@@ -25,11 +25,7 @@ export const SearchResultsContainer = styled('div')(
     background: rgba(0,0,0,0.4);
    }
 
-    ${theme.breakpoints.down('sm')}{
-        min-width:390px
-    }
   }
-
 
   .searResultsMain {
     flex: 1;
@@ -38,12 +34,13 @@ export const SearchResultsContainer = styled('div')(
     .sidebar {
       display: flex;
       max-height: calc(100vh - ${theme.typography.pxToRem(96)});
-    overflow-y: scroll;
-      box-shadow: ${theme.shadows[4]};
+      overflow-y: scroll;
+      box-shadow: ${theme.shadows[2]};
       flex-direction:column;
       position:sticky;
       padding:${theme.typography.pxToRem(theme.padding.primary)};
       gap:${theme.typography.pxToRem(theme.gap.secondary)};
+      
       &::-webkit-scrollbar {
         display:none;
         };

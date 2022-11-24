@@ -8,13 +8,13 @@ import * as Yup from 'yup';
 import Box from '@mui/material/Box/Box';
 import Button from '@mui/material/Button/Button';
 import { ISignInInput } from './signIn.types';
-import FormInput from '../FormInput/FormInput';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import FormInput from '../FormInput/formInput';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { SignInContainer } from './signIn.styles';
 import { routes } from '../../constants/route';
 import { signIn } from '../../services/auth/auth.service';
-import { StoreContext } from '../../context/StoreContext/StoreContext';
+import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { toasterDataAction } from '../../context/actions/toasterActions/toasterActions';
 

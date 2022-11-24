@@ -5,11 +5,9 @@ export const RadioGroupContainer = styled('div')(
     `
     .formLabel{
         display:block;
-        margin: 0 0 ${theme.typography.pxToRem(theme.padding.main)} 0;
+        margin-bottom: ${theme.typography.pxToRem(theme.padding.small)};
     }
     .radioGroup{
-        display:flex;
-        gap:${theme.typography.pxToRem(theme.gap.primary)};
         font-size: ${theme.typography.pxToRem(theme.typography.fontSizeSmall)}
     }`,
 );

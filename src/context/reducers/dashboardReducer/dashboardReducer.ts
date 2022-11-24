@@ -26,7 +26,6 @@ const INITIAL_STATE: IDashboardState = {
     vehicleType: '',
     departure: '',
     price: [0, 100],
-    drop: '',
   },
   sortData: {
     isSorted: false,

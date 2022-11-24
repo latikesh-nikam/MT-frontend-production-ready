@@ -1,5 +1,5 @@
 import { useRef, useState, useContext } from 'react';
-import { StoreContext } from '../../context/StoreContext/StoreContext';
+import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { IInfiniteScrollProps, IState } from './inifiniteScroll.types';
 

@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
-import Auth from '../../Pages/Auth/Auth';
-import Home from '../../Pages/Home/Home';
-import Main from '../../Pages/Main/Main';
-import MobileFilter from '../../Pages/MobileFilter/MobileFilter';
-import SearchResults from '../../Pages/SearchResults/SearchResults';
-import SignIn from '../SignIn/SignIn';
+import Auth from '../../Pages/Auth/auth';
+import Home from '../../Pages/Home/home';
+import Main from '../../Pages/Main/main';
+import MobileFilter from '../../Pages/MobileFilter/mobileFilter';
+import SearchResults from '../../Pages/SearchResults/searchResults';
+import SignIn from '../SignIn/signIn';
 
 const Layout = () => {
   return (

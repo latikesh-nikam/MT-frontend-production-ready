@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { TextField } from '@mui/material';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { IFormInputProps } from './formInput.types';
 import { InputContainer } from './formInput.styles';
 
@@ -16,9 +16,13 @@ const FormInput = ({
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
-  const { control, formState:{errors} } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
-  const errorMessage = showErrorMessage && errors[name]? errors[name]?.message as string : ""
+  const errorMessage =
+    showErrorMessage && errors[name] ? (errors[name]?.message as string) : '';
   return (
     <Controller
       name={name}

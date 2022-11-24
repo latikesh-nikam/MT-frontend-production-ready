@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react';
 import Button from '@mui/material/Button/Button';
-import Divider from '@mui/material/Divider/Divider';
 import { BusResultCardContainer } from './busResultCard.styles';
 import { IBusResultCardProps } from './busResultCard.types';
 import { iconMap } from '../BusResults/busResults.data';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const BusResultCard = ({ data }: IBusResultCardProps) => {
   const [selected, setSelected] = useState('');
@@ -13,6 +13,9 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
+
+  const { width } = useWindowSize();
+  const windowWidth = width > 576;
   const {
     vehicleName,
     operatorName,
@@ -44,25 +47,27 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
   return (
     <BusResultCardContainer>
       <div className="busDetails">
-        <div className="vehicle">
-          <h4>
-            {operatorName} {vehicleName}
-          </h4>
-          <p className="lightGrey">
-            {vehicleType} {vehicleClassType}
-          </p>
-        </div>
-        <div className="timeDetails">
-          <div className="departure time">
-            <h3>{departure.sourceDepartureTime}</h3>
-            <p className="lightGrey">{departure.sourceName}</p>
+        <div>
+          <div className="vehicle">
+            <h3>
+              {operatorName} {vehicleName}
+            </h3>
+            <p className="lightGrey">
+              {vehicleType} {vehicleClassType}
+            </p>
           </div>
-          <div className="totalDuration time">
-            <p className="lightGrey">{totalTravelTime} hrs</p>
-          </div>
-          <div className="arrival time">
-            <p>{arrival.sourceDepartureTime}</p>
-            <p className="lightGrey">{arrival.sourceName}</p>
+          <div className="timeDetails">
+            <div className="departure time">
+              <h3>{departure.sourceDepartureTime}</h3>
+              <p className="lightGrey">{departure.sourceName}</p>
+            </div>
+            <div className="totalDuration time">
+              <p className="lightGrey">{totalTravelTime} hrs</p>
+            </div>
+            <div className="arrival time">
+              <p>{arrival.sourceDepartureTime}</p>
+              <p className="lightGrey">{arrival.sourceName}</p>
+            </div>
           </div>
         </div>
         {ratings && (
@@ -88,36 +93,28 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
             {TotalAvailableSeat} {localString?.seatsAvailable}
           </p>
         </div>
-        <div className="viewSeats">
-          <Button variant="contained" size="small">
-            {localString?.viewSeats}
-          </Button>
-        </div>
+        {windowWidth && (
+          <div className="viewSeats">
+            <Button variant="contained" size="small">
+              {localString?.viewSeats}
+            </Button>
+          </div>
+        )}
       </div>
 
-      <div className="actionsContainer lightGrey">
-        <div
-          className={
-            selected === 'amenity'
-              ? 'active amenities actions'
-              : 'amenities actions'
-          }
-          onClick={() => handleClick('amenity')}>
-          <p>{localString?.amenities}</p>
+      {windowWidth && (
+        <div className="actionsContainer lightGrey">
+          <div
+            className={
+              selected === 'amenity'
+                ? 'active amenities actions'
+                : 'amenities actions'
+            }
+            onClick={() => handleClick('amenity')}>
+            <p>{localString?.amenities}</p>
+          </div>
         </div>
-        <Divider orientation="vertical" color="primary" />
-        <div
-          className={
-            selected === 'boardingAndDropping' ? 'active actions' : 'actions'
-          }
-          onClick={() => handleClick('boardingAndDropping')}>
-          <p>
-            {localString?.boarding} {localString?.and} {localString?.dropping}{' '}
-            {localString?.points}
-          </p>
-        </div>
-      </div>
-
+      )}
       {selected === 'amenity' && (
         <div className="amenitiesContainer">
           {amenities.map((amenity: string, index: number) => {
@@ -129,34 +126,6 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
               </div>
             );
           })}
-        </div>
-      )}
-      {selected === 'boardingAndDropping' && (
-        <div className="boardingAndDroppingPointsContainer">
-          <div className="stationsContainer">
-            <h4>
-              {localString?.boarding} {localString?.points}
-            </h4>
-            {departure.BoardingPoint?.map(
-              (boardingPoint: any, index: number) => (
-                <div className="station" key={index}>
-                  <p className="time">{boardingPoint.time}</p>
-                  <p className="lightGrey">{boardingPoint.locationName}</p>
-                </div>
-              ),
-            )}
-          </div>
-          <div className="stationsContainer">
-            <h4>
-              {localString?.dropping} {localString?.points}
-            </h4>
-            {arrival.BoardingPoint?.map((boardingPoint: any, index: number) => (
-              <div className="station" key={index}>
-                <p className="time">{boardingPoint.time}</p>
-                <p className="lightGrey">{boardingPoint.locationName}</p>
-              </div>
-            ))}
-          </div>
         </div>
       )}
     </BusResultCardContainer>

@@ -2,12 +2,12 @@ import { Fragment, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import Button from '@mui/material/Button/Button';
-import FormInputCheckBox from '../FormInputCheckbox/FormInputCheckbox';
-import { ISortProps, ISortTypes } from './Sort.types';
+import FormInputCheckBox from '../FormInputCheckbox/formInputCheckbox';
+import { ISortProps, ISortTypes } from './sort.types';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
-import RadioInput from '../RadioInput/RadioInput';
-import { StoreContext } from '../../context/StoreContext/StoreContext';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
+import RadioInput from '../RadioInput/radioInput';
+import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { sortDataAction } from '../../context/actions/dashboardActions/dashboardActions';
 

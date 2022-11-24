@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import { Box } from '@mui/material';
 import DirectionsBusFilledIcon from '@mui/icons-material/DirectionsBusFilled';
 import { Header } from './topbar.style';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
-import Profile from '../Profile/Profile';
+import Profile from '../Profile/profile';
 
 function Topbar() {
   const { localisation } = useContext(

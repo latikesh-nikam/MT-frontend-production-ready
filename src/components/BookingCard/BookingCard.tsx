@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { IBookingsCardProps } from './bookingCard.types';
 import { BookingCardContainer } from './bookingCard.styles';

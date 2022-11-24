@@ -4,7 +4,7 @@ import Autocomplete from '@mui/material/Autocomplete/Autocomplete';
 import TextField from '@mui/material/TextField/TextField';
 import Box from '@mui/material/Box/Box';
 import { ISearchableDropdownProps } from './searchableDropdown.types';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { InputContainer } from '../FormInput/formInput.styles';
 import { SearchableDropdownContainer } from './searchableDropdown.styles';
@@ -29,19 +29,20 @@ const SearchableDropdown = ({
             options={searchList}
             fullWidth
             value={
-              searchList.filter(station => station.stationName === value).length>0 ?  searchList.filter(station => station.stationName === value)[0] : null
+              searchList.filter(station => station.stationName === value)
+                .length > 0
+                ? searchList.filter(station => station.stationName === value)[0]
+                : null
             }
             getOptionLabel={option => option.stationName || option.label}
-            renderOption={(props, option) =>
-         
-                <Box
-                  component="li"
-                  {...props}
-                  sx={{ textTransform: 'capitalize' }}>
-                  {option.stationName || option.label}
-                </Box>
-              
-            }
+            renderOption={(props, option) => (
+              <Box
+                component="li"
+                {...props}
+                sx={{ textTransform: 'capitalize' }}>
+                {option.stationName || option.label}
+              </Box>
+            )}
             renderInput={params => (
               <InputContainer>
                 <TextField

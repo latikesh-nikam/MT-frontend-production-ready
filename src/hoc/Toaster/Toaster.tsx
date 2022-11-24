@@ -1,6 +1,6 @@
 import { useEffect, useContext } from 'react';
 import { toasterDataAction } from '../../context/actions/toasterActions/toasterActions';
-import { StoreContext } from '../../context/StoreContext/StoreContext';
+import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { IToasterProps } from './toaster.types';
 import { ToasterContainer } from './toaster.styles';

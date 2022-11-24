@@ -4,7 +4,7 @@ import FormControlLabel from '@mui/material/FormControlLabel/FormControlLabel';
 import Radio from '@mui/material/Radio/Radio';
 import RadioGroup from '@mui/material/RadioGroup/RadioGroup';
 import FormLabel from '@mui/material/FormLabel/FormLabel';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { IRadioInputProps } from './radioInput.types';
 import { RadioGroupContainer } from './radioInput.styles';

@@ -1,5 +1,5 @@
-import RecentBookings from '../../components/RecentBookings/RecentBookings';
-import Search from '../../components/Search/Search';
+import RecentBookings from '../../components/RecentBookings/recentBookings';
+import Search from '../../components/Search/search';
 import { HomeContainer } from './home.styles';
 import { mockBookingsData } from '../../mock/bookingsData/bookings.data';
 import { routes } from '../../constants/route';

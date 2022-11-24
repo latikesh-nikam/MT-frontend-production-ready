@@ -1,16 +1,16 @@
-import { useContext,Fragment } from 'react';
+import { useContext, Fragment } from 'react';
 import { IRecentBookingsProps } from './recentBookings.types';
 import { RecentBookingsContainer } from './recentBookings.styles';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
-import BookingCard from '../BookingCard/BookingCard';
+import BookingCard from '../BookingCard/bookingCard';
 
 const RecentBookings = ({ data }: IRecentBookingsProps) => {
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
 
-  const showBookingCard = data.length > 0
+  const showBookingCard = data.length > 0;
 
   return (
     <RecentBookingsContainer>

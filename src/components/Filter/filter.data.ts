@@ -43,7 +43,6 @@ export const sliderData = [
 
 export const filterInitialState: IFilterInput = {
   departure: '',
-  drop: '',
   price: [0, 100],
   vehicleClassType: [],
   vehicleType: '',

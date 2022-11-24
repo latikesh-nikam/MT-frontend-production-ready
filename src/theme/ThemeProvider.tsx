@@ -1,6 +1,6 @@
 import { createTheme, ThemeProvider, ThemeOptions } from '@mui/material/styles';
-import { appTheme } from './ThemeProvider.data';
-import { IMuiThemeProviderProps } from './ThemeProvider.types';
+import { appTheme } from './themeProvider.data';
+import { IMuiThemeProviderProps } from './themeProvider.types';
 
 const MuiThemeProvider = ({ children }: IMuiThemeProviderProps) => {
   const theme = createTheme(appTheme as ThemeOptions);

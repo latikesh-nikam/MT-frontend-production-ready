@@ -12,14 +12,14 @@ import {
 } from './filter.data';
 import { cities } from '../Search/search.data';
 import { IFilterInput, IFilterProps } from './filter.types';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
-import { StoreContext } from '../../context/StoreContext/StoreContext';
+import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
-import FormInputCheckBox from '../FormInputCheckbox/FormInputCheckbox';
-import SliderInput from '../Slider/Slider';
-import RadioInput from '../RadioInput/RadioInput';
-import SearchableDropdown from '../SearchableDropdown/SearchableDropdown';
+import FormInputCheckBox from '../FormInputCheckbox/formInputCheckbox';
+import SliderInput from '../Slider/slider';
+import RadioInput from '../RadioInput/radioInput';
+import SearchableDropdown from '../SearchableDropdown/searchableDropdown';
 import { epochDate } from '../../utils/utility';
 import { useDidMountEffect } from '../../hooks/useDidMountEffect';
 import { filterDataAction } from '../../context/actions/dashboardActions/dashboardActions';
@@ -112,11 +112,6 @@ const Filter = ({ navigateTo = '' }: IFilterProps) => {
             options={departureOptions}
           />
           <SliderInput name="price" label="selectPrice" data={sliderData} />
-          <SearchableDropdown
-            label="droppingPoint"
-            name="drop"
-            searchList={cities}
-          />
           <Button type="submit" variant="contained" fullWidth>
             {localString?.filter}
           </Button>
