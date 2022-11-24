@@ -1,11 +1,10 @@
+import Home from "../Pages/Home/Home";
 
 
-export const ROUTES_MAP = {
-  user: [
+export const ROUTES_MAP = [
     {
       path: "/home",
-      // element: AdminHome,
+      element: Home,
     },
-  ],
+  ]
  
-};

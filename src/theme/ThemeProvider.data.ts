@@ -14,7 +14,6 @@ export const appTheme: ThemeOptions = {
 
     palette: newPalette,
     typography: {
-      fontFamily: ['Noto Sans'].join(','),
       h1: {
         fontSize: '2rem',
         fontWeight: 600,
@@ -48,11 +47,11 @@ export const appTheme: ThemeOptions = {
         fontSize: '0.875rem',
         fontWeight: 400,
         lineHeight: 1.714,
-        letterSpacing: '1px',
+        letterSpacing: '0.064rem',
         textTransform: 'uppercase',
       },
       subtitle1: {
-        fontSize: '0.85rem',
+        fontSize: '0.8rem',
         fontWeight: 400,
         lineHeight: 1.286,
         letterSpacing: '0',
@@ -62,7 +61,7 @@ export const appTheme: ThemeOptions = {
         fontSize: '0.75rem',
         fontWeight: 400,
         lineHeight: 1.5,
-        letterSpacing: '0.5px',
+        letterSpacing: '0.04rem',
       },
       body1: {
         fontSize: '1rem',
@@ -78,7 +77,7 @@ export const appTheme: ThemeOptions = {
       },
       button: {
         fontFamily: 'inherit',
-        fontSize: '0.95rem',
+        fontSize: '1rem',
         fontWeight: '500',
         textTransform: 'none',
       },
@@ -86,7 +85,7 @@ export const appTheme: ThemeOptions = {
         fontSize: '0.625rem',
         fontWeight: 400,
         lineHeight: 1.4,
-        letterSpacing: '0.5px',
+        letterSpacing: '0.04rem',
       },
     },
   }

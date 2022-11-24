@@ -1,10 +1,15 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
+enum languageConstants  {
+  "english" = "en",
+  "hindi" = "hn"
+}
+
 
 i18n.use(initReactI18next).init({
-  fallbackLng: 'en',
-  lng: 'en',
+  fallbackLng: languageConstants.english,
+  lng: languageConstants.english,
   resources: {
     en: {
       translations: require('./locales/languages/en.json')
@@ -17,6 +22,6 @@ i18n.use(initReactI18next).init({
   defaultNS: 'translations'
 });
 
-i18n.languages = ['en', 'hn'];
+i18n.languages = [languageConstants.english, languageConstants.english];
 
 export default i18n;
