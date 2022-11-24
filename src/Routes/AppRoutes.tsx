@@ -1,6 +1,6 @@
 import { Fragment, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import { ROUTES_MAP } from "./appRoutes.data";
+import ROUTES_MAP from "./AppRoutes.data";
 import { IAppRoutes } from "./appRoutes.types";
 
 const AppRoutes = () => {

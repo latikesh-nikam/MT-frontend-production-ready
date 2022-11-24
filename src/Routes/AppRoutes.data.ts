@@ -1,10 +1,11 @@
 import Home from "../Pages/Home/Home";
 
 
-export const ROUTES_MAP = [
+  const ROUTES_MAP = [
     {
       path: "/home",
       element: Home,
     },
   ]
  
+  export default ROUTES_MAP
