@@ -1,5 +1,9 @@
+import { Fragment } from "react";
+
 const App = () => {
-  return <>This is app</>;
-};
+  return (
+  <Fragment></Fragment>
+  );
+}
 
 export default App;
