@@ -44,10 +44,6 @@ export const SearchResultsContainer = styled('div')(
       &::-webkit-scrollbar {
         display:none;
         };
-  
-        ${theme.breakpoints.down('sm')}{
-          display:none;
-        }
     }
 
     .searchRresults{
@@ -68,10 +64,20 @@ export const SearchResultsContainer = styled('div')(
     font-size: ${theme.typography.fontSizeMedium};
     color:${theme.palette.textColors.grey};
     display:none;
-    
-    ${theme.breakpoints.down('sm')}{
+  }
+
+  ${theme.breakpoints.down('md')}{
+
+    .filterIcon{
       display:block;
     }
+    .searResultsMain{
+
+      .sidebar{
+        display:none;
+      }
+    }
   }
+
 `,
 );

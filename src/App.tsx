@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
-import Layout from './components/Layout/Layout';
+import Layout from './components/Layout/layout';
 import StoreProvider from './context/StoreContext/storeContext';
 import LocalisationProvider from './hoc/LocalisationProvider/localisationProvider';
 import Toaster from './hoc/Toaster/toaster';

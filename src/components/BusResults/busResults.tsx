@@ -25,7 +25,7 @@ const BusResults = ({
 
   return (
     <BusResultsContainer ref={scrollerRef} onScroll={handleScroll}>
-      {data?.length ? (
+      {data.length ? (
         data.map((result: any, index: number) => {
           return <BusResultCard data={result} key={index} />;
         })
