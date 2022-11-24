@@ -44,10 +44,14 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
     else setSelected(type);
   };
 
+  const handleViewSeats = () => {
+    console.log('view seats');
+  };
+
   return (
-    <BusResultCardContainer>
+    <BusResultCardContainer onClick={!windowWidth ? handleViewSeats : () => {}}>
       <div className="busDetails">
-        <div>
+        <div className="vehicleAndTimeDetails">
           <div className="vehicle">
             <h3>
               {operatorName} {vehicleName}
@@ -77,25 +81,27 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
             </div>
           </div>
         )}
-        <div className="fare">
-          <p className="lightGrey">{localString?.startsFrom}</p>
-          <h3>
-            <span className="lightGrey fontWeightLight">
+        <div className="fareAndSeatsAvailabilty">
+          <div className="fare">
+            <p className="lightGrey">{localString?.startsFrom}</p>
+            <h3>
+              <span className="lightGrey fontWeightLight">
+                {' '}
+                {localString?.INR}
+              </span>{' '}
+              {fixedFare}
+            </h3>
+          </div>
+          <div className="seatsAvailability">
+            <p className="lightGrey">
               {' '}
-              {localString?.INR}
-            </span>{' '}
-            {fixedFare}
-          </h3>
-        </div>
-        <div className="seatsAvailability">
-          <p className="lightGrey">
-            {' '}
-            {TotalAvailableSeat} {localString?.seatsAvailable}
-          </p>
+              {TotalAvailableSeat} {localString?.seatsAvailable}
+            </p>
+          </div>
         </div>
         {windowWidth && (
           <div className="viewSeats">
-            <Button variant="contained" size="small">
+            <Button variant="contained" size="small" onClick={handleViewSeats}>
               {localString?.viewSeats}
             </Button>
           </div>

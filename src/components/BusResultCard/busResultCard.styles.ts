@@ -23,23 +23,40 @@ export const BusResultCardContainer = styled('div')(
         display:flex;
         padding:${theme.typography.pxToRem(theme.padding.secondary)};
         gap:${theme.typography.pxToRem(theme.gap.larger)};
-        .vehicle{
-            flex:2;
-            p{
-                text-transform:capitalize;
-            }
-        }
 
-        .timeDetails{
+        .vehicleAndTimeDetails{
             flex:2;
             display:flex;
             justify-content:space-between;
-            .time{
-                display:flex;
-                flex-direction:column;
-                gap:${theme.typography.pxToRem(theme.gap.secondary)};
-                justify-content:space-between;
+            min-width:${theme.typography.pxToRem(200)};
+            .vehicle{
+                flex:2;
+                p{
+                    text-transform:capitalize;
+                }
             }
+    
+            .timeDetails{
+                flex:2;
+                display:flex;
+                justify-content:space-between;
+                .time{
+                    display:flex;
+                    flex-direction:column;
+                    gap:${theme.typography.pxToRem(theme.gap.secondary)};
+                    justify-content:space-between;
+
+                    &.totalDuration{
+                        text-transform:none;
+                    }
+                }
+            }
+            
+        }
+
+        .fareAndSeatsAvailabilty{
+            display:flex;
+            gap:${theme.typography.pxToRem(theme.gap.secondary)};
         }
 
         .ratingDetails{
@@ -73,14 +90,14 @@ export const BusResultCardContainer = styled('div')(
             cursor:pointer;
             transition:all linear 0.2s;
          
-            &:hover, &.active{
+            &:hover{
                     color:${theme.palette.primary.main};
                     font-weight:${theme.typography.fontWeightRegular};
             }
         }
     }
 
-    .amenitiesContainer, .boardingAndDroppingPointsContainer{
+    .amenitiesContainer{
         padding:${theme.typography.pxToRem(theme.padding.secondary)};
         background-color: ${theme.palette.commonBgColor.lightGrey};
         display:flex;
@@ -97,35 +114,24 @@ export const BusResultCardContainer = styled('div')(
             align-items:center;
         }
     }
-    .boardingAndDroppingPointsContainer{
-        flex-direction:row;
-        gap:${theme.typography.pxToRem(theme.gap.larger)};
-
-        .stationsContainer{
-            display:flex;
-            flex-direction:column;
-
-            h4{
-                color:${theme.palette.primary.main};
-                padding-bottom:${theme.typography.pxToRem(
-                  theme.padding.secondary,
-                )};
-            }
-            .station{
-                display:flex;
-                flex:1;
-                gap:${theme.typography.pxToRem(theme.gap.primary)};
-                padding-bottom:${theme.typography.pxToRem(
-                  theme.padding.primary,
-                )};
-            }
-        }
-    }
 
     &:hover {
         box-shadow:${theme.shadows[3]};
         transform:scale(101%);
     
+}
+
+${theme.breakpoints.down('sm')}{
+    cursor:pointer;
+    
+    .vehicleAndTimeDetails{
+        flex-direction:column;
+        gap:${theme.typography.pxToRem(theme.gap.secondary)}
+    }
+
+    .fareAndSeatsAvailabilty{
+        flex-direction:column;
+    }
 }
 
 `,
