@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react';
 
 const App = () => {
-  return (
-  <>This is app</>
-  );
-}
+  const [updatedData, setUpdateData] = useState();
+  useEffect(() => {}, []);
+
+  return <>This is app</>;
+};
 
 export default App;
