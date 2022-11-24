@@ -31,5 +31,13 @@ export const HomeContainer = styled('div')(
     .bookings{
         flex: 1;
     }
-`
+
+    ${theme.breakpoints.down('sm')}{
+      .search {
+        flex: 0 1 auto;
+padding:${theme.typography.pxToRem(theme.padding.main)} 0;
+      }
+      
+    }
+`,
 );

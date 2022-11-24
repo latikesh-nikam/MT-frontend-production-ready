@@ -7,7 +7,6 @@ export const SearchContainer = styled('div')(
     display:flex;
     gap:${theme.typography.pxToRem(theme.gap.small)}; 
 
-    
     .searchForm{
       display:flex;
       gap:${theme.typography.pxToRem(theme.gap.primary)};      
@@ -54,10 +53,15 @@ export const SearchContainer = styled('div')(
     ${theme.breakpoints.down('sm')}{
 
       .searchForm{
-
         flex-direction:column;
         gap:${theme.typography.pxToRem(theme.gap.primary)};
-        padding:${theme.typography.pxToRem(theme.padding.secondary)} 0;
+
+        .MuiOutlinedInput-input{
+          font-size: ${theme.typography.pxToRem(14)};
+        }
+        .searchButton{
+          font-size: ${theme.typography.pxToRem(14)};
+        }
       }
     }
 `,

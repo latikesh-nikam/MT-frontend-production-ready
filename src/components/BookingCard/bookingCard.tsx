@@ -1,42 +1,40 @@
 import { useContext } from 'react';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { IBookingsCardProps } from './bookingCard.types';
 import { BookingCardContainer } from './bookingCard.styles';
+import Grid from '@mui/material/Grid/Grid';
 
 const BookingCard = ({ data }: IBookingsCardProps) => {
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
 
-  const { _id, adults, children, date, from, to } = data;
+  const { _id, date, from, to } = data;
 
   const formatter = new Intl.DateTimeFormat('ru');
 
   return (
-    <BookingCardContainer data-testid="bookingCard">
-      <div className="cardHeader" data-testid="cardHeader">
-        <h4>
-          {localString?.bookingId}: {_id}
-        </h4>
-      </div>
-      <p>
-        {localString?.date}: {formatter.format(date)}
-      </p>
-      <div className="cities" data-testid="cities">
-        <p className="city">{from} </p>{' '}
-        <span className="icon">
-          <ArrowForwardIcon />
-        </span>{' '}
-        <p className="city">{to}</p>
-      </div>
-      <div className="passengers" data-testid="passengers">
+    <Grid item xs={12} sm={6} md={3}>
+      <BookingCardContainer data-testid="bookingCard">
+        <div className="cardHeader" data-testid="cardHeader">
+          <h3>
+            {localString?.bookingId}: {_id}
+          </h3>
+        </div>
         <p>
-          {localString?.adults}: {adults}, {localString?.children}: {children}
+          {localString?.date}: {formatter.format(date)}
         </p>
-      </div>
-    </BookingCardContainer>
+        <div className="cities" data-testid="cities">
+          <p className="city">{from} </p>{' '}
+          <div className="icon">
+            <ArrowRightAltIcon fontSize="medium" />
+          </div>{' '}
+          <p className="city">{to}</p>
+        </div>
+      </BookingCardContainer>
+    </Grid>
   );
 };
 

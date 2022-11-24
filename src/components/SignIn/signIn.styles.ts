@@ -4,12 +4,11 @@ export const SignInContainer = styled('div')(
   ({ theme }: any) => `
   display: flex;
   flex-direction: column;
-  min-width: 20%;
-  padding: ${theme.typography.pxToRem(theme.padding.larger)};
+  padding: ${theme.typography.pxToRem(theme.padding.main)};
   gap: ${theme.typography.pxToRem(theme.gap.main)};
   box-shadow: ${theme.shadows[6]};
   background:${theme.palette.textColors.white};
-  border-radius: 1rem;
+  border-radius:${theme.borderRadius.primary};
   .formHeading{
     color:${theme.palette.primary.main};    
     text-align:center;

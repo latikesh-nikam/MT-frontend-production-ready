@@ -1,4 +1,4 @@
-import { useContext, Fragment, useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types/form';
@@ -25,8 +25,6 @@ const SignIn = () => {
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
-
-  console.log(localString.password, localString.email);
 
   const navigate = useNavigate();
   const captchaRef = useRef<ReCAPTCHA>(null);
@@ -62,7 +60,7 @@ const SignIn = () => {
     try {
       data['captcha'] = captchaToken;
       const response = await signIn(data);
-
+      console.log(response);
       dispatch(
         toasterDataAction({
           showMessage: true,
@@ -92,58 +90,56 @@ const SignIn = () => {
   );
 
   return (
-    <Fragment>
-      <SignInContainer data-testid="signIn">
-        <h2 className="formHeading">{localString?.signIn}</h2>
-        <Box>
-          <FormProvider {...methods}>
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="signInForm"
-              data-testid="signInForm">
-              <FormInput
-                name="email"
-                label={localString?.email}
-                showErrorMessage
-                data-testid="emailInput"
+    <SignInContainer data-testid="signIn">
+      <h2 className="formHeading">{localString?.signIn}</h2>
+      <Box>
+        <FormProvider {...methods}>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="signInForm"
+            data-testid="signInForm">
+            <FormInput
+              name="email"
+              label={localString?.email}
+              showErrorMessage
+              data-testid="emailInput"
+            />
+            <FormInput
+              name="password"
+              label={localString?.password}
+              type="password"
+              showErrorMessage
+              data-testid="passwordInput"
+            />
+            <div className="recaptchaContainer">
+              <ReCAPTCHA
+                sitekey={process.env.REACT_APP_SITE_KEY || ''}
+                ref={captchaRef}
+                onChange={handleCaptchaChange}
+                size="normal"
+                data-testid="recaptcha"
               />
-              <FormInput
-                name="password"
-                label={localString?.password}
-                type="password"
-                showErrorMessage
-                data-testid="passwordInput"
-              />
-              <div className="recaptchaContainer">
-                <ReCAPTCHA
-                  sitekey={process.env.REACT_APP_SITE_KEY || ''}
-                  ref={captchaRef}
-                  onChange={handleCaptchaChange}
-                  size="normal"
-                  data-testid="recaptcha"
-                />
-              </div>
-              <Button
-                className="submitButton"
-                data-testid="submitButton"
-                type="submit"
-                disabled={disableSignInButton}
-                variant="contained">
-                {localString?.signIn}
-              </Button>
-            </form>
-          </FormProvider>
-        </Box>
-        <div className="actions">
-          <Link to="forgotPassword" data-testid="forgotPasswordButton">
-            {localString?.forgotPassword}?
-          </Link>
-          <Link to="signUp" data-testid="signUpButtom">
-            {localString?.signUp}
-          </Link>
-        </div>
-      </SignInContainer>
-    </Fragment>
+            </div>
+            <Button
+              className="submitButton"
+              data-testid="submitButton"
+              type="submit"
+              disabled={disableSignInButton}
+              variant="contained">
+              {localString?.signIn}
+            </Button>
+          </form>
+        </FormProvider>
+      </Box>
+      <div className="actions">
+        <Link to="forgotPassword" data-testid="forgotPasswordButton">
+          {localString?.forgotPassword}?
+        </Link>
+        <Link to="signUp" data-testid="signUpButtom">
+          {localString?.signUp}
+        </Link>
+      </div>
+    </SignInContainer>
   );
 };
 

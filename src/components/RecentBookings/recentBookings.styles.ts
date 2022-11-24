@@ -4,23 +4,20 @@ export const RecentBookingsContainer = styled('div')(
   ({ theme }: any) => `
   flex: 1;
   display: flex;
-  gap: ${theme.typography.pxToRem(theme.gap.primary)};
+  gap: ${theme.typography.pxToRem(theme.gap.main)};
   padding: ${theme.typography.pxToRem(theme.padding.main)};
   flex-direction: column;
 
-  ${theme.breakpoints.down('sm')}{
-    align-items:center;
-  }
+  // .cardsContainer{
+  //   display: flex;
+  //   gap: ${theme.typography.pxToRem(theme.gap.secondary)};
+  //   flex-wrap:wrap;
 
-  .cardsContainer{
-    padding: ${theme.typography.pxToRem(theme.padding.main)} 0;
-    display: flex;
-    gap: ${theme.typography.pxToRem(theme.gap.secondary)};
-    flex-wrap:wrap;
-
+  //   }
     ${theme.breakpoints.down('sm')}{
-      justify-content:center;
-    }
-  }
+      max-height: calc(100vh - ${theme.typography.pxToRem(181)});
+      h2{
+          font-size:${theme.typography.fontSizeMedium};
+      }
   `,
 );

@@ -11,7 +11,11 @@
   "password": "*पासवर्ड",
   "required": "*आवश्यक",
   "minlengthSix": "न्यूनतम लंबाई 6 होनी चाहिए",
+  "minlengthSixteen": "लंबाई 16 होनी चाहिए",
+  "lengththree": "लंबाई 3 होनी चाहिए",
   "emailMessage": "एक मान्य ईमेल पता दर्ज करें",
+  "monthMessage": "एक मान्य महीना दर्ज करें",
+  "yearMessage": "एक वैध वर्ष दर्ज करें",
   "from": "*से",
   "to": "*तक",
   "adults": "वयस्कों",
@@ -65,5 +69,15 @@
   "and": "एंड",
   "points": "पॉइंट्स",
   "noBusesFound": "कोई बस नहीं मिली",
-  "loading": "लोड हो रहा है"
+  "loading": "लोड हो रहा है",
+  "cardNumber": "कार्ड संख्या",
+  "cardHolderName": "कार्डधारक का नाम",
+  "cvv": "सीवीवी",
+  "cancel": "रद्द",
+  "month": "महीना",
+  "year": "वर्ष",
+  "paymentDetails": "भुगतान विवरण",
+  "paymentSummary": "भुगतान सारांश",
+  "issuer": "जारीकर्ता",
+  "amount": "रकम"
 }

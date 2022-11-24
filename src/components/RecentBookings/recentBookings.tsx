@@ -4,6 +4,7 @@ import { RecentBookingsContainer } from './recentBookings.styles';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import BookingCard from '../BookingCard/bookingCard';
+import Grid from '@mui/material/Grid/Grid';
 
 const RecentBookings = ({ data }: IRecentBookingsProps) => {
   const {
@@ -18,11 +19,11 @@ const RecentBookings = ({ data }: IRecentBookingsProps) => {
         <h2>{localString['recentBookings']}</h2>
       </div>
       {showBookingCard ? (
-        <div className="cardsContainer">
+        <Grid container className="cardsContainer" spacing={2}>
           {data.map(booking => {
             return <BookingCard data={booking} key={booking._id} />;
           })}
-        </div>
+        </Grid>
       ) : (
         <Fragment></Fragment>
       )}

@@ -3,30 +3,39 @@ import { styled } from '@mui/material/styles';
 export const BookingCardContainer = styled('div')(
   ({ theme }: any) =>
     `
-      padding: ${theme.typography.pxToRem(theme.padding.secondary)};
-      border-radius: ${theme.typography.pxToRem(8)};
-      display: flex;
-      flex-direction: column;
-      gap: ${theme.typography.pxToRem(theme.gap.primary)};
-      box-shadow:${theme.shadows[4]};
-
-      .cardHeader{
-        font-size: ${theme.typography.fontSizeMedium};
-        font-weight:${theme.typography.fontWeightMedium}
-      };
-
-      .cities {
+        padding: ${theme.typography.pxToRem(theme.padding.main)};
+        border-radius: ${theme.typography.pxToRem(theme.borderRadius.primary)};
         display: flex;
-        alignItems: center;
+        flex-direction: column;
         gap: ${theme.typography.pxToRem(theme.gap.primary)};
+        border: thin solid ${theme.palette.borderFaded2};
+  
+        .cities {
+          display: flex;
+          align-items: center;
+          gap: ${theme.typography.pxToRem(theme.gap.primary)};
+  
+          .city{
+            font-weight: ${theme.typography.fontWeightRegular}
+          }
+  
+          .icon{
+            margin-top: 0.4rem;
+          }
+  
+        
+    }
+  }
+    ${theme.breakpoints.down('sm')}{
 
-        .city{
-          font-weight: ${theme.typography.fontWeightRegular}
-        },
+      h3{
+          font-size:${theme.typography.fontSizeRegular};
+      }
+  
+      p{
+          font-size:${theme.typography.fontSizeSmall};
+      }
+    }
 
-        .icon{
-          font-size: ${theme.typography.fontSizeRegular}
-        }
-      },
-    }, `,
+    `,
 );

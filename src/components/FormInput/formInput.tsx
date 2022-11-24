@@ -5,7 +5,6 @@ import { InputContainer } from './formInput.styles';
 
 const FormInput = ({
   name,
-  type = 'text',
   showErrorMessage = false,
   size = 'medium',
   ...textFieldProps
@@ -26,12 +25,10 @@ const FormInput = ({
           <TextField
             data-testid={`${name}Input`}
             {...field}
-            sx={{ m: 0 }}
             fullWidth
             variant="outlined"
             error={!!errors[name]}
             helperText={errorMessage}
-            type={type}
             margin="dense"
             size={size}
             {...textFieldProps}

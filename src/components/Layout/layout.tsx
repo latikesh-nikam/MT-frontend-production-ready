@@ -3,6 +3,7 @@ import Auth from '../../Pages/Auth/auth';
 import Home from '../../Pages/Home/home';
 import Main from '../../Pages/Main/main';
 import MobileFilter from '../../Pages/MobileFilter/mobileFilter';
+import Payment from '../../Pages/Payment/payment';
 import SearchResults from '../../Pages/SearchResults/searchResults';
 import SignIn from '../SignIn/signIn';
 
@@ -16,6 +17,7 @@ const Layout = () => {
         <Route index element={<Home />} />
         <Route path="searchResults" element={<SearchResults />} />
         <Route path="filter" element={<MobileFilter />} />
+        <Route path="payment" element={<Payment />} />
       </Route>
     </Routes>
   );
