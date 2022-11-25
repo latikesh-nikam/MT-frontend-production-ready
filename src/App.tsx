@@ -1,9 +1,15 @@
-import { Fragment } from "react";
+import { BrowserRouter } from 'react-router-dom';
+import Layout from './components/Layout/Layout';
+import LocalisationProvider from './hoc/LocalisationProvider/LocalisationProvider';
 
 const App = () => {
   return (
-  <Fragment></Fragment>
+    <BrowserRouter>
+      <LocalisationProvider>
+        <Layout />
+      </LocalisationProvider>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

@@ -1,3 +1,3 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from 'react';
 
-export interface IMuiThemeProviderProps extends PropsWithChildren{}
+export interface IMuiThemeProviderProps extends PropsWithChildren {}

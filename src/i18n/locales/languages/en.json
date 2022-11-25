@@ -1,7 +1,15 @@
 {
-    "home": "Home",
-    "edit":"Edit",
-    "profile":"Profile",
-    "404": "404 not found",
-    "homepage": "Home Page"
+  "home": "Home",
+  "edit": "Edit",
+  "profile": "Profile",
+  "404": "404 not found",
+  "homePage": "Home Page",
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
+  "forgotPassword": "Forgot Password",
+  "email": "Email",
+  "password": "Password",
+  "required": "*Required",
+  "minlength6": "Minimum length should be 6",
+  "emailMessage": "Enter a valid email address"
 }
