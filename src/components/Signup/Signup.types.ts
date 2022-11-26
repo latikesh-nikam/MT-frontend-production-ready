@@ -1,7 +1,7 @@
 export default interface ISignupProps {
   name: string;
   email: string;
-  phone: number;
+  phone: number | string;
   gender: string;
   occupation: string;
   newPassword: string;

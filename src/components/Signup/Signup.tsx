@@ -1,7 +1,8 @@
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useTranslation } from "react-i18next";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useTranslation } from 'react-i18next';
+import * as Yup from 'yup';
+import ReCAPTCHA from 'react-google-recaptcha';
 import {
   Avatar,
   Box,
@@ -21,29 +22,43 @@ import {
   SelectChangeEvent,
   TextField,
   Typography,
-} from "@mui/material";
-import { schema } from "./Signup.validation";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import styles from "../Signup/Signup.module.scss";
-import ISignupProps from "./Signup.types";
-import { useRef, useState } from "react";
+} from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import styles from '../Signup/Signup.module.scss';
+import ISignupProps from './Signup.types';
+import { useRef, useState } from 'react';
 
 const Signup = () => {
-  const [securityQuestion, setSecurityQuestion] = useState("");
+  const [securityQuestion, setSecurityQuestion] = useState('');
 
   const handleChange = (event: SelectChangeEvent) => {
     setSecurityQuestion(event.target.value as string);
   };
 
-  const { t } = useTranslation();
   const captchaRef = useRef<any>(null);
-  const [captchaToken, setCaptchaToken] = useState("");
+  const { t } = useTranslation();
+  const required = t('required');
+  const emailMessage = t('emailMessage');
+  const minLengthPassword = t('minlength6');
+  const minLengthPhone = t('minlength10');
+  const maxLengthPhone = t('maxlength10');
+  const [captchaToken, setCaptchaToken] = useState('');
 
-  console.log(t("home"));
+  const signUpSchema = Yup.object({
+    name: Yup.string().required(required),
+    email: Yup.string().required(required).email(emailMessage),
+    newPassword: Yup.string().required(required).min(6, minLengthPassword),
+    confirmPassword: Yup.string().required(required).min(6, minLengthPassword),
+    phone: Yup.number()
+      .required(required)
+      .min(10, minLengthPhone)
+      .max(10, maxLengthPhone),
+    gender: Yup.string().required(required),
+    occupation: Yup.string().required(required),
+    securityQuestion: Yup.string().required(required),
+    securityQuestionAnswer: Yup.string().required(required),
+  });
 
-  const resolver = yupResolver(schema);
-
-  console.log(captchaRef.current);
   const {
     control,
     handleSubmit,
@@ -51,16 +66,17 @@ const Signup = () => {
     formState: { errors },
   } = useForm<ISignupProps>({
     defaultValues: {
-      email: "",
-      name: "",
-      phone: 0,
-      gender: "",
-      occupation: "",
-      newPassword: "",
-      confirmPassword: "",
-      securityQuestion: "",
-      securityQuestionAnswer: "",
+      email: '',
+      name: '',
+      phone: '',
+      gender: '',
+      occupation: '',
+      newPassword: '',
+      confirmPassword: '',
+      securityQuestion: '',
+      securityQuestionAnswer: '',
     },
+    resolver: yupResolver(signUpSchema),
   });
   const formData: any = {};
   const submit = (data: any) => {
@@ -68,21 +84,26 @@ const Signup = () => {
     const token = captchaRef.current.getValue();
     setCaptchaToken(token);
     captchaRef.current.reset();
-    formData["data"] = data;
-    formData["captchaToken"] = token;
+    formData['data'] = data;
+    formData['captchaToken'] = token;
     console.log(formData);
     reset({
-      email: "",
-      name: "",
-      phone: 0,
-      gender: "",
-      occupation: "",
-      newPassword: "",
-      confirmPassword: "",
-      securityQuestion: "",
-      securityQuestionAnswer: "",
+      email: '',
+      name: '',
+      phone: '',
+      gender: '',
+      occupation: '',
+      newPassword: '',
+      confirmPassword: '',
+      securityQuestion: '',
+      securityQuestionAnswer: '',
     });
   };
+  const onCaptchaChange = () => {
+    const token = captchaRef.current?.getValue();
+    if (token) setCaptchaToken(token as string);
+  };
+
   return (
     <>
       <Paper elevation={3} className={styles.signUp}>
@@ -91,20 +112,19 @@ const Signup = () => {
             <Box
               sx={{
                 marginTop: 8,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
               }}
-              className={styles.formContainer}
-            >
-              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              className={styles.formContainer}>
+              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                 <LockOutlinedIcon />
               </Avatar>
-              <Typography component="h1" variant="h1">
-                Sign up
+              <Typography component="h1" variant="h5">
+                {t('signUp')}
               </Typography>
               <Box sx={{ mt: 1 }}>
-                <form onSubmit={handleSubmit((data) => submit(data))}>
+                <form onSubmit={handleSubmit(data => submit(data))}>
                   <Box className={styles.box1}>
                     <Controller
                       name="name"
@@ -113,12 +133,13 @@ const Signup = () => {
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label="First Name"
+                          label={t('enterName')}
                           variant="outlined"
                           fullWidth
                           error={!!errors.name}
-                          helperText={errors.name ? errors.name?.message : ""}
+                          helperText={errors.name ? errors.name?.message : ''}
                           margin="dense"
+                          size="small"
                         />
                       )}
                     />
@@ -129,12 +150,13 @@ const Signup = () => {
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label="Enter Email"
+                          label={t('enterEmail')}
                           variant="outlined"
                           fullWidth
                           error={!!errors.email}
-                          helperText={errors.email ? errors.email?.message : ""}
+                          helperText={errors.email ? errors.email?.message : ''}
                           margin="dense"
+                          size="small"
                         />
                       )}
                     />
@@ -143,16 +165,17 @@ const Signup = () => {
                     <Controller
                       name="phone"
                       control={control}
-                      defaultValue={0}
+                      defaultValue=""
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label="Enter Phone Number"
+                          label={t('enterPhoneNumber')}
                           variant="outlined"
                           fullWidth
                           error={!!errors.phone}
-                          helperText={errors.phone ? errors.phone?.message : ""}
+                          helperText={errors.phone ? errors.phone?.message : ''}
                           margin="dense"
+                          size="small"
                         />
                       )}
                     />
@@ -163,14 +186,15 @@ const Signup = () => {
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label="Enter Occupation"
+                          label={t('enterOccupation')}
                           variant="outlined"
                           fullWidth
                           error={!!errors.occupation}
                           helperText={
-                            errors.occupation ? errors.occupation?.message : ""
+                            errors.occupation ? errors.occupation?.message : ''
                           }
                           margin="dense"
+                          size="small"
                         />
                       )}
                     />
@@ -181,29 +205,27 @@ const Signup = () => {
                     defaultValue="other"
                     render={({ field }) => (
                       <>
-                        {/* <FormControl variant="outlined"> */}
-                        <FormLabel id="gender">Select Gender</FormLabel>
+                        <FormLabel id="gender">{t('selectGender')}</FormLabel>
                         <RadioGroup {...field} row aria-labelledby="gender">
                           <FormControlLabel
                             value="female"
                             control={<Radio />}
-                            label="Female"
+                            label={t('female')}
                             name="female"
                           />
                           <FormControlLabel
                             value="male"
                             control={<Radio />}
-                            label="Male"
+                            label={t('male')}
                             name="male"
                           />
                           <FormControlLabel
                             value="other"
                             control={<Radio />}
-                            label="Other"
+                            label={t('other')}
                             name="other"
                           />
                         </RadioGroup>
-                        {/* </FormControl> */}
                       </>
                     )}
                   />
@@ -211,14 +233,15 @@ const Signup = () => {
                     <Controller
                       name="securityQuestion"
                       control={control}
-                      defaultValue={""}
+                      defaultValue={''}
                       render={({ field }) => (
                         <>
                           <FormControl
-                            sx={{ marginTop: "0.5rem", minWidth: "47%" }}
-                          >
-                            <InputLabel id="securityQuestion-label">
-                              Select Security Question
+                            sx={{ marginTop: '0.5rem', minWidth: '48.5%' }}>
+                            <InputLabel
+                              id="securityQuestion-label"
+                              sx={{ marginTop: '-0.5rem' }}>
+                              {t('selectSecurityQuestion')}
                             </InputLabel>
                             <Select
                               {...field}
@@ -227,14 +250,14 @@ const Signup = () => {
                               label="Select Security Question"
                               error={!!errors.securityQuestion}
                               margin="dense"
-                            >
-                              <MenuItem value={"10"}>
+                              size="small">
+                              <MenuItem value={'10'}>
                                 What is your Favourite Food?
                               </MenuItem>
-                              <MenuItem value={"20"}>
+                              <MenuItem value={'20'}>
                                 Who is your role model?
                               </MenuItem>
-                              <MenuItem value={"30"}>
+                              <MenuItem value={'30'}>
                                 Where were you born?
                               </MenuItem>
                             </Select>
@@ -249,16 +272,17 @@ const Signup = () => {
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label="Enter Security Question Answer"
+                          label={t('enterSecurityQuestionAnswer')}
                           variant="outlined"
                           fullWidth
                           error={!!errors.securityQuestionAnswer}
                           helperText={
                             errors.securityQuestionAnswer
                               ? errors.securityQuestionAnswer?.message
-                              : ""
+                              : ''
                           }
                           margin="dense"
+                          size="small"
                         />
                       )}
                     />
@@ -271,16 +295,18 @@ const Signup = () => {
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label="Enter New Password"
+                          label={t('enterNewPassword')}
                           variant="outlined"
                           fullWidth
                           error={!!errors.newPassword}
                           helperText={
                             errors.newPassword
                               ? errors.newPassword?.message
-                              : ""
+                              : ''
                           }
                           margin="dense"
+                          size="small"
+                          type="password"
                         />
                       )}
                     />
@@ -291,36 +317,42 @@ const Signup = () => {
                       render={({ field }) => (
                         <TextField
                           {...field}
-                          label="Confirm New Password"
+                          label={t('confirmNewPassword')}
                           variant="outlined"
                           fullWidth
                           error={!!errors.confirmPassword}
                           helperText={
                             errors.confirmPassword
                               ? errors.confirmPassword?.message
-                              : ""
+                              : ''
                           }
                           margin="dense"
+                          size="small"
+                          type="password"
                         />
                       )}
                     />
                   </Box>
-                  <ReCAPTCHA
-                    sitekey={process.env.REACT_APP_SITE_KEY || ""}
-                    ref={captchaRef}
-                  />
+                  <Box className={styles.recaptchaBox}>
+                    <ReCAPTCHA
+                      sitekey={process.env.REACT_APP_SITE_KEY || ''}
+                      ref={captchaRef}
+                      onChange={onCaptchaChange}
+                      size="normal"
+                    />
+                  </Box>
                   <Button
                     type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
-                  >
-                    Sign In
+                    disabled={!captchaToken}
+                    sx={{ mt: 3, mb: 2 }}>
+                    {t('signUp')}
                   </Button>
                 </form>
                 <Grid container>
                   <Grid item xs className={styles.link}>
-                    <a href="#">Back to Login</a>
+                    <a href="#">{t('backToLogin')}</a>
                   </Grid>
                 </Grid>
               </Box>

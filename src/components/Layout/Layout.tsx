@@ -5,12 +5,14 @@ import Main from '../../Pages/Main/Main';
 import MobileFilter from '../../Pages/MobileFilter/MobileFilter';
 import SearchResults from '../../Pages/SearchResults/SearchResults';
 import SignIn from '../SignIn/SignIn';
+import Signup from '../Signup/Signup';
 
 const Layout = () => {
   return (
     <Routes>
       <Route path="/" element={<Auth />}>
         <Route index element={<SignIn />} />
+        <Route index element={<Signup />} />
       </Route>
       <Route path="/home" element={<Main />}>
         <Route index element={<Home />} />
