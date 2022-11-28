@@ -11,5 +11,13 @@
   "password": "पासवर्ड",
   "required": "*आवश्यक",
   "minlength6": "न्यूनतम लंबाई 6 होनी चाहिए",
-  "emailMessage": "एक मान्य ईमेल पता दर्ज करें"
+  "emailMessage": "एक मान्य ईमेल पता दर्ज करें",
+  "from":" से",
+  "to":" तक",
+  "adults":"वयस्कों",
+  "children":"बच्चे",
+  "numberMessage":"एक संख्या होनी चाहिए",
+  "date":"दिनांक",
+  "adultMessage": "1 या 1 से अधिक होना चाहिए",
+  "differentCities":"विभिन्न शहरों का चयन करें"
 }

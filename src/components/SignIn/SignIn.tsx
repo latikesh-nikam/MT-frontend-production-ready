@@ -1,13 +1,14 @@
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import styles from './signIn.module.scss';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { useRef, useState } from 'react';
 import { ISignInInput } from './SignIn.types';
 import ReCAPTCHA from 'react-google-recaptcha';
+import FormInputText from '../FormInput/FormInput';
 
 const SignIn = () => {
   const { t } = useTranslation();
@@ -24,11 +25,18 @@ const SignIn = () => {
     password: Yup.string().required(required).min(6, minLength),
   });
 
+  const methods = useForm<ISignInInput>({
+    resolver: yupResolver(signInSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
   const {
     formState: { errors },
     handleSubmit,
-    control,
-  } = useForm<ISignInInput>({ resolver: yupResolver(signInSchema) });
+  } = methods;
 
   const onCaptchaChange = () => {
     const token = captchaRef.current?.getValue();
@@ -49,53 +57,37 @@ const SignIn = () => {
         {t('signIn')}
       </Typography>
       <Box>
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.signInForm}>
-          <Controller
-            name="email"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <TextField
-                {...field}
-                sx={{ m: 0 }}
-                label={t('email')}
-                variant="outlined"
-                error={!!errors.email}
-                helperText={errors['email'] ? errors.email?.message : ''}
-                margin="dense"
+        <FormProvider {...methods}>
+          <form onSubmit={handleSubmit(onSubmit)} className={styles.signInForm}>
+            <FormInputText
+              name="email"
+              label="email"
+              errors={errors}
+              type="text"
+            />
+            <FormInputText
+              name="password"
+              label="password"
+              errors={errors}
+              type="password"
+            />
+            <Box className={styles.recaptchaContainer}>
+              <ReCAPTCHA
+                sitekey={process.env.REACT_APP_SITE_KEY || ''}
+                ref={captchaRef}
+                onChange={onCaptchaChange}
+                size="normal"
               />
-            )}
-          />
-          <Controller
-            name="password"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <TextField
-                sx={{ m: 0 }}
-                {...field}
-                label={t('password')}
-                variant="outlined"
-                error={!!errors.password}
-                helperText={errors['password'] ? errors.password?.message : ''}
-                margin="dense"
-              />
-            )}
-          />
-          <ReCAPTCHA
-            sitekey={process.env.REACT_APP_SITE_KEY || ''}
-            ref={captchaRef}
-            onChange={onCaptchaChange}
-            size="normal"
-          />
-          <Button
-            className={styles.submitButton}
-            type="submit"
-            disabled={!captchaToken}
-            variant="contained">
-            {t('signIn')}
-          </Button>
-        </form>
+            </Box>
+            <Button
+              className={styles.submitButton}
+              type="submit"
+              disabled={!captchaToken}
+              variant="contained">
+              {t('signIn')}
+            </Button>
+          </form>
+        </FormProvider>
       </Box>
       <Grid container className={styles.actions}>
         <Link to="forgotPassword">{t('forgotPassword')}?</Link>

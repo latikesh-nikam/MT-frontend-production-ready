@@ -11,5 +11,13 @@
   "password": "Password",
   "required": "*Required",
   "minlength6": "Minimum length should be 6",
-  "emailMessage": "Enter a valid email address"
+  "emailMessage": "Enter a valid email address",
+  "from":"From City",
+  "to":"To City",
+  "adults":"Adults",
+  "date":"Date",
+  "children":"Children",
+  "numberMessage":"Must be a number",
+  "adultMessage":"Must be 1 or greater than 1",
+  "differentCities": "select different cities"
 }
