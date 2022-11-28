@@ -5,6 +5,7 @@ import Main from '../../Pages/Main/Main';
 import MobileFilter from '../../Pages/MobileFilter/MobileFilter';
 import SearchResults from '../../Pages/SearchResults/SearchResults';
 import SignIn from '../SignIn/SignIn';
+import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import Signup from '../Signup/Signup';
 
 const Layout = () => {
@@ -12,7 +13,8 @@ const Layout = () => {
     <Routes>
       <Route path="/" element={<Auth />}>
         <Route index element={<SignIn />} />
-        <Route index element={<Signup />} />
+        <Route path="signup" element={<Signup />} />
+        <Route path="forgotPassword" element={<ForgotPassword />} />
       </Route>
       <Route path="/home" element={<Main />}>
         <Route index element={<Home />} />

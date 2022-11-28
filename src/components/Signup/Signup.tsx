@@ -108,10 +108,9 @@ const Signup = () => {
     <>
       <Paper elevation={3} className={styles.signUp}>
         <Box>
-          <Container component="main" maxWidth="xs">
+          <Container component="main">
             <Box
               sx={{
-                marginTop: 8,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',

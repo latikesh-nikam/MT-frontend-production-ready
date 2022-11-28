@@ -121,5 +121,6 @@
     "contactInformation":"संपर्क जानकारी",
     "sendTicketDetails":"आपके टिकट का विवरण इन विवरणों को भेजा जाएगा",
     "proceedToPayment":"भुगतान करें",
-    "passengerDetails":"यात्री विवरण"
+    "passengerDetails":"यात्री विवरण",
+    "updatePassword":"पासवर्ड बदलें"
 }
