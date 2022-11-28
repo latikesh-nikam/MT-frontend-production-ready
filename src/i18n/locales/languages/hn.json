@@ -122,5 +122,11 @@
     "sendTicketDetails":"आपके टिकट का विवरण इन विवरणों को भेजा जाएगा",
     "proceedToPayment":"भुगतान करें",
     "passengerDetails":"यात्री विवरण",
-    "updatePassword":"पासवर्ड बदलें"
+    "updatePassword":"पासवर्ड बदलें",
+    "Mticket":"एम टिकट",
+    "bookTicket":"बुक टिकट",
+    "settings":"सेटिंग्स",
+    "logout":"लॉग आउट",
+    "recentBookings":"हाल ही का बुकिंग",
+    "passwordValidation":"पासवर्ड मेल नहीं खाते"
 }

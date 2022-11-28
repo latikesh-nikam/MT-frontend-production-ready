@@ -72,7 +72,7 @@
     "required": "*Required",
     "minlength6": "Minimum length should be 6",
     "minlength10": "Minimum length should be 10",
-    "maxlength10": "Maximim length should be 10",
+    "maxlength10": "Maximum length should be 10",
     "emailMessage": "Enter a valid email address",
     "backToLogin":"Back to Login",
     "enterEmail":"Enter Email",
@@ -123,6 +123,12 @@
     "sendTicketDetails":"Your ticket details will be send to these details",
     "proceedToPayment":"Proceed To Payment",
     "passengerDetails":"Passenger Details",
-    "updatePassword":"Update Password"
+    "updatePassword":"Update Password",
+    "Mticket":"MTicket",
+    "bookTicket":"Book Ticket",
+    "settings":"Settings",
+    "logout":"Logout",
+    "recentBookings":"Recent Bookings",
+    "passwordValidation":"Passwords Do Not Match"
 
 }

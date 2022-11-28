@@ -8,7 +8,6 @@ import {
   Box,
   Button,
   Container,
-  CssBaseline,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -27,6 +26,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import styles from '../Signup/Signup.module.scss';
 import ISignupProps from './Signup.types';
 import { useRef, useState } from 'react';
+import LoginIcon from '@mui/icons-material/Input';
 
 const Signup = () => {
   const [securityQuestion, setSecurityQuestion] = useState('');
@@ -42,17 +42,21 @@ const Signup = () => {
   const minLengthPassword = t('minlength6');
   const minLengthPhone = t('minlength10');
   const maxLengthPhone = t('maxlength10');
+  const passwordValidator = t('passwordValidation');
   const [captchaToken, setCaptchaToken] = useState('');
 
   const signUpSchema = Yup.object({
     name: Yup.string().required(required),
     email: Yup.string().required(required).email(emailMessage),
     newPassword: Yup.string().required(required).min(6, minLengthPassword),
-    confirmPassword: Yup.string().required(required).min(6, minLengthPassword),
-    phone: Yup.number()
+    phone: Yup.string()
       .required(required)
       .min(10, minLengthPhone)
       .max(10, maxLengthPhone),
+    confirmPassword: Yup.string()
+      .required(required)
+      .min(6, minLengthPassword)
+      .oneOf([Yup.ref('newPassword'), null], passwordValidator),
     gender: Yup.string().required(required),
     occupation: Yup.string().required(required),
     securityQuestion: Yup.string().required(required),
@@ -78,7 +82,9 @@ const Signup = () => {
     },
     resolver: yupResolver(signUpSchema),
   });
+
   const formData: any = {};
+
   const submit = (data: any) => {
     console.log(data);
     const token = captchaRef.current.getValue();
@@ -98,6 +104,7 @@ const Signup = () => {
       securityQuestion: '',
       securityQuestionAnswer: '',
     });
+    setCaptchaToken('');
   };
   const onCaptchaChange = () => {
     const token = captchaRef.current?.getValue();
@@ -116,8 +123,8 @@ const Signup = () => {
                 alignItems: 'center',
               }}
               className={styles.formContainer}>
-              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                <LockOutlinedIcon />
+              <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+                <LoginIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
                 {t('signUp')}

@@ -35,11 +35,15 @@ const ForgotPassword = () => {
   const required = t('required');
   const emailMessage = t('emailMessage');
   const minLengthPassword = t('minlength6');
+  const passwordValidator = t('passwordValidation');
 
   const forgotPasswordSchema = Yup.object({
     email: Yup.string().required(required).email(emailMessage),
     newPassword: Yup.string().required(required).min(6, minLengthPassword),
-    confirmPassword: Yup.string().required(required).min(6, minLengthPassword),
+    confirmPassword: Yup.string()
+      .required(required)
+      .min(6, minLengthPassword)
+      .oneOf([Yup.ref('newPassword'), null], passwordValidator),
     securityQuestion: Yup.string().required(required),
     securityQuestionAnswer: Yup.string().required(required),
   });
@@ -84,7 +88,7 @@ const ForgotPassword = () => {
                 alignItems: 'center',
               }}
               className={styles.formContainer}>
-              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
                 <LockResetIcon />
               </Avatar>
               <Typography component="h1" variant="h5">

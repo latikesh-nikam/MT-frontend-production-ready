@@ -1,3 +1,4 @@
+import { Toolbar } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import Auth from '../../Pages/Auth/Auth';
 import Home from '../../Pages/Home/Home';
@@ -7,6 +8,7 @@ import SearchResults from '../../Pages/SearchResults/SearchResults';
 import SignIn from '../SignIn/SignIn';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import Signup from '../Signup/Signup';
+import Topbar from '../Topbar/Topbar';
 
 const Layout = () => {
   return (
@@ -21,6 +23,7 @@ const Layout = () => {
         <Route path="searchResults" element={<SearchResults />} />
         <Route path="filter" element={<MobileFilter />} />
       </Route>
+      <Route path="/topbar" element={<Topbar />}></Route>
     </Routes>
   );
 };

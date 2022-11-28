@@ -1,4 +1,5 @@
 .signUp {
+  min-width: 30rem;
   .formContainer {
     padding: 1rem;
 
@@ -12,11 +13,31 @@
     }
     .link {
       text-align: center;
+      font-style: italic;
+
+      :hover {
+        color: darkred;
+      }
     }
     .recaptchaBox {
       margin-top: 1rem;
       display: flex;
       justify-content: center;
+    }
+  }
+}
+@media (max-width: 30rem) {
+  .signUp {
+    min-width: 22rem;
+    .formContainer {
+      .box1,
+      .box2,
+      .box3,
+      .box4 {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
     }
   }
 }
