@@ -23,6 +23,9 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import IForgotPasswordProps from './forgotPassword.types';
+import axios from 'axios';
+import { postData } from '../../services/http';
+// import axiosInstance from '../../services/axios.instance';
 
 const ForgotPassword = () => {
   const [securityQuestion, setSecurityQuestion] = useState('');
@@ -63,11 +66,11 @@ const ForgotPassword = () => {
     },
     resolver: yupResolver(forgotPasswordSchema),
   });
-  const formData: any = {};
-  const submit = (data: any) => {
-    console.log(data);
-    formData['data'] = data;
-    console.log(formData);
+
+  const submit = async (data: any) => {
+    console.log(data, 'data');
+    const response = await postData('auth/forgot-password', data);
+    console.log(response, 'response');
     reset({
       email: '',
       newPassword: '',

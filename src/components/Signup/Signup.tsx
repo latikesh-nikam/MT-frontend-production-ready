@@ -3,6 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Avatar,
   Box,
@@ -18,23 +20,17 @@ import {
   Radio,
   RadioGroup,
   Select,
-  SelectChangeEvent,
   TextField,
   Typography,
 } from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import styles from '../Signup/Signup.module.scss';
-import ISignupProps from './Signup.types';
-import { useRef, useState } from 'react';
+import { ISignupProps, IQuestionProps } from './Signup.types';
+import { useEffect, useRef, useState } from 'react';
 import LoginIcon from '@mui/icons-material/Input';
+import { getData, postData } from '../../services/http';
 
 const Signup = () => {
-  const [securityQuestion, setSecurityQuestion] = useState('');
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setSecurityQuestion(event.target.value as string);
-  };
-
+  const [questions, setQuestions] = useState<IQuestionProps[]>([]);
   const captchaRef = useRef<any>(null);
   const { t } = useTranslation();
   const required = t('required');
@@ -48,7 +44,7 @@ const Signup = () => {
   const signUpSchema = Yup.object({
     name: Yup.string().required(required),
     email: Yup.string().required(required).email(emailMessage),
-    newPassword: Yup.string().required(required).min(6, minLengthPassword),
+    password: Yup.string().required(required).min(6, minLengthPassword),
     phone: Yup.string()
       .required(required)
       .min(10, minLengthPhone)
@@ -56,12 +52,21 @@ const Signup = () => {
     confirmPassword: Yup.string()
       .required(required)
       .min(6, minLengthPassword)
-      .oneOf([Yup.ref('newPassword'), null], passwordValidator),
+      .oneOf([Yup.ref('password'), null], passwordValidator),
     gender: Yup.string().required(required),
     occupation: Yup.string().required(required),
     securityQuestion: Yup.string().required(required),
-    securityQuestionAnswer: Yup.string().required(required),
+    securityAnswer: Yup.string().required(required),
   });
+
+  const getSecurityQuestions = async () => {
+    const response = await getData('security');
+    setQuestions(response);
+  };
+
+  useEffect(() => {
+    getSecurityQuestions();
+  }, []);
 
   const {
     control,
@@ -75,36 +80,44 @@ const Signup = () => {
       phone: '',
       gender: '',
       occupation: '',
-      newPassword: '',
+      password: '',
       confirmPassword: '',
       securityQuestion: '',
-      securityQuestionAnswer: '',
+      securityAnswer: '',
     },
     resolver: yupResolver(signUpSchema),
   });
 
-  const formData: any = {};
-
-  const submit = (data: any) => {
+  const submit = async (data: any) => {
     console.log(data);
     const token = captchaRef.current.getValue();
     setCaptchaToken(token);
-    captchaRef.current.reset();
-    formData['data'] = data;
-    formData['captchaToken'] = token;
-    console.log(formData);
-    reset({
-      email: '',
-      name: '',
-      phone: '',
-      gender: '',
-      occupation: '',
-      newPassword: '',
-      confirmPassword: '',
-      securityQuestion: '',
-      securityQuestionAnswer: '',
-    });
-    setCaptchaToken('');
+    console.log(captchaToken);
+    data['captcha'] = captchaToken;
+    try {
+      const response = await postData('auth/signup', data);
+      console.log(response);
+      reset({
+        email: '',
+        name: '',
+        phone: '',
+        gender: '',
+        occupation: '',
+        password: '',
+        confirmPassword: '',
+        securityQuestion: '',
+        securityAnswer: '',
+      });
+      setCaptchaToken('');
+      toast.success(`${response.message}`, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } catch (error) {
+      toast.error(`${error}`, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      throw error;
+    }
   };
   const onCaptchaChange = () => {
     const token = captchaRef.current?.getValue();
@@ -113,6 +126,7 @@ const Signup = () => {
 
   return (
     <>
+      <ToastContainer />
       <Paper elevation={3} className={styles.signUp}>
         <Box>
           <Container component="main">
@@ -257,22 +271,23 @@ const Signup = () => {
                               error={!!errors.securityQuestion}
                               margin="dense"
                               size="small">
-                              <MenuItem value={'10'}>
-                                What is your Favourite Food?
-                              </MenuItem>
-                              <MenuItem value={'20'}>
-                                Who is your role model?
-                              </MenuItem>
-                              <MenuItem value={'30'}>
-                                Where were you born?
-                              </MenuItem>
+                              {questions &&
+                                questions.map((question: IQuestionProps) => {
+                                  return (
+                                    <MenuItem
+                                      value={question._id}
+                                      key={question._id}>
+                                      {question.question}
+                                    </MenuItem>
+                                  );
+                                })}
                             </Select>
                           </FormControl>
                         </>
                       )}
                     />
                     <Controller
-                      name="securityQuestionAnswer"
+                      name="securityAnswer"
                       control={control}
                       defaultValue=""
                       render={({ field }) => (
@@ -281,10 +296,10 @@ const Signup = () => {
                           label={t('enterSecurityQuestionAnswer')}
                           variant="outlined"
                           fullWidth
-                          error={!!errors.securityQuestionAnswer}
+                          error={!!errors.securityAnswer}
                           helperText={
-                            errors.securityQuestionAnswer
-                              ? errors.securityQuestionAnswer?.message
+                            errors.securityAnswer
+                              ? errors.securityAnswer?.message
                               : ''
                           }
                           margin="dense"
@@ -295,7 +310,7 @@ const Signup = () => {
                   </Box>
                   <Box className={styles.box4}>
                     <Controller
-                      name="newPassword"
+                      name="password"
                       control={control}
                       defaultValue=""
                       render={({ field }) => (
@@ -304,11 +319,9 @@ const Signup = () => {
                           label={t('enterNewPassword')}
                           variant="outlined"
                           fullWidth
-                          error={!!errors.newPassword}
+                          error={!!errors.password}
                           helperText={
-                            errors.newPassword
-                              ? errors.newPassword?.message
-                              : ''
+                            errors.password ? errors.password?.message : ''
                           }
                           margin="dense"
                           size="small"
@@ -351,7 +364,7 @@ const Signup = () => {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    disabled={!captchaToken}
+                    // disabled={!captchaToken}
                     sx={{ mt: 3, mb: 2 }}>
                     {t('signUp')}
                   </Button>

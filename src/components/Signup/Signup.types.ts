@@ -1,11 +1,16 @@
-export default interface ISignupProps {
+export interface ISignupProps {
   name: string;
   email: string;
   phone: number | string;
   gender: string;
   occupation: string;
-  newPassword: string;
+  password: string;
   confirmPassword: string;
   securityQuestion: string;
-  securityQuestionAnswer: string;
+  securityAnswer: string;
+}
+
+export interface IQuestionProps {
+  _id: number;
+  question: string;
 }
