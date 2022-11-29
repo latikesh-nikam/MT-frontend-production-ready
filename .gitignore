@@ -25,9 +25,6 @@ yarn-error.log*
 # lock files
 /yarn.lock
 
-#files
-Filter/
-FormInputCheckbox/
-SearchResults/
+
 
 
