@@ -1,11 +1,28 @@
-.searchForm{
+.search {
+  min-width: 50%;
+
+  .searchForm {
     display: flex;
-    padding: 1rem ;
-   
-    .actions{
-        position: absolute;
-        top: 35%;
-        left: 50%;
-        transform: translateX(-50%);
+
+    .formInput {
+      flex: 2;
     }
+
+    .passenger {
+      flex: 1;
+    }
+
+    .actions {
+      display: flex;
+      button {
+        flex: 1;
+      }
+    }
+  }
+}
+
+@media (max-width: 390px) or (max-width: 412px) {
+  .searchForm {
+    flex-direction: column;
+  }
 }

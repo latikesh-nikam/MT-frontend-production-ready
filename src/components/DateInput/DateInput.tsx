@@ -15,8 +15,10 @@ const DateInput = ({ name, label, errors }: IDatePickerProps) => {
       render={({ field: { onChange, value } }) => {
         return (
           <DatePicker
+            minDate={new Date()}
             label={t(label)}
             value={value}
+            inputFormat="DD-MM-YYYY"
             renderInput={params => (
               <TextField
                 {...params}
@@ -26,8 +28,8 @@ const DateInput = ({ name, label, errors }: IDatePickerProps) => {
                 }
               />
             )}
-            onChange={(event, data) => {
-              onChange(event._d);
+            onChange={event => {
+              onChange(event);
             }}
           />
         );

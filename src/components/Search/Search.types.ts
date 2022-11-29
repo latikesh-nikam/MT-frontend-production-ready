@@ -5,3 +5,7 @@ export interface ISearchInput {
   adults: number;
   children: number;
 }
+
+export interface ISearchProps {
+  handleSearch: (data: ISearchInput) => void;
+}

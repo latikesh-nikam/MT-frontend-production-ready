@@ -1,4 +1,4 @@
-import { FieldErrorsImpl } from "react-hook-form";
+import { FieldErrorsImpl } from 'react-hook-form';
 
 export interface ISearchableDropdownProps {
   name: string;
@@ -8,4 +8,6 @@ export interface ISearchableDropdownProps {
     }>
   >;
   label: string;
+  searchList: any[];
+  defaultValue: string;
 }

@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Auth from '../../Pages/Auth/Auth';
 import Home from '../../Pages/Home/Home';
 import Main from '../../Pages/Main/Main';
+import SearchResults from '../../Pages/SearchResults/SearchResult';
 import SignIn from '../SignIn/SignIn';
 
 const Layout = () => {
@@ -12,6 +13,7 @@ const Layout = () => {
       </Route>
       <Route path="/home" element={<Main />}>
         <Route index element={<Home />} />
+        <Route path="searchResults" element={<SearchResults />} />
       </Route>
     </Routes>
   );

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import utility from '../utils/utility';
-const baseURL = 'http://localhost:3000/';
+
+const baseURL = 'http://192.168.3.176:3200/';
 
 const apiUrl = axios.create({
   baseURL: baseURL,
@@ -15,4 +16,22 @@ apiUrl.interceptors.request.use(config => {
   return config;
 });
 
-export default apiUrl;
+export const getData = async (url: string) => {
+    try {
+      const { data } = await apiUrl.get(`${url}`);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  };
+  
+  export const postData = async (url: string, formData: any) => {
+    try {
+      const { data } = await apiUrl.post(`${url}`, formData);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+

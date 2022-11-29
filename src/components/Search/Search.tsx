@@ -1,11 +1,11 @@
 import { Box, Button, Paper } from '@mui/material';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import SearchableDropdown from '../SearchableDropdown/SearchableDropdown';
 import styles from './search.module.scss';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
-import { ISearchInput } from './Search.types';
+import { ISearchInput, ISearchProps } from './Search.types';
 import DateInput from '../DateInput/DateInput';
 import FormInput from '../FormInput/FormInput';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
@@ -13,8 +13,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { useContext } from 'react';
 import { HomeContext } from '../../context/HomeContext/HomeContext';
 import { IHomeContext } from '../../context/HomeContext/homeContext.types';
+import { cities } from './search.data';
 
-const Search = () => {
+const Search = ({ handleSearch }: ISearchProps) => {
   const { t } = useTranslation();
   const required = t('required');
   const adultMessage = t('adultMessage');
@@ -23,6 +24,8 @@ const Search = () => {
   const {
     homeState: { searchFormData },
   } = useContext(HomeContext) as IHomeContext;
+
+  console.log(searchFormData);
 
   const searchSchema = Yup.object({
     from: Yup.string()
@@ -38,7 +41,7 @@ const Search = () => {
 
   const methods = useForm<ISearchInput>({
     resolver: yupResolver(searchSchema),
-    defaultValues: { ...searchFormData },
+    defaultValues: searchFormData,
   });
 
   const {
@@ -46,25 +49,35 @@ const Search = () => {
     formState: { errors },
   } = methods;
 
-  const onSubmit: SubmitHandler<ISearchInput> = (data: any) => {
-    console.log(data);
-  };
-
   return (
     <FormProvider {...methods}>
       <LocalizationProvider dateAdapter={AdapterMoment}>
-        <Paper elevation={3}>
-          <form onSubmit={handleSubmit(onSubmit)} className={styles.searchForm}>
-            <Box>
-              <SearchableDropdown name="from" label="from" errors={errors} />
+        <Paper elevation={3} className={styles.search}>
+          <form
+            onSubmit={handleSubmit(handleSearch)}
+            className={styles.searchForm}>
+            <Box className={styles.formInput}>
+              <SearchableDropdown
+                name="from"
+                label="from"
+                errors={errors}
+                searchList={cities}
+                defaultValue={searchFormData.from}
+              />
             </Box>
-            <Box>
-              <SearchableDropdown name="to" label="to" errors={errors} />
+            <Box className={styles.formInput}>
+              <SearchableDropdown
+                name="to"
+                label="to"
+                errors={errors}
+                searchList={cities}
+                defaultValue={searchFormData.to}
+              />
             </Box>
-            <Box>
+            <Box className={styles.formInput}>
               <DateInput errors={errors} name="date" label="date" />
             </Box>
-            <Box>
+            <Box className={styles.passenger}>
               <FormInput
                 errors={errors}
                 name="adults"
@@ -72,7 +85,7 @@ const Search = () => {
                 type="number"
               />
             </Box>
-            <Box>
+            <Box className={styles.passenger}>
               <FormInput
                 errors={errors}
                 name="children"
@@ -82,7 +95,7 @@ const Search = () => {
             </Box>
             <Box className={styles.actions}>
               <Button type="submit" variant="contained">
-                Search
+                {t('search')}
               </Button>
             </Box>
           </form>

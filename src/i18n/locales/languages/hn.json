@@ -19,5 +19,8 @@
   "numberMessage":"एक संख्या होनी चाहिए",
   "date":"दिनांक",
   "adultMessage": "1 या 1 से अधिक होना चाहिए",
-  "differentCities":"विभिन्न शहरों का चयन करें"
+  "differentCities":"विभिन्न शहरों का चयन करें",
+  "search": "खोज",
+  "recentBookings": "हाल ही की बुकिंग",
+  "bookingId":"बुकिंग आईडी"
 }

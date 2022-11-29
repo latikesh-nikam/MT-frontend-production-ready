@@ -7,20 +7,9 @@ const SearchableDropdown = ({
   name,
   errors,
   label,
+  searchList,
+  defaultValue,
 }: ISearchableDropdownProps) => {
-  const cities = [
-    'Nagpur',
-    'Pune',
-    'Mumbai',
-    'Yavatmal',
-    'Jalgaon',
-    'Shegaon',
-    'Buldana',
-    'Amravati',
-    'Bhandara',
-    'Wardha',
-  ];
-
   const { control } = useFormContext();
   const { t } = useTranslation();
   return (
@@ -29,19 +18,21 @@ const SearchableDropdown = ({
       control={control}
       render={({ field: { onChange } }) => (
         <Autocomplete
-          options={cities}
+          options={searchList}
+          fullWidth
+          defaultValue={defaultValue}
           renderInput={params => (
             <TextField
               {...params}
+              fullWidth
               label={t(label)}
               variant="outlined"
               error={!!errors[name]}
-              helperText={errors[name] ? (errors[name]?.message as string) : ''}
+              //   helperText={errors[name] ? (errors[name]?.message as string) : ''}
             />
           )}
           onChange={(event, data) => {
             onChange(data);
-            return data;
           }}
         />
       )}

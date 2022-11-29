@@ -12,12 +12,15 @@
   "required": "*Required",
   "minlength6": "Minimum length should be 6",
   "emailMessage": "Enter a valid email address",
-  "from":"From City",
-  "to":"To City",
+  "from":"From",
+  "to":"To",
   "adults":"Adults",
   "date":"Date",
   "children":"Children",
   "numberMessage":"Must be a number",
   "adultMessage":"Must be 1 or greater than 1",
-  "differentCities": "select different cities"
+  "differentCities": "select different cities",
+  "search":"Search",
+  "recentBookings":"Recent Bookings",
+  "bookingId":"Booking Id"
 }

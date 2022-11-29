@@ -5,7 +5,7 @@ export interface IHomeAction {
   payload?: any;
 }
 
-const HOME_ACTIONS_MAP = {
+export const HOME_ACTIONS_MAP = {
   SEARCH_DATA: 'SEARCH_DATA',
   SEARCH_FORM_DATA: 'SEARCH_FORM_DATA',
 };
@@ -19,6 +19,7 @@ export const homeReducer = (
       return { ...state, searchData: payload };
     }
     case HOME_ACTIONS_MAP.SEARCH_FORM_DATA: {
+      console.log(payload)
       return { ...state, searchFormData: payload };
     }
     default: {

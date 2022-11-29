@@ -15,12 +15,11 @@ const FormInput = ({ name, label, errors, type }: IFormInputProps) => {
           {...field}
           sx={{ m: 0 }}
           label={t(label)}
+          fullWidth
           variant="outlined"
           error={!!errors[name]}
           type={type}
-          helperText={
-            errors[name] ? (errors[name]?.message as string) : ('' as string)
-          }
+          helperText={errors[name] ? (errors[name]?.message as string) : ''}
           margin="dense"
         />
       )}

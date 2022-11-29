@@ -2,16 +2,19 @@ import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import styles from './signIn.module.scss';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Button, Grid, Paper, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import { useRef, useState } from 'react';
 import { ISignInInput } from './SignIn.types';
 import ReCAPTCHA from 'react-google-recaptcha';
 import FormInputText from '../FormInput/FormInput';
+import { postData } from '../../services/http';
+import utility from '../../utils/utility';
 
 const SignIn = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const [captchaToken, setCaptchaToken] = useState<string>('');
 
@@ -22,7 +25,7 @@ const SignIn = () => {
 
   const signInSchema = Yup.object({
     email: Yup.string().required(required).email(emailMessage),
-    password: Yup.string().required(required).min(6, minLength),
+    password: Yup.string().required(required).min(0, minLength),
   });
 
   const methods = useForm<ISignInInput>({
@@ -38,13 +41,22 @@ const SignIn = () => {
     handleSubmit,
   } = methods;
 
-  const onCaptchaChange = () => {
+  const handleCaptchaChange = () => {
     const token = captchaRef.current?.getValue();
-    if (token) setCaptchaToken(token as string);
+    setCaptchaToken(token as string);
+    console.log(token);
   };
 
-  const onSubmit: SubmitHandler<ISignInInput> = data => {
-    // need to add a handler function
+  const onSubmit: SubmitHandler<ISignInInput> = async data => {
+    try {
+      data['captcha'] = captchaToken;
+      const response = await postData('auth/login', data);
+      utility.setStore('token', response.access_token);
+      navigate('/home');
+    } catch (error: any) {
+      console.log(error.response);
+      throw error;
+    }
   };
 
   return (
@@ -75,7 +87,7 @@ const SignIn = () => {
               <ReCAPTCHA
                 sitekey={process.env.REACT_APP_SITE_KEY || ''}
                 ref={captchaRef}
-                onChange={onCaptchaChange}
+                onChange={handleCaptchaChange}
                 size="normal"
               />
             </Box>
