@@ -1,6 +1,7 @@
 import axios from 'axios';
 import utility from '../utils/utility';
-const baseURL = 'http://192.168.2.180:3200/';
+const baseURL = process.env.REACT_APP_BASE_URL;
+
 const apiUrl = axios.create({
   baseURL: baseURL,
 });

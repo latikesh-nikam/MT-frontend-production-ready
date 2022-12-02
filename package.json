@@ -19,6 +19,7 @@
     "@types/react-dom": "^18.0.0",
     "@types/react-google-recaptcha": "^2.1.5",
     "axios": "^1.2.0",
+    "dotenv": "^16.0.3",
     "i18next": "^22.0.6",
     "moment": "^2.29.4",
     "react": "^18.2.0",
