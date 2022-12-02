@@ -1,5 +1,6 @@
 import { Toolbar } from '@mui/material';
-import { Route, Routes } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
 import Auth from '../../Pages/Auth/Auth';
 import Home from '../../Pages/Home/Home';
 import Main from '../../Pages/Main/Main';

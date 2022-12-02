@@ -1,7 +1,7 @@
 export default interface IForgotPasswordProps {
   email: string;
-  newPassword: string;
+  password: string;
   confirmPassword: string;
   securityQuestion: string;
-  securityQuestionAnswer: string;
+  securityAnswer: string;
 }

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import utility from '../utils/utility';
-const baseURL = 'http://192.168.3.176:3200/';
+const baseURL = 'http://192.168.2.180:3200/';
 const apiUrl = axios.create({
   baseURL: baseURL,
 });
@@ -24,6 +24,24 @@ export const getData = async (url: string) => {
 export const postData = async (url: string, formData: any) => {
   try {
     const { data } = await apiUrl.post(`${url}`, formData);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateData = async (url: string, formData: any) => {
+  try {
+    const { data } = await apiUrl.put(`${url}`, formData);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteData = async (id: string, url: string) => {
+  try {
+    const { data } = await apiUrl.delete(`${url}/${id}`);
     return data;
   } catch (error) {
     throw error;
