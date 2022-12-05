@@ -17,8 +17,9 @@ export const MainDivBox = styled('div')(
     margin-top:${theme.typography.pxToRem(theme.palette['margin']['main'])};
   }
   .heading{
-    font-weight:${theme.typography.fontWeightMedium};
-    font-size:${theme.typography.fontSizeLarge};
+    color:${theme.palette.primary.main};
+    padding-top:1rem;
+    margin:0;
   }
   .buttonDiv{
     margin-top: ${theme.typography.pxToRem(

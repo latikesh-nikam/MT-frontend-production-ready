@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Controller } from 'react-hook-form';
+import { Controller, FormProvider } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import ReCAPTCHA from 'react-google-recaptcha';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,12 +15,10 @@ import { Box } from '@mui/material';
 import { FormControl } from '@mui/material';
 import { FormControlLabel } from '@mui/material';
 import { FormLabel } from '@mui/material';
-import { InputLabel } from '@mui/material';
 import { MenuItem } from '@mui/material';
 import { Paper } from '@mui/material';
 import { Radio } from '@mui/material';
 import { RadioGroup } from '@mui/material';
-import { Select } from '@mui/material';
 import { TextField } from '@mui/material';
 import { MainDivBox } from './signup.style';
 import { getData } from '../../services/http';
@@ -31,6 +29,7 @@ import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider
 import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import FormInput from '../FormInput/FormInput';
 
 const Signup = () => {
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);
@@ -74,12 +73,8 @@ const Signup = () => {
     getSecurityQuestions();
   }, []);
 
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors, dirtyFields, defaultValues },
-  } = useForm<ISignupProps>({
+  const methods = useForm<ISignupProps>({
+    resolver: yupResolver(signUpSchema),
     defaultValues: {
       email: '',
       name: '',
@@ -91,8 +86,13 @@ const Signup = () => {
       securityQuestion: '',
       securityAnswer: '',
     },
-    resolver: yupResolver(signUpSchema),
   });
+  const {
+    handleSubmit,
+    reset,
+    control,
+    formState: { dirtyFields, defaultValues, errors },
+  } = methods;
 
   const submit = async (data: any) => {
     const token = captchaRef.current.getValue();
@@ -134,241 +134,150 @@ const Signup = () => {
       <MainDivBox>
         <Paper elevation={3} className="container">
           <Box className="formContainer">
-            <Box className="heading">{localString['signUp']}</Box>
+            <h2 className="heading">{localString['signUp']}</h2>
             <Box className="mainBox">
-              <form onSubmit={handleSubmit(submit)} autoComplete="off">
-                <Box className="row">
+              <FormProvider {...methods}>
+                <form onSubmit={handleSubmit(submit)} autoComplete="off">
+                  <Box className="row">
+                    <FormInput
+                      name="name"
+                      label="enterName"
+                      showErrorMessage
+                      size="small"
+                    />
+                    <FormInput
+                      name="email"
+                      label="enterEmail"
+                      showErrorMessage
+                      size="small"
+                    />
+                  </Box>
+                  <Box className="row">
+                    <FormInput
+                      name="phone"
+                      label="enterPhoneNumber"
+                      showErrorMessage
+                      size="small"
+                    />
+                    <FormInput
+                      name="occupation"
+                      label="enterOccupation"
+                      showErrorMessage
+                      size="small"
+                    />
+                  </Box>
                   <Controller
-                    name="name"
+                    name="gender"
                     control={control}
-                    defaultValue=""
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={localString['enterName']}
-                        variant="outlined"
-                        fullWidth
-                        error={!!errors.name}
-                        helperText={errors.name ? errors.name?.message : ''}
-                        margin="dense"
-                        size="small"
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="email"
-                    control={control}
-                    defaultValue=""
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={localString['enterEmail']}
-                        variant="outlined"
-                        fullWidth
-                        error={!!errors.email}
-                        helperText={errors.email ? errors.email?.message : ''}
-                        margin="dense"
-                        size="small"
-                      />
-                    )}
-                  />
-                </Box>
-                <Box className="row">
-                  <Controller
-                    name="phone"
-                    control={control}
-                    defaultValue=""
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={localString['enterPhoneNumber']}
-                        variant="outlined"
-                        fullWidth
-                        error={!!errors.phone}
-                        helperText={errors.phone ? errors.phone?.message : ''}
-                        margin="dense"
-                        size="small"
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="occupation"
-                    control={control}
-                    defaultValue=""
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={localString['enterOccupation']}
-                        variant="outlined"
-                        fullWidth
-                        error={!!errors.occupation}
-                        helperText={
-                          errors.occupation ? errors.occupation?.message : ''
-                        }
-                        margin="dense"
-                        size="small"
-                      />
-                    )}
-                  />
-                </Box>
-                <Controller
-                  name="gender"
-                  control={control}
-                  defaultValue="other"
-                  render={({ field }) => (
-                    <Fragment>
-                      <FormLabel id="gender">
-                        {localString['selectGender']}
-                      </FormLabel>
-                      <RadioGroup {...field} row aria-labelledby="gender">
-                        <FormControlLabel
-                          value="female"
-                          control={<Radio />}
-                          label={localString['female']}
-                          name="female"
-                        />
-                        <FormControlLabel
-                          value="male"
-                          control={<Radio />}
-                          label={localString['male']}
-                          name="male"
-                        />
-                        <FormControlLabel
-                          value="other"
-                          control={<Radio />}
-                          label={localString['other']}
-                          name="other"
-                        />
-                      </RadioGroup>
-                    </Fragment>
-                  )}
-                />
-                <Box className="row">
-                  <Controller
-                    name="securityQuestion"
-                    control={control}
-                    defaultValue={''}
+                    defaultValue="other"
                     render={({ field }) => (
                       <Fragment>
-                        <FormControl className="selectControl">
-                          <InputLabel
-                            id="securityQuestion-label"
-                            className="selectInput">
-                            {localString['selectSecurityQuestion']}
-                          </InputLabel>
-                          <Select
-                            {...field}
-                            labelId="securityQuestion-label"
-                            id="securityQuestions"
-                            label="Select Security Question"
-                            error={!!errors.securityQuestion}
-                            margin="dense"
-                            size="small">
-                            {questions &&
-                              questions.map((question: IQuestionProps) => {
-                                return (
-                                  <MenuItem
-                                    value={question.question}
-                                    key={question._id}>
-                                    {question.question}
-                                  </MenuItem>
-                                );
-                              })}
-                          </Select>
-                        </FormControl>
+                        <FormLabel id="gender">
+                          {localString['selectGender']}
+                        </FormLabel>
+                        <RadioGroup {...field} row aria-labelledby="gender">
+                          <FormControlLabel
+                            value="female"
+                            control={<Radio />}
+                            label={localString['female']}
+                            name="female"
+                          />
+                          <FormControlLabel
+                            value="male"
+                            control={<Radio />}
+                            label={localString['male']}
+                            name="male"
+                          />
+                          <FormControlLabel
+                            value="other"
+                            control={<Radio />}
+                            label={localString['other']}
+                            name="other"
+                          />
+                        </RadioGroup>
                       </Fragment>
                     )}
                   />
-                  <Controller
-                    name="securityAnswer"
-                    control={control}
-                    defaultValue=""
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={localString['enterSecurityQuestionAnswer']}
-                        variant="outlined"
-                        fullWidth
-                        error={!!errors.securityAnswer}
-                        helperText={
-                          errors.securityAnswer
-                            ? errors.securityAnswer?.message
-                            : ''
-                        }
-                        margin="dense"
-                        size="small"
-                      />
-                    )}
-                  />
-                </Box>
-                <Box className="row">
-                  <Controller
-                    name="password"
-                    control={control}
-                    defaultValue=""
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={localString['enterNewPassword']}
-                        variant="outlined"
-                        fullWidth
-                        error={!!errors.password}
-                        helperText={
-                          errors.password ? errors.password?.message : ''
-                        }
-                        margin="dense"
-                        size="small"
-                        type="password"
-                      />
-                    )}
-                  />
-                  <Controller
-                    name="confirmPassword"
-                    control={control}
-                    defaultValue=""
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        label={localString['confirmNewPassword']}
-                        variant="outlined"
-                        fullWidth
-                        error={!!errors.confirmPassword}
-                        helperText={
-                          errors.confirmPassword
-                            ? errors.confirmPassword?.message
-                            : ''
-                        }
-                        margin="dense"
-                        size="small"
-                        type="password"
-                      />
-                    )}
-                  />
-                </Box>
-                <Box className="recaptchaBox">
-                  <ReCAPTCHA
-                    sitekey={process.env.REACT_APP_SITE_KEY || ''}
-                    ref={captchaRef}
-                    onChange={onCaptchaChange}
-                    size="normal"
-                  />
-                </Box>
-                <Box className="buttonDiv">
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    disabled={
-                      !(
-                        Boolean(captchaToken) &&
-                        Object.keys(dirtyFields).length ===
-                          Object.keys(defaultValues as ISignupProps).length
-                      )
-                    }>
-                    {localString['signUp']}
-                  </Button>
-                </Box>
-              </form>
+                  <Box className="row">
+                    <Controller
+                      name="securityQuestion"
+                      control={control}
+                      defaultValue={''}
+                      render={({ field }) => (
+                        <Fragment>
+                          <FormControl className="selectControl">
+                            <TextField
+                              {...field}
+                              select
+                              id="securityQuestions"
+                              className="selectInput"
+                              label={localString['selectSecurityQuestion']}
+                              error={!!errors.securityQuestion}
+                              margin="dense"
+                              size="small">
+                              {questions &&
+                                questions.map((question: IQuestionProps) => {
+                                  return (
+                                    <MenuItem
+                                      value={question.question}
+                                      key={question._id}>
+                                      {question.question}
+                                    </MenuItem>
+                                  );
+                                })}
+                            </TextField>
+                          </FormControl>
+                        </Fragment>
+                      )}
+                    />
+                    <FormInput
+                      name="securityAnswer"
+                      label="enterSecurityQuestionAnswer"
+                      showErrorMessage
+                      size="small"
+                    />
+                  </Box>
+                  <Box className="row">
+                    <FormInput
+                      name="password"
+                      label="password"
+                      showErrorMessage
+                      size="small"
+                      type="password"
+                    />
+                    <FormInput
+                      name="confirmPassword"
+                      label="confirmPassword"
+                      showErrorMessage
+                      size="small"
+                      type="password"
+                    />
+                  </Box>
+                  <Box className="recaptchaBox">
+                    <ReCAPTCHA
+                      sitekey={process.env.REACT_APP_SITE_KEY || ''}
+                      ref={captchaRef}
+                      onChange={onCaptchaChange}
+                      size="normal"
+                    />
+                  </Box>
+                  <Box className="buttonDiv">
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      disabled={
+                        !(
+                          Boolean(captchaToken) &&
+                          Object.keys(dirtyFields).length ===
+                            Object.keys(defaultValues as ISignupProps).length
+                        )
+                      }>
+                      {localString['signUp']}
+                    </Button>
+                  </Box>
+                </form>
+              </FormProvider>
               <Box className="linkDiv">
                 <Link to="/">{localString['backToLogin']}</Link>
               </Box>

@@ -16,9 +16,13 @@ const FormInput = ({
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
-  const { control, formState:{errors} } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
 
-  const errorMessage = showErrorMessage && errors[name]? errors[name]?.message as string : ""
+  const errorMessage =
+    showErrorMessage && errors[name] ? (errors[name]?.message as string) : '';
   return (
     <Controller
       name={name}

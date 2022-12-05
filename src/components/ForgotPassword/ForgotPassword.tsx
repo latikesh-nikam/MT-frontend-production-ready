@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Box } from '@mui/system';
@@ -24,6 +24,7 @@ import { IQuestionProps } from '../Signup/Signup.types';
 import { MainDivBox } from './forgotPassword.style';
 import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
 import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
+import FormInput from '../FormInput/FormInput';
 
 const ForgotPassword = () => {
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);
@@ -47,12 +48,8 @@ const ForgotPassword = () => {
     securityAnswer: Yup.string().required(required),
   });
 
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors, dirtyFields, defaultValues },
-  } = useForm<IForgotPasswordProps>({
+  const methods = useForm<IForgotPasswordProps>({
+    resolver: yupResolver(forgotPasswordSchema),
     defaultValues: {
       email: '',
       password: '',
@@ -60,8 +57,13 @@ const ForgotPassword = () => {
       securityQuestion: '',
       securityAnswer: '',
     },
-    resolver: yupResolver(forgotPasswordSchema),
   });
+  const {
+    handleSubmit,
+    reset,
+    control,
+    formState: { dirtyFields, defaultValues, errors },
+  } = methods;
 
   const submit = async (data: any) => {
     try {
@@ -92,146 +94,115 @@ const ForgotPassword = () => {
     getSecurityQuestions();
   }, []);
 
+  const onSubmitForTest = (items: any) => {
+    console.log(items);
+  };
   return (
     <Fragment>
       <ToastContainer />
       <Paper elevation={3}>
-        <MainDivBox>
+        <MainDivBox data-testid="forgotPasswordForm">
           <div className="formContainer">
-            <Box className="heading">{localString['forgotPassword']}</Box>
+            <h2 className="heading">{localString['forgotPassword']}</h2>
             <Box className="mainBox">
-              <form onSubmit={handleSubmit(submit)} autoComplete="off">
-                <Controller
-                  name="email"
-                  control={control}
-                  defaultValue=""
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label={localString['enterEmail']}
-                      variant="outlined"
+              <FormProvider {...methods}>
+                {/* <form onSubmit={handleSubmit(submit)} autoComplete="off"> */}
+                <form
+                  className="mainBox"
+                  onSubmit={() => {
+                    if (onSubmitForTest) {
+                      const forgotPasswordFields = {
+                        'email-input-field': 'stharmia@gmail.com',
+                        'newPassword-input-field': '123456',
+                        'confirmPassword-input-field': '123456',
+                        'securityQuestion-field':
+                          'What is the name of your pet?',
+                        'securityAnswer-input-field': 'manan',
+                      };
+                      onSubmitForTest(forgotPasswordFields);
+                    }
+                    handleSubmit(submit);
+                  }}>
+                  <FormInput
+                    name="email"
+                    label="enterEmail"
+                    size="small"
+                    showErrorMessage
+                  />
+                  <Controller
+                    name="securityQuestion"
+                    control={control}
+                    defaultValue={''}
+                    render={({ field }) => (
+                      <Fragment>
+                        <FormControl className="formControl">
+                          <InputLabel
+                            id="securityQuestion-label"
+                            className="selectInput">
+                            {localString['selectSecurityQuestion']}
+                          </InputLabel>
+                          <Select
+                            {...field}
+                            labelId="securityQuestion-label"
+                            id="securityQuestions"
+                            label="Select Security Question"
+                            error={!!errors.securityQuestion}
+                            margin="dense"
+                            data-testid="securityQuestion-field"
+                            size="small">
+                            {questions &&
+                              questions.map((question: IQuestionProps) => {
+                                return (
+                                  <MenuItem
+                                    value={question.question}
+                                    key={question._id}>
+                                    {question.question}
+                                  </MenuItem>
+                                );
+                              })}
+                          </Select>
+                        </FormControl>
+                      </Fragment>
+                    )}
+                  />
+                  <FormInput
+                    name="securityAnswer"
+                    label="enterSecurityQuestionAnswer"
+                    size="small"
+                    showErrorMessage
+                  />
+                  <FormInput
+                    name="password"
+                    label="password"
+                    size="small"
+                    showErrorMessage
+                    type="password"
+                  />
+                  <FormInput
+                    name="confirmPassword"
+                    label="confirmPassword"
+                    size="small"
+                    showErrorMessage
+                    type="password"
+                  />
+                  <Box className="buttonDiv">
+                    <Button
+                      data-testid="submit-button"
+                      type="submit"
                       fullWidth
-                      error={!!errors.email}
-                      helperText={errors.email ? errors.email?.message : ''}
-                      margin="dense"
-                      size="small"
-                    />
-                  )}
-                />
-                <Controller
-                  name="securityQuestion"
-                  control={control}
-                  defaultValue={''}
-                  render={({ field }) => (
-                    <Fragment>
-                      <FormControl className="formControl">
-                        <InputLabel
-                          id="securityQuestion-label"
-                          className="selectInput">
-                          {localString['selectSecurityQuestion']}
-                        </InputLabel>
-                        <Select
-                          {...field}
-                          labelId="securityQuestion-label"
-                          id="securityQuestions"
-                          label="Select Security Question"
-                          error={!!errors.securityQuestion}
-                          margin="dense"
-                          size="small">
-                          {questions &&
-                            questions.map((question: IQuestionProps) => {
-                              return (
-                                <MenuItem
-                                  value={question.question}
-                                  key={question._id}>
-                                  {question.question}
-                                </MenuItem>
-                              );
-                            })}
-                        </Select>
-                      </FormControl>
-                    </Fragment>
-                  )}
-                />
-                <Controller
-                  name="securityAnswer"
-                  control={control}
-                  defaultValue=""
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label={localString['enterSecurityQuestionAnswer']}
-                      variant="outlined"
-                      fullWidth
-                      error={!!errors.securityAnswer}
-                      helperText={
-                        errors.securityAnswer
-                          ? errors.securityAnswer?.message
-                          : ''
-                      }
-                      margin="dense"
-                      size="small"
-                    />
-                  )}
-                />
-                <Controller
-                  name="password"
-                  control={control}
-                  defaultValue=""
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label={localString['enterNewPassword']}
-                      variant="outlined"
-                      fullWidth
-                      error={!!errors.password}
-                      helperText={
-                        errors.password ? errors.password?.message : ''
-                      }
-                      margin="dense"
-                      size="small"
-                      type="password"
-                    />
-                  )}
-                />
-                <Controller
-                  name="confirmPassword"
-                  control={control}
-                  defaultValue=""
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      label={localString['confirmNewPassword']}
-                      variant="outlined"
-                      fullWidth
-                      error={!!errors.confirmPassword}
-                      helperText={
-                        errors.confirmPassword
-                          ? errors.confirmPassword?.message
-                          : ''
-                      }
-                      margin="dense"
-                      size="small"
-                      type="password"
-                    />
-                  )}
-                />
-                <Box className="buttonDiv">
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    disabled={
-                      !(
-                        Object.keys(dirtyFields).length ===
-                        Object.keys(defaultValues as IForgotPasswordProps)
-                          .length
-                      )
-                    }>
-                    {localString['updatePassword']}
-                  </Button>
-                </Box>
-              </form>
+                      variant="contained"
+                      disabled={
+                        !(
+                          Object.keys(dirtyFields).length ===
+                          Object.keys(defaultValues as IForgotPasswordProps)
+                            .length
+                        )
+                      }>
+                      {localString['updatePassword']}
+                    </Button>
+                  </Box>
+                </form>
+              </FormProvider>
             </Box>
             <Box className="linkDiv">
               <Link to="/">{localString['backToLogin']}</Link>

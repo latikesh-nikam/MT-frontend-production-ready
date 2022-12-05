@@ -24,16 +24,15 @@ export const MainDivBox = styled('div')(
         min-width: 48.5%;
       }
   .selectInput {
-    margin-top: -${theme.typography.pxToRem(
-      theme.palette['margin']['primary'],
-    )};
+    margin-top: -0.5rem;
   }
   .mainBox{
     margin-top:${theme.typography.pxToRem(theme.palette['margin']['main'])};
   }
   .heading{
-    font-size:${theme.typography.fontSizeLarge};
-    font-weight:${theme.typography.fontWeightMedium};
+    color:${theme.palette.primary.main};
+    padding-top:1rem;
+    margin:0;
   }
   .buttonDiv{
     margin-top: ${theme.typography.pxToRem(
@@ -51,6 +50,7 @@ export const MainDivBox = styled('div')(
   justify-content: center;
   }
   .row{
+    padding-bottom:1rem;
     display: flex;
   gap: ${theme.typography.pxToRem(theme.palette['gap']['main'])};
 

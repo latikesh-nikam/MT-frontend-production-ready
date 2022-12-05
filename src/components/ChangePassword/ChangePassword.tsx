@@ -77,7 +77,7 @@ const ChangePassword = () => {
       <Paper elevation={3}>
         <MainDivBox>
           <div className="formContainer">
-            <Box className="heading">{localString['changePassword']}</Box>
+            <h2 className="heading">{localString['changePassword']}</h2>
             <Box className="mainBox">
               <form onSubmit={handleSubmit(submit)} autoComplete="off">
                 <Controller

@@ -2,15 +2,13 @@ import { styled } from '@mui/material/styles';
 
 export const MainDivBox = styled('div')(
   ({ theme }: any) => `
-  max-width: ${theme.typography.pxToRem(theme.palette['width']['main'])};
+  min-width:26rem;
   .formContainer {
-    padding:${theme.typography.pxToRem(theme.palette['padding']['main'])};
+    padding:${theme.typography.pxToRem(theme.palette['padding']['secondary'])};
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
   .formControl {
-    margin-top: ${theme.typography.pxToRem(theme.palette['margin']['primary'])};
     min-width: 100%;
   }
   .selectInput {
@@ -20,10 +18,15 @@ export const MainDivBox = styled('div')(
   }
   .mainBox{
     margin-top:${theme.typography.pxToRem(theme.palette['margin']['main'])};
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
   }
   .heading{
-    font-weight:${theme.typography.fontWeightMedium};
-    font-size:${theme.typography.fontSizeLarge};
+    color:${theme.palette.primary.main};
+    padding-top:1rem;
+    margin:0;
+    text-align:center;
   }
   .buttonDiv{
     margin-top: ${theme.typography.pxToRem(
