@@ -1,5 +1,7 @@
-import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import ForgotPassword from '../components/ForgotPassword/ForgotPassword';
 import { BrowserRouter } from 'react-router-dom';
 import LocalisationProvider from '../hoc/Localization/LocalisationProvider';
