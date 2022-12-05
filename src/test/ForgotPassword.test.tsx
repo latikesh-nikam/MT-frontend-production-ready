@@ -36,11 +36,11 @@ test('Forgot Password Fields Test', async () => {
     </BrowserRouter>,
   );
 
-  const email = screen.getByTestId('email-input-field');
-  const newPassword = screen.getByTestId('newPassword-input-field');
-  const confirmPassword = screen.getByTestId('confirmPassword-input-field');
+  const email = screen.getByTestId('emailInput');
+  const newPassword = screen.getByTestId('passwordInput');
+  const confirmPassword = screen.getByTestId('confirmPasswordInput');
   const securityQuestion = screen.getByTestId('securityQuestion-field');
-  const securityAnswer = screen.getByTestId('securityAnswer-input-field');
+  const securityAnswer = screen.getByTestId('securityAnswerInput');
   userEvent.type(email, 'stharmia@gmail.com');
   userEvent.type(newPassword, '123456');
   userEvent.type(confirmPassword, '123456');
