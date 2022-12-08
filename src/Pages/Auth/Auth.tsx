@@ -1,12 +1,11 @@
-import { Box } from '@mui/material';
 import { Outlet } from 'react-router-dom';
-import styles from './auth.module.scss';
+import { AuthContainer } from './auth.styles';
 
 const Auth = () => {
   return (
-    <Box className={styles.authPage}>
+    <AuthContainer>
       <Outlet />
-    </Box>
+    </AuthContainer>
   );
 };
 

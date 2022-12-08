@@ -1,31 +1,33 @@
-import { Box, Button, Paper } from '@mui/material';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import SearchableDropdown from '../SearchableDropdown/SearchableDropdown';
-import styles from './search.module.scss';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useTranslation } from 'react-i18next';
-import { ISearchInput, ISearchProps } from './Search.types';
-import DateInput from '../DateInput/DateInput';
-import FormInput from '../FormInput/FormInput';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { useContext } from 'react';
+import Button from '@mui/material/Button/Button';
+import DateInput from '../DateInput/DateInput';
+import { getData } from '../../services/axios.instance';
+import SearchableDropdown from '../SearchableDropdown/SearchableDropdown';
 import { HomeContext } from '../../context/HomeContext/HomeContext';
 import { IHomeContext } from '../../context/HomeContext/homeContext.types';
-import { cities } from './search.data';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
+import { SearchContainer } from './search.styles';
+import { IAllStation, ISearchInput } from './search.types';
+import { ISearchProps } from './search.types';
 
 const Search = ({ handleSearch }: ISearchProps) => {
-  const { t } = useTranslation();
-  const required = t('required');
-  const adultMessage = t('adultMessage');
-  const differentCities = t('differentCities');
+  const [allStations, updateAllStations] = useState<IAllStation[]>([]);
 
   const {
     homeState: { searchFormData },
   } = useContext(HomeContext) as IHomeContext;
+  const {
+    localisation: { localString },
+  } = useContext(LocalisationContext) as ILocalisationContext;
 
-  console.log(searchFormData);
+  const required = localString['required'];
+  const differentCities = localString['differentCities'];
 
   const searchSchema = Yup.object({
     from: Yup.string()
@@ -35,8 +37,6 @@ const Search = ({ handleSearch }: ISearchProps) => {
       .required(required)
       .notOneOf([Yup.ref('from')], differentCities),
     date: Yup.date().required(required),
-    adults: Yup.number().required(required).min(1, adultMessage),
-    children: Yup.number().required(required),
   });
 
   const methods = useForm<ISearchInput>({
@@ -46,60 +46,60 @@ const Search = ({ handleSearch }: ISearchProps) => {
 
   const {
     handleSubmit,
-    formState: { errors },
+    formState: { isValid },
   } = methods;
 
+  const getAllStations = async () => {
+    const response = await getData('vehicle');
+    updateAllStations(response);
+  };
+
+  useEffect(() => {
+    getAllStations();
+  }, []);
+
+  const searchButtonClassName = !isValid
+    ? 'searchButton disable'
+    : 'searchButton';
+
+  const showStationDropdown = allStations.length > 0;
   return (
     <FormProvider {...methods}>
       <LocalizationProvider dateAdapter={AdapterMoment}>
-        <Paper elevation={3} className={styles.search}>
-          <form
-            onSubmit={handleSubmit(handleSearch)}
-            className={styles.searchForm}>
-            <Box className={styles.formInput}>
-              <SearchableDropdown
-                name="from"
-                label="from"
-                errors={errors}
-                searchList={cities}
-                defaultValue={searchFormData.from}
-              />
-            </Box>
-            <Box className={styles.formInput}>
-              <SearchableDropdown
-                name="to"
-                label="to"
-                errors={errors}
-                searchList={cities}
-                defaultValue={searchFormData.to}
-              />
-            </Box>
-            <Box className={styles.formInput}>
-              <DateInput errors={errors} name="date" label="date" />
-            </Box>
-            <Box className={styles.passenger}>
-              <FormInput
-                errors={errors}
-                name="adults"
-                label="adults"
-                type="number"
-              />
-            </Box>
-            <Box className={styles.passenger}>
-              <FormInput
-                errors={errors}
-                name="children"
-                label="children"
-                type="number"
-              />
-            </Box>
-            <Box className={styles.actions}>
-              <Button type="submit" variant="contained">
-                {t('search')}
-              </Button>
-            </Box>
+        <SearchContainer>
+          <form onSubmit={handleSubmit(handleSearch)} className="searchForm">
+            {showStationDropdown && (
+              <Fragment>
+                <div className="formInput">
+                  <SearchableDropdown
+                    name="from"
+                    label="from"
+                    searchList={allStations}
+                  />
+                </div>
+                <div className="formInput">
+                  <SearchableDropdown
+                    name="to"
+                    label="to"
+                    searchList={allStations}
+                  />
+                </div>
+                <div className="formInput">
+                  <DateInput name="date" label="date" />
+                </div>
+                <div className="actions">
+                  <Button
+                    disabled={!isValid}
+                    type="submit"
+                    className={searchButtonClassName}
+                    variant="contained">
+                    {localString?.search}
+                  </Button>
+                </div>
+              </Fragment>
+            )}
           </form>
-        </Paper>
+        </SearchContainer>
       </LocalizationProvider>
     </FormProvider>
   );

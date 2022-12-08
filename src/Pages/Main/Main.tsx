@@ -1,18 +1,12 @@
-import { Outlet } from "react-router-dom";
-import Topbar from "../../components/Topbar/Topbar";
-import HomeProvider from "../../context/HomeContext/HomeContext";
-import styles from "./Main.module.scss"
+import { Outlet } from 'react-router-dom';
+import { MainContainer } from './main.styles';
 
 const Main = () => {
-    return (
-      <HomeProvider>
-        <div className={styles.mainPage}>
-            <Topbar/>
-            
-          <Outlet />
-        </div>
-      </HomeProvider>
-    );
-  };
-  
-  export default Main;
+  return (
+    <MainContainer>
+      <Outlet />
+    </MainContainer>
+  );
+};
+
+export default Main;

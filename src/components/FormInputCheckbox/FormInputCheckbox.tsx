@@ -1,45 +1,59 @@
-import {
-  Box,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-} from '@mui/material';
+import { useContext } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
-import { IFormInputCheckboxProps } from './FormInputCheckbox.types';
-import styles from "./formInputCheckbox.module.scss"
+import FormControl from '@mui/material/FormControl/FormControl';
+import FormLabel from '@mui/material/FormLabel/FormLabel';
+import FormControlLabel from '@mui/material/FormControlLabel/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox/Checkbox';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { CheckboxContainer } from './formInputChecbox.styles';
+import { IFormInputCheckboxProps } from './formInputCheckbox.types';
+import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 
 const FormInputCheckBox = ({
   name,
   label,
   options,
 }: IFormInputCheckboxProps) => {
+  const {
+    localisation: { localString },
+  } = useContext(LocalisationContext) as ILocalisationContext;
   const { control, register } = useFormContext();
+
   return (
-    <Box className={styles.checkbox}>
+    <CheckboxContainer>
+      <FormControl size={'small'} variant={'outlined'}>
+        <FormLabel component="legend">{localString[label]}</FormLabel>
 
-    <FormControl size={'small'} variant={'outlined'}>
-      <FormLabel component="legend">{label}</FormLabel>
+        {options.map(option => {
+          return (
+            <FormControlLabel
+              control={
+                <Controller
+                  name={name}
+                  render={({ field: { value } }) => {
+                    const checked =
+                      value &&
+                      value?.filter((el: string) => el === option.value)
+                        .length > 0;
 
-      {options.map((option: any) => {
-        return (
-          <FormControlLabel
-            control={
-              <Controller
-                name={name}
-                render={({}) => {
-                  return <Checkbox value={option.value} {...register(name)} />;
-                }}
-                control={control}
-              />
-            }
-            label={option.label}
-            key={option.value}
-          />
-        );
-      })}
-    </FormControl>
-    </Box>
+                    return (
+                      <Checkbox
+                        value={option.value}
+                        {...register(name)}
+                        defaultChecked={checked}
+                      />
+                    );
+                  }}
+                  control={control}
+                />
+              }
+              label={localString[option.label]}
+              key={option.value}
+            />
+          );
+        })}
+      </FormControl>
+    </CheckboxContainer>
   );
 };
 

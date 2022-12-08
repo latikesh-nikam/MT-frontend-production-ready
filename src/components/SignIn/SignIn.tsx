@@ -1,31 +1,37 @@
-import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
-import styles from './signIn.module.scss';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Button, Grid, Paper, Typography } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import * as Yup from 'yup';
-import { useRef, useState } from 'react';
-import { ISignInInput } from './SignIn.types';
+import { useContext, Fragment, useRef, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { FormProvider, useForm } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form/dist/types/form';
+import { toast, ToastContainer } from 'react-toastify';
 import ReCAPTCHA from 'react-google-recaptcha';
-import FormInputText from '../FormInput/FormInput';
-import { postData } from '../../services/http';
+import 'react-toastify/dist/ReactToastify.css';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+import Box from '@mui/material/Box/Box';
+import Button from '@mui/material/Button/Button';
+import { postData } from '../../services/axios.instance';
 import utility from '../../utils/utility';
+import { ISignInInput } from './signIn.types';
+import FormInput from '../FormInput/FormInput';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
+import { SignInContainer } from './signIn.styles';
 
 const SignIn = () => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-
   const [captchaToken, setCaptchaToken] = useState<string>('');
+  const {
+    localisation: { localString },
+  } = useContext(LocalisationContext) as ILocalisationContext;
 
+  const navigate = useNavigate();
   const captchaRef = useRef<ReCAPTCHA>(null);
-  const required = t('required');
-  const emailMessage = t('emailMessage');
-  const minLength = t('minlength6');
+
+  const emailMessage = localString?.emailMessage;
+  const minLength = localString?.minlengthSix;
 
   const signInSchema = Yup.object({
-    email: Yup.string().required(required).email(emailMessage),
-    password: Yup.string().required(required).min(0, minLength),
+    email: Yup.string().required('').email(emailMessage),
+    password: Yup.string().required('').min(6, minLength),
   });
 
   const methods = useForm<ISignInInput>({
@@ -37,76 +43,96 @@ const SignIn = () => {
   });
 
   const {
-    formState: { errors },
     handleSubmit,
+    formState: { dirtyFields, defaultValues },
   } = methods;
 
   const handleCaptchaChange = () => {
     const token = captchaRef.current?.getValue();
     setCaptchaToken(token as string);
-    console.log(token);
+    captchaRef.current?.reset();
   };
 
   const onSubmit: SubmitHandler<ISignInInput> = async data => {
     try {
       data['captcha'] = captchaToken;
       const response = await postData('auth/login', data);
-      utility.setStore('token', response.access_token);
+      utility.setStore('accessToken', response.access_token);
+      utility.setStore('refreshToken', response.refresh_token);
+      toast.success(response.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setCaptchaToken('');
       navigate('/home');
     } catch (error: any) {
-      console.log(error.response);
-      throw error;
+      toast.error(error.response.data.error.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      console.log(error);
+      setCaptchaToken('');
     }
   };
 
-  return (
-    <Paper elevation={3} className={styles.signIn}>
-      <Typography
-        component="h3"
-        variant="h5"
-        color="primary"
-        className={styles.formHeading}>
-        {t('signIn')}
-      </Typography>
-      <Box>
-        <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)} className={styles.signInForm}>
-            <FormInputText
-              name="email"
-              label="email"
-              errors={errors}
-              type="text"
-            />
-            <FormInputText
-              name="password"
-              label="password"
-              errors={errors}
-              type="password"
-            />
-            <Box className={styles.recaptchaContainer}>
-              <ReCAPTCHA
-                sitekey={process.env.REACT_APP_SITE_KEY || ''}
-                ref={captchaRef}
-                onChange={handleCaptchaChange}
-                size="normal"
-              />
-            </Box>
-            <Button
-              className={styles.submitButton}
-              type="submit"
-              disabled={!captchaToken}
-              variant="contained">
-              {t('signIn')}
-            </Button>
-          </form>
-        </FormProvider>
-      </Box>
-      <Grid container className={styles.actions}>
-        <Link to="forgotPassword">{t('forgotPassword')}?</Link>
+  const disableSignInButton = !(
+    Boolean(captchaToken) &&
+    Object.keys(dirtyFields).length ===
+      Object.keys(defaultValues as ISignInInput).length
+  );
 
-        <Link to="signUp">{t('signUp')}</Link>
-      </Grid>
-    </Paper>
+  return (
+    <Fragment>
+      <ToastContainer />
+      <SignInContainer data-testid="signIn">
+        <h2 className="formHeading">{localString?.signIn}</h2>
+        <Box>
+          <FormProvider {...methods}>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="signInForm"
+              data-testid="signInForm">
+              <FormInput
+                name="email"
+                label="email"
+                showErrorMessage
+                data-testid="emailInput"
+              />
+              <FormInput
+                name="password"
+                label="password"
+                type="password"
+                showErrorMessage
+                data-testid="passwordInput"
+              />
+              <div className="recaptchaContainer">
+                <ReCAPTCHA
+                  sitekey={process.env.REACT_APP_SITE_KEY || ''}
+                  ref={captchaRef}
+                  onChange={handleCaptchaChange}
+                  size="normal"
+                  data-testid="recaptcha"
+                />
+              </div>
+              <Button
+                className="submitButton"
+                data-testid="submitButton"
+                type="submit"
+                disabled={disableSignInButton}
+                variant="contained">
+                {localString?.signIn}
+              </Button>
+            </form>
+          </FormProvider>
+        </Box>
+        <div className="actions">
+          <Link to="forgotPassword" data-testid="forgotPasswordButton">
+            {localString?.forgotPassword}?
+          </Link>
+          <Link to="signUp" data-testid="signUpButtom">
+            {localString?.signUp}
+          </Link>
+        </div>
+      </SignInContainer>
+    </Fragment>
   );
 };
 

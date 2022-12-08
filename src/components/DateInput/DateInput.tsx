@@ -1,12 +1,23 @@
-import { IDatePickerProps } from './DateInput.types';
+import { useContext } from 'react';
 import { useFormContext, Controller } from 'react-hook-form';
 import { TextField } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 import { DatePicker } from '@mui/x-date-pickers';
+import { IDatePickerProps } from './dateInput.types';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
+import { InputContainer } from '../FormInput/formInput.styles';
 
-const DateInput = ({ name, label, errors }: IDatePickerProps) => {
-  const { control } = useFormContext();
-  const { t } = useTranslation();
+const DateInput = ({
+  name,
+  label,
+  showErrorMessage = false,
+}: IDatePickerProps) => {
+  const { control,formState:{errors} } = useFormContext();
+  const {
+    localisation: { localString },
+  } = useContext(LocalisationContext) as ILocalisationContext;
+
+  const errorMessage = showErrorMessage && errors[name]? errors[name]?.message as string : ""
 
   return (
     <Controller
@@ -16,17 +27,20 @@ const DateInput = ({ name, label, errors }: IDatePickerProps) => {
         return (
           <DatePicker
             minDate={new Date()}
-            label={t(label)}
             value={value}
             inputFormat="DD-MM-YYYY"
             renderInput={params => (
-              <TextField
-                {...params}
-                error={!!errors[name]}
-                helperText={
-                  errors[name] ? (errors[name]?.message as string) : ''
-                }
-              />
+              <InputContainer>
+                <TextField
+                  required
+                  label={localString[label]}
+                  {...params}
+                  error={!!errors[name]}
+                  helperText={
+                    errorMessage
+                  }
+                />
+              </InputContainer>
             )}
             onChange={event => {
               onChange(event);

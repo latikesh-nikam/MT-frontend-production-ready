@@ -30,9 +30,11 @@ export const newPalette = {
     dark: '#1857B6',
   },
   background: {
-    default: '#EFF8FF',
+    default: '#175CD3',
     semiPurple: '#EDEDF7',
     grey: '#FAFAFE',
+    cream: '#FAFDD6',
+    blue: '#175CD3',
   },
   borderFaded: '#f5f5f5',
   borderFaded2: '#eaecf0',
@@ -94,5 +96,6 @@ export const newPalette = {
     lightCyanBlue: '#E3EDF9',
     lightCyanGreen: '#E6F4F2',
     lightRed: '#FFF4F3',
+    blue: '#175CD3',
   },
 };

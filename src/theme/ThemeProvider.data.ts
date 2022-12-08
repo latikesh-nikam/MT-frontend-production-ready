@@ -1,11 +1,10 @@
-import { ThemeOptions } from '@mui/material/styles/createTheme';
 import { newPalette } from './newPallete';
 
-export const appTheme: ThemeOptions = {
+export const appTheme = {
   breakpoints: {
     values: {
       xs: 0,
-      sm: 640,
+      sm: 410,
       md: 768,
       lg: 1024,
       xl: 1280,
@@ -14,6 +13,16 @@ export const appTheme: ThemeOptions = {
 
   palette: newPalette,
   typography: {
+    fontWeightLight: 300,
+    fontWeightRegular: 500,
+    fontWeightMedium: 600,
+    fontWeightBold: 700,
+
+    fontSizeSmall: '0.75rem',
+    fontSizeRegular: '1rem',
+    fontSizeMedium: '1.25rem',
+    fontSizeLarge: '1.5rem',
+
     h1: {
       fontSize: '2rem',
       fontWeight: 600,
@@ -87,5 +96,25 @@ export const appTheme: ThemeOptions = {
       lineHeight: 1.4,
       letterSpacing: '0.04rem',
     },
+  },
+
+  padding: {
+    primary: 8,
+    main: 16,
+    secondary: 20,
+    larger: 32,
+  },
+  gap: {
+    primary: 8,
+    main: 16,
+    secondary: 20,
+    small: 4,
+    larger: 32,
+  },
+  borderRadius: {
+    primary: 8,
+    main: 16,
+    secondary: 20,
+    small: 4,
   },
 };

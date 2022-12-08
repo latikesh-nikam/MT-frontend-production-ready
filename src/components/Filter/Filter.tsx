@@ -1,39 +1,61 @@
-import { Button, Paper } from '@mui/material';
-import { SubmitHandler, useForm, FormProvider } from 'react-hook-form';
+import { useContext } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import Button from '@mui/material/Button/Button';
+import { FilterContainer } from './filter.styles';
+import { busTypeOptions, departureOptions, sliderData } from './filter.data';
+import { cities } from '../Search/search.data';
+import { IFilterInput, IFilterProps } from './filter.types';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
+import { HomeContext } from '../../context/HomeContext/HomeContext';
+import { IHomeContext } from '../../context/HomeContext/homeContext.types';
 import FormInputCheckBox from '../FormInputCheckbox/FormInputCheckbox';
-import { IFilterInput } from './Filter.types';
-import styles from './filter.module.scss';
+import SliderInput from '../Slider/Slider';
+import RadioInput from '../RadioInput/RadioInput';
+import SearchableDropdown from '../SearchableDropdown/SearchableDropdown';
 
-const Filter = () => {
-  const methods = useForm<IFilterInput>();
+const Filter = ({handleFilter}:IFilterProps) => {
+  const {
+    localisation: { localString },
+  } = useContext(LocalisationContext) as ILocalisationContext;
+  const {
+    homeState: {
+      filterData: { isFiltered, ...filterData },
+    }
+  } = useContext(HomeContext) as IHomeContext;
+
+  const methods = useForm<IFilterInput>({
+    defaultValues: filterData,
+  });
 
   const { handleSubmit } = methods;
 
-  const onSubmit: SubmitHandler<IFilterInput> = data => {
-    console.log(data);
-  };
-
-  const busTypeOptions = [
-    { label: 'AC', value: 'AC' },
-    { label: 'Non-AC', value: 'Non-AC' },
-    { label: 'Sleeper', value: 'sleeper' },
-    { label: 'Seater', value: 'seater' },
-  ];
-
   return (
     <FormProvider {...methods}>
-      <Paper className={styles.filter} elevation={3}>
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.filterForm}>
+      <FilterContainer className="filter">
+        <form onSubmit={handleSubmit(handleFilter)} className="filterForm">
           <FormInputCheckBox
             options={busTypeOptions}
             name="busType"
-            label="Bus Type"
+            label="busType"
           />
-          <Button type="submit" variant="contained">
-            Filter
+          <RadioInput
+            name="departure"
+            label="departureTime"
+            options={departureOptions}
+          />
+          <SliderInput name="price" label="selectPrice" data={sliderData} />
+          <SearchableDropdown
+            label="droppingPoint"
+            name="drop"
+            searchList={cities}
+            
+          />
+          <Button type="submit" variant="contained" fullWidth>
+            {localString?.filter}
           </Button>
         </form>
-      </Paper>
+      </FilterContainer>
     </FormProvider>
   );
 };

@@ -1,13 +1,7 @@
-import { FieldErrorsImpl } from 'react-hook-form';
+import { IAllStation } from "../Search/search.types";
 
 export interface ISearchableDropdownProps {
   name: string;
-  errors: Partial<
-    FieldErrorsImpl<{
-      [x: string]: any;
-    }>
-  >;
   label: string;
   searchList: any[];
-  defaultValue: string;
 }
