@@ -8,9 +8,26 @@ import { FormProvider } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import ReCAPTCHA from 'react-google-recaptcha';
-import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+
+import { MainDivBox } from './signup.style';
+
+import { getData } from '../../services/http';
+import { postData } from '../../services/http';
+import FormInput from '../FormInput/FormInput';
+import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
+import { authURLConstants } from '../../constants/authURLConstants';
+import { getRequestsURL } from '../../constants/getRequestsURL';
+
+import { ISignupProps } from './Signup.types';
+import { IQuestionProps } from './Signup.types';
+import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
+
 import { Button } from '@mui/material';
 import { Box } from '@mui/material';
 import { FormControl } from '@mui/material';
@@ -21,16 +38,6 @@ import { Paper } from '@mui/material';
 import { Radio } from '@mui/material';
 import { RadioGroup } from '@mui/material';
 import { TextField } from '@mui/material';
-import { MainDivBox } from './signup.style';
-import { getData } from '../../services/http';
-import { postData } from '../../services/http';
-import { ISignupProps } from './Signup.types';
-import { IQuestionProps } from './Signup.types';
-import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
-import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
-import FormInput from '../FormInput/FormInput';
 
 const Signup = () => {
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);
@@ -39,13 +46,15 @@ const Signup = () => {
     LocalisationContext,
   ) as ILocalisationContext;
   const { localString } = localisation;
+
   const captchaRef = useRef<any>(null);
-  const required = localString['required'];
-  const emailMessage = localString['emailMessage'];
-  const minLengthPassword = localString['minLengthSix'];
-  const minLengthPhone = localString['minLengthTen'];
-  const maxLengthPhone = localString['maxLengthTen'];
-  const passwordValidator = localString['passwordValidation'];
+
+  const required = localString?.required;
+  const emailMessage = localString?.emailMessage;
+  const minLengthPassword = localString?.minLengthSix;
+  const minLengthPhone = localString?.minLengthTen;
+  const maxLengthPhone = localString?.maxLengthTen;
+  const passwordValidator = localString?.passwordValidation;
 
   const signUpSchema = Yup.object({
     name: Yup.string().required(required),
@@ -65,14 +74,7 @@ const Signup = () => {
     securityAnswer: Yup.string().required(required),
   });
 
-  const getSecurityQuestions = async () => {
-    const response = await getData('security');
-    setQuestions(response);
-  };
-
-  useEffect(() => {
-    getSecurityQuestions();
-  }, []);
+  const gender = ['male', 'female', 'other'];
 
   const methods = useForm<ISignupProps>({
     resolver: yupResolver(signUpSchema),
@@ -96,11 +98,12 @@ const Signup = () => {
   } = methods;
 
   const submit = async (data: any) => {
+    console.log(data);
     const token = captchaRef.current.getValue();
     setCaptchaToken(token);
     data['captcha'] = captchaToken;
     try {
-      const response = await postData('auth/signup', data);
+      const response = await postData(authURLConstants.signup, data);
       reset({
         email: '',
         name: '',
@@ -129,13 +132,22 @@ const Signup = () => {
     if (token) setCaptchaToken(token as string);
   };
 
+  const getSecurityQuestions = async () => {
+    const response = await getData(getRequestsURL.getSecurityQuestions);
+    setQuestions(response);
+  };
+
+  useEffect(() => {
+    getSecurityQuestions();
+  }, []);
+
   return (
     <Fragment>
       <ToastContainer />
-      <MainDivBox>
+      <MainDivBox data-testid="signupForm">
         <Paper elevation={3} className="container">
           <Box className="formContainer">
-            <h2 className="heading">{localString['signUp']}</h2>
+            <h2 className="heading">{localString?.signUp}</h2>
             <Box className="mainBox">
               <FormProvider {...methods}>
                 <form onSubmit={handleSubmit(submit)} autoComplete="off">
@@ -174,27 +186,19 @@ const Signup = () => {
                     render={({ field }) => (
                       <Fragment>
                         <FormLabel id="gender">
-                          {localString['selectGender']}
+                          {localString?.selectGender}
                         </FormLabel>
                         <RadioGroup {...field} row aria-labelledby="gender">
-                          <FormControlLabel
-                            value="female"
-                            control={<Radio />}
-                            label={localString['female']}
-                            name="female"
-                          />
-                          <FormControlLabel
-                            value="male"
-                            control={<Radio />}
-                            label={localString['male']}
-                            name="male"
-                          />
-                          <FormControlLabel
-                            value="other"
-                            control={<Radio />}
-                            label={localString['other']}
-                            name="other"
-                          />
+                          {gender &&
+                            gender.map((genderValue: string) => {
+                              return (
+                                <FormControlLabel
+                                  value={genderValue}
+                                  control={<Radio />}
+                                  label={localString[`${genderValue}`]}
+                                />
+                              );
+                            })}
                         </RadioGroup>
                       </Fragment>
                     )}
@@ -210,9 +214,10 @@ const Signup = () => {
                             <TextField
                               {...field}
                               select
+                              data-testid="securityQuestion-field"
                               id="securityQuestions"
                               className="selectInput"
-                              label={localString['selectSecurityQuestion']}
+                              label={localString?.selectSecurityQuestion}
                               error={!!errors.securityQuestion}
                               margin="dense"
                               size="small">
@@ -274,13 +279,13 @@ const Signup = () => {
                             Object.keys(defaultValues as ISignupProps).length
                         )
                       }>
-                      {localString['signUp']}
+                      {localString?.signUp}
                     </Button>
                   </Box>
                 </form>
               </FormProvider>
               <Box className="linkDiv">
-                <Link to="/">{localString['backToLogin']}</Link>
+                <Link to="/">{localString?.backToLogin}</Link>
               </Box>
             </Box>
           </Box>

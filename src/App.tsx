@@ -1,4 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import Layout from './components/Layout/Layout';
 import StoreProvider from './context/StoreContext/StoreContext';
 import LocalisationProvider from './hoc/LocalisationProvider/LocalisationProvider';

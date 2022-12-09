@@ -8,7 +8,9 @@ import MobileFilter from '../../Pages/MobileFilter/MobileFilter';
 import SearchResults from '../../Pages/SearchResults/SearchResults';
 import SignIn from '../SignIn/SignIn';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
+import Seat from '../Seat/Seat';
 import Signup from '../Signup/Signup';
+import Sort from '../SortComponent/Sort';
 import Topbar from '../Topbar/Topbar';
 
 const Layout = () => {
@@ -25,6 +27,8 @@ const Layout = () => {
         <Route path="searchResults" element={<SearchResults />} />
         <Route path="filter" element={<MobileFilter />} />
       </Route>
+      <Route path="/sort" element={<Sort />} />
+      <Route path="/seat" element={<Seat />} />
       <Route path="/topbar" element={<Topbar />}></Route>
     </Routes>
   );

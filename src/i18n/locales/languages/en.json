@@ -167,6 +167,16 @@
     "oldPassword":"*Enter Old Password",
     "changePassword":"Change Password",
     "close":"Close",
-
+,
+    "fareLowToHigh":"Fare - Low To High",
+    "fareHighToLow":"Fare - High To Low",
+    "ratings":"Ratings",
+    "name":"Name",
+    "sort":"Sort",
+    "aboveFour":"Above 4",
+    "belowThree":"Below 3",
+    "threeToFour":"3 to 4",
+    "somethingWentWrong":"Something Went Wrong!",
+    "expand":"Expand"
 
 }

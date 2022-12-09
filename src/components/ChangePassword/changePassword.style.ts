@@ -9,6 +9,9 @@ export const MainDivBox = styled('div')(
     flex-direction: column;
     align-items: center;
   }
+  .container{
+    border-radius:1rem;
+  }
   .formControl {
     margin-top: ${theme.typography.pxToRem(theme.palette['margin']['primary'])};
     min-width: 100%;

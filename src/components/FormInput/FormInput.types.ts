@@ -4,4 +4,5 @@ export interface IFormInputProps {
   type?: 'text' | 'number' | 'password';
   showErrorMessage?: boolean;
   size?: 'medium' | 'small';
+  select?: boolean;
 }

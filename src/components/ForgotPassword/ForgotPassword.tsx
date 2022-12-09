@@ -2,9 +2,22 @@ import { Fragment } from 'react';
 import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
+
+import { getData } from '../../services/http';
+import { updateData } from '../../services/http';
+
+import IForgotPasswordProps from './forgotPassword.types';
+import { IQuestionProps } from '../Signup/Signup.types';
+import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
+import { authURLConstants } from '../../constants/authURLConstants';
+import { getRequestsURL } from '../../constants/getRequestsURL';
+
 import { Box } from '@mui/system';
 import { Button } from '@mui/material';
 import { FormControl } from '@mui/material';
@@ -12,18 +25,11 @@ import { InputLabel } from '@mui/material';
 import { MenuItem } from '@mui/material';
 import { Paper } from '@mui/material';
 import { Select } from '@mui/material';
-import { ToastContainer } from 'react-toastify';
-import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import IForgotPasswordProps from './forgotPassword.types';
-import { getData } from '../../services/http';
-import { updateData } from '../../services/http';
-import { IQuestionProps } from '../Signup/Signup.types';
 import { MainDivBox } from './forgotPassword.style';
-import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
-import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
 import FormInput from '../FormInput/FormInput';
+import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
 
 const ForgotPassword = () => {
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);
@@ -31,10 +37,10 @@ const ForgotPassword = () => {
     LocalisationContext,
   ) as ILocalisationContext;
   const { localString } = localisation;
-  const required = localString['required'];
-  const emailMessage = localString['emailMessage'];
-  const minLengthPassword = localString['minLengthSix'];
-  const passwordValidator = localString['passwordValidation'];
+  const required = localString?.required;
+  const emailMessage = localString?.emailMessage;
+  const minLengthPassword = localString?.minLengthSix;
+  const passwordValidator = localString?.passwordValidation;
 
   const forgotPasswordSchema = Yup.object({
     email: Yup.string().required(required).email(emailMessage),
@@ -66,7 +72,8 @@ const ForgotPassword = () => {
 
   const submit = async (data: any) => {
     try {
-      const response = await updateData('auth/forgotPassword', data);
+      const response = await updateData(authURLConstants.forgotPassword, data);
+      console.log(response);
       reset({
         email: '',
         password: '',
@@ -85,7 +92,7 @@ const ForgotPassword = () => {
   };
 
   const getSecurityQuestions = async () => {
-    const response = await getData('security');
+    const response = await getData(getRequestsURL.getSecurityQuestions);
     setQuestions(response);
   };
 
@@ -93,35 +100,19 @@ const ForgotPassword = () => {
     getSecurityQuestions();
   }, []);
 
-  const onSubmitForTest = (items: any) => {
-    console.log(items);
-  };
   return (
     <Fragment>
       <ToastContainer />
-      <Paper elevation={3}>
-        <MainDivBox data-testid="forgotPasswordForm">
+      <MainDivBox data-testid="forgotPasswordForm">
+        <Paper elevation={3} className="container">
           <div className="formContainer">
-            <h2 className="heading">{localString['forgotPassword']}</h2>
+            <h2 className="heading">{localString?.forgotPassword}</h2>
             <Box className="mainBox">
               <FormProvider {...methods}>
-                {/* <form onSubmit={handleSubmit(submit)} autoComplete="off"> */}
                 <form
-                  className="mainBox"
-                  onSubmit={() => {
-                    if (onSubmitForTest) {
-                      const forgotPasswordFields = {
-                        'email-input-field': 'stharmia@gmail.com',
-                        'newPassword-input-field': '123456',
-                        'confirmPassword-input-field': '123456',
-                        'securityQuestion-field':
-                          'What is the name of your pet?',
-                        'securityAnswer-input-field': 'manan',
-                      };
-                      onSubmitForTest(forgotPasswordFields);
-                    }
-                    handleSubmit(submit);
-                  }}>
+                  onSubmit={handleSubmit(submit)}
+                  autoComplete="off"
+                  className="mainBox">
                   <FormInput
                     name="email"
                     label="enterEmail"
@@ -138,7 +129,7 @@ const ForgotPassword = () => {
                           <InputLabel
                             id="securityQuestion-label"
                             className="selectInput">
-                            {localString['selectSecurityQuestion']}
+                            {localString?.selectSecurityQuestion}
                           </InputLabel>
                           <Select
                             {...field}
@@ -197,18 +188,18 @@ const ForgotPassword = () => {
                             .length
                         )
                       }>
-                      {localString['updatePassword']}
+                      {localString?.updatePassword}
                     </Button>
                   </Box>
                 </form>
               </FormProvider>
             </Box>
             <Box className="linkDiv">
-              <Link to="/">{localString['backToLogin']}</Link>
+              <Link to="/">{localString?.backToLogin}</Link>
             </Box>
           </div>
-        </MainDivBox>
-      </Paper>
+        </Paper>
+      </MainDivBox>
     </Fragment>
   );
 };

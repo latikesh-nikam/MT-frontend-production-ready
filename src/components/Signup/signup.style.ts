@@ -5,7 +5,11 @@ export const MainDivBox = styled('div')(
   max-width: ${theme.typography.pxToRem(theme.palette['width']['secondary'])};
   padding:${theme.typography.pxToRem(theme.palette['padding']['primary'])};
   background-color:${theme.palette?.secondary};
-
+  
+  .container{
+    border-radius:1rem;
+  }
+  
   .formContainer {
     padding:${theme.typography.pxToRem(theme.palette['padding']['main'])};
     display: flex;

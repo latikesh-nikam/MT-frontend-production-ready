@@ -8,6 +8,9 @@ export const MainDivBox = styled('div')(
     display: flex;
     flex-direction: column;
   }
+  .container{
+    border-radius:1rem;
+  }
   .formControl {
     min-width: 100%;
   }

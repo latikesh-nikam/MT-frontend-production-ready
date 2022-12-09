@@ -3,29 +3,35 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
+
+import { MainDivBox } from './changePassword.style';
+
+import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
+import IChangePasswordProps from './changePassword.types';
+
+import { updateData } from '../../services/http';
+import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
+import { authURLConstants } from '../../constants/authURLConstants';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+
 import { Box } from '@mui/system';
 import { Button } from '@mui/material';
 import { Paper } from '@mui/material';
 import { TextField } from '@mui/material';
-import { ToastContainer } from 'react-toastify';
-import { toast } from 'react-toastify';
-import * as Yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { updateData } from '../../services/http';
-import { MainDivBox } from './changePassword.style';
-import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
-import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
-import IChangePasswordProps from './changePassword.types';
 
 const ChangePassword = () => {
   const { localisation, updateLocalisation } = useContext(
     LocalisationContext,
   ) as ILocalisationContext;
   const { localString } = localisation;
-  const required = localString['required'];
-  const emailMessage = localString['emailMessage'];
-  const minLengthPassword = localString['minLengthSix'];
-  const passwordValidator = localString['passwordValidation'];
+  const required = localString?.required;
+  const emailMessage = localString?.emailMessage;
+  const minLengthPassword = localString?.minLengthSix;
+  const passwordValidator = localString?.passwordValidation;
 
   const changePasswordSchema = Yup.object({
     email: Yup.string().required(required).email(emailMessage),
@@ -54,7 +60,7 @@ const ChangePassword = () => {
 
   const submit = async (data: any) => {
     try {
-      const response = await updateData('auth/changePassword', data);
+      const response = await updateData(authURLConstants.changePassword, data);
       reset({
         email: '',
         newPassword: '',
@@ -74,10 +80,10 @@ const ChangePassword = () => {
   return (
     <Fragment>
       <ToastContainer />
-      <Paper elevation={3}>
-        <MainDivBox>
+      <MainDivBox>
+        <Paper elevation={3} className="container">
           <div className="formContainer">
-            <h2 className="heading">{localString['changePassword']}</h2>
+            <h2 className="heading">{localString?.changePassword}</h2>
             <Box className="mainBox">
               <form onSubmit={handleSubmit(submit)} autoComplete="off">
                 <Controller
@@ -87,7 +93,7 @@ const ChangePassword = () => {
                   render={({ field }) => (
                     <TextField
                       {...field}
-                      label={localString['enterEmail']}
+                      label={localString?.enterEmail}
                       variant="outlined"
                       fullWidth
                       error={!!errors.email}
@@ -104,7 +110,7 @@ const ChangePassword = () => {
                   render={({ field }) => (
                     <TextField
                       {...field}
-                      label={localString['oldPassword']}
+                      label={localString?.oldPassword}
                       variant="outlined"
                       fullWidth
                       error={!!errors.oldPassword}
@@ -124,7 +130,7 @@ const ChangePassword = () => {
                   render={({ field }) => (
                     <TextField
                       {...field}
-                      label={localString['enterNewPassword']}
+                      label={localString?.password}
                       variant="outlined"
                       fullWidth
                       error={!!errors.newPassword}
@@ -144,7 +150,7 @@ const ChangePassword = () => {
                   render={({ field }) => (
                     <TextField
                       {...field}
-                      label={localString['confirmNewPassword']}
+                      label={localString?.confirmPassword}
                       variant="outlined"
                       fullWidth
                       error={!!errors.confirmPassword}
@@ -171,17 +177,17 @@ const ChangePassword = () => {
                           .length
                       )
                     }>
-                    {localString['updatePassword']}
+                    {localString?.updatePassword}
                   </Button>
                 </Box>
               </form>
             </Box>
             <Box className="linkDiv">
-              <Link to="/profile">{localString['close']}</Link>
+              <Link to="/profile">{localString?.close}</Link>
             </Box>
           </div>
-        </MainDivBox>
-      </Paper>
+        </Paper>
+      </MainDivBox>
     </Fragment>
   );
 };
