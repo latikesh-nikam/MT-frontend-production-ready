@@ -4,22 +4,23 @@ export const ParentBox = styled('div')(
   ({ theme }: any) => `
 
   display:flex;
-  
+  justify-content:center;
+
   .parentContainer{
+    background-color:whitesmoke;
     max-height:100vh;
     display:flex;
-    flex-direction:column;
+    gap:1rem;
     justify-content: flex-end;
-    margin-top:9%;
+    margin-top:10%;
   }
 
   .busContainer{
     border:thin solid black;
+    width:min-content;
     display:flex;
     flex-direction:column;
     align-items:flex-end;
-    width:min-content;
-    margin-left:10%;
     }
   .boxContainer{
   padding:1rem;
@@ -61,7 +62,7 @@ export const ParentBox = styled('div')(
   
     .id{
       position:absolute;
-      left:20%;
+      font-size:0.7rem;
     }
   }
 
@@ -99,16 +100,14 @@ export const ParentBox = styled('div')(
   .singleLegend{
     display:flex;
     gap:1rem;
-    justify-content:flex-start;
-
   }
 .seatLegend{
  position:absolute;
- top:4%;
- left:1.5%;
+ top:5.5%;
+left:26%;
 }
 .seatDetails{
-  margin-top:14%;
+  margin-top:8%;
   margin-left:10%;
 }
 .bookingSummaryButton{

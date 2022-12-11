@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import image from '../../assets/images/bg.jpg';
+import image from '../../assets/images/bookingbg.jpg';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { SeatDetailsContainer } from './seatDetails.style';
 
@@ -18,12 +18,12 @@ export default function SeatDetails({ selected }: any) {
   }, [selected]);
   return (
     <SeatDetailsContainer>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 300 }}>
         <CardActionArea>
           <CardMedia component="img" height="250" image={image} alt="image" />
           <CardContent className="cardContent">
             <Typography gutterBottom variant="h3" component="div">
-              Booking Details
+              Booking Summary
             </Typography>
             <Typography variant="h5" color="text.secondary">
               Source: Pune

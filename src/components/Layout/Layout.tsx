@@ -27,8 +27,8 @@ const Layout = () => {
         <Route path="searchResults" element={<SearchResults />} />
         <Route path="filter" element={<MobileFilter />} />
       </Route>
-      <Route path="/sort" element={<Sort />} />
       <Route path="/seat" element={<Seat />} />
+      <Route path="/sort" element={<Sort />} />
       <Route path="/topbar" element={<Topbar />}></Route>
     </Routes>
   );

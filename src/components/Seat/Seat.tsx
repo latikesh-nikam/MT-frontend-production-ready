@@ -112,15 +112,6 @@ function Seat() {
                   })}
               </Grid>
             </Box>
-            <Button
-              variant="contained"
-              size="small"
-              fullWidth
-              onClick={handleOpen}
-              className="bookingSummaryButton"
-              disabled={selected.length === 0}>
-              Open Booking Summary
-            </Button>
           </Box>
           <Box className="seatLegend">
             {detailsContainer.map(detail => {
@@ -133,19 +124,8 @@ function Seat() {
             })}
           </Box>
         </Box>
-        {/* <Box className="seatDetails">
+        <Box className="seatDetails">
           <SeatDetails selected={selected} />
-        </Box> */}
-        <Box>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description">
-            <Box className="modal" sx={style}>
-              <SeatDetails selected={selected} />
-            </Box>
-          </Modal>
         </Box>
       </ParentBox>
     </Fragment>
