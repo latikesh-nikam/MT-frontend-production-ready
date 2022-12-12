@@ -1,8 +1,7 @@
 import { Box, Divider, Grid } from '@mui/material';
 import { Fragment, useState } from 'react';
 import { ParentBox } from './upperSeat.style';
-import SeatDetails from '../SeatDetails/SeatDetails';
-import { detailsContainer, seatDetails } from './upperSeat.mockData';
+import { seatDetails } from './upperSeat.mockData';
 
 type ISeatProps = {
   id: number;
