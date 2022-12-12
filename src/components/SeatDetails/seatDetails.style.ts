@@ -1,10 +1,13 @@
 import { styled } from '@mui/material/styles';
 export const SeatDetailsContainer = styled('div')(
   ({ theme }: any) => `
-   
-  .cardContent{
-    // height:10rem;
-    // max-width:10rem;
+
+  .image{
+    height:${theme.typography.pxToRem(theme.palette['height']['larger'])};
+  }
+
+  .cardContainer{
+    max-width:${theme.typography.pxToRem(theme.palette['width']['largest'])};
   }
     `,
 );

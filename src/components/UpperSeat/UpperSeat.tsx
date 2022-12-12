@@ -1,10 +1,8 @@
-import { Box, Divider, Grid, Stack } from '@mui/material';
-import { Fragment, useEffect, useState } from 'react';
-import { ParentBox } from './seat.style';
-import image from '../../assets/images/sw.png';
+import { Box, Divider, Grid } from '@mui/material';
+import { Fragment, useState } from 'react';
+import { ParentBox } from './upperSeat.style';
 import SeatDetails from '../SeatDetails/SeatDetails';
-import { detailsContainer, seatDetails } from './seatMockData';
-import UpperSeat from '../UpperSeat/UpperSeat';
+import { detailsContainer, seatDetails } from './upperSeat.mockData';
 
 type ISeatProps = {
   id: number;
@@ -12,7 +10,7 @@ type ISeatProps = {
   bookedGender: 'female' | 'male';
 };
 
-function Seat() {
+function UpperSeat() {
   const [selected, setSelected] = useState<number[]>([]);
 
   function classSelector(seat: any) {
@@ -72,51 +70,32 @@ function Seat() {
     <Fragment>
       <ParentBox>
         <Box className="parentContainer">
-          <Box className="busContainer">
-            <img src={image} alt="drive icon" className="steeringImage" />
-            <Box className="boxContainer">
-              <Grid direction="column" className="nowrap" container rowGap={2}>
-                {singleRow.map((seat: any, index: number) => {
+          <Box className="boxContainer">
+            <Grid direction="column" className="nowrap" container rowGap={2}>
+              {singleRow.map((seat: any, index: number) => {
+                return gridItem(seat, index);
+              })}
+            </Grid>
+            <Divider className="divider" />
+            <Grid direction="column" container className="nowrap" rowGap={2}>
+              {doubleRow
+                .slice(0, doubleRow.length / 2)
+                .map((seat: any, index: number) => {
                   return gridItem(seat, index);
                 })}
-              </Grid>
-              <Divider className="divider" />
-              <Grid direction="column" container className="nowrap" rowGap={2}>
-                {doubleRow
-                  .slice(0, doubleRow.length / 2)
-                  .map((seat: any, index: number) => {
-                    return gridItem(seat, index);
-                  })}
-              </Grid>
-              <Box className="space"></Box>
-              <Grid direction="column" className="nowrap" container rowGap={2}>
-                {doubleRow
-                  .slice(doubleRow.length / 2)
-                  .map((seat: any, index: number) => {
-                    return gridItem(seat, index + doubleRow.length / 2);
-                  })}
-              </Grid>
-            </Box>
+            </Grid>
+            <Box className="space"></Box>
+            <Grid direction="column" className="nowrap" container rowGap={2}>
+              {doubleRow
+                .slice(doubleRow.length / 2)
+                .map((seat: any, index: number) => {
+                  return gridItem(seat, index + doubleRow.length / 2);
+                })}
+            </Grid>
           </Box>
-          <Box className="seatLegend">
-            {detailsContainer.map(detail => {
-              return (
-                <Box className="singleLegend">
-                  <Box className={detail.classname}></Box>
-                  <span>{detail.text}</span>
-                </Box>
-              );
-            })}
-          </Box>
-        </Box>
-        <Box className="upperSeat">
-          <UpperSeat />
-        </Box>
-        <Box className="seatDetails">
-          <SeatDetails selected={selected} />
         </Box>
       </ParentBox>
     </Fragment>
   );
 }
-export default Seat;
+export default UpperSeat;

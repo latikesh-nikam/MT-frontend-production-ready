@@ -18,9 +18,14 @@ export default function SeatDetails({ selected }: any) {
   }, [selected]);
   return (
     <SeatDetailsContainer>
-      <Card sx={{ maxWidth: 300 }}>
+      <Card className="cardContainer">
         <CardActionArea>
-          <CardMedia component="img" height="250" image={image} alt="image" />
+          <CardMedia
+            component="img"
+            image={image}
+            alt="image"
+            className="image"
+          />
           <CardContent className="cardContent">
             <Typography gutterBottom variant="h3" component="div">
               Booking Summary

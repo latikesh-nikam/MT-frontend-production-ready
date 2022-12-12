@@ -12,6 +12,7 @@ import Seat from '../Seat/Seat';
 import Signup from '../Signup/Signup';
 import Sort from '../SortComponent/Sort';
 import Topbar from '../Topbar/Topbar';
+import UpperSeat from '../UpperSeat/UpperSeat';
 
 const Layout = () => {
   return (
@@ -28,6 +29,7 @@ const Layout = () => {
         <Route path="filter" element={<MobileFilter />} />
       </Route>
       <Route path="/seat" element={<Seat />} />
+      <Route path="/upperSeat" element={<UpperSeat />} />
       <Route path="/sort" element={<Sort />} />
       <Route path="/topbar" element={<Topbar />}></Route>
     </Routes>

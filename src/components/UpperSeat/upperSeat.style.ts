@@ -4,20 +4,18 @@ export const ParentBox = styled('div')(
   ({ theme }: any) => `
 
   display:flex;
-  justify-content:space-evenly;
+  justify-content:center;
 
   .parentContainer{
     background-color:whitesmoke;
     max-height:100vh;
+    border:thin solid;
     display:flex;
     gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
-    justify-content: flex-end;
     margin-top:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
   }
 
   .busContainer{
-    border:thin solid;
-    width:min-content;
     display:flex;
     flex-direction:column;
     align-items:flex-end;
@@ -30,8 +28,8 @@ export const ParentBox = styled('div')(
   }
 
   .nowrap{
-    flex-wrap:nowrap;
-    height:min-content;
+    flex-wrap:no-wrap;
+    margin-top:${theme.typography.pxToRem(theme.palette['margin']['medium'])};
   }
 
   .space{
@@ -125,12 +123,6 @@ export const ParentBox = styled('div')(
 
   .bookingSummaryButton{
     border-radius:0;
-  }
-
-  .upperSeat{
-    // margin-top:${theme.typography.pxToRem(
-      theme.palette['margin']['medium'],
-    )};
   }
 
 `,
