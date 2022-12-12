@@ -112,15 +112,15 @@ export const seatDetails = [
 export const detailsContainer = [
   {
     classname: 'femaleAvailable detailsMain',
-    text: 'Female (available females only)',
+    text: 'Female',
   },
   {
     classname: 'available detailsMain',
-    text: 'Available (male / female)',
+    text: 'Available',
   },
   {
     classname: 'femaleUnavailable detailsMain',
-    text: 'Booked (by female)',
+    text: 'Booked',
   },
   {
     classname: 'maleUnavailable detailsMain',

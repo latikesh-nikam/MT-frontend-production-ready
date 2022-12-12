@@ -7,7 +7,8 @@ export const SeatDetailsContainer = styled('div')(
   }
 
   .cardContainer{
-    max-width:${theme.typography.pxToRem(theme.palette['width']['largest'])};
+    border:thin solid ${theme.palette.background.lightgrey};
+    max-width:${theme.typography.pxToRem(theme.palette['width']['medium'])};
   }
     `,
 );

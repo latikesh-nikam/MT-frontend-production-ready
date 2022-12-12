@@ -99,27 +99,6 @@ export const ParentBox = styled('div')(
     border:thin solid;
   }
 
-  .detailsMain{
-    height:${theme.typography.pxToRem(theme.palette['height']['oneRem'])};
-    width:${theme.typography.pxToRem(theme.palette['width']['oneRem'])};
-    margin-top:${theme.typography.pxToRem(theme.palette['margin']['oneForth'])};
-  }
-
-  .singleLegend{
-    display:flex;
-    gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
-  }
-
-  .seatLegend{
-    position:absolute;
-    top:${theme.typography.pxToRem(theme.palette['top']['large'])};
-    left:${theme.typography.pxToRem(theme.palette['left']['large'])};
-  }
-
-  .seatDetails{
-    margin-top:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
-    margin-left:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
-  }
 
   .bookingSummaryButton{
     border-radius:0;

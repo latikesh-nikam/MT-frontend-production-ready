@@ -4,11 +4,11 @@ export const ParentBox = styled('div')(
   ({ theme }: any) => `
 
   display:flex;
-  justify-content:space-evenly;
+  margin-left:10rem;
 
   .parentContainer{
     background-color:whitesmoke;
-    max-height:100vh;
+    max-height:75vh;
     display:flex;
     gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
     justify-content: flex-end;
@@ -46,8 +46,8 @@ export const ParentBox = styled('div')(
 
   .container{
     max-width: ${theme.typography.pxToRem(theme.palette['width']['main'])};
-   display:flex;
-   gap:${theme.typography.pxToRem(theme.palette['gap']['tworem'])};
+    display:flex;
+    gap:${theme.typography.pxToRem(theme.palette['gap']['tworem'])};
   }
 
   .steeringImage{
@@ -109,13 +109,18 @@ export const ParentBox = styled('div')(
 
   .singleLegend{
     display:flex;
-    gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
+    gap:${theme.typography.pxToRem(theme.palette['gap']['small'])};
   }
 
   .seatLegend{
-    position:absolute;
-    top:${theme.typography.pxToRem(theme.palette['top']['large'])};
-    left:${theme.typography.pxToRem(theme.palette['left']['large'])};
+    // position:absolute;
+    display:flex;
+    margin-right:1rem;
+    margin-top:50%;
+    flex-direction:column;
+    // gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
+    // top:${theme.typography.pxToRem(theme.palette['top']['large'])};
+    // left:${theme.typography.pxToRem(theme.palette['left']['primary'])};
   }
 
   .seatDetails{
@@ -128,9 +133,12 @@ export const ParentBox = styled('div')(
   }
 
   .upperSeat{
-    // margin-top:${theme.typography.pxToRem(
-      theme.palette['margin']['medium'],
-    )};
+    // margin-right:1rem;
+    // margin-left:1rem;
+  }
+
+  .selected{
+    border:thin solid green;
   }
 
 `,
