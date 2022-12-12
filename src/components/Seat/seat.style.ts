@@ -10,119 +10,121 @@ export const ParentBox = styled('div')(
     background-color:whitesmoke;
     max-height:100vh;
     display:flex;
-    gap:1rem;
+    gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
     justify-content: flex-end;
-    margin-top:10%;
+    margin-top:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
   }
 
   .busContainer{
-    border:thin solid black;
+    border:thin solid;
     width:min-content;
     display:flex;
     flex-direction:column;
     align-items:flex-end;
     }
+
   .boxContainer{
-  padding:1rem;
-  position:relative;
-  display:flex;
+    padding:${theme.typography.pxToRem(theme.palette['padding']['main'])};
+    position:relative;
+    display:flex;
   }
+
   .nowrap{
     flex-wrap:nowrap;
     height:min-content;
   }
 
-.space{
-  padding:0.5rem;
-}
-  .divider{
-    margin:1.5rem 4rem 1.5rem 0;
+  .space{
+    padding:${theme.typography.pxToRem(theme.palette['padding']['primary'])};
   }
+
+  .divider{
+    margin:${theme.typography.pxToRem(
+      theme.palette['margin']['large'],
+    )} 4rem ${theme.typography.pxToRem(theme.palette['margin']['large'])} 0;
+  }
+
   .container{
     max-width: ${theme.typography.pxToRem(theme.palette['width']['main'])};
-  display:flex;
-  gap:2rem;
+   display:flex;
+   gap:${theme.typography.pxToRem(theme.palette['gap']['tworem'])};
   }
 
   .steeringImage{
-    width:15%;
-    margin-right:1rem;
-    margin-top:0.5rem;
+    width:${theme.typography.pxToRem(theme.palette['width']['small'])};
+    margin-right:${theme.typography.pxToRem(theme.palette['margin']['main'])};
+    margin-top:${theme.typography.pxToRem(theme.palette['margin']['primary'])};
   }
+
   .mainBox {
     height:${theme.typography.pxToRem(theme.palette['width']['small'])};
     border:thin solid;
-    padding:0.4rem;
+    padding:${theme.typography.pxToRem(theme.palette['padding']['primary'])};
     position:relative;
     display:flex;
     justify-content:flex-start;
     align-items:center;
     flex-direction:column-reverse;
     cursor:pointer;
-  
+
     .id{
       position:absolute;
-      font-size:0.7rem;
+      font-size:${theme.typography.fontSizeSmall};
     }
   }
 
   .smallBox{
     width:${theme.typography.pxToRem(theme.palette['width']['smaller'])};
-    border:thin solid black;
-    padding:0.2rem;
-  }
-  .femaleUnavailable{
-    background-color:pink;
-  }
-  .femaleAvailable{
-    border:thin solid #e75480;
-    background-color:white;
-    
-  }
-  .maleAvailable{
-    background-color:white;
-    
-  }
-  .maleUnavailable{
-    background-color:lightgrey;
-  }
-  .available{
-    background-color:white;
     border:thin solid;
-    
+    padding:${theme.typography.pxToRem(theme.palette['padding']['oneForth'])};
   }
- 
+
+  .femaleUnavailable{
+    background-color:${theme.palette.background.pink};
+  }
+
+  .femaleAvailable{
+    border:thin solid ${theme.palette.background.darkpink};
+    background-color:${theme.palette.background.white};
+  }
+
+  .maleAvailable{
+    background-color:${theme.palette.background.white};
+  }
+
+  .maleUnavailable{
+    background-color:${theme.palette.background.lightgrey};
+  }
+
+  .available{
+    background-color:${theme.palette.background.white};
+    border:thin solid;
+  }
+
   .detailsMain{
-    height:1rem;
-    width:1rem;
-    margin-top:0.3rem;
+    height:${theme.typography.pxToRem(theme.palette['height']['oneRem'])};
+    width:${theme.typography.pxToRem(theme.palette['width']['oneRem'])};
+    margin-top:${theme.typography.pxToRem(theme.palette['margin']['oneForth'])};
   }
+
   .singleLegend{
     display:flex;
-    gap:1rem;
+    gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
   }
-.seatLegend{
- position:absolute;
- top:5.5%;
-left:26%;
-}
-.seatDetails{
-  margin-top:8%;
-  margin-left:10%;
-}
-.bookingSummaryButton{
-  border-radius:0;
-}
-.modal{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: fit-content;
-  background-color:transparent;
-  border: 2px solid #000;
-  box-shadow: 24px;
-}
 
+  .seatLegend{
+    position:absolute;
+    top:${theme.typography.pxToRem(theme.palette['top']['large'])};
+    left:${theme.typography.pxToRem(theme.palette['left']['large'])};
+  }
+
+  .seatDetails{
+    margin-top:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
+    margin-left:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
+  }
+
+  .bookingSummaryButton{
+    border-radius:0;
+  }
 `,
 );

@@ -30,7 +30,7 @@ function Seat() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  function seatSelector(seat: any) {
+  function classSelector(seat: any) {
     if (selected.includes(seat.id)) {
       seat.status = 'unavailable';
     }
@@ -70,12 +70,12 @@ function Seat() {
       <Grid item xs={2} key={index}>
         <Box
           key={index}
-          className={seatSelector(seat) + ' ' + 'mainBox'}
+          className={classSelector(seat) + ' ' + 'mainBox'}
           onClick={() => handleChange(seat)}>
           <p className="id">{seat.id}</p>
           <Box
             key={index + seat.id}
-            className={seatSelector(seat) + ' ' + 'smallBox'}
+            className={classSelector(seat) + ' ' + 'smallBox'}
             onClick={() => handleChange(seat)}></Box>
         </Box>
       </Grid>
