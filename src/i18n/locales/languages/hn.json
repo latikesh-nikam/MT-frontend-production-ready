@@ -237,5 +237,6 @@
     "passwordValidation":"पासवर्ड मेल नहीं खाते",
     "oldPassword":"*पुराना पासवर्ड डालें",
     "changePassword":"पासवर्ड बदलें",
-    "close":"बंद करना"
+    "close":"बंद करना",
+    "enterAge":"*आयु दर्ज करें"
 }

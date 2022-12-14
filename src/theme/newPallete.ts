@@ -32,7 +32,7 @@ export const newPalette = {
   background: {
     default: '#175CD3',
     semiPurple: '#EDEDF7',
-    grey: '#FAFAFE',
+    grey: '#cfd2cd',
     cream: '#FAFDD6',
     blue: '#175CD3',
     white: '#FFFFFF',
@@ -106,7 +106,11 @@ export const newPalette = {
     lightCyanBlue: '#E3EDF9',
     lightCyanGreen: '#E6F4F2',
     lightRed: '#e62e00',
+    darkgrey: '#6c757d',
     lightOrange: '#FF9E0D',
     blue: '#175CD3',
+  },
+  lineHeight: {
+    primary: 30,
   },
 };

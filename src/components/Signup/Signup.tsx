@@ -15,6 +15,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
+import { Button } from '@mui/material';
+import { Box } from '@mui/material';
+import { FormControl } from '@mui/material';
+import { FormControlLabel } from '@mui/material';
+import { FormLabel } from '@mui/material';
+import { MenuItem } from '@mui/material';
+import { Paper } from '@mui/material';
+import { Radio } from '@mui/material';
+import { RadioGroup } from '@mui/material';
+import { TextField } from '@mui/material';
+
 import { MainDivBox } from './signup.style';
 
 import { getData } from '../../services/http';
@@ -27,17 +38,6 @@ import { getRequestsURL } from '../../constants/getRequestsURL';
 import { ISignupProps } from './Signup.types';
 import { IQuestionProps } from './Signup.types';
 import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
-
-import { Button } from '@mui/material';
-import { Box } from '@mui/material';
-import { FormControl } from '@mui/material';
-import { FormControlLabel } from '@mui/material';
-import { FormLabel } from '@mui/material';
-import { MenuItem } from '@mui/material';
-import { Paper } from '@mui/material';
-import { Radio } from '@mui/material';
-import { RadioGroup } from '@mui/material';
-import { TextField } from '@mui/material';
 
 const Signup = () => {
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);

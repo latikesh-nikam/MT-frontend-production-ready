@@ -21,7 +21,6 @@ export const ParentBox = styled('div')(
 
   .busContainer{
     border:thin solid ${theme.palette.background.grey};
-    width:min-content;
     display:flex;
     flex-direction:column;
     align-items:flex-end;
@@ -32,8 +31,9 @@ export const ParentBox = styled('div')(
     position:relative;
     display:flex;
   }
-
+  
   .nowrap{
+    gap:${theme.typography.pxToRem(theme.palette['gap']['small'])};
     flex-wrap:nowrap;
     height:min-content;
   }
@@ -56,56 +56,56 @@ export const ParentBox = styled('div')(
 
   .steeringImage{
     width:${theme.typography.pxToRem(theme.palette['width']['small'])};
-    margin-right:${theme.typography.pxToRem(theme.palette['margin']['main'])};
+    margin-right:${theme.typography.pxToRem(
+      theme.palette['margin']['secondary'],
+    )};
     margin-top:${theme.typography.pxToRem(theme.palette['margin']['primary'])};
   }
 
   .mainBox {
-    height:${theme.typography.pxToRem(theme.palette['width']['small'])};
-    border:thin solid ${theme.palette.background.lightblue};
-    padding:${theme.typography.pxToRem(theme.palette['padding']['primary'])};
+    padding:${theme.typography.pxToRem(theme.palette['padding']['small'])};
     position:relative;
     display:flex;
     justify-content:flex-start;
     align-items:center;
     flex-direction:column-reverse;
     cursor:pointer;
-
-    .id{
-      position:absolute;
-      font-size:${theme.typography.fontSizeSmall};
-    }
   }
-
-  .smallBox{
-    width:${theme.typography.pxToRem(theme.palette['width']['smaller'])};
-    border:thin solid ${theme.palette.commonBgColor.darkgrey};
-    padding:${theme.typography.pxToRem(theme.palette['padding']['oneForth'])};
+  .count {
+    position: absolute;
+    line-height: ${theme.typography.pxToRem(
+      theme.palette['lineHeight']['primary'],
+    )};
+    color: ${theme.palette.background.darkgrey};
+    top:${theme.typography.pxToRem(theme.palette['top']['small'])};
+    font-size:${theme.typography.fontSizeSmall};
+    cursor:pointer;
   }
-
+  .root {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
   .femaleUnavailable{
-    background-color:${theme.palette.background.pink};
-    border:thin solid ${theme.palette.background.darkgrey};
+    color:${theme.palette.background.pink};
   }
 
   .femaleAvailable{
-    border:thin solid ${theme.palette.background.pink};
-    background-color:${theme.palette.background.white};
+    color:${theme.palette.background.white};
+    color:${theme.palette.background.lightblue};
   }
 
   .maleAvailable{
-    background-color:${theme.palette.background.white};
-    border:thin solid ${theme.palette.background.grey};
+    color:${theme.palette.background.lightblue};
   }
 
   .maleUnavailable{
-    background-color:${theme.palette.background.lightblue};
-    border:thin solid ${theme.palette.background.darkgrey};
+    color:${theme.palette.background.lightgrey};
   }
 
   .available{
-    background-color:${theme.palette.background.white};
-    border:thin solid ${theme.palette.background.grey};
+    background-color:${theme.palette.background.lightblue};
   }
 
   .detailsMain{
@@ -118,7 +118,12 @@ export const ParentBox = styled('div')(
     display:flex;
     gap:${theme.typography.pxToRem(theme.palette['gap']['small'])};
   }
-
+.femaleBorder{
+  border:thin solid ${theme.palette.background.pink};
+}
+.bookedColor{
+  background-color:${theme.palette.background.lightgrey};
+}
   .seatLegend{
     display:flex;
     margin-right:1rem;
@@ -136,14 +141,8 @@ export const ParentBox = styled('div')(
     border-radius:0;
   }
 
-  .selected{
-    border:thin solid green;
-  }
 
-  .gridMargin{
-    margin-top:${theme.typography.pxToRem(theme.palette['margin']['medium'])};
 
-  }
 
 `,
 );

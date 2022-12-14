@@ -1,4 +1,4 @@
-export const seatDetails = [
+export const upperSeatDetails = [
   {
     id: 'U1',
     status: 'available',

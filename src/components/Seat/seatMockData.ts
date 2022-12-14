@@ -120,10 +120,6 @@ export const detailsContainer = [
   },
   {
     classname: 'femaleUnavailable detailsMain',
-    text: 'Booked',
-  },
-  {
-    classname: 'maleUnavailable detailsMain',
-    text: 'Booked',
+    text: 'Booked(Female)',
   },
 ];

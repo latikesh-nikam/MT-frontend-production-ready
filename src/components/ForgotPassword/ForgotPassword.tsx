@@ -9,6 +9,14 @@ import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 
+import { Box } from '@mui/system';
+import { Button } from '@mui/material';
+import { FormControl } from '@mui/material';
+import { InputLabel } from '@mui/material';
+import { MenuItem } from '@mui/material';
+import { Paper } from '@mui/material';
+import { Select } from '@mui/material';
+
 import { getData } from '../../services/http';
 import { updateData } from '../../services/http';
 
@@ -18,13 +26,6 @@ import { ILocalisationContext } from '../../hoc/Localization/localisationProvide
 import { authURLConstants } from '../../constants/authURLConstants';
 import { getRequestsURL } from '../../constants/getRequestsURL';
 
-import { Box } from '@mui/system';
-import { Button } from '@mui/material';
-import { FormControl } from '@mui/material';
-import { InputLabel } from '@mui/material';
-import { MenuItem } from '@mui/material';
-import { Paper } from '@mui/material';
-import { Select } from '@mui/material';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MainDivBox } from './forgotPassword.style';

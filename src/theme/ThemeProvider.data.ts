@@ -23,7 +23,8 @@ export const appTheme = {
     fontSizeRegular: '1rem',
     fontSizeMedium: '1.25rem',
     fontSizeLarge: '1.5rem',
-
+    fontSizeLarger: '1.75rem',
+    fontSizeLargest: '2rem',
     h1: {
       fontSize: '2rem',
       fontWeight: 600,

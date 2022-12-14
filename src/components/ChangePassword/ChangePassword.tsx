@@ -6,6 +6,11 @@ import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 
+import { Box } from '@mui/system';
+import { Button } from '@mui/material';
+import { Paper } from '@mui/material';
+import { TextField } from '@mui/material';
+
 import { MainDivBox } from './changePassword.style';
 
 import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
@@ -17,11 +22,6 @@ import { authURLConstants } from '../../constants/authURLConstants';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-
-import { Box } from '@mui/system';
-import { Button } from '@mui/material';
-import { Paper } from '@mui/material';
-import { TextField } from '@mui/material';
 
 const ChangePassword = () => {
   const { localisation, updateLocalisation } = useContext(

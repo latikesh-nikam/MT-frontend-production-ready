@@ -1,17 +1,18 @@
 import { Fragment } from 'react';
 import { useState } from 'react';
 
+import WeekendIcon from '@mui/icons-material/Weekend';
 import { Box } from '@mui/material';
+import { Typography } from '@mui/material';
 import { Grid } from '@mui/material';
 import { Divider } from '@mui/material';
 
 import image from '../../assets/images/sw.png';
 import SeatDetails from '../SeatDetails/SeatDetails';
-import { detailsContainer } from './seatMockData';
-import { seatDetails } from './seatMockData';
-import { upperSeatDetails } from './upperSeat.mockData';
+import { detailsContainer } from './seater.mockdata';
+import { seatDetails } from './seater.mockdata';
 
-import { ParentBox } from './seat.style';
+import { ParentBox } from './seater.style';
 
 type ISeatProps = {
   id: number;
@@ -19,7 +20,7 @@ type ISeatProps = {
   bookedGender: 'female' | 'male';
 };
 
-function Seat() {
+function Seater() {
   const [selected, setSelected] = useState<number[]>([]);
 
   function classSelector(seat: any) {
@@ -53,35 +54,24 @@ function Seat() {
 
   const dataLength = seatDetails.length;
 
-  const singleRow = seatDetails.slice(0, dataLength / 3);
+  const singleRow = seatDetails.slice(0, dataLength / 2);
 
-  const doubleRow = seatDetails.slice(dataLength / 3, dataLength);
-
-  const dataLengthForUpperSeats = upperSeatDetails.length;
-
-  const singleRowForUpperSeats = upperSeatDetails.slice(
-    0,
-    dataLengthForUpperSeats / 3,
-  );
-
-  const doubleRowForUpperSeats = upperSeatDetails.slice(
-    dataLengthForUpperSeats / 3,
-    dataLengthForUpperSeats,
-  );
+  const doubleRow = seatDetails.slice(dataLength / 2, dataLength);
 
   function gridItem(seat: any, index: number) {
     return (
-      <Grid item xs={2} key={index}>
-        <Box
-          key={index}
+      <Grid item xs={2} key={index} className="root">
+        <WeekendIcon
+          fontSize="large"
           className={classSelector(seat) + ' ' + 'mainBox'}
+          onClick={() => handleChange(seat)}
+        />
+        <Typography
+          component="span"
+          className="count"
           onClick={() => handleChange(seat)}>
-          <p className="id">{seat.id}</p>
-          <Box
-            key={index + seat.id}
-            className={classSelector(seat) + ' ' + 'smallBox'}
-            onClick={() => handleChange(seat)}></Box>
-        </Box>
+          {seat.id}
+        </Typography>
       </Grid>
     );
   }
@@ -95,9 +85,18 @@ function Seat() {
             <img src={image} alt="drive icon" className="steeringImage" />
             <Box className="boxContainer">
               <Grid direction="column" className="nowrap" container rowGap={2}>
-                {singleRow.map((seat: any, index: number) => {
-                  return gridItem(seat, index);
-                })}
+                {singleRow
+                  .slice(0, singleRow.length / 2)
+                  .map((seat: any, index: number) => {
+                    return gridItem(seat, index);
+                  })}
+              </Grid>
+              <Grid direction="column" className="nowrap" container rowGap={2}>
+                {singleRow
+                  .slice(singleRow.length / 2)
+                  .map((seat: any, index: number) => {
+                    return gridItem(seat, index + singleRow.length / 2);
+                  })}
               </Grid>
               <Divider className="divider" />
               <Grid direction="column" container className="nowrap" rowGap={2}>
@@ -107,7 +106,6 @@ function Seat() {
                     return gridItem(seat, index);
                   })}
               </Grid>
-              <Box className="space"></Box>
               <Grid direction="column" className="nowrap" container rowGap={2}>
                 {doubleRow
                   .slice(doubleRow.length / 2)
@@ -128,47 +126,6 @@ function Seat() {
             })}
           </Box>
         </Box>
-        {/* Upper Berth */}
-        <Box className="parentContainer">
-          <Box className="boxContainer upperBox">
-            <Grid
-              direction="column"
-              className="nowrap gridMargin"
-              container
-              rowGap={2}>
-              {singleRowForUpperSeats.map((seat: any, index: number) => {
-                return gridItem(seat, index);
-              })}
-            </Grid>
-            <Divider className="divider" />
-            <Grid
-              direction="column"
-              container
-              className="nowrap gridMargin"
-              rowGap={2}>
-              {doubleRowForUpperSeats
-                .slice(0, doubleRowForUpperSeats.length / 2)
-                .map((seat: any, index: number) => {
-                  return gridItem(seat, index);
-                })}
-            </Grid>
-            <Box className="space"></Box>
-            <Grid
-              direction="column"
-              className="nowrap gridMargin"
-              container
-              rowGap={2}>
-              {doubleRowForUpperSeats
-                .slice(doubleRowForUpperSeats.length / 2)
-                .map((seat: any, index: number) => {
-                  return gridItem(
-                    seat,
-                    index + doubleRowForUpperSeats.length / 2,
-                  );
-                })}
-            </Grid>
-          </Box>
-        </Box>
         <Box className="seatDetails">
           <SeatDetails selected={selected} />
         </Box>
@@ -176,4 +133,4 @@ function Seat() {
     </Fragment>
   );
 }
-export default Seat;
+export default Seater;
