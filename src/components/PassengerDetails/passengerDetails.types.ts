@@ -4,4 +4,5 @@ export default interface IPassengerDetailsProps {
   phone: number | string;
   gender: string;
   age: string;
+  seatNumber: string;
 }

@@ -57,5 +57,9 @@ export const Parent = styled('div')(
     .button{
         padding:0.5rem;
     }
+
+    .seatNumber{
+        display:none;
+    }
     `,
 );

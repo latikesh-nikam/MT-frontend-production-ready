@@ -116,9 +116,9 @@ function Seater() {
             </Box>
           </Box>
           <Box className="seatLegend">
-            {detailsContainer.map(detail => {
+            {detailsContainer.map((detail, index) => {
               return (
-                <Box className="singleLegend">
+                <Box className="singleLegend" key={index}>
                   <Box className={detail.classname}></Box>
                   <span>{detail.text}</span>
                 </Box>

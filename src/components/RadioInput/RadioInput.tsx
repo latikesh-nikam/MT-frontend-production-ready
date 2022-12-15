@@ -14,6 +14,7 @@ const RadioInput = ({
   label,
   options,
   row = false,
+  ...radioGroupProps
 }: IRadioInputProps) => {
   const {
     localisation: { localString },
@@ -29,7 +30,11 @@ const RadioInput = ({
           <FormLabel className="formLabel" component="legend">
             {localString[label]}
           </FormLabel>
-          <RadioGroup {...field} className="radioGroup" row={row}>
+          <RadioGroup
+            {...field}
+            className="radioGroup"
+            row={row}
+            {...radioGroupProps}>
             {options &&
               options.map(({ label, value }, index) => {
                 return (
@@ -38,6 +43,7 @@ const RadioInput = ({
                     value={value}
                     control={<Radio />}
                     label={localString[label]}
+                    ref={field.ref}
                   />
                 );
               })}

@@ -13,6 +13,7 @@ const FormInput = ({
   type = 'text',
   showErrorMessage = false,
   size = 'medium',
+  ...textFieldProps
 }: IFormInputProps) => {
   const {
     localisation: { localString },
@@ -42,6 +43,8 @@ const FormInput = ({
             type={type}
             margin="dense"
             size={size}
+            ref={field.ref}
+            {...textFieldProps}
           />
         </InputContainer>
       )}

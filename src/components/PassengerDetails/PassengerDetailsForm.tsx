@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { useContext } from 'react';
 
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { FormProvider } from 'react-hook-form';
 
 import { toast } from 'react-toastify';
@@ -45,6 +45,7 @@ function PassengerDetailsForm(passengerCount: any) {
       .max(10, maxLengthPhone),
     gender: Yup.string().required(required),
     age: Yup.string().required(required),
+    seatNumber: Yup.string(),
   });
 
   const genderOptions = [
@@ -53,42 +54,44 @@ function PassengerDetailsForm(passengerCount: any) {
     { label: 'other', value: 'other' },
   ];
 
-  const methods = useForm<IPassengerDetailsProps>({
-    resolver: yupResolver(passengerDetailsSchema),
-    defaultValues: {
-      email: '',
-      name: '',
-      phone: '',
-      gender: '',
-      age: '',
-    },
-  });
+  const methods = useForm<IPassengerDetailsProps>({});
 
   const {
     handleSubmit,
     reset,
+    register,
+    control,
     formState: { dirtyFields, defaultValues },
   } = methods;
 
+  const { fields, append, remove } = useFieldArray<any>({
+    name: 'seats',
+    control,
+  });
+
   const submit = async (data: any) => {
-    try {
-      const response = await updateData(authURLConstants.forgotPassword, data);
-      console.log(response);
-      reset({
-        email: '',
-        name: '',
-        phone: '',
-        gender: '',
-        age: '',
-      });
-      toast.success(`${response.message}`, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } catch (error: any) {
-      toast.error(error.response.data.error.message, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    }
+    // try {
+    //   const response = await updateData(authURLConstants.forgotPassword, data);
+    //   console.log(response);
+    //   reset({
+    //     email: '',
+    //     name: '',
+    //     phone: '',
+    //     gender: '',
+    //     age: '',
+    //   });
+    //   toast.success(`${response.message}`, {
+    //     position: toast.POSITION.TOP_RIGHT,
+    //   });
+    // } catch (error: any) {
+    //   toast.error(error.response.data.error.message, {
+    //     position: toast.POSITION.TOP_RIGHT,
+    //   });
+    // }
+    data.seats.forEach((element: any, index: number) => {
+      element.seatNumber = count[index];
+    });
+    console.log(data);
   };
 
   return (
@@ -110,20 +113,20 @@ function PassengerDetailsForm(passengerCount: any) {
                       <Box className="inputs">
                         <Box>
                           <FormInput
-                            name={`name_${index}`}
+                            name={`seats.${index}.name`}
                             label="enterName"
                             showErrorMessage
                             size="small"
                           />
 
                           <RadioInput
-                            name={`gender_${index}`}
+                            name={`seats.${index}.gender`}
                             label="Select Gender"
                             options={genderOptions}
                             row
                           />
                           <FormInput
-                            name={`age_${index}`}
+                            name={`seats.${index}.age`}
                             label="enterAge"
                             showErrorMessage
                             size="small"
@@ -162,13 +165,7 @@ function PassengerDetailsForm(passengerCount: any) {
                 fullWidth
                 className="button"
                 variant="contained"
-                size="small"
-                disabled={
-                  !(
-                    Object.keys(dirtyFields).length ===
-                    Object.keys(defaultValues as IPassengerDetailsProps).length
-                  )
-                }>
+                size="small">
                 Proceed to Payment
               </Button>
             </Box>
