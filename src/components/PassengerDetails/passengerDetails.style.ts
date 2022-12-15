@@ -10,40 +10,46 @@ export const Parent = styled('div')(
     
     .row{
         display:flex;
-        gap:1rem;
-        margin:0.5rem 1rem 0 1.5rem;
+        gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
+        margin:${theme.typography.pxToRem(
+          theme.palette['margin']['primary'],
+        )} ${theme.typography.pxToRem(
+    theme.palette['margin']['main'],
+  )} 0 ${theme.typography.pxToRem(theme.palette['margin']['large'])};
     }
     .inputs{
-        padding:0.5rem;
-        margin:0.5rem;
+        padding:${theme.typography.pxToRem(
+          theme.palette['padding']['primary'],
+        )};
+        margin:${theme.typography.pxToRem(theme.palette['margin']['primary'])};
     }
 
     .paper{
-        border:thin solid lightgrey;
+        border:thin solid ${theme.palette.background.lightgrey};
     }
 
     .column{
         display:flex;
         flex-direction:column;
-        gap:1rem;
+        gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
     }
 
     .button{
-        margin-top:1rem;
-        padding:1rem;
+        margin-top:${theme.typography.pxToRem(theme.palette['margin']['main'])};
+        padding:${theme.typography.pxToRem(theme.palette['padding']['main'])};
     }
 
     .description{
-        font-size:1rem;
+        font-size:${theme.typography.fontSizeRegular};
         margin:0;
 
     }
 
     .container{
-        padding:1rem;
+        padding:${theme.typography.pxToRem(theme.palette['padding']['main'])};
         display:flex;
         flex-direction:column;
-        gap:1rem;
+        gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
     }
 
     .heading{
@@ -55,7 +61,9 @@ export const Parent = styled('div')(
         padding:0;
     }
     .button{
-        padding:0.5rem;
+        padding:${theme.typography.pxToRem(
+          theme.palette['padding']['primary'],
+        )};
     }
 
     .seatNumber{
