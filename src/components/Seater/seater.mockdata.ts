@@ -26,7 +26,7 @@ export const seatDetails = [
   {
     id: '5',
     status: 'available',
-    bookedGender: 'female',
+    bookedGender: 'male',
     selected: false,
   },
   {
@@ -196,14 +196,18 @@ export const seatDetails = [
 export const detailsContainer = [
   {
     classname: 'femaleAvailable detailsMain femaleBorder',
-    text: 'Female',
+    text: 'Available (Female)',
   },
   {
     classname: 'available detailsMain',
-    text: 'Available',
+    text: 'Available (Female/Male)',
   },
   {
-    classname: 'femaleUnavailable detailsMain bookedColor',
-    text: 'Booked',
+    classname: 'femaleUnavailable detailsMain maleBookedColor',
+    text: 'Unavailable',
+  },
+  {
+    classname: 'femaleUnavailable detailsMain femaleBookedColor',
+    text: 'Booked (Female)',
   },
 ];

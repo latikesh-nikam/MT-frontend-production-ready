@@ -71,6 +71,8 @@ export const ParentBox = styled('div')(
     flex-direction:column-reverse;
     cursor:pointer;
   }
+
+
   .count {
     position: absolute;
     line-height: ${theme.typography.pxToRem(
@@ -88,12 +90,13 @@ export const ParentBox = styled('div')(
     align-items: center;
   }
   .femaleUnavailable{
-    color:${theme.palette.background.pink};
+    color:${theme.palette.background.lightpink};
   }
 
   .femaleAvailable{
-    color:${theme.palette.background.white};
-    color:${theme.palette.background.lightblue};
+  
+    color:${theme.palette.background.lightpurple};
+
   }
 
   .maleAvailable{
@@ -102,6 +105,7 @@ export const ParentBox = styled('div')(
 
   .maleUnavailable{
     color:${theme.palette.background.lightgrey};
+
   }
 
   .available{
@@ -119,10 +123,13 @@ export const ParentBox = styled('div')(
     gap:${theme.typography.pxToRem(theme.palette['gap']['small'])};
   }
 .femaleBorder{
-  border:thin solid ${theme.palette.background.pink};
+  background-color:${theme.palette.background.lightpurple};
 }
-.bookedColor{
+.maleBookedColor{
   background-color:${theme.palette.background.lightgrey};
+}
+.femaleBookedColor{
+  background-color:${theme.palette.background.lightpink};
 }
   .seatLegend{
     display:flex;
@@ -140,9 +147,6 @@ export const ParentBox = styled('div')(
   .bookingSummaryButton{
     border-radius:0;
   }
-
-
-
 
 `,
 );

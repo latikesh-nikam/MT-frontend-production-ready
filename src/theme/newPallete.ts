@@ -43,6 +43,8 @@ export const newPalette = {
     lightblue: '#A2D2FF',
     lightpink: '#FFC8DD',
     lightpurple: '#C7ADFF',
+    lightpink: '#ffc8dd',
+    lightpurple: '#c7adff',
   },
   borderFaded: '#f5f5f5',
   borderFaded2: '#eaecf0',

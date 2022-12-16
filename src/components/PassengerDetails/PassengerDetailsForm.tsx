@@ -1,7 +1,8 @@
 import { Fragment } from 'react';
 import { useContext } from 'react';
 
-import { useFieldArray, useForm } from 'react-hook-form';
+import { useFieldArray } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { FormProvider } from 'react-hook-form';
 
 import { toast } from 'react-toastify';
@@ -24,6 +25,7 @@ import FormInput from '../FormInput/FormInput';
 import RadioInput from '../RadioInput/RadioInput';
 
 import { Parent } from './passengerDetails.style';
+import { seatDetails } from '../Seat/seatMockData';
 
 function PassengerDetailsForm(passengerCount: any) {
   const { localisation, updateLocalisation } = useContext(
@@ -54,12 +56,15 @@ function PassengerDetailsForm(passengerCount: any) {
     { label: 'other', value: 'other' },
   ];
 
-  const methods = useForm<IPassengerDetailsProps>({});
+  const methods = useForm<any>({
+    resolver: yupResolver(passengerDetailsSchema),
+  });
 
   const {
     handleSubmit,
-    reset,
     register,
+    reset,
+    resetField,
     control,
     formState: { dirtyFields, defaultValues },
   } = methods;
