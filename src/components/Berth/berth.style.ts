@@ -7,5 +7,9 @@ export const Container = styled('div')(
     max-height:100vh;
     margin-top:-5rem;
     margin-left:-4rem;
+
+    ${theme.breakpoints.down('sm')} {
+      flex-direction:column;
+    }
 `,
 );

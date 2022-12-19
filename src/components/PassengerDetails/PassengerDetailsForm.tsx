@@ -28,6 +28,7 @@ import { Parent } from './passengerDetails.style';
 import { seatDetails } from '../Seat/seatMockData';
 
 function PassengerDetailsForm(passengerCount: any) {
+  console.log(passengerCount);
   const { localisation, updateLocalisation } = useContext(
     LocalisationContext,
   ) as ILocalisationContext;
@@ -57,7 +58,7 @@ function PassengerDetailsForm(passengerCount: any) {
   ];
 
   const methods = useForm<any>({
-    resolver: yupResolver(passengerDetailsSchema),
+    // resolver: yupResolver(passengerDetailsSchema),
   });
 
   const {
@@ -94,9 +95,9 @@ function PassengerDetailsForm(passengerCount: any) {
     //   });
     // }
     data.seats.forEach((element: any, index: number) => {
-      element.seatNumber = count[index];
+      element.seatNo = count[index].seatNo;
     });
-    console.log(data);
+    console.log(data, 'hello');
   };
 
   return (
@@ -107,13 +108,13 @@ function PassengerDetailsForm(passengerCount: any) {
           <form onSubmit={handleSubmit(submit)} autoComplete="off">
             <Box className="container">
               <h4 className="subHeading">Passenger Information</h4>
-              {count &&
+              {count.length > 0 &&
                 count.map((element: any, index: number) => {
                   return (
                     <Paper elevation={3} className="paper">
                       <Box className="row">
                         Passenger {index + 1} &emsp;|
-                        <Box>Seat {element}</Box>
+                        <Box>Seat {element.seatNo}</Box>
                       </Box>
                       <Box className="inputs">
                         <Box>

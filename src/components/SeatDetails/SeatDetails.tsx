@@ -31,21 +31,17 @@ const style = {
 export default function SeatDetails({ selected }: any) {
   const selectedSeats = selected.length > 0 ? selected : 'None';
   const [open, setOpen] = useState(false);
+  const fare = selected.reduce(
+    (current: number, sum: any) => current + sum.seatFare,
+    0,
+  );
 
-  const [fare, setFare] = useState(0);
-  const handleFare = () => {
-    setFare(600 * selected.length);
-  };
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-
-  useEffect(() => {
-    handleFare();
-  }, [selected]);
 
   return (
     <SeatDetailsContainer>
@@ -82,7 +78,11 @@ export default function SeatDetails({ selected }: any) {
             <Box className="seats">
               <Typography variant="h5" color="text.secondary">
                 Seats Selected:{' '}
-                <span className="rightText">{selectedSeats.toString()}</span>
+                <span className="rightText">
+                  {selected.length > 0
+                    ? selected.map((element: any) => element.seatNo).join(', ')
+                    : 'None'}
+                </span>
               </Typography>
             </Box>
             <Box className="fare">
@@ -111,7 +111,7 @@ export default function SeatDetails({ selected }: any) {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description">
         <Box sx={{ ...style, width: 400 }}>
-          <PassengerDetailsForm passengerCount={selectedSeats} />
+          <PassengerDetailsForm passengerCount={selected} />
         </Box>
       </Modal>
     </SeatDetailsContainer>

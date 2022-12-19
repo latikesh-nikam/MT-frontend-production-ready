@@ -80,54 +80,72 @@ function Seater() {
   return (
     <Fragment>
       <ParentBox>
-        <Box className="parentContainer">
-          <Box className="busContainer">
-            <img src={image} alt="drive icon" className="steeringImage" />
-            <Box className="boxContainer">
-              <Grid direction="column" className="nowrap" container rowGap={2}>
-                {singleRow
-                  .slice(0, singleRow.length / 2)
-                  .map((seat: any, index: number) => {
-                    return gridItem(seat, index);
-                  })}
-              </Grid>
-              <Grid direction="column" className="nowrap" container rowGap={2}>
-                {singleRow
-                  .slice(singleRow.length / 2)
-                  .map((seat: any, index: number) => {
-                    return gridItem(seat, index + singleRow.length / 2);
-                  })}
-              </Grid>
-              <Divider className="divider" />
-              <Grid direction="column" container className="nowrap" rowGap={2}>
-                {doubleRow
-                  .slice(0, doubleRow.length / 2)
-                  .map((seat: any, index: number) => {
-                    return gridItem(seat, index);
-                  })}
-              </Grid>
-              <Grid direction="column" className="nowrap" container rowGap={2}>
-                {doubleRow
-                  .slice(doubleRow.length / 2)
-                  .map((seat: any, index: number) => {
-                    return gridItem(seat, index + doubleRow.length / 2);
-                  })}
-              </Grid>
+        <Box className="try">
+          <Box className="parentContainer">
+            <Box className="busContainer">
+              <img src={image} alt="drive icon" className="steeringImage" />
+              <Box className="boxContainer">
+                <Grid
+                  direction="column"
+                  className="nowrap"
+                  container
+                  rowGap={2}>
+                  {singleRow
+                    .slice(0, singleRow.length / 2)
+                    .map((seat: any, index: number) => {
+                      return gridItem(seat, index);
+                    })}
+                </Grid>
+                <Grid
+                  direction="column"
+                  className="nowrap"
+                  container
+                  rowGap={2}>
+                  {singleRow
+                    .slice(singleRow.length / 2)
+                    .map((seat: any, index: number) => {
+                      return gridItem(seat, index + singleRow.length / 2);
+                    })}
+                </Grid>
+                <Divider className="divider" />
+                <Grid
+                  direction="column"
+                  container
+                  className="nowrap"
+                  rowGap={2}>
+                  {doubleRow
+                    .slice(0, doubleRow.length / 2)
+                    .map((seat: any, index: number) => {
+                      return gridItem(seat, index);
+                    })}
+                </Grid>
+                <Grid
+                  direction="column"
+                  className="nowrap"
+                  container
+                  rowGap={2}>
+                  {doubleRow
+                    .slice(doubleRow.length / 2)
+                    .map((seat: any, index: number) => {
+                      return gridItem(seat, index + doubleRow.length / 2);
+                    })}
+                </Grid>
+              </Box>
+            </Box>
+            <Box className="seatLegend">
+              {detailsContainer.map((detail, index) => {
+                return (
+                  <Box className="singleLegend" key={index}>
+                    <Box className={detail.classname}></Box>
+                    <span>{detail.text}</span>
+                  </Box>
+                );
+              })}
             </Box>
           </Box>
-          <Box className="seatLegend">
-            {detailsContainer.map((detail, index) => {
-              return (
-                <Box className="singleLegend" key={index}>
-                  <Box className={detail.classname}></Box>
-                  <span>{detail.text}</span>
-                </Box>
-              );
-            })}
+          <Box className="seatDetails">
+            <SeatDetails selected={selected} />
           </Box>
-        </Box>
-        <Box className="seatDetails">
-          <SeatDetails selected={selected} />
         </Box>
       </ParentBox>
     </Fragment>

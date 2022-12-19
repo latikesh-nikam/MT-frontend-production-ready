@@ -8,10 +8,9 @@ import { Divider } from '@mui/material';
 import image from '../../assets/images/sw.png';
 import SeatDetails from '../SeatDetails/SeatDetails';
 import { detailsContainer } from './seatMockData';
-import { seatDetails } from './seatMockData';
-import { upperSeatDetails } from './upperSeat.mockData';
 
 import { ParentBox } from './seat.style';
+import { berthData } from '../Berth/berth.mockData';
 
 type ISeatProps = {
   id: number;
@@ -20,10 +19,10 @@ type ISeatProps = {
 };
 
 function Seat() {
-  const [selected, setSelected] = useState<number[]>([]);
+  const [selected, setSelected] = useState<any[]>([]);
 
   function classSelector(seat: any) {
-    if (selected.includes(seat.id)) {
+    if (selected.includes(seat.seatNo)) {
       seat.status = 'unavailable';
     }
     const capitalizedText =
@@ -34,37 +33,52 @@ function Seat() {
 
   const handleChange = (seat: any) => {
     if (seat.status === 'unavailable') {
-      if (selected.includes(seat.id)) {
-        setSelected(selected.filter(element => element !== seat.id));
+      const selectedSeat = selected.filter(
+        (s: any) => s.seatNo === seat.seatNo,
+      );
+      if (selectedSeat.length > 0) {
+        setSelected(selected.filter(element => element.seatNo !== seat.seatNo));
         seat.status = 'available';
       } else {
         return;
       }
     } else {
-      if (selected.includes(seat.id)) {
-        setSelected(selected.filter(element => element !== seat.id));
+      const selectedSeat = selected.filter(
+        (s: any) => s.seatNo === seat.seatNo,
+      );
+
+      if (selectedSeat.length > 0) {
+        setSelected(selected.filter(element => element.seatNo !== seat.seatNo));
         seat.status = seat.status === 'available' ? 'unavailable' : 'available';
       } else {
-        selected.push(seat.id);
+        seat.status = 'unavailable';
+        selected.push(seat);
         setSelected([...selected]);
       }
     }
   };
 
-  const dataLength = seatDetails.length;
+  const lowerDeck = berthData.filter(element => element.deck === 'lower Deck');
 
-  const singleRow = seatDetails.slice(0, dataLength / 3);
+  const dataLengthForLowerSeats = lowerDeck.length;
 
-  const doubleRow = seatDetails.slice(dataLength / 3, dataLength);
+  const singleRow = lowerDeck.slice(0, dataLengthForLowerSeats / 3);
 
-  const dataLengthForUpperSeats = upperSeatDetails.length;
+  const doubleRow = lowerDeck.slice(
+    dataLengthForLowerSeats / 3,
+    dataLengthForLowerSeats,
+  );
+  //////////////////////////////////////////////////
 
-  const singleRowForUpperSeats = upperSeatDetails.slice(
+  const upperDeck = berthData.filter(element => element.deck === 'upper Deck');
+  const dataLengthForUpperSeats = upperDeck.length;
+
+  const singleRowForUpperSeats = upperDeck.slice(
     0,
     dataLengthForUpperSeats / 3,
   );
 
-  const doubleRowForUpperSeats = upperSeatDetails.slice(
+  const doubleRowForUpperSeats = upperDeck.slice(
     dataLengthForUpperSeats / 3,
     dataLengthForUpperSeats,
   );
@@ -76,16 +90,15 @@ function Seat() {
           key={index}
           className={classSelector(seat) + ' ' + 'mainBox'}
           onClick={() => handleChange(seat)}>
-          <p className="id">{seat.id}</p>
+          <p className="id">{seat.seatNo}</p>
           <Box
-            key={index + seat.id}
+            key={index + seat.seatNo}
             className={classSelector(seat) + ' ' + 'smallBox'}
             onClick={() => handleChange(seat)}></Box>
         </Box>
       </Grid>
     );
   }
-  console.log(selected);
 
   return (
     <Fragment>
@@ -130,7 +143,7 @@ function Seat() {
         </Box>
         {/* Upper Berth */}
         <Box className="parentContainer">
-          <Box className="boxContainer upperBox">
+          <Box className="boxContainer upperSeatBox">
             <Grid
               direction="column"
               className="nowrap gridMargin"
@@ -169,6 +182,8 @@ function Seat() {
             </Grid>
           </Box>
         </Box>
+
+        {/* selected seats */}
         <Box className="seatDetails">
           <SeatDetails selected={selected} />
         </Box>

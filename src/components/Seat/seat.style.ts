@@ -4,7 +4,14 @@ export const ParentBox = styled('div')(
   ({ theme }: any) => `
 
   display:flex;
+  justify-content:center;
+  align-items:center;
   margin-left:10rem;
+
+  ${theme.breakpoints.down('sm')} {
+    flex-direction:column;
+    margin-left:0;
+  }
 
   .parentContainer{
     background-color:${theme.palette.background.whitesmoke};
@@ -15,7 +22,7 @@ export const ParentBox = styled('div')(
     margin-top:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
   }
 
-  .upperBox{
+  .upperSeatBox{
     border:thin solid ${theme.palette.background.grey};
   }
 
@@ -62,7 +69,7 @@ export const ParentBox = styled('div')(
 
   .mainBox {
     height:${theme.typography.pxToRem(theme.palette['width']['small'])};
-    border:thin solid ${theme.palette.background.lightblue};
+    border:thin solid ${theme.palette.background.grey};
     padding:${theme.typography.pxToRem(theme.palette['padding']['primary'])};
     position:relative;
     display:flex;
@@ -116,13 +123,14 @@ export const ParentBox = styled('div')(
 
   .singleLegend{
     display:flex;
-    gap:${theme.typography.pxToRem(theme.palette['gap']['small'])};
+    gap:${theme.typography.pxToRem(theme.palette['gap']['primary'])};
   }
 
   .seatLegend{
     display:flex;
     margin-right:1rem;
-    margin-top:50%;
+    justify-content:center;
+    height:inherit;
     flex-direction:column;
    
   }

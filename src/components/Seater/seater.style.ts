@@ -4,7 +4,7 @@ export const ParentBox = styled('div')(
   ({ theme }: any) => `
 
   display:flex;
-  margin-left:10rem;
+  margin-left:15rem;
 
   .parentContainer{
     background-color:${theme.palette.background.whitesmoke};
@@ -134,7 +134,7 @@ export const ParentBox = styled('div')(
   .seatLegend{
     display:flex;
     margin-right:1rem;
-    margin-top:50%;
+    margin-top:40%;
     flex-direction:column;
    
   }
@@ -148,5 +148,10 @@ export const ParentBox = styled('div')(
     border-radius:0;
   }
 
+  .try{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
 `,
 );
