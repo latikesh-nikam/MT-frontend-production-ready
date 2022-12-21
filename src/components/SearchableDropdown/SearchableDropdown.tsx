@@ -54,7 +54,7 @@ const SearchableDropdown = ({
               </InputContainer>
             )}
             onChange={(event, data) => {
-              onChange(data?.stationName || data?._id);
+              onChange(data?.stationName || data?.label);
             }}
           />
         </SearchableDropdownContainer>

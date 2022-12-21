@@ -1,0 +1,1 @@
+export const searchApiRoute = "vehicleDetail/search?limit=5&page="

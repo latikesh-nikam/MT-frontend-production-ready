@@ -9,7 +9,6 @@ export const InputContainer = styled('div')(
       border-radius:${theme.typography.pxToRem(theme.borderRadius.small)};
     }
     
-
     .MuiOutlinedInput-root{
       border-radius:0;
     }

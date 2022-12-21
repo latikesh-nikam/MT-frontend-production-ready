@@ -1,4 +1,4 @@
-import {  useContext } from 'react';
+import { useContext } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import FormControlLabel from '@mui/material/FormControlLabel/FormControlLabel';
 import Radio from '@mui/material/Radio/Radio';
@@ -9,7 +9,12 @@ import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisatio
 import { IRadioInputProps } from './radioInput.types';
 import { RadioGroupContainer } from './radioInput.styles';
 
-const RadioInput = ({ name, label, options }: IRadioInputProps) => {
+const RadioInput = ({
+  name,
+  label,
+  options,
+  row = false,
+}: IRadioInputProps) => {
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
@@ -21,8 +26,10 @@ const RadioInput = ({ name, label, options }: IRadioInputProps) => {
       control={control}
       render={({ field }) => (
         <RadioGroupContainer>
-          <FormLabel className="formLabel" component="legend">{localString[label]}</FormLabel>
-          <RadioGroup {...field} className="radioGroup">
+          <FormLabel className="formLabel" component="legend">
+            {localString[label]}
+          </FormLabel>
+          <RadioGroup {...field} className="radioGroup" row={row}>
             {options &&
               options.map(({ label, value }, index) => {
                 return (

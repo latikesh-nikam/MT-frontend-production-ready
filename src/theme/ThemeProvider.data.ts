@@ -18,6 +18,7 @@ export const appTheme = {
     fontWeightMedium: 600,
     fontWeightBold: 700,
 
+    fontSizeSmaller: '0.5rem',
     fontSizeSmall: '0.75rem',
     fontSizeRegular: '1rem',
     fontSizeMedium: '1.25rem',
@@ -99,6 +100,7 @@ export const appTheme = {
   },
 
   padding: {
+    small: 4,
     primary: 8,
     main: 16,
     secondary: 20,

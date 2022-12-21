@@ -1,10 +1,11 @@
 export interface IFilterInput {
-  busType: any;
+  vehicleClassType: string[];
+  vehicleType:string,
   departure: string;
   price: number[];
   drop: string;
 }
 
 export interface IFilterProps {
-  handleFilter: (data: IFilterInput) => void;
+  navigateTo?:string
 }

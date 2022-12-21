@@ -9,13 +9,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import Box from '@mui/material/Box/Box';
 import Button from '@mui/material/Button/Button';
-import { postData } from '../../services/axios.instance';
+import { postData } from '../../services/axios.interceptors';
 import utility from '../../utils/utility';
 import { ISignInInput } from './signIn.types';
 import FormInput from '../FormInput/FormInput';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { SignInContainer } from './signIn.styles';
+import { homeRoute } from '../../constants/routeConstants';
 
 const SignIn = () => {
   const [captchaToken, setCaptchaToken] = useState<string>('');
@@ -63,7 +64,7 @@ const SignIn = () => {
         position: toast.POSITION.TOP_RIGHT,
       });
       setCaptchaToken('');
-      navigate('/home');
+      navigate(homeRoute);
     } catch (error: any) {
       toast.error(error.response.data.error.message, {
         position: toast.POSITION.TOP_RIGHT,

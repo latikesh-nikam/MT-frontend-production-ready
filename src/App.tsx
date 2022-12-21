@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-import HomeProvider from './context/HomeContext/HomeContext';
+import StoreProvider from './context/StoreContext/StoreContext';
 import LocalisationProvider from './hoc/LocalisationProvider/LocalisationProvider';
 import MuiThemeProvider from './theme/ThemeProvider';
 
@@ -9,9 +9,9 @@ const App = () => {
     <BrowserRouter>
       <LocalisationProvider>
         <MuiThemeProvider>
-          <HomeProvider>
+          <StoreProvider>
             <Layout />
-          </HomeProvider>
+          </StoreProvider>
         </MuiThemeProvider>
       </LocalisationProvider>
     </BrowserRouter>

@@ -1,3 +1,8 @@
 export interface ISortTypes {
-  sortValue: string;
+  fixedFare: string;
+  ratings: string[];
+}
+
+export interface ISortProps {
+  navigateTo?: string;
 }

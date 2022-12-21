@@ -1,9 +1,14 @@
+import { IFilterInput } from "./filter.types";
+
 export const busTypeOptions = [
-  { label: 'ac', value: 'ac' },
-  { label: 'non-ac', value: 'non-AC' },
-  { label: 'sleeper', value: 'sleeper' },
-  { label: 'seater', value: 'seater' },
+  { label: 'sleeper', value: 'SLEEPER' },
+  { label: 'seater', value: 'SEATER' },
 ];
+
+export const vehicleTypeOptions = [
+  { label: 'ac', value: 'AC' },
+  { label: 'non-ac', value: 'NONAC' },
+]
 
 export const departureOptions = [
   { label: 'Early Morning (before 6 AM)', value: '6' },
@@ -35,3 +40,11 @@ export const sliderData = [
     label: '2000+',
   },
 ];
+
+export const filterInitialState:IFilterInput ={
+  departure: '',
+  drop: '',
+  price: [0, 100],
+  vehicleClassType: [],
+  vehicleType: '',
+}

@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import image from '../../assets/images/searchBackground.jpg';
+import searchBackground from '../../assets/images/searchBackground.jpg';
 
 export const HomeContainer = styled('div')(
   ({ theme }: any) => `
@@ -12,7 +12,7 @@ export const HomeContainer = styled('div')(
         display: flex;
         align-items: center;
         justify-content: center;
-        background: url(${image}) center/cover no-repeat;
+        background: url(${searchBackground}) center/cover no-repeat;
         padding:${theme.padding.main} 0;
         position:relative;
 
@@ -25,9 +25,7 @@ export const HomeContainer = styled('div')(
         left:0;
         background: rgba(0,0,0,0.4);
        }
-        ${theme.breakpoints.down('sm')}{
-            min-width:390px
-        }
+        
     }
 
     .bookings{

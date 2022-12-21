@@ -1,65 +1,69 @@
-import { useContext, useEffect } from 'react';
-import { SubmitHandler } from 'react-hook-form';
-import { HomeContext } from '../../context/HomeContext/HomeContext';
-import { IHomeContext } from '../../context/HomeContext/homeContext.types';
-import { ISearchInput } from '../../components/Search/search.types';
-import { HOME_ACTIONS_MAP } from '../../reducers/homeReducer/homeReducer';
+import { useNavigate } from 'react-router-dom';
+import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
+import Divider from '@mui/material/Divider/Divider';
 import Search from '../../components/Search/Search';
 import Filter from '../../components/Filter/Filter';
-import { SearchResultsContainer } from './searchResults.styles';
 import Sort from '../../components/SortComponent/Sort';
-import Divider from '@mui/material/Divider/Divider';
-import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
-import { IFilterInput } from '../../components/Filter/filter.types';
-import { useNavigate } from 'react-router-dom';
 import BusResults from '../../components/BusResults/BusResults';
+import { SearchResultsContainer } from './searchResults.styles';
+import { useContext, useEffect } from 'react';
+import { StoreContext } from '../../context/StoreContext/StoreContext';
+import { IStoreContext } from '../../context/StoreContext/storeContext.types';
+import InfiniteScroll from '../../components/InfiniteScroll/InifiniteScroll';
+import { filterRoute } from '../../constants/routeConstants';
+import { pageNumberAction } from '../../context/actions/dashboardActions/dashboardAction';
 
 const SearchResults = () => {
-  const { homeDispatch, getSearchResults } = useContext(
-    HomeContext,
-  ) as IHomeContext;
+  const {
+    dispatch,
+    getSearchResults,
+    state: {
+      dashboardState: {
+        pageNumber,
+        searchFormData: { date, ...search },
+      },
+    },
+  } = useContext(StoreContext) as IStoreContext;
   const navigate = useNavigate();
 
-  const handleSearch: SubmitHandler<ISearchInput> = async data => {
-    homeDispatch({ type: HOME_ACTIONS_MAP.SEARCH_FORM_DATA, payload: data });
-    try {
-      const response = await getSearchResults('vehicleDetail/search', {
-        ...data,
-        date: data.date.toLocaleDateString('fr-CA'),
-      });
-    } catch (error) {
-      throw error;
-    }
+  const handleFilterIcon = () => {
+    navigate(filterRoute);
   };
 
-  const handleFilter = (data: IFilterInput) => {
-    homeDispatch({
-      type: HOME_ACTIONS_MAP.FILTER_FORM_DATA,
-      payload: { ...data, isFiltered: true },
+  const handlePageNumber = () => {
+    dispatch(pageNumberAction(pageNumber+1))
+  };
+
+  const getSearchData = async () => {
+    await getSearchResults({
+      ...search,
+      date: date.getTime(),
+      filterby: {},
     });
   };
 
-  const handleFilterIcon = () => {
-    navigate('/home/filter');
-  };
-
-  // useEffect(()=> {
-  //   getSearchResults("vehicleDetails/search")
-  // },[])
+  useEffect(() => {
+    if (pageNumber > 0) {
+      getSearchData();
+    }
+  }, [pageNumber]);
 
   return (
     <SearchResultsContainer>
       <div className="search">
-        <Search handleSearch={handleSearch} />
+        <Search />
       </div>
       <div className="searResultsMain">
         <aside className="sidebar">
           <Sort />
           <Divider />
-          <Filter handleFilter={handleFilter} />
+          <Filter />
         </aside>
         <div className="searchRresults">
-          <BusResults />
+          <InfiniteScroll
+            handlePageChange={handlePageNumber}
+            Component={BusResults}
+          />
         </div>
       </div>
       <div className="filterIcon" onClick={handleFilterIcon}>

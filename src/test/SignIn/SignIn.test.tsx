@@ -9,7 +9,7 @@ import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import SignIn from '../../components/SignIn/SignIn';
 import LocalisationProvider from '../../hoc/LocalisationProvider/LocalisationProvider';
-import { postData } from '../../services/axios.instance';
+import { postData } from '../../services/axios.interceptors';
 import MuiThemeProvider from '../../theme/ThemeProvider';
 
 jest.mock('../../services/axios.instance');

@@ -33,8 +33,7 @@ const BookingCard = ({ data }: IBookingsCardProps) => {
       </div>
       <div className="passengers" data-testid="passengers">
         <p>
-          {localString?.adults}: {adults}, {localString?.children}:{' '}
-          {children}
+          {localString?.adults}: {adults}, {localString?.children}: {children}
         </p>
       </div>
     </BookingCardContainer>

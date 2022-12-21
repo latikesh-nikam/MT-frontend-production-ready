@@ -9,7 +9,6 @@ export const RadioGroupContainer = styled('div')(
     }
     .radioGroup{
         display:flex;
-        flex-direction:column;
         gap:${theme.typography.pxToRem(theme.gap.primary)};
         font-size: ${theme.typography.pxToRem(theme.typography.fontSizeSmall)}
     }`,
