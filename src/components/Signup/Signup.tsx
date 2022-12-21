@@ -97,7 +97,7 @@ const Signup = () => {
     formState: { dirtyFields, defaultValues, errors },
   } = methods;
 
-  const submit = async (data: any) => {
+  const submit = async (data: ISignupProps) => {
     console.log(data);
     const token = captchaRef.current.getValue();
     setCaptchaToken(token);

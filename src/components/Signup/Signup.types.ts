@@ -8,6 +8,7 @@ export interface ISignupProps {
   confirmPassword: string;
   securityQuestion: string;
   securityAnswer: string;
+  captcha?: string;
 }
 
 export interface IQuestionProps {

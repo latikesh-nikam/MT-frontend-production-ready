@@ -9,7 +9,9 @@ export const MainDivBox = styled('div')(
     flex-direction: column;
   }
   .container{
-    border-radius:1rem;
+    border-radius:${theme.typography.pxToRem(
+      theme.palette['shape']['borderRadius']['medium'],
+    )};
   }
   .formControl {
     min-width: 100%;
@@ -23,11 +25,11 @@ export const MainDivBox = styled('div')(
     margin-top:${theme.typography.pxToRem(theme.palette['margin']['main'])};
     display: flex;
     flex-direction: column;
-    gap:1rem;
+    gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
   }
   .heading{
     color:${theme.palette.primary.main};
-    padding-top:1rem;
+    padding-top:${theme.typography.pxToRem(theme.palette['padding']['main'])};
     margin:0;
     text-align:center;
   }
@@ -41,5 +43,6 @@ export const MainDivBox = styled('div')(
     text-align: center;
   font-style: italic;
   }
+
 `,
 );

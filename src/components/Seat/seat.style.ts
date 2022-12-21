@@ -6,8 +6,7 @@ export const ParentBox = styled('div')(
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-left:10rem;
-
+  margin-left:${theme.typography.pxToRem(theme.palette['margin']['seatLeft'])};
   ${theme.breakpoints.down('sm')} {
     flex-direction:column;
     margin-left:0;
@@ -20,10 +19,22 @@ export const ParentBox = styled('div')(
     gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
     justify-content: flex-end;
     margin-top:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
+
+    ${theme.breakpoints.down('sm')} {
+      margin-left:${theme.typography.pxToRem(
+        theme.palette['margin']['larger'],
+      )};
+    }
   }
 
   .upperSeatBox{
     border:thin solid ${theme.palette.background.grey};
+
+    ${theme.breakpoints.down('sm')} {
+      margin-left:-${theme.typography.pxToRem(
+        theme.palette['margin']['berthBottom'],
+      )};
+    }
   }
 
   .busContainer{
@@ -32,12 +43,29 @@ export const ParentBox = styled('div')(
     display:flex;
     flex-direction:column;
     align-items:flex-end;
+    max-height: 24rem;
+
+    &::-webkit-scrollbar { 
+      display: none; 
+  }
+
+    ${theme.breakpoints.down('sm')} {
+      margin-left:-${theme.typography.pxToRem(
+        theme.palette['margin']['berthBottom'],
+      )};
+    }
     }
 
   .boxContainer{
     padding:${theme.typography.pxToRem(theme.palette['padding']['main'])};
     position:relative;
     display:flex;
+    max-height: 24rem;
+    overflow-y:scroll;
+
+    &::-webkit-scrollbar { 
+      display: none; 
+  }
   }
 
   .nowrap{
@@ -46,13 +74,13 @@ export const ParentBox = styled('div')(
   }
 
   .space{
-    padding:${theme.typography.pxToRem(theme.palette['padding']['primary'])};
+    padding:${theme.typography.pxToRem(theme.palette['padding']['small'])};
   }
 
   .divider{
     margin:${theme.typography.pxToRem(
       theme.palette['margin']['large'],
-    )} 4rem ${theme.typography.pxToRem(theme.palette['margin']['large'])} 0;
+    )} 3rem ${theme.typography.pxToRem(theme.palette['margin']['large'])} 0;
   }
 
   .container{
@@ -124,20 +152,36 @@ export const ParentBox = styled('div')(
   .singleLegend{
     display:flex;
     gap:${theme.typography.pxToRem(theme.palette['gap']['primary'])};
+    margin-bottom:${theme.typography.pxToRem(
+      theme.palette['margin']['oneForth'],
+    )};
   }
 
   .seatLegend{
     display:flex;
-    margin-right:1rem;
+    margin-right:${theme.typography.pxToRem(theme.palette['margin']['main'])};
     justify-content:center;
     height:inherit;
     flex-direction:column;
-   
+
+    ${theme.breakpoints.down('sm')} {
+    flex-direction: column;
+    position: absolute;
+    bottom: 33%;
+    right: 43%;
+    }
   }
 
   .seatDetails{
     margin-top:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
     margin-left:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
+
+    ${theme.breakpoints.down('sm')} {
+      margin-left:${theme.typography.pxToRem(
+        theme.palette['margin']['primary'],
+      )};
+      margin-top:${theme.typography.pxToRem(theme.palette['margin']['twoRem'])};
+    }
   }
 
   .bookingSummaryButton{
@@ -151,6 +195,14 @@ export const ParentBox = styled('div')(
   .gridMargin{
     margin-top:${theme.typography.pxToRem(theme.palette['margin']['medium'])};
 
+  }
+
+  .deckInfo{
+    position: absolute;
+    top: ${theme.typography.pxToRem(theme.palette['top']['medium'])};
+    left: ${theme.typography.pxToRem(theme.palette['left']['secondary'])};
+    margin: 0;
+    color:${theme.palette.background.darkgrey};
   }
 
 `,

@@ -58,7 +58,7 @@ const ChangePassword = () => {
     resolver: yupResolver(changePasswordSchema),
   });
 
-  const submit = async (data: any) => {
+  const submit = async (data: IChangePasswordProps) => {
     try {
       const response = await updateData(authURLConstants.changePassword, data);
       reset({

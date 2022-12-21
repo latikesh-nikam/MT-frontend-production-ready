@@ -1,4 +1,3 @@
-import { Toolbar } from '@mui/material';
 import { Route } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
 import Auth from '../../Pages/Auth/Auth';

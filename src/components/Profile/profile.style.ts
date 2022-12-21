@@ -22,7 +22,7 @@ export const ProfileContainer = styled('div')(
   .profileDetails{
     box-shadow: ${theme.shadows[3]};
     position: absolute;
-    top: 12%;
+    top:9%;
     right: ${theme.typography.pxToRem(theme.palette['padding']['oneForth'])};
     min-width:  ${theme.typography.pxToRem(theme.palette['width']['primary'])};
     background-color:${theme.palette.background.white};

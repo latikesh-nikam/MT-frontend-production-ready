@@ -2,7 +2,11 @@ import { styled } from '@mui/material/styles';
 export const SeatDetailsContainer = styled('div')(
   ({ theme }: any) => `
 
-  
+  ${theme.breakpoints.down('sm')} {
+    margin-right:${theme.typography.pxToRem(
+      theme.palette['margin']['berthBottom'],
+    )};
+  }
 
   .image{
     height:${theme.typography.pxToRem(theme.palette['height']['medium'])};
@@ -12,10 +16,17 @@ export const SeatDetailsContainer = styled('div')(
   .cardContainer{
     border:thin solid ${theme.palette.background.lightgrey};
     max-width:${theme.typography.pxToRem(theme.palette['width']['main'])};
-    min-height:${theme.typography.pxToRem(theme.palette['height']['largest'])};
+    min-height:${theme.typography.pxToRem(theme.palette['height']['larger'])};
     border-radius:${theme.typography.pxToRem(
       theme.palette['shape']['borderRadius']['medium'],
     )};
+
+    ${theme.breakpoints.down('sm')} {
+      max-width:${theme.typography.pxToRem(theme.palette['width']['new'])};
+      margin-left:${theme.typography.pxToRem(
+        theme.palette['margin']['berthBottom'],
+      )};
+    }
   }
 
   .rightText{
@@ -23,39 +34,49 @@ export const SeatDetailsContainer = styled('div')(
     font-size:0.9rem;
   }
 
-  .boardingPoint{
-    margin-left:3.5rem;
-    font-size:0.9rem;
-  }
 
-  .droppingPoint{
-    margin-left:5.5rem;
-    font-size:0.8rem;
-  }
-  
   .buttonContainer{
     padding:${theme.typography.pxToRem(theme.palette['padding']['main'])};
 
   }
 
   .button{
-    border-radius:0;
+    border-radius:${theme.typography.pxToRem(
+      theme.palette['shape']['borderRadius']['small'],
+    )};
   }
 
   .cardContent{
     display:flex;
     flex-direction:column;
-    gap:0.5rem;
+    gap:${theme.typography.pxToRem(theme.palette['gap']['primary'])};
   }
 
   .seats{
     color:red;
   }
-  .css-b46tu0-MuiTypography-root{
-    font-size:1rem;
-  }
+
   .formHeading{
     text-align:center;
   }
+  .bottom{
+    padding-top:0;
+    margin-top:0;
+  }
+
+  .source, .destination{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+  }
+
+  .berthData{
+    ${theme.breakpoints.down('sm')} {
+      margin-right:${theme.typography.pxToRem(
+        theme.palette['margin']['berthBottom'],
+      )};
+    }
+  }
+
     `,
 );

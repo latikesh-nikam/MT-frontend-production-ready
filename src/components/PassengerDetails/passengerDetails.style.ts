@@ -8,6 +8,7 @@ export const Parent = styled('div')(
         display: none; 
     }
     
+    
     .row{
         display:flex;
         gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
@@ -24,10 +25,6 @@ export const Parent = styled('div')(
         margin:${theme.typography.pxToRem(theme.palette['margin']['primary'])};
     }
 
-    .paper{
-        border:thin solid ${theme.palette.background.lightgrey};
-    }
-
     .column{
         display:flex;
         flex-direction:column;
@@ -37,16 +34,17 @@ export const Parent = styled('div')(
     .button{
         margin-top:${theme.typography.pxToRem(theme.palette['margin']['main'])};
         padding:${theme.typography.pxToRem(theme.palette['padding']['main'])};
+        border-radius:8px;
     }
 
     .description{
-        font-size:${theme.typography.fontSizeRegular};
-        margin:0;
+        font-size:${theme.typography.fontSizeSmall};
+        margin-top:-0.5rem;
+        padding:0;
 
     }
 
     .container{
-        padding:${theme.typography.pxToRem(theme.palette['padding']['main'])};
         display:flex;
         flex-direction:column;
         gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
@@ -54,11 +52,13 @@ export const Parent = styled('div')(
 
     .heading{
         text-align:center;
+        margin-bottom:0;
     }
 
     .subHeading{
         margin:0;
         padding:0;
+        margin-top:1rem;
     }
     .button{
         padding:${theme.typography.pxToRem(
@@ -66,8 +66,16 @@ export const Parent = styled('div')(
         )};
     }
 
+    .paper{
+        border:thin solid ${theme.palette.background.lightgrey};
+    }
+
     .seatNumber{
         display:none;
+    }
+
+    .contactContainer{
+        margin-top:-1rem;
     }
     `,
 );

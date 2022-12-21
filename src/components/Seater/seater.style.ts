@@ -4,19 +4,29 @@ export const ParentBox = styled('div')(
   ({ theme }: any) => `
 
   display:flex;
-  margin-left:15rem;
+  margin-left:20rem;
+  margin-top:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
+  
+  ${theme.breakpoints.down('sm')} {
+    flex-direction:column;
+    gap:${theme.typography.pxToRem(theme.palette['gap']['large'])};
+    margin-left:${theme.typography.pxToRem(theme.palette['gap']['large'])};
+
+  }
+
 
   .parentContainer{
     background-color:${theme.palette.background.whitesmoke};
-    max-height:75vh;
+    max-height:100vh;
     display:flex;
+    align-items: center;
     gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
-    justify-content: flex-end;
-    margin-top:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
-  }
 
-  .upperBox{
-    border:thin solid ${theme.palette.background.grey};
+    ${theme.breakpoints.down('sm')} {
+      flex-direction:column;
+      gap:${theme.typography.pxToRem(theme.palette['gap']['small'])};
+      margin-left:0;
+    }
   }
 
   .busContainer{
@@ -24,12 +34,20 @@ export const ParentBox = styled('div')(
     display:flex;
     flex-direction:column;
     align-items:flex-end;
+    height:max-content;
+    justify-content:center;
     }
 
   .boxContainer{
     padding:${theme.typography.pxToRem(theme.palette['padding']['main'])};
     position:relative;
     display:flex;
+    max-height: 24rem;
+    overflow-y:scroll;
+
+    &::-webkit-scrollbar { 
+      display: none; 
+  }
   }
   
   .nowrap{
@@ -38,14 +56,10 @@ export const ParentBox = styled('div')(
     height:min-content;
   }
 
-  .space{
-    padding:${theme.typography.pxToRem(theme.palette['padding']['primary'])};
-  }
-
   .divider{
     margin:${theme.typography.pxToRem(
       theme.palette['margin']['large'],
-    )} 4rem ${theme.typography.pxToRem(theme.palette['margin']['large'])} 0;
+    )} 1.5rem ${theme.typography.pxToRem(theme.palette['margin']['large'])} 0;
   }
 
   .container{
@@ -55,11 +69,11 @@ export const ParentBox = styled('div')(
   }
 
   .steeringImage{
-    width:${theme.typography.pxToRem(theme.palette['width']['small'])};
+    width:1.6em;
     margin-right:${theme.typography.pxToRem(
       theme.palette['margin']['secondary'],
     )};
-    margin-top:${theme.typography.pxToRem(theme.palette['margin']['primary'])};
+    margin-top:${theme.typography.pxToRem(theme.palette['margin']['main'])};
   }
 
   .mainBox {
@@ -94,22 +108,19 @@ export const ParentBox = styled('div')(
   }
 
   .femaleAvailable{
-  
-    color:${theme.palette.background.lightpurple};
-
+    color:${theme.palette.background.pink};
   }
 
   .maleAvailable{
-    color:${theme.palette.background.lightblue};
+    color:${theme.palette.background.grey};
   }
 
   .maleUnavailable{
     color:${theme.palette.background.lightgrey};
-
   }
 
   .available{
-    background-color:${theme.palette.background.lightblue};
+    color:${theme.palette.background.grey};
   }
 
   .detailsMain{
@@ -121,27 +132,37 @@ export const ParentBox = styled('div')(
   .singleLegend{
     display:flex;
     gap:${theme.typography.pxToRem(theme.palette['gap']['small'])};
+    margin-bottom:${theme.typography.pxToRem(
+      theme.palette['margin']['oneForth'],
+    )};
   }
 .femaleBorder{
-  background-color:${theme.palette.background.lightpurple};
+  border:thin solid ${theme.palette.background.lightpink};
+
 }
 .maleBookedColor{
-  background-color:${theme.palette.background.lightgrey};
+  border:thin solid ${theme.palette.background.lightgrey};
+  
 }
 .femaleBookedColor{
   background-color:${theme.palette.background.lightpink};
 }
   .seatLegend{
     display:flex;
-    margin-right:1rem;
-    margin-top:40%;
+    margin-right:${theme.typography.pxToRem(theme.palette['margin']['main'])};
     flex-direction:column;
-   
+
+    ${theme.breakpoints.down('sm')} {
+      margin-left:-${theme.typography.pxToRem(
+        theme.palette['margin']['berthBottom'],
+      )};
+    }
   }
 
   .seatDetails{
     margin-top:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
     margin-left:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
+    
   }
 
   .bookingSummaryButton{
@@ -153,5 +174,6 @@ export const ParentBox = styled('div')(
     justify-content:center;
     align-items:center;
   }
+
 `,
 );

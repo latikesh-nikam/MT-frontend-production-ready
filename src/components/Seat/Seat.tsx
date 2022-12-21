@@ -11,17 +11,12 @@ import { detailsContainer } from './seatMockData';
 
 import { ParentBox } from './seat.style';
 import { berthData } from '../Berth/berth.mockData';
-
-type ISeatProps = {
-  id: number;
-  status: 'available' | 'unavailable' | 'selected';
-  bookedGender: 'female' | 'male';
-};
+import { ISeatProps } from './seat.types';
 
 function Seat() {
-  const [selected, setSelected] = useState<any[]>([]);
+  const [selected, setSelected] = useState<ISeatProps[]>([]);
 
-  function classSelector(seat: any) {
+  function classSelector(seat: ISeatProps) {
     if (selected.includes(seat.seatNo)) {
       seat.status = 'unavailable';
     }
@@ -31,10 +26,10 @@ function Seat() {
     return `${seat.bookedGender}${capitalizedText}`;
   }
 
-  const handleChange = (seat: any) => {
+  const handleChange = (seat: ISeatProps) => {
     if (seat.status === 'unavailable') {
       const selectedSeat = selected.filter(
-        (s: any) => s.seatNo === seat.seatNo,
+        (singleSeat: ISeatProps) => singleSeat.seatNo === seat.seatNo,
       );
       if (selectedSeat.length > 0) {
         setSelected(selected.filter(element => element.seatNo !== seat.seatNo));
@@ -44,7 +39,7 @@ function Seat() {
       }
     } else {
       const selectedSeat = selected.filter(
-        (s: any) => s.seatNo === seat.seatNo,
+        (singleSeat: ISeatProps) => singleSeat.seatNo === seat.seatNo,
       );
 
       if (selectedSeat.length > 0) {
@@ -83,7 +78,7 @@ function Seat() {
     dataLengthForUpperSeats,
   );
 
-  function gridItem(seat: any, index: number) {
+  function gridItem(seat: ISeatProps, index: number) {
     return (
       <Grid item xs={2} key={index}>
         <Box
@@ -108,7 +103,7 @@ function Seat() {
             <img src={image} alt="drive icon" className="steeringImage" />
             <Box className="boxContainer">
               <Grid direction="column" className="nowrap" container rowGap={2}>
-                {singleRow.map((seat: any, index: number) => {
+                {singleRow.map((seat: ISeatProps, index: number) => {
                   return gridItem(seat, index);
                 })}
               </Grid>
@@ -116,7 +111,7 @@ function Seat() {
               <Grid direction="column" container className="nowrap" rowGap={2}>
                 {doubleRow
                   .slice(0, doubleRow.length / 2)
-                  .map((seat: any, index: number) => {
+                  .map((seat: ISeatProps, index: number) => {
                     return gridItem(seat, index);
                   })}
               </Grid>
@@ -124,7 +119,7 @@ function Seat() {
               <Grid direction="column" className="nowrap" container rowGap={2}>
                 {doubleRow
                   .slice(doubleRow.length / 2)
-                  .map((seat: any, index: number) => {
+                  .map((seat: ISeatProps, index: number) => {
                     return gridItem(seat, index + doubleRow.length / 2);
                   })}
               </Grid>
@@ -142,6 +137,7 @@ function Seat() {
           </Box>
         </Box>
         {/* Upper Berth */}
+
         <Box className="parentContainer">
           <Box className="boxContainer upperSeatBox">
             <Grid
@@ -149,7 +145,7 @@ function Seat() {
               className="nowrap gridMargin"
               container
               rowGap={2}>
-              {singleRowForUpperSeats.map((seat: any, index: number) => {
+              {singleRowForUpperSeats.map((seat: ISeatProps, index: number) => {
                 return gridItem(seat, index);
               })}
             </Grid>
@@ -161,7 +157,7 @@ function Seat() {
               rowGap={2}>
               {doubleRowForUpperSeats
                 .slice(0, doubleRowForUpperSeats.length / 2)
-                .map((seat: any, index: number) => {
+                .map((seat: ISeatProps, index: number) => {
                   return gridItem(seat, index);
                 })}
             </Grid>
@@ -173,13 +169,14 @@ function Seat() {
               rowGap={2}>
               {doubleRowForUpperSeats
                 .slice(doubleRowForUpperSeats.length / 2)
-                .map((seat: any, index: number) => {
+                .map((seat: ISeatProps, index: number) => {
                   return gridItem(
                     seat,
                     index + doubleRowForUpperSeats.length / 2,
                   );
                 })}
             </Grid>
+            <p className="deckInfo">Upper Deck</p>
           </Box>
         </Box>
 

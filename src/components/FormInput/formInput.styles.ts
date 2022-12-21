@@ -12,5 +12,6 @@ export const InputContainer = styled('div')(
     .MuiOutlinedInput-root{
       border-radius:0;
     }
+
     `,
 );

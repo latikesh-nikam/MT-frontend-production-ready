@@ -7,7 +7,9 @@ export const MainDivBox = styled('div')(
   background-color:${theme.palette?.secondary};
   
   .container{
-    border-radius:1rem;
+    border-radius:${theme.typography.pxToRem(
+      theme.palette['shape']['borderRadius']['small'],
+    )};
   }
   
   .formContainer {
@@ -28,14 +30,16 @@ export const MainDivBox = styled('div')(
         min-width: 48.5%;
       }
   .selectInput {
-    margin-top: -0.5rem;
+    margin-top: -${theme.typography.pxToRem(
+      theme.palette['margin']['primary'],
+    )};
   }
   .mainBox{
     margin-top:${theme.typography.pxToRem(theme.palette['margin']['main'])};
   }
   .heading{
     color:${theme.palette.primary.main};
-    padding-top:1rem;
+    padding-top:${theme.typography.pxToRem(theme.palette['padding']['main'])};
     margin:0;
   }
   .buttonDiv{
@@ -61,7 +65,11 @@ export const MainDivBox = styled('div')(
   ${theme.breakpoints.down('sm')} {
     flex-direction:column;
   }
+  
   }
 
+  label{
+    color:${theme.palette.background.darkgrey};
+  }
 `,
 );

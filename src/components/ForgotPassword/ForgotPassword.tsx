@@ -71,7 +71,7 @@ const ForgotPassword = () => {
     formState: { dirtyFields, defaultValues, errors },
   } = methods;
 
-  const submit = async (data: any) => {
+  const submit = async (data: IForgotPasswordProps) => {
     try {
       const response = await updateData(authURLConstants.forgotPassword, data);
       console.log(response);

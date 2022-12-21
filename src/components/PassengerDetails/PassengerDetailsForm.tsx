@@ -15,40 +15,35 @@ import { Paper } from '@mui/material';
 import { Button } from '@mui/material';
 
 import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
-import IPassengerDetailsProps from './passengerDetails.types';
-import { authURLConstants } from '../../constants/authURLConstants';
-
-import { updateData } from '../../services/http';
+import { IPassengerDetailsProps } from './passengerDetails.types';
+import { IPassengerDetailsFormProps } from './passengerDetails.types';
+import { IPassengerCountProps } from './passengerDetails.types';
+import { IPassengerDetails } from './passengerDetails.types';
 
 import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
 import FormInput from '../FormInput/FormInput';
 import RadioInput from '../RadioInput/RadioInput';
 
 import { Parent } from './passengerDetails.style';
-import { seatDetails } from '../Seat/seatMockData';
 
-function PassengerDetailsForm(passengerCount: any) {
-  console.log(passengerCount);
+function PassengerDetailsForm(passengerCount: IPassengerCountProps) {
   const { localisation, updateLocalisation } = useContext(
     LocalisationContext,
   ) as ILocalisationContext;
   const { localString } = localisation;
   const { passengerCount: count } = passengerCount;
+  count.sort((a: any, b: any) => a.seatNo - b.seatNo);
   const required = localString?.required;
   const emailMessage = localString?.emailMessage;
   const minLengthPhone = localString?.minLengthTen;
   const maxLengthPhone = localString?.maxLengthTen;
 
   const passengerDetailsSchema = Yup.object({
-    name: Yup.string().required(required),
     email: Yup.string().required(required).email(emailMessage),
     phone: Yup.string()
       .required(required)
       .min(10, minLengthPhone)
       .max(10, maxLengthPhone),
-    gender: Yup.string().required(required),
-    age: Yup.string().required(required),
-    seatNumber: Yup.string(),
   });
 
   const genderOptions = [
@@ -57,47 +52,26 @@ function PassengerDetailsForm(passengerCount: any) {
     { label: 'other', value: 'other' },
   ];
 
-  const methods = useForm<any>({
-    // resolver: yupResolver(passengerDetailsSchema),
+  const methods = useForm<IPassengerDetailsProps>({
+    resolver: yupResolver(passengerDetailsSchema),
   });
 
   const {
     handleSubmit,
-    register,
-    reset,
-    resetField,
     control,
-    formState: { dirtyFields, defaultValues },
+    formState: { dirtyFields },
   } = methods;
 
-  const { fields, append, remove } = useFieldArray<any>({
+  const { fields } = useFieldArray<any>({
     name: 'seats',
     control,
   });
 
-  const submit = async (data: any) => {
-    // try {
-    //   const response = await updateData(authURLConstants.forgotPassword, data);
-    //   console.log(response);
-    //   reset({
-    //     email: '',
-    //     name: '',
-    //     phone: '',
-    //     gender: '',
-    //     age: '',
-    //   });
-    //   toast.success(`${response.message}`, {
-    //     position: toast.POSITION.TOP_RIGHT,
-    //   });
-    // } catch (error: any) {
-    //   toast.error(error.response.data.error.message, {
-    //     position: toast.POSITION.TOP_RIGHT,
-    //   });
-    // }
-    data.seats.forEach((element: any, index: number) => {
+  const submit = async (data: IPassengerDetailsProps) => {
+    data.seats.forEach((element: IPassengerDetailsFormProps, index: number) => {
       element.seatNo = count[index].seatNo;
     });
-    console.log(data, 'hello');
+    console.log(data);
   };
 
   return (
@@ -109,9 +83,10 @@ function PassengerDetailsForm(passengerCount: any) {
             <Box className="container">
               <h4 className="subHeading">Passenger Information</h4>
               {count.length > 0 &&
-                count.map((element: any, index: number) => {
+                count.map((element: IPassengerDetails, index: number) => {
+                  console.log(element, 'element');
                   return (
-                    <Paper elevation={3} className="paper">
+                    <Paper elevation={2} className="paper">
                       <Box className="row">
                         Passenger {index + 1} &emsp;|
                         <Box>Seat {element.seatNo}</Box>
@@ -149,7 +124,7 @@ function PassengerDetailsForm(passengerCount: any) {
               <p className="description">
                 Your ticket will be sent to these details
               </p>
-              <Paper elevation={3} className="paper">
+              <Paper elevation={2} className="paper contactContainer">
                 <Box className="column inputs">
                   <FormInput
                     name="email"
@@ -167,6 +142,7 @@ function PassengerDetailsForm(passengerCount: any) {
                 </Box>
               </Paper>
               <Button
+                disabled={!(Object.keys(dirtyFields).length >= 3)}
                 type="submit"
                 fullWidth
                 className="button"

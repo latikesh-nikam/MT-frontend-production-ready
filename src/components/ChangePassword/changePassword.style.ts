@@ -10,7 +10,9 @@ export const MainDivBox = styled('div')(
     align-items: center;
   }
   .container{
-    border-radius:1rem;
+    border-radius:${theme.typography.pxToRem(
+      theme.palette['shape']['borderRadius']['medium'],
+    )};
   }
   .formControl {
     margin-top: ${theme.typography.pxToRem(theme.palette['margin']['primary'])};
@@ -21,7 +23,7 @@ export const MainDivBox = styled('div')(
   }
   .heading{
     color:${theme.palette.primary.main};
-    padding-top:1rem;
+    padding-top:${theme.typography.pxToRem(theme.palette['padding']['main'])};
     margin:0;
   }
   .buttonDiv{

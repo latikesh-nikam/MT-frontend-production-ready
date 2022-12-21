@@ -29,7 +29,7 @@ const style = {
   pb: 3,
 };
 export default function SeatDetails({ selected }: any) {
-  const selectedSeats = selected.length > 0 ? selected : 'None';
+  console.log(selected, 'selected');
   const [open, setOpen] = useState(false);
   const fare = selected.reduce(
     (current: number, sum: any) => current + sum.seatFare,
@@ -64,7 +64,7 @@ export default function SeatDetails({ selected }: any) {
                 Source: <span className="rightText">Pune</span>
               </Typography>
               <Typography variant="h5" color="text.secondary">
-                <span className="rightText">Swargate - 9:00am</span>
+                <span className="rightText bottom">Swargate - 9:00am</span>
               </Typography>
             </Box>
             <Box className="destination">
@@ -72,7 +72,7 @@ export default function SeatDetails({ selected }: any) {
                 Destination: <span className="rightText">Nagpur</span>
               </Typography>
               <Typography variant="h5" color="text.secondary">
-                <span className="rightText">ABC Bus Stop - 12:00pm</span>
+                <span className="rightText bottom">ABC Bus Stop - 12:00pm</span>
               </Typography>
             </Box>
             <Box className="seats">
@@ -80,7 +80,10 @@ export default function SeatDetails({ selected }: any) {
                 Seats Selected:{' '}
                 <span className="rightText">
                   {selected.length > 0
-                    ? selected.map((element: any) => element.seatNo).join(', ')
+                    ? selected
+                        .map((element: any) => element.seatNo)
+                        .sort((a: number, b: number) => a - b)
+                        .join(', ')
                     : 'None'}
                 </span>
               </Typography>

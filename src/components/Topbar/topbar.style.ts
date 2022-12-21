@@ -14,6 +14,7 @@ export const Header = styled('div')(
     display:flex;
     align-items:center;
     gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
+    margin:-${theme.typography.pxToRem(theme.palette['margin']['primary'])}
   }
   .icon{
     font-size:${theme.typography.h1.fontSize};
