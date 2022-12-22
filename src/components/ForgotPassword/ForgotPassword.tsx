@@ -29,6 +29,7 @@ import FormInput from '../FormInput/FormInput';
 import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
 import { forgotPassword } from '../../services/auth/auth.service';
 import { axiosInstance } from '../../services/axios.interceptors';
+import { getSecurityQuestions } from '../../services/user/user.service';
 
 const ForgotPassword = () => {
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);
@@ -90,13 +91,13 @@ const ForgotPassword = () => {
     }
   };
 
-  const getSecurityQuestions = async () => {
-    const { data } = await axiosInstance.get(apiRoutes.getSecurityQuestions);
+  const securityQuestions = async () => {
+    const data = await getSecurityQuestions();
     setQuestions(data);
   };
 
   useEffect(() => {
-    getSecurityQuestions();
+    securityQuestions();
   }, []);
 
   return (

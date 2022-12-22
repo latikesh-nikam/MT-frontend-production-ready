@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useState } from 'react';
 
 import Card from '@mui/material/Card';
@@ -14,6 +14,8 @@ import { CardActions } from '@mui/material';
 
 import PassengerDetailsForm from '../PassengerDetails/PassengerDetailsForm';
 import { SeatDetailsContainer } from './seatDetails.style';
+import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
+import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -31,6 +33,11 @@ const style = {
 export default function SeatDetails({ selected }: any) {
   console.log(selected, 'selected');
   const [open, setOpen] = useState(false);
+  const { localisation, updateLocalisation } = useContext(
+    LocalisationContext,
+  ) as ILocalisationContext;
+  const { localString } = localisation;
+
   const fare = selected.reduce(
     (current: number, sum: any) => current + sum.seatFare,
     0,
@@ -56,12 +63,12 @@ export default function SeatDetails({ selected }: any) {
           <CardContent className="cardContent">
             <Box className="heading">
               <Typography gutterBottom variant="h3" component="div">
-                Booking Summary
+                {localString?.bookingSummary}
               </Typography>
             </Box>
             <Box className="source">
               <Typography variant="h5" color="text.secondary">
-                Source: <span className="rightText">Pune</span>
+                {localString?.source}: <span className="rightText">Pune</span>
               </Typography>
               <Typography variant="h5" color="text.secondary">
                 <span className="rightText bottom">Swargate - 9:00am</span>
@@ -69,7 +76,8 @@ export default function SeatDetails({ selected }: any) {
             </Box>
             <Box className="destination">
               <Typography variant="h5" color="text.secondary">
-                Destination: <span className="rightText">Nagpur</span>
+                {localString?.destination}:{' '}
+                <span className="rightText">Nagpur</span>
               </Typography>
               <Typography variant="h5" color="text.secondary">
                 <span className="rightText bottom">ABC Bus Stop - 12:00pm</span>
@@ -77,7 +85,7 @@ export default function SeatDetails({ selected }: any) {
             </Box>
             <Box className="seats">
               <Typography variant="h5" color="text.secondary">
-                Seats Selected:{' '}
+                {localString?.seatsSelected}:{' '}
                 <span className="rightText">
                   {selected.length > 0
                     ? selected
@@ -90,7 +98,8 @@ export default function SeatDetails({ selected }: any) {
             </Box>
             <Box className="fare">
               <Typography variant="h5" color="text.secondary">
-                Total Fare: <span className="rightText">Rs. {fare}</span>
+                {localString?.totalFare}:{' '}
+                <span className="rightText">Rs. {fare}</span>
               </Typography>
             </Box>
           </CardContent>
@@ -104,7 +113,7 @@ export default function SeatDetails({ selected }: any) {
             disabled={fare === 0}
             className="button"
             onClick={handleOpen}>
-            Enter Passenger Details
+            {localString?.totalFare}
           </Button>
         </CardActions>
       </Card>

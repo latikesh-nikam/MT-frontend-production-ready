@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { useState } from 'react';
 
 import ChairIcon from '@mui/icons-material/Chair';
@@ -15,9 +15,15 @@ import { detailsContainer } from './seater.mockdata';
 import { ParentBox } from './seater.style';
 import SeatDetails from '../SeatDetails/SeatDetails';
 import { ISeatProps } from '../Seat/seat.types';
+import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
+import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
 
 function Seater() {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
+  const { localisation, updateLocalisation } = useContext(
+    LocalisationContext,
+  ) as ILocalisationContext;
+  const { localString } = localisation;
 
   function classSelector(seat: ISeatProps) {
     if (selected.includes(seat.seatNo)) {
@@ -122,9 +128,9 @@ function Seater() {
           <Box className="seatLegend">
             {detailsContainer.map((detail, index) => {
               return (
-                <Box className="singleLegend" key={index}>
+                <Box className="singleLegend">
                   <Box className={detail.classname}></Box>
-                  <span>{detail.text}</span>
+                  <span>{localString[detail.text]}</span>
                 </Box>
               );
             })}

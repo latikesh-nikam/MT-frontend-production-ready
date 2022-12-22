@@ -81,6 +81,8 @@ export const changePassword = async (
 export const logout = async () => {
   try {
     const { data } = await axiosInstance.get(apiRoutes.logout);
+    utility.setStore('accessToken', '');
+    utility.setStore('refreshToken', '');
     return data;
   } catch (error) {
     throw error;

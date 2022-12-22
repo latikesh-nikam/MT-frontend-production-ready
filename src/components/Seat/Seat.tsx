@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { useState } from 'react';
 
 import { Box } from '@mui/material';
@@ -12,10 +12,15 @@ import { detailsContainer } from './seatMockData';
 import { ParentBox } from './seat.style';
 import { berthData } from '../Berth/berth.mockData';
 import { ISeatProps } from './seat.types';
+import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
+import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
 
 function Seat() {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
-
+  const { localisation, updateLocalisation } = useContext(
+    LocalisationContext,
+  ) as ILocalisationContext;
+  const { localString } = localisation;
   function classSelector(seat: ISeatProps) {
     if (selected.includes(seat.seatNo)) {
       seat.status = 'unavailable';
@@ -130,7 +135,7 @@ function Seat() {
               return (
                 <Box className="singleLegend">
                   <Box className={detail.classname}></Box>
-                  <span>{detail.text}</span>
+                  <span>{localString[detail.text]}</span>
                 </Box>
               );
             })}

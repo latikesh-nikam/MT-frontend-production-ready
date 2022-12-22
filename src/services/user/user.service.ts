@@ -9,3 +9,14 @@ export const fetchAllStations = async () => {
     throw error;
   }
 };
+
+export const getSecurityQuestions = async () => {
+  try {
+    const { data } = await axiosInstance.get(apiRoutes.getSecurityQuestions);
+    utility.setStore('accessToken', data.access_token);
+    utility.setStore('refreshToken', data.refresh_token);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

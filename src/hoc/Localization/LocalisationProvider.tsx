@@ -13,7 +13,7 @@ export const LocalisationContext = createContext<ILocalisationContext | null>(
 
 const LocalisationProvider = ({ children }: ILocalisationProviderProps) => {
   const [localisation, updateLocalisation] = useState<ILocalisationState>({
-    language: languageConstants.english,
+    language: languageConstants.hindi,
     localString: {},
   });
 

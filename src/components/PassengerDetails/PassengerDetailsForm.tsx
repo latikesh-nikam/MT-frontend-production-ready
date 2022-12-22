@@ -77,19 +77,23 @@ function PassengerDetailsForm(passengerCount: IPassengerCountProps) {
   return (
     <Fragment>
       <Parent>
-        <h2 className="heading">Passenger Details</h2>
+        <h2 className="heading">{localString?.passengerDetails}</h2>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(submit)} autoComplete="off">
             <Box className="container">
-              <h4 className="subHeading">Passenger Information</h4>
-              {count.length > 0 &&
+              <h4 className="subHeading">
+                {localString?.passengerInformation}
+              </h4>
+              {count.length &&
                 count.map((element: IPassengerDetails, index: number) => {
                   console.log(element, 'element');
                   return (
                     <Paper elevation={2} className="paper">
                       <Box className="row">
-                        Passenger {index + 1} &emsp;|
-                        <Box>Seat {element.seatNo}</Box>
+                        {localString?.passenger} {index + 1} &emsp;|
+                        <Box>
+                          {localString?.seat} {element.seatNo}
+                        </Box>
                       </Box>
                       <Box className="inputs">
                         <Box>
@@ -120,10 +124,8 @@ function PassengerDetailsForm(passengerCount: IPassengerCountProps) {
                 })}
             </Box>
             <Box className="container">
-              <h4 className="subHeading">Contact Information</h4>
-              <p className="description">
-                Your ticket will be sent to these details
-              </p>
+              <h4 className="subHeading">{localString?.contactInformation}</h4>
+              <p className="description">{localString?.sendTicketDetails}</p>
               <Paper elevation={2} className="paper contactContainer">
                 <Box className="column inputs">
                   <FormInput
@@ -148,7 +150,7 @@ function PassengerDetailsForm(passengerCount: IPassengerCountProps) {
                 className="button"
                 variant="contained"
                 size="small">
-                Proceed to Payment
+                {localString?.proceedToPayment}
               </Button>
             </Box>
           </form>

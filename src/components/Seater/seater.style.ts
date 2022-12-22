@@ -105,6 +105,7 @@ export const ParentBox = styled('div')(
   }
   .femaleUnavailable{
     color:${theme.palette.background.lightpink};
+    cursor:default;
   }
 
   .femaleAvailable{
@@ -117,6 +118,7 @@ export const ParentBox = styled('div')(
 
   .maleUnavailable{
     color:${theme.palette.background.lightgrey};
+    cursor:default;
   }
 
   .available{

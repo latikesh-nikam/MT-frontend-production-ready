@@ -30,13 +30,12 @@ import { MainDivBox } from './signup.style';
 
 import FormInput from '../FormInput/FormInput';
 import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
-import { apiRoutes } from '../../constants/apiRoutes';
 
 import { ISignupProps } from './Signup.types';
 import { IQuestionProps } from './Signup.types';
 import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
 import { signUp } from '../../services/auth/auth.service';
-import { axiosInstance } from '../../services/axios.interceptors';
+import { getSecurityQuestions } from '../../services/user/user.service';
 
 const Signup = () => {
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);
@@ -131,13 +130,13 @@ const Signup = () => {
     if (token) setCaptchaToken(token as string);
   };
 
-  const getSecurityQuestions = async () => {
-    const { data } = await axiosInstance.get(apiRoutes.getSecurityQuestions);
+  const securityQuestions = async () => {
+    const data = await getSecurityQuestions();
     setQuestions(data);
   };
 
   useEffect(() => {
-    getSecurityQuestions();
+    securityQuestions();
   }, []);
 
   return (
