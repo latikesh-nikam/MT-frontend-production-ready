@@ -77,3 +77,12 @@ export const changePassword = async (
     throw error;
   }
 };
+
+export const logout = async () => {
+  try {
+    const { data } = await axiosInstance.get(apiRoutes.logout);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

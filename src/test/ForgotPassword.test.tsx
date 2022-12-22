@@ -5,8 +5,7 @@ import { render } from '@testing-library/react';
 import { screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { authURLConstants } from '../constants/apiRoutes';
-import { updateData } from '../services/http';
+import { forgotPassword } from '../services/auth/auth.service';
 
 import userEvent from '@testing-library/user-event';
 import ForgotPassword from '../components/ForgotPassword/ForgotPassword';
@@ -186,10 +185,7 @@ const mockPostData = {
   confirmPassword: 'dddddd',
 };
 test('Should submit form successfully', async () => {
-  const response = await updateData(
-    authURLConstants.forgotPassword,
-    mockPostData,
-  );
+  const response = await forgotPassword(mockPostData);
   render(
     <BrowserRouter>
       <LocalisationProvider>

@@ -9,7 +9,6 @@ import { ILocalisationContext } from '../../hoc/Localization/localisationProvide
 
 import FormInputCheckBox from '../FormInputCheckbox/FormInputCheckbox';
 import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
-import { getData } from '../../services/http';
 
 import { RadioGroup } from '@mui/material';
 import { FormControlLabel } from '@mui/material';
@@ -48,11 +47,7 @@ function Sort() {
   ];
 
   const submit = async (data: any) => {
-    try {
-      const response = await getData('auth/changePassword');
-    } catch (error: any) {
-      throw error;
-    }
+    console.log(data);
   };
 
   return (
