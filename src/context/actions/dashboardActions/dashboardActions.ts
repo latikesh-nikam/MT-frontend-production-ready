@@ -4,7 +4,7 @@ import {
   SEARCH_DATA,
   SEARCH_FORM_DATA,
   SORT_DATA,
-} from '../../../constants/dashboardAction.constants';
+} from '../../../constants/dashboard';
 import {
   IFilterDataState,
   ISearchFormState,

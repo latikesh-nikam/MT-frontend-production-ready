@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { languageConstants } from '../../constants/languageConstants';
+import { languageConstants } from '../../constants/language';
 import i18n from '../../i18n/config';
 import { ILocalisationContext } from './localisationProvider.types';
 import { ILocalisationProviderProps } from './localisationProvider.types';

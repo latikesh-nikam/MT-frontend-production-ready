@@ -8,9 +8,7 @@ import { LocalisationContext } from '../../hoc/LocalisationProvider/Localisation
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 
 const BusResultCard = ({ data }: IBusResultCardProps) => {
-  const [showAmenities, updateShowAmenities] = useState(false);
-  const [showBoardingAndDroppingPoints, updateShowBoardingAndDroppingPoints] =
-    useState(false);
+  const [selected, setSelected] = useState('');
 
   const {
     localisation: { localString },
@@ -28,6 +26,9 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
     totalTravelTime,
   } = data;
 
+  const [departure, ...stations] = station;
+  const arrival = station.slice(-1)[0];
+
   const ratingClassName =
     ratings >= 4
       ? 'ratings green'
@@ -35,13 +36,9 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
       ? 'ratings orange'
       : 'ratings red';
 
-  const handleAmenity = () => {
-    updateShowBoardingAndDroppingPoints(false);
-    updateShowAmenities(!showAmenities);
-  };
-  const handleBoardingAndDroppingPoints = () => {
-    updateShowAmenities(false);
-    updateShowBoardingAndDroppingPoints(!showBoardingAndDroppingPoints);
+  const handleClick = (type: string) => {
+    if (selected === type) setSelected('');
+    else setSelected(type);
   };
 
   return (
@@ -57,15 +54,15 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
         </div>
         <div className="timeDetails">
           <div className="departure time">
-            <h3>{station[0].sourceDepartureTime}</h3>
-            <p className="lightGrey">{station[0].sourceName}</p>
+            <h3>{departure.sourceDepartureTime}</h3>
+            <p className="lightGrey">{departure.sourceName}</p>
           </div>
           <div className="totalDuration time">
             <p className="lightGrey">{totalTravelTime} hrs</p>
           </div>
           <div className="arrival time">
-            <p>{station.slice(-1)[0].sourceDepartureTime}</p>
-            <p className="lightGrey">{station.slice(-1)[0].sourceName}</p>
+            <p>{arrival.sourceDepartureTime}</p>
+            <p className="lightGrey">{arrival.sourceName}</p>
           </div>
         </div>
         {ratings && (
@@ -101,17 +98,19 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
       <div className="actionsContainer lightGrey">
         <div
           className={
-            showAmenities ? 'active amenities actions' : 'amenities actions'
+            selected === 'amenity'
+              ? 'active amenities actions'
+              : 'amenities actions'
           }
-          onClick={handleAmenity}>
+          onClick={() => handleClick('amenity')}>
           <p>{localString?.amenities}</p>
         </div>
         <Divider orientation="vertical" color="primary" />
         <div
           className={
-            showBoardingAndDroppingPoints ? 'active actions' : 'actions'
+            selected === 'boardingAndDropping' ? 'active actions' : 'actions'
           }
-          onClick={handleBoardingAndDroppingPoints}>
+          onClick={() => handleClick('boardingAndDropping')}>
           <p>
             {localString?.boarding} {localString?.and} {localString?.dropping}{' '}
             {localString?.points}
@@ -119,7 +118,7 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
         </div>
       </div>
 
-      {showAmenities && (
+      {selected === 'amenity' && (
         <div className="amenitiesContainer">
           {amenities.map((amenity: string, index: number) => {
             const Icon = iconMap[amenity];
@@ -132,13 +131,13 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
           })}
         </div>
       )}
-      {showBoardingAndDroppingPoints && (
+      {selected === 'boardingAndDropping' && (
         <div className="boardingAndDroppingPointsContainer">
           <div className="stationsContainer">
-            <h3>
+            <h4>
               {localString?.boarding} {localString?.points}
-            </h3>
-            {station[0].BoardingPoint?.map(
+            </h4>
+            {departure.BoardingPoint?.map(
               (boardingPoint: any, index: number) => (
                 <div className="station" key={index}>
                   <p className="time">{boardingPoint.time}</p>
@@ -148,17 +147,15 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
             )}
           </div>
           <div className="stationsContainer">
-            <h3>
+            <h4>
               {localString?.dropping} {localString?.points}
-            </h3>
-            {station
-              .slice(-1)[0]
-              .BoardingPoint?.map((boardingPoint: any, index: number) => (
-                <div className="station" key={index}>
-                  <p className="time">{boardingPoint.time}</p>
-                  <p className="lightGrey">{boardingPoint.locationName}</p>
-                </div>
-              ))}
+            </h4>
+            {arrival.BoardingPoint?.map((boardingPoint: any, index: number) => (
+              <div className="station" key={index}>
+                <p className="time">{boardingPoint.time}</p>
+                <p className="lightGrey">{boardingPoint.locationName}</p>
+              </div>
+            ))}
           </div>
         </div>
       )}

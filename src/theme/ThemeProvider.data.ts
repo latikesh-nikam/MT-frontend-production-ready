@@ -98,7 +98,6 @@ export const appTheme = {
       letterSpacing: '0.04rem',
     },
   },
-
   padding: {
     small: 4,
     primary: 8,
@@ -107,16 +106,17 @@ export const appTheme = {
     larger: 32,
   },
   gap: {
+    small: 4,
     primary: 8,
     main: 16,
     secondary: 20,
-    small: 4,
     larger: 32,
   },
   borderRadius: {
+    small: 4,
     primary: 8,
     main: 16,
     secondary: 20,
-    small: 4,
+    larger: 32,
   },
 };

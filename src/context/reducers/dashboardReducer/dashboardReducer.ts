@@ -4,16 +4,9 @@ import {
   SEARCH_FORM_DATA,
   PAGE_NUMBER,
   SORT_DATA,
-} from '../../../constants/dashboardAction.constants';
-import { IDashboardAction, IDashboardState } from './dashboardReducer.types';
-
-export const HOME_ACTIONS_MAP = {
-  SEARCH_DATA: 'SEARCH_DATA',
-  SEARCH_FORM_DATA: 'SEARCH_FORM_DATA',
-  FILTER_FORM_DATA: 'FILTER_FORM_DATA',
-  SORT_DATA: 'SORT_DATA',
-  PAGE_NUMBER: 'PAGE_NUMBER',
-};
+} from '../../../constants/dashboard';
+import { IReducerAction } from '../index.types';
+import { IDashboardState } from './dashboardReducer.types';
 
 const INITIAL_STATE: IDashboardState = {
   searchData: {
@@ -45,7 +38,7 @@ const INITIAL_STATE: IDashboardState = {
 
 const dashboardReducer = (
   state: IDashboardState,
-  { type, payload }: IDashboardAction,
+  { type, payload }: IReducerAction,
 ) => {
   switch (type) {
     case SEARCH_DATA: {
@@ -70,4 +63,5 @@ const dashboardReducer = (
 };
 
 dashboardReducer.INITIAL_STATE = INITIAL_STATE;
+
 export default dashboardReducer;

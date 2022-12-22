@@ -5,10 +5,11 @@ import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import Button from '@mui/material/Button';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { getData } from '../../services/axios.interceptors';
 import { ProfileContainer } from './profile.style';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
+import { logout } from '../../services/auth/auth.service';
+import { routes } from '../../constants/route';
 
 function Profile() {
   const [profile, setProfile] = useState(false);
@@ -19,7 +20,7 @@ function Profile() {
   const { localString } = localisation;
 
   const handleLogout = async () => {
-    const response = await getData('auth/logout');
+    const response = await logout();
     navigate('/');
   };
 
@@ -43,7 +44,7 @@ function Profile() {
             <Button
               className="settingsButton"
               onClick={() => {
-                navigate('/changePassword');
+                navigate(routes.changePassword);
                 setProfile(false);
               }}>
               <Box className="buttonItems">

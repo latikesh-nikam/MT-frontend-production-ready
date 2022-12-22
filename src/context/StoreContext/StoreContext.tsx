@@ -4,8 +4,8 @@ import { IStoreContext, IStoreProviderProps } from './storeContext.types';
 import {
   pageNumberAction,
   searchDataAction,
-} from '../actions/dashboardActions/dashboardAction';
-import { searchApi } from '../../services/search/searchService';
+} from '../actions/dashboardActions/dashboardActions';
+import { searchApi } from '../../services/search/search.service';
 import { ISearchData } from '../reducers/dashboardReducer/dashboardReducer.types';
 
 export const StoreContext = createContext<IStoreContext | null>(null);

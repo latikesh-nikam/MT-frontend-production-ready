@@ -1,11 +1,16 @@
+import { IInitialState } from '../state/initialState.types';
 import { initialState } from '../state/initialStates';
 import dashboardReducer from './dashboardReducer/dashboardReducer';
-import { IDashboardAction } from './dashboardReducer/dashboardReducer.types';
+import { IReducerAction } from './index.types';
+import toasterReducer from './toasterReducer/toasterReducer';
 
-const reducer = (state = initialState, action: IDashboardAction) => {
+const reducer: (
+  state: IInitialState,
+  action: IReducerAction,
+) => IInitialState = (state = initialState, action) => {
   return {
-  
     dashboardState: dashboardReducer(state.dashboardState, action),
+    toasterState: toasterReducer(state.toasterState, action),
   };
 };
 

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { STATUS_CODE } from '../constants/apiStatusCode';
 import utility from '../utils/utility';
+import { refreshAccessToken } from './auth/auth.service';
 
 const baseURL = process.env.REACT_APP_BASE_URL;
 
@@ -16,14 +17,6 @@ axiosInstance.interceptors.request.use(config => {
   };
   return config;
 });
-
-const refreshAccessToken = async () => {
-  const { data } = await axiosInstance.post('auth/refresh', {
-    refresh: utility.getStore('refreshToken'),
-  });
-
-  return data;
-};
 
 axios.interceptors.response.use(
   response => {
@@ -47,20 +40,3 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-
-export const getData = async (url: string) => {
-  try {
-    const { data } = await axiosInstance.get(`${url}`);
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};
-export const postData = async (url: string, formData: any) => {
-  try {
-    const { data } = await axiosInstance.post(`${url}`, formData);
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};

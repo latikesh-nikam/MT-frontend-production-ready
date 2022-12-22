@@ -3,15 +3,15 @@ import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
 import Divider from '@mui/material/Divider/Divider';
 import Search from '../../components/Search/Search';
 import Filter from '../../components/Filter/Filter';
-import Sort from '../../components/SortComponent/Sort';
+import Sort from '../../components/Sort/Sort';
 import BusResults from '../../components/BusResults/BusResults';
 import { SearchResultsContainer } from './searchResults.styles';
+import InfiniteScroll from '../../components/InfiniteScroll/InifiniteScroll';
 import { useContext, useEffect } from 'react';
 import { StoreContext } from '../../context/StoreContext/StoreContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
-import InfiniteScroll from '../../components/InfiniteScroll/InifiniteScroll';
-import { filterRoute } from '../../constants/routeConstants';
-import { pageNumberAction } from '../../context/actions/dashboardActions/dashboardAction';
+import { routes } from '../../constants/route';
+import { pageNumberAction } from '../../context/actions/dashboardActions/dashboardActions';
 
 const SearchResults = () => {
   const {
@@ -27,18 +27,18 @@ const SearchResults = () => {
   const navigate = useNavigate();
 
   const handleFilterIcon = () => {
-    navigate(filterRoute);
+    navigate(routes.filterRoute);
   };
 
   const handlePageNumber = () => {
-    dispatch(pageNumberAction(pageNumber+1))
+    dispatch(pageNumberAction(pageNumber + 1));
   };
 
   const getSearchData = async () => {
     await getSearchResults({
       ...search,
       date: date.getTime(),
-      filterby: {},
+      filterBy: {},
     });
   };
 

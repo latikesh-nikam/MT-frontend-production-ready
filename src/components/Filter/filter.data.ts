@@ -1,4 +1,4 @@
-import { IFilterInput } from "./filter.types";
+import { IFilterInput } from './filter.types';
 
 export const busTypeOptions = [
   { label: 'sleeper', value: 'SLEEPER' },
@@ -8,14 +8,14 @@ export const busTypeOptions = [
 export const vehicleTypeOptions = [
   { label: 'ac', value: 'AC' },
   { label: 'non-ac', value: 'NONAC' },
-]
+];
 
 export const departureOptions = [
-  { label: 'Early Morning (before 6 AM)', value: '6' },
-  { label: 'Morning (6 AM - 12 PM)', value: '6-12' },
-  { label: 'Afternoon (12 PM - 4 PM)', value: '12-16' },
-  { label: 'Evening (4 PM - 6 PM)', value: '16-18' },
-  { label: 'Night (after 6 PM)', value: '18' },
+  { label: 'earlyMorning', value: '6' },
+  { label: 'morning', value: '6-12' },
+  { label: 'afternoon', value: '12-16' },
+  { label: 'evening', value: '16-18' },
+  { label: 'night', value: '18' },
 ];
 
 export const sliderData = [
@@ -41,10 +41,10 @@ export const sliderData = [
   },
 ];
 
-export const filterInitialState:IFilterInput ={
+export const filterInitialState: IFilterInput = {
   departure: '',
   drop: '',
   price: [0, 100],
   vehicleClassType: [],
   vehicleType: '',
-}
+};

@@ -1,9 +1,5 @@
-import { IFilterInput } from "../../../components/Filter/filter.types";
+import { IFilterInput } from '../../../components/Filter/filter.types';
 
-export interface IDashboardAction {
-  type: string;
-  payload: any;
-}
 export interface ISearchFormState {
   from: string;
   to: string;

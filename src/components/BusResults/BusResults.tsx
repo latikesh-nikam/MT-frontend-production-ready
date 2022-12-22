@@ -4,6 +4,8 @@ import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { BusResultsContainer } from './busResults.styles';
 import BusResultCard from '../BusResultCard/BusResultCard';
 import { IBusResultsProps } from './busResults.type';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 
 const BusResults = ({
   handleScroll,
@@ -17,18 +19,20 @@ const BusResults = ({
       },
     },
   } = useContext(StoreContext) as IStoreContext;
-
+  const {
+    localisation: { localString },
+  } = useContext(LocalisationContext) as ILocalisationContext;
 
   return (
     <BusResultsContainer ref={scrollerRef} onScroll={handleScroll}>
-      {data?.length > 0 ? (
+      {data?.length ? (
         data.map((result: any, index: number) => {
           return <BusResultCard data={result} key={index} />;
         })
       ) : (
-        <p>No buses Found</p>
+        <p>{localString?.noBusesFound}</p>
       )}
-      {loading && <p>...Loading</p>}
+      {loading && <p>...{localString?.loading}</p>}
     </BusResultsContainer>
   );
 };

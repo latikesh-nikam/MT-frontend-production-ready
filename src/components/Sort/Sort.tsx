@@ -9,7 +9,7 @@ import { LocalisationContext } from '../../hoc/LocalisationProvider/Localisation
 import RadioInput from '../RadioInput/RadioInput';
 import { StoreContext } from '../../context/StoreContext/StoreContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
-import { sortDataAction } from '../../context/actions/dashboardActions/dashboardAction';
+import { sortDataAction } from '../../context/actions/dashboardActions/dashboardActions';
 
 const Sort = ({ navigateTo = '' }: ISortProps) => {
   const {

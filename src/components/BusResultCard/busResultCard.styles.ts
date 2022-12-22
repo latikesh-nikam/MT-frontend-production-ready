@@ -105,7 +105,7 @@ export const BusResultCardContainer = styled('div')(
             display:flex;
             flex-direction:column;
 
-            h3{
+            h4{
                 color:${theme.palette.primary.main};
                 padding-bottom:${theme.typography.pxToRem(
                   theme.padding.secondary,

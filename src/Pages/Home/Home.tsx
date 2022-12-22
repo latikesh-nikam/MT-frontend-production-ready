@@ -2,13 +2,13 @@ import RecentBookings from '../../components/RecentBookings/RecentBookings';
 import Search from '../../components/Search/Search';
 import { HomeContainer } from './home.styles';
 import { mockBookingsData } from '../../mock/bookingsData/bookings.data';
-import { searcResultsRoute } from '../../constants/routeConstants';
+import { routes } from '../../constants/route';
 
 const Home = () => {
   return (
     <HomeContainer>
       <div className="search">
-        <Search navigateTo={searcResultsRoute} />
+        <Search navigateTo={routes.searcResultsRoute} />
       </div>
       <RecentBookings data={mockBookingsData} />
     </HomeContainer>

@@ -53,7 +53,6 @@ export const SearchResultsContainer = styled('div')(
         }
     }
 
-
     .searchRresults{
         flex: 5;
         display:flex;

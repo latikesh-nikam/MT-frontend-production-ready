@@ -22,7 +22,7 @@ import RadioInput from '../RadioInput/RadioInput';
 import SearchableDropdown from '../SearchableDropdown/SearchableDropdown';
 import { epochDate } from '../../utils/utility';
 import { useDidMountEffect } from '../../hooks/useDidMountEffect';
-import { filterDataAction } from '../../context/actions/dashboardActions/dashboardAction';
+import { filterDataAction } from '../../context/actions/dashboardActions/dashboardActions';
 
 const Filter = ({ navigateTo = '' }: IFilterProps) => {
   const [formData, setFormData] = useState<IFilterInput>(filterInitialState);

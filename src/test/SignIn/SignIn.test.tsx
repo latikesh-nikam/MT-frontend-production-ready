@@ -9,7 +9,7 @@ import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import SignIn from '../../components/SignIn/SignIn';
 import LocalisationProvider from '../../hoc/LocalisationProvider/LocalisationProvider';
-import { postData } from '../../services/axios.interceptors';
+import { signIn } from '../../services/auth/auth.service';
 import MuiThemeProvider from '../../theme/ThemeProvider';
 
 jest.mock('../../services/axios.instance');
@@ -122,7 +122,7 @@ test('form submit successfully', async () => {
     fireEvent.submit(signInForm);
   });
 
-  expect(postData).toHaveBeenCalledWith('auth/login', {
+  expect(signIn).toHaveBeenCalledWith({
     email: emailInput.value,
     password: passwordInput.value,
     captcha: '',

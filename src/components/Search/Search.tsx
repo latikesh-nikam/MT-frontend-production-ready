@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -7,7 +7,6 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import Button from '@mui/material/Button/Button';
 import DateInput from '../DateInput/DateInput';
-import { getData } from '../../services/axios.interceptors';
 import SearchableDropdown from '../SearchableDropdown/SearchableDropdown';
 import { StoreContext } from '../../context/StoreContext/StoreContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
@@ -16,10 +15,10 @@ import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisatio
 import { SearchContainer } from './search.styles';
 import { IAllStation, ISearchInput } from './search.types';
 import { ISearchProps } from './search.types';
-import { HOME_ACTIONS_MAP } from '../../context/reducers/dashboardReducer/dashboardReducer';
 import { epochDate } from '../../utils/utility';
 import { useDidMountEffect } from '../../hooks/useDidMountEffect';
-import { searchFormDataAction } from '../../context/actions/dashboardActions/dashboardAction';
+import { searchFormDataAction } from '../../context/actions/dashboardActions/dashboardActions';
+import { fetchAllStations } from '../../services/user/user.service';
 
 const Search = ({ navigateTo = '' }: ISearchProps) => {
   const [allStations, updateAllStations] = useState<IAllStation[]>([]);
@@ -71,7 +70,7 @@ const Search = ({ navigateTo = '' }: ISearchProps) => {
     : 'searchButton';
 
   const getAllStations = async () => {
-    const response = await getData('vehicle');
+    const response = await fetchAllStations();
     updateAllStations(response);
   };
 

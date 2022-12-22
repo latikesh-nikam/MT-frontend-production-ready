@@ -1,19 +1,35 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { IErrorBoundaryProps } from './ErrorBoundary.types';
+import { Component } from 'react';
+import { IErrorBoundaryState } from './ErrorBoundary.types';
 
-const ErrorBoundary = ({ children }: IErrorBoundaryProps) => {
-  const [componentToRender, updateComponentToRender] = useState(<></>);
-  useEffect(() => {
-    try {
-      console.log('in try');
-      updateComponentToRender(children as JSX.Element);
-    } catch (error) {
-      console.log('in catch');
-      updateComponentToRender(<>Some Error Occurred</>);
+class ErrorBoundary extends Component<any, IErrorBoundaryState> {
+  constructor(props: any) {
+    super(props);
+    this.state = { error: null, errorInfo: null };
+  }
+
+  componentDidCatch(error: Error | null, errorInfo: any) {
+    this.setState({
+      error: error,
+      errorInfo: errorInfo,
+    });
+  }
+
+  render() {
+    if (this.state.errorInfo) {
+      return (
+        <div>
+          <h2>Something went wrong!</h2>
+          <details>
+            <summary>Expand</summary>
+            {this.state.error && this.state.error.toString()}
+            <br />
+            {this.state.errorInfo.componentStack}
+          </details>
+        </div>
+      );
     }
-  }, [children]);
+    return this.props.children;
+  }
+}
 
-  return componentToRender;
-};
 export default ErrorBoundary;

@@ -1,8 +1,8 @@
-import { styled } from "@mui/material/styles";
+import { styled } from '@mui/material/styles';
 
-
-export const BookingCardContainer = styled('div')(({theme}:any) => (
-   `
+export const BookingCardContainer = styled('div')(
+  ({ theme }: any) =>
+    `
       padding: ${theme.typography.pxToRem(theme.padding.secondary)};
       border-radius: ${theme.typography.pxToRem(8)};
       display: flex;
@@ -28,5 +28,5 @@ export const BookingCardContainer = styled('div')(({theme}:any) => (
           font-size: ${theme.typography.fontSizeRegular}
         }
       },
-    }, `
-))
+    }, `,
+);

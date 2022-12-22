@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import StoreProvider from './context/StoreContext/StoreContext';
 import LocalisationProvider from './hoc/LocalisationProvider/LocalisationProvider';
+import Toaster from './hoc/Toaster/Toaster';
 import MuiThemeProvider from './theme/ThemeProvider';
 
 const App = () => {
@@ -10,7 +11,9 @@ const App = () => {
       <LocalisationProvider>
         <MuiThemeProvider>
           <StoreProvider>
-            <Layout />
+            <Toaster>
+              <Layout />
+            </Toaster>
           </StoreProvider>
         </MuiThemeProvider>
       </LocalisationProvider>
