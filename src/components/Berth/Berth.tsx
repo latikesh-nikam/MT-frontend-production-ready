@@ -9,8 +9,8 @@ function Berth() {
     <Fragment>
       <Topbar />
       <Container>
-        <Seat />
-        {/* <Seater /> */}
+        {/* <Seat /> */}
+        <Seater />
       </Container>
     </Fragment>
   );
