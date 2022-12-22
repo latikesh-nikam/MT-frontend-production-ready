@@ -17,20 +17,18 @@ import { MenuItem } from '@mui/material';
 import { Paper } from '@mui/material';
 import { Select } from '@mui/material';
 
-import { getData } from '../../services/http';
-import { updateData } from '../../services/http';
-
 import IForgotPasswordProps from './forgotPassword.types';
 import { IQuestionProps } from '../Signup/Signup.types';
 import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
-import { authURLConstants } from '../../constants/authURLConstants';
-import { getRequestsURL } from '../../constants/getRequestsURL';
+import { apiRoutes } from '../../constants/apiRoutes';
 
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MainDivBox } from './forgotPassword.style';
 import FormInput from '../FormInput/FormInput';
 import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
+import { forgotPassword } from '../../services/auth/auth.service';
+import { axiosInstance } from '../../services/axios.interceptors';
 
 const ForgotPassword = () => {
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);
@@ -73,7 +71,7 @@ const ForgotPassword = () => {
 
   const submit = async (data: IForgotPasswordProps) => {
     try {
-      const response = await updateData(authURLConstants.forgotPassword, data);
+      const response = await forgotPassword(data);
       console.log(response);
       reset({
         email: '',
@@ -93,8 +91,8 @@ const ForgotPassword = () => {
   };
 
   const getSecurityQuestions = async () => {
-    const response = await getData(getRequestsURL.getSecurityQuestions);
-    setQuestions(response);
+    const { data } = await axiosInstance.get(apiRoutes.getSecurityQuestions);
+    setQuestions(data);
   };
 
   useEffect(() => {

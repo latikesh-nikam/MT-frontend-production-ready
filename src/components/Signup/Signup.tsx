@@ -28,16 +28,15 @@ import { TextField } from '@mui/material';
 
 import { MainDivBox } from './signup.style';
 
-import { getData } from '../../services/http';
-import { postData } from '../../services/http';
 import FormInput from '../FormInput/FormInput';
 import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
-import { authURLConstants } from '../../constants/authURLConstants';
-import { getRequestsURL } from '../../constants/getRequestsURL';
+import { apiRoutes } from '../../constants/apiRoutes';
 
 import { ISignupProps } from './Signup.types';
 import { IQuestionProps } from './Signup.types';
 import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
+import { signUp } from '../../services/auth/auth.service';
+import { axiosInstance } from '../../services/axios.interceptors';
 
 const Signup = () => {
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);
@@ -103,7 +102,7 @@ const Signup = () => {
     setCaptchaToken(token);
     data['captcha'] = captchaToken;
     try {
-      const response = await postData(authURLConstants.signup, data);
+      const response = await signUp(data);
       reset({
         email: '',
         name: '',
@@ -133,8 +132,8 @@ const Signup = () => {
   };
 
   const getSecurityQuestions = async () => {
-    const response = await getData(getRequestsURL.getSecurityQuestions);
-    setQuestions(response);
+    const { data } = await axiosInstance.get(apiRoutes.getSecurityQuestions);
+    setQuestions(data);
   };
 
   useEffect(() => {

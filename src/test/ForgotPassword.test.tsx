@@ -5,7 +5,7 @@ import { render } from '@testing-library/react';
 import { screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { authURLConstants } from '../constants/authURLConstants';
+import { authURLConstants } from '../constants/apiRoutes';
 import { updateData } from '../services/http';
 
 import userEvent from '@testing-library/user-event';

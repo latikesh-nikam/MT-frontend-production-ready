@@ -16,12 +16,11 @@ import { MainDivBox } from './changePassword.style';
 import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
 import IChangePasswordProps from './changePassword.types';
 
-import { updateData } from '../../services/http';
 import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
-import { authURLConstants } from '../../constants/authURLConstants';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { changePassword } from '../../services/auth/auth.service';
 
 const ChangePassword = () => {
   const { localisation, updateLocalisation } = useContext(
@@ -60,7 +59,7 @@ const ChangePassword = () => {
 
   const submit = async (data: IChangePasswordProps) => {
     try {
-      const response = await updateData(authURLConstants.changePassword, data);
+      const response = await changePassword(data);
       reset({
         email: '',
         newPassword: '',
