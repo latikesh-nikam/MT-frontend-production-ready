@@ -5,7 +5,6 @@ import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisatio
 import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 import { IFormInputProps } from './formInput.types';
 import { InputContainer } from './formInput.styles';
-import { IQuestionProps } from '../Signup/Signup.types';
 
 const FormInput = ({
   name,
