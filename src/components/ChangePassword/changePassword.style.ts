@@ -2,35 +2,33 @@ import { styled } from '@mui/material/styles';
 
 export const MainDivBox = styled('div')(
   ({ theme }: any) => `
-  max-width: ${theme.typography.pxToRem(theme.palette['width']['main'])};
+  max-width: ${theme.typography.pxToRem(theme['width']['main'])};
   .formContainer {
-    padding:${theme.typography.pxToRem(theme.palette['padding']['main'])};
+    padding:${theme.typography.pxToRem(theme['padding']['main'])};
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   .container{
     border-radius:${theme.typography.pxToRem(
-      theme.palette['shape']['borderRadius']['medium'],
+      theme['shape']['borderRadius']['medium'],
     )};
   }
   .formControl {
-    margin-top: ${theme.typography.pxToRem(theme.palette['margin']['primary'])};
+    margin-top: ${theme.typography.pxToRem(theme['margin']['primary'])};
     min-width: 100%;
   }
   .mainBox{
-    margin-top:${theme.typography.pxToRem(theme.palette['margin']['main'])};
+    margin-top:${theme.typography.pxToRem(theme['margin']['main'])};
   }
   .heading{
     color:${theme.palette.primary.main};
-    padding-top:${theme.typography.pxToRem(theme.palette['padding']['main'])};
+    padding-top:${theme.typography.pxToRem(theme['padding']['main'])};
     margin:0;
   }
   .buttonDiv{
-    margin-top: ${theme.typography.pxToRem(
-      theme.palette['margin']['secondary'],
-    )};
-  margin-bottom: ${theme.typography.pxToRem(theme.palette['margin']['main'])};
+    margin-top: ${theme.typography.pxToRem(theme['margin']['secondary'])};
+  margin-bottom: ${theme.typography.pxToRem(theme['margin']['main'])};
   }
   .linkDiv{
     text-align: center;

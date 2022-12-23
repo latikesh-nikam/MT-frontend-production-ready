@@ -5,12 +5,12 @@ export const ParentBox = styled('div')(
 
   display:flex;
   margin-left:20rem;
-  margin-top:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
+  margin-top:${theme.typography.pxToRem(theme['margin']['larger'])};
   
   ${theme.breakpoints.down('sm')} {
     flex-direction:column;
-    gap:${theme.typography.pxToRem(theme.palette['gap']['large'])};
-    margin-left:${theme.typography.pxToRem(theme.palette['gap']['large'])};
+    gap:${theme.typography.pxToRem(theme['gap']['large'])};
+    margin-left:${theme.typography.pxToRem(theme['gap']['large'])};
 
   }
 
@@ -20,11 +20,11 @@ export const ParentBox = styled('div')(
     max-height:100vh;
     display:flex;
     align-items: center;
-    gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
+    gap:${theme.typography.pxToRem(theme['gap']['main'])};
 
     ${theme.breakpoints.down('sm')} {
       flex-direction:column;
-      gap:${theme.typography.pxToRem(theme.palette['gap']['small'])};
+      gap:${theme.typography.pxToRem(theme['gap']['small'])};
       margin-left:0;
     }
   }
@@ -39,10 +39,10 @@ export const ParentBox = styled('div')(
     }
 
   .boxContainer{
-    padding:${theme.typography.pxToRem(theme.palette['padding']['main'])};
+    padding:${theme.typography.pxToRem(theme['padding']['main'])};
     position:relative;
     display:flex;
-    max-height: 24rem;
+    max-height: ${theme.typography.pxToRem(360)};
     overflow-y:scroll;
 
     &::-webkit-scrollbar { 
@@ -51,33 +51,31 @@ export const ParentBox = styled('div')(
   }
   
   .nowrap{
-    gap:${theme.typography.pxToRem(theme.palette['gap']['small'])};
+    gap:${theme.typography.pxToRem(theme['gap']['small'])};
     flex-wrap:nowrap;
     height:min-content;
   }
 
   .divider{
     margin:${theme.typography.pxToRem(
-      theme.palette['margin']['large'],
-    )} 1.5rem ${theme.typography.pxToRem(theme.palette['margin']['large'])} 0;
+      theme['margin']['large'],
+    )} 1.5rem ${theme.typography.pxToRem(theme['margin']['large'])} 0;
   }
 
   .container{
-    max-width: ${theme.typography.pxToRem(theme.palette['width']['main'])};
+    max-width: ${theme.typography.pxToRem(theme['width']['main'])};
     display:flex;
-    gap:${theme.typography.pxToRem(theme.palette['gap']['tworem'])};
+    gap:${theme.typography.pxToRem(theme['gap']['tworem'])};
   }
 
   .steeringImage{
     width:1.6em;
-    margin-right:${theme.typography.pxToRem(
-      theme.palette['margin']['secondary'],
-    )};
-    margin-top:${theme.typography.pxToRem(theme.palette['margin']['main'])};
+    margin-right:${theme.typography.pxToRem(theme['margin']['secondary'])};
+    margin-top:${theme.typography.pxToRem(theme['margin']['main'])};
   }
 
   .mainBox {
-    padding:${theme.typography.pxToRem(theme.palette['padding']['small'])};
+    padding:${theme.typography.pxToRem(theme['padding']['small'])};
     position:relative;
     display:flex;
     justify-content:flex-start;
@@ -89,11 +87,9 @@ export const ParentBox = styled('div')(
 
   .count {
     position: absolute;
-    line-height: ${theme.typography.pxToRem(
-      theme.palette['lineHeight']['primary'],
-    )};
+    line-height: ${theme.typography.pxToRem(theme['lineHeight']['primary'])};
     color: ${theme.palette.background.darkgrey};
-    top:${theme.typography.pxToRem(theme.palette['top']['small'])};
+    top:${theme.typography.pxToRem(theme['top']['small'])};
     font-size:${theme.typography.fontSizeSmall};
     cursor:pointer;
   }
@@ -126,17 +122,15 @@ export const ParentBox = styled('div')(
   }
 
   .detailsMain{
-    height:${theme.typography.pxToRem(theme.palette['height']['oneRem'])};
-    width:${theme.typography.pxToRem(theme.palette['width']['oneRem'])};
-    margin-top:${theme.typography.pxToRem(theme.palette['margin']['oneForth'])};
+    height:${theme.typography.pxToRem(theme['height']['oneRem'])};
+    width:${theme.typography.pxToRem(theme['width']['oneRem'])};
+    margin-top:${theme.typography.pxToRem(theme['margin']['oneForth'])};
   }
 
   .singleLegend{
     display:flex;
-    gap:${theme.typography.pxToRem(theme.palette['gap']['small'])};
-    margin-bottom:${theme.typography.pxToRem(
-      theme.palette['margin']['oneForth'],
-    )};
+    gap:${theme.typography.pxToRem(theme['gap']['small'])};
+    margin-bottom:${theme.typography.pxToRem(theme['margin']['oneForth'])};
   }
 .femaleBorder{
   border:thin solid ${theme.palette.background.lightpink};
@@ -151,19 +145,17 @@ export const ParentBox = styled('div')(
 }
   .seatLegend{
     display:flex;
-    margin-right:${theme.typography.pxToRem(theme.palette['margin']['main'])};
+    margin-right:${theme.typography.pxToRem(theme['margin']['main'])};
     flex-direction:column;
 
     ${theme.breakpoints.down('sm')} {
-      margin-left:-${theme.typography.pxToRem(
-        theme.palette['margin']['berthBottom'],
-      )};
+      margin-left:-${theme.typography.pxToRem(theme['margin']['berthBottom'])};
     }
   }
 
   .seatDetails{
-    margin-top:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
-    margin-left:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
+    margin-top:${theme.typography.pxToRem(theme['margin']['larger'])};
+    margin-left:${theme.typography.pxToRem(theme['margin']['larger'])};
     
   }
 

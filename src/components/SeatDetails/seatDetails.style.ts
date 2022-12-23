@@ -3,29 +3,25 @@ export const SeatDetailsContainer = styled('div')(
   ({ theme }: any) => `
 
   ${theme.breakpoints.down('sm')} {
-    margin-right:${theme.typography.pxToRem(
-      theme.palette['margin']['berthBottom'],
-    )};
+    margin-right:${theme.typography.pxToRem(theme['margin']['berthBottom'])};
   }
 
   .image{
-    height:${theme.typography.pxToRem(theme.palette['height']['medium'])};
-    min-width:${theme.typography.pxToRem(theme.palette['width']['main'])}
+    height:${theme.typography.pxToRem(theme['height']['medium'])};
+    min-width:${theme.typography.pxToRem(theme['width']['main'])}
   }
 
   .cardContainer{
     border:thin solid ${theme.palette.background.lightgrey};
-    max-width:${theme.typography.pxToRem(theme.palette['width']['main'])};
-    min-height:${theme.typography.pxToRem(theme.palette['height']['larger'])};
+    max-width:${theme.typography.pxToRem(theme['width']['main'])};
+    min-height:${theme.typography.pxToRem(theme['height']['larger'])};
     border-radius:${theme.typography.pxToRem(
-      theme.palette['shape']['borderRadius']['medium'],
+      theme['shape']['borderRadius']['medium'],
     )};
 
     ${theme.breakpoints.down('sm')} {
-      max-width:${theme.typography.pxToRem(theme.palette['width']['new'])};
-      margin-left:${theme.typography.pxToRem(
-        theme.palette['margin']['berthBottom'],
-      )};
+      max-width:${theme.typography.pxToRem(theme['width']['new'])};
+      margin-left:${theme.typography.pxToRem(theme['margin']['berthBottom'])};
     }
   }
 
@@ -36,20 +32,20 @@ export const SeatDetailsContainer = styled('div')(
 
 
   .buttonContainer{
-    padding:${theme.typography.pxToRem(theme.palette['padding']['main'])};
+    padding:${theme.typography.pxToRem(theme['padding']['main'])};
 
   }
 
   .button{
     border-radius:${theme.typography.pxToRem(
-      theme.palette['shape']['borderRadius']['small'],
+      theme['shape']['borderRadius']['small'],
     )};
   }
 
   .cardContent{
     display:flex;
     flex-direction:column;
-    gap:${theme.typography.pxToRem(theme.palette['gap']['primary'])};
+    gap:${theme.typography.pxToRem(theme['gap']['primary'])};
   }
 
   .seats{
@@ -72,9 +68,7 @@ export const SeatDetailsContainer = styled('div')(
 
   .berthData{
     ${theme.breakpoints.down('sm')} {
-      margin-right:${theme.typography.pxToRem(
-        theme.palette['margin']['berthBottom'],
-      )};
+      margin-right:${theme.typography.pxToRem(theme['margin']['berthBottom'])};
     }
   }
 

@@ -6,7 +6,7 @@ export const ParentBox = styled('div')(
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-left:${theme.typography.pxToRem(theme.palette['margin']['seatLeft'])};
+  margin-left:${theme.typography.pxToRem(theme['margin']['seatLeft'])};
   ${theme.breakpoints.down('sm')} {
     flex-direction:column;
     margin-left:0;
@@ -16,14 +16,12 @@ export const ParentBox = styled('div')(
     background-color:${theme.palette.background.whitesmoke};
     max-height:75vh;
     display:flex;
-    gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
+    gap:${theme.typography.pxToRem(theme['gap']['main'])};
     justify-content: flex-end;
-    margin-top:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
+    margin-top:${theme.typography.pxToRem(theme['margin']['larger'])};
 
     ${theme.breakpoints.down('sm')} {
-      margin-left:${theme.typography.pxToRem(
-        theme.palette['margin']['larger'],
-      )};
+      margin-left:${theme.typography.pxToRem(theme['margin']['larger'])};
     }
   }
 
@@ -31,9 +29,7 @@ export const ParentBox = styled('div')(
     border:thin solid ${theme.palette.background.grey};
 
     ${theme.breakpoints.down('sm')} {
-      margin-left:-${theme.typography.pxToRem(
-        theme.palette['margin']['berthBottom'],
-      )};
+      margin-left:-${theme.typography.pxToRem(theme['margin']['berthBottom'])};
     }
   }
 
@@ -43,24 +39,22 @@ export const ParentBox = styled('div')(
     display:flex;
     flex-direction:column;
     align-items:flex-end;
-    max-height: 24rem;
 
     &::-webkit-scrollbar { 
       display: none; 
   }
 
     ${theme.breakpoints.down('sm')} {
-      margin-left:-${theme.typography.pxToRem(
-        theme.palette['margin']['berthBottom'],
-      )};
+      margin-left:-${theme.typography.pxToRem(theme['margin']['berthBottom'])};
     }
     }
 
   .boxContainer{
-    padding:${theme.typography.pxToRem(theme.palette['padding']['main'])};
+    padding:${theme.typography.pxToRem(theme['padding']['main'])};
     position:relative;
     display:flex;
-    max-height: 24rem;
+    max-height: ${theme.typography.pxToRem(400)};
+
     overflow-y:scroll;
 
     &::-webkit-scrollbar { 
@@ -74,31 +68,31 @@ export const ParentBox = styled('div')(
   }
 
   .space{
-    padding:${theme.typography.pxToRem(theme.palette['padding']['small'])};
+    padding:${theme.typography.pxToRem(theme['padding']['small'])};
   }
 
   .divider{
     margin:${theme.typography.pxToRem(
-      theme.palette['margin']['large'],
-    )} 3rem ${theme.typography.pxToRem(theme.palette['margin']['large'])} 0;
+      theme['margin']['large'],
+    )} 3rem ${theme.typography.pxToRem(theme['margin']['large'])} 0;
   }
 
   .container{
-    max-width: ${theme.typography.pxToRem(theme.palette['width']['main'])};
+    max-width: ${theme.typography.pxToRem(theme['width']['main'])};
     display:flex;
-    gap:${theme.typography.pxToRem(theme.palette['gap']['tworem'])};
+    gap:${theme.typography.pxToRem(theme['gap']['tworem'])};
   }
 
   .steeringImage{
-    width:${theme.typography.pxToRem(theme.palette['width']['small'])};
-    margin-right:${theme.typography.pxToRem(theme.palette['margin']['main'])};
-    margin-top:${theme.typography.pxToRem(theme.palette['margin']['primary'])};
+    width:${theme.typography.pxToRem(theme['width']['small'])};
+    margin-right:${theme.typography.pxToRem(theme['margin']['main'])};
+    margin-top:${theme.typography.pxToRem(theme['margin']['primary'])};
   }
 
   .mainBox {
-    height:${theme.typography.pxToRem(theme.palette['width']['small'])};
+    height:${theme.typography.pxToRem(theme['width']['small'])};
     border:thin solid ${theme.palette.background.grey};
-    padding:${theme.typography.pxToRem(theme.palette['padding']['primary'])};
+    padding:${theme.typography.pxToRem(theme['padding']['primary'])};
     position:relative;
     display:flex;
     justify-content:flex-start;
@@ -113,9 +107,9 @@ export const ParentBox = styled('div')(
   }
 
   .smallBox{
-    width:${theme.typography.pxToRem(theme.palette['width']['smaller'])};
+    width:${theme.typography.pxToRem(theme['width']['smaller'])};
     border:thin solid ${theme.palette.commonBgColor.darkgrey};
-    padding:${theme.typography.pxToRem(theme.palette['padding']['oneForth'])};
+    padding:${theme.typography.pxToRem(theme['padding']['oneForth'])};
   }
 
   .femaleUnavailable{
@@ -146,22 +140,20 @@ export const ParentBox = styled('div')(
   }
 
   .detailsMain{
-    height:${theme.typography.pxToRem(theme.palette['height']['oneRem'])};
-    width:${theme.typography.pxToRem(theme.palette['width']['oneRem'])};
-    margin-top:${theme.typography.pxToRem(theme.palette['margin']['oneForth'])};
+    height:${theme.typography.pxToRem(theme['height']['oneRem'])};
+    width:${theme.typography.pxToRem(theme['width']['oneRem'])};
+    margin-top:${theme.typography.pxToRem(theme['margin']['oneForth'])};
   }
 
   .singleLegend{
     display:flex;
-    gap:${theme.typography.pxToRem(theme.palette['gap']['primary'])};
-    margin-bottom:${theme.typography.pxToRem(
-      theme.palette['margin']['oneForth'],
-    )};
+    gap:${theme.typography.pxToRem(theme['gap']['primary'])};
+    margin-bottom:${theme.typography.pxToRem(theme['margin']['oneForth'])};
   }
 
   .seatLegend{
     display:flex;
-    margin-right:${theme.typography.pxToRem(theme.palette['margin']['main'])};
+    margin-right:${theme.typography.pxToRem(theme['margin']['main'])};
     justify-content:center;
     height:inherit;
     flex-direction:column;
@@ -175,14 +167,12 @@ export const ParentBox = styled('div')(
   }
 
   .seatDetails{
-    margin-top:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
-    margin-left:${theme.typography.pxToRem(theme.palette['margin']['larger'])};
+    margin-top:${theme.typography.pxToRem(theme['margin']['larger'])};
+    margin-left:${theme.typography.pxToRem(theme['margin']['larger'])};
 
     ${theme.breakpoints.down('sm')} {
-      margin-left:${theme.typography.pxToRem(
-        theme.palette['margin']['primary'],
-      )};
-      margin-top:${theme.typography.pxToRem(theme.palette['margin']['twoRem'])};
+      margin-left:${theme.typography.pxToRem(theme['margin']['primary'])};
+      margin-top:${theme.typography.pxToRem(theme['margin']['twoRem'])};
     }
   }
 
@@ -195,14 +185,14 @@ export const ParentBox = styled('div')(
   }
 
   .gridMargin{
-    margin-top:${theme.typography.pxToRem(theme.palette['margin']['medium'])};
+    margin-top:${theme.typography.pxToRem(theme['margin']['medium'])};
 
   }
 
   .deckInfo{
     position: absolute;
-    top: ${theme.typography.pxToRem(theme.palette['top']['medium'])};
-    left: ${theme.typography.pxToRem(theme.palette['left']['secondary'])};
+    top: ${theme.typography.pxToRem(theme['top']['medium'])};
+    left: ${theme.typography.pxToRem(theme['left']['secondary'])};
     margin: 0;
     color:${theme.palette.background.darkgrey};
   }

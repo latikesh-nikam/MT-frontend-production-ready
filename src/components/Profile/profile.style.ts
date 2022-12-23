@@ -5,7 +5,7 @@ export const ProfileContainer = styled('div')(
   display: flex;
   align-items: flex-end;
   flex-direction: column;
-  padding: ${theme.typography.pxToRem(theme.palette['padding']['primary'])};
+  padding: ${theme.typography.pxToRem(theme['padding']['primary'])};
 
   .profileDetailsContainer{
     position: fixed;
@@ -23,15 +23,15 @@ export const ProfileContainer = styled('div')(
     box-shadow: ${theme.shadows[3]};
     position: absolute;
     top:9%;
-    right: ${theme.typography.pxToRem(theme.palette['padding']['oneForth'])};
-    min-width:  ${theme.typography.pxToRem(theme.palette['width']['primary'])};
+    right: ${theme.typography.pxToRem(theme['padding']['oneForth'])};
+    min-width:  ${theme.typography.pxToRem(theme['width']['primary'])};
     background-color:${theme.palette.background.white};
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: ${theme.typography.pxToRem(theme.palette['padding']['primary'])};
-    gap:${theme.typography.pxToRem(theme.palette['gap']['primary'])};
+    padding: ${theme.typography.pxToRem(theme['padding']['primary'])};
+    gap:${theme.typography.pxToRem(theme['gap']['primary'])};
   }
 
   .actions{
@@ -40,9 +40,9 @@ export const ProfileContainer = styled('div')(
   
   .buttonItems{
     display:flex;
-    gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
+    gap:${theme.typography.pxToRem(theme['gap']['main'])};
     color:${theme.palette['textColors']['grey']};
-    padding:${theme.typography.pxToRem(theme.palette['padding']['primary'])};
+    padding:${theme.typography.pxToRem(theme['padding']['primary'])};
     background-color:${theme.palette['background']['white']};
   }
 
@@ -50,12 +50,10 @@ export const ProfileContainer = styled('div')(
     outline: none;
     cursor: pointer;
     font-weight: ${theme.typography.h1.fontWeight};
-    border-radius: ${theme.typography.pxToRem(
-      theme.palette['shape']['borderRadius'],
-    )};
+    border-radius: ${theme.typography.pxToRem(theme['shape']['borderRadius'])};
     padding: ${theme.typography.pxToRem(
-      theme.palette['padding']['oneForth'],
-    )} ${theme.typography.pxToRem(theme.palette['padding']['primary'])};
+      theme['padding']['oneForth'],
+    )} ${theme.typography.pxToRem(theme['padding']['primary'])};
   }
 
   .buttonItems:hover{
@@ -70,9 +68,7 @@ export const ProfileContainer = styled('div')(
   }
 
   .icon {
-    margin-top: ${theme.typography.pxToRem(
-      theme.palette['margin']['oneForth'],
-    )};
+    margin-top: ${theme.typography.pxToRem(theme['margin']['oneForth'])};
     font-size: ${theme.typography.h2.fontSize};
   }
 

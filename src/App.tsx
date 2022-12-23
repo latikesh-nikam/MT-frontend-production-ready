@@ -1,9 +1,10 @@
 import { BrowserRouter } from 'react-router-dom';
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from './hoc/ErrorBoundary/ErrorBoundary';
 import Layout from './components/Layout/Layout';
 import StoreProvider from './context/StoreContext/StoreContext';
 import LocalisationProvider from './hoc/LocalisationProvider/LocalisationProvider';
 import Toaster from './hoc/Toaster/Toaster';
+import LocalisationProvider from './hoc/Localization/LocalisationProvider';
 import MuiThemeProvider from './theme/ThemeProvider';
 
 const App = () => {
@@ -12,9 +13,11 @@ const App = () => {
       <LocalisationProvider>
         <MuiThemeProvider>
           <StoreProvider>
-            <Toaster>
-              <Layout />
-            </Toaster>
+            <ErrorBoundary>
+              <Toaster>
+                <Layout />
+              </Toaster>
+            </ErrorBoundary>
           </StoreProvider>
         </MuiThemeProvider>
       </LocalisationProvider>

@@ -11,29 +11,27 @@ export const Parent = styled('div')(
     
     .row{
         display:flex;
-        gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
+        gap:${theme.typography.pxToRem(theme['gap']['main'])};
         margin:${theme.typography.pxToRem(
-          theme.palette['margin']['primary'],
+          theme['margin']['primary'],
         )} ${theme.typography.pxToRem(
-    theme.palette['margin']['main'],
-  )} 0 ${theme.typography.pxToRem(theme.palette['margin']['large'])};
+    theme['margin']['main'],
+  )} 0 ${theme.typography.pxToRem(theme['margin']['large'])};
     }
     .inputs{
-        padding:${theme.typography.pxToRem(
-          theme.palette['padding']['primary'],
-        )};
-        margin:${theme.typography.pxToRem(theme.palette['margin']['primary'])};
+        padding:${theme.typography.pxToRem(theme['padding']['primary'])};
+        margin:${theme.typography.pxToRem(theme['margin']['primary'])};
     }
 
     .column{
         display:flex;
         flex-direction:column;
-        gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
+        gap:${theme.typography.pxToRem(theme['gap']['main'])};
     }
 
     .button{
-        margin-top:${theme.typography.pxToRem(theme.palette['margin']['main'])};
-        padding:${theme.typography.pxToRem(theme.palette['padding']['main'])};
+        margin-top:${theme.typography.pxToRem(theme['margin']['main'])};
+        padding:${theme.typography.pxToRem(theme['padding']['main'])};
         border-radius:8px;
     }
 
@@ -47,7 +45,7 @@ export const Parent = styled('div')(
     .container{
         display:flex;
         flex-direction:column;
-        gap:${theme.typography.pxToRem(theme.palette['gap']['main'])};
+        gap:${theme.typography.pxToRem(theme['gap']['main'])};
     }
 
     .heading{
@@ -61,9 +59,7 @@ export const Parent = styled('div')(
         margin-top:1rem;
     }
     .button{
-        padding:${theme.typography.pxToRem(
-          theme.palette['padding']['primary'],
-        )};
+        padding:${theme.typography.pxToRem(theme['padding']['primary'])};
     }
 
     .paper{
