@@ -22,6 +22,7 @@ export const SeatDetailsContainer = styled('div')(
     ${theme.breakpoints.down('sm')} {
       max-width:${theme.typography.pxToRem(theme['width']['new'])};
       margin-left:${theme.typography.pxToRem(theme['margin']['berthBottom'])};
+      margin-bottom:${theme.typography.pxToRem(48)};
     }
   }
 

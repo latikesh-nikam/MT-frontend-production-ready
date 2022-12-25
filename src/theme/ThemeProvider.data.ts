@@ -101,6 +101,7 @@ export const appTheme = {
   },
   padding: {
     small: 4,
+    smaller: 2,
     primary: 8,
     main: 16,
     secondary: 20,

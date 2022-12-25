@@ -41,8 +41,6 @@ export const newPalette = {
     pink: '#FFB3C1',
     darkpink: '#FF4D6D',
     lightblue: '#A2D2FF',
-    lightpink: '#FFC8DD',
-    lightpurple: '#C7ADFF',
     lightpink: '#ffc8dd',
     lightpurple: '#c7adff',
   },

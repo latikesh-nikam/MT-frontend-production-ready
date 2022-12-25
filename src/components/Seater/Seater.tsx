@@ -15,15 +15,14 @@ import { detailsContainer } from './seater.mockdata';
 import { ParentBox } from './seater.style';
 import SeatDetails from '../SeatDetails/SeatDetails';
 import { ISeatProps } from '../Seat/seat.types';
-import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
-import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 
 function Seater() {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
-  const { localisation, updateLocalisation } = useContext(
-    LocalisationContext,
-  ) as ILocalisationContext;
-  const { localString } = localisation;
+  const {
+    localisation: { localString },
+  } = useContext(LocalisationContext) as ILocalisationContext;
 
   function classSelector(seat: ISeatProps) {
     if (selected.includes(seat.seatNo)) {

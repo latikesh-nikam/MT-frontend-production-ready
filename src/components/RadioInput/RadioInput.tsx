@@ -36,14 +36,14 @@ const RadioInput = ({
             row={row}
             {...radioGroupProps}>
             {options &&
-              options.map(({ label, value }, index) => {
+              options.map(({ label, value, displayIcon: Icon }, index) => {
+                console.log(Icon);
                 return (
                   <FormControlLabel
                     key={index}
                     value={value}
                     control={<Radio />}
-                    label={localString[label]}
-                    ref={field.ref}
+                    label={`${localString[label]} ${Icon}`}
                   />
                 );
               })}

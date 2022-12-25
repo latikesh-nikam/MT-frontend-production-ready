@@ -10,8 +10,9 @@ import SignIn from '../SignIn/SignIn';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import Seat from '../Seat/Seat';
 import Signup from '../Signup/Signup';
-import Sort from '../SortComponent/Sort';
+import Sort from '../Sort/Sort';
 import Topbar from '../Topbar/Topbar';
+import ChangePassword from '../ChangePassword/ChangePassword';
 
 const Layout = () => {
   return (

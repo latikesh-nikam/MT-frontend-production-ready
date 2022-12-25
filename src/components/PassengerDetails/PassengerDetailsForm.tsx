@@ -14,23 +14,22 @@ import { Box } from '@mui/material';
 import { Paper } from '@mui/material';
 import { Button } from '@mui/material';
 
-import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
+import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { IPassengerDetailsProps } from './passengerDetails.types';
 import { IPassengerDetailsFormProps } from './passengerDetails.types';
 import { IPassengerCountProps } from './passengerDetails.types';
 import { IPassengerDetails } from './passengerDetails.types';
 
-import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 import FormInput from '../FormInput/FormInput';
 import RadioInput from '../RadioInput/RadioInput';
 
 import { Parent } from './passengerDetails.style';
 
 function PassengerDetailsForm(passengerCount: IPassengerCountProps) {
-  const { localisation, updateLocalisation } = useContext(
-    LocalisationContext,
-  ) as ILocalisationContext;
-  const { localString } = localisation;
+  const {
+    localisation: { localString },
+  } = useContext(LocalisationContext) as ILocalisationContext;
   const { passengerCount: count } = passengerCount;
   count.sort((a: any, b: any) => a.seatNo - b.seatNo);
   const required = localString?.required;

@@ -14,8 +14,8 @@ import { CardActions } from '@mui/material';
 
 import PassengerDetailsForm from '../PassengerDetails/PassengerDetailsForm';
 import { SeatDetailsContainer } from './seatDetails.style';
-import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
-import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -33,10 +33,9 @@ const style = {
 export default function SeatDetails({ selected }: any) {
   console.log(selected, 'selected');
   const [open, setOpen] = useState(false);
-  const { localisation, updateLocalisation } = useContext(
-    LocalisationContext,
-  ) as ILocalisationContext;
-  const { localString } = localisation;
+  const {
+    localisation: { localString },
+  } = useContext(LocalisationContext) as ILocalisationContext;
 
   const fare = selected.reduce(
     (current: number, sum: any) => current + sum.seatFare,

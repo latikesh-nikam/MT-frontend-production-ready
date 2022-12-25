@@ -12,15 +12,14 @@ import { detailsContainer } from './seatMockData';
 import { ParentBox } from './seat.style';
 import { berthData } from '../Berth/berth.mockData';
 import { ISeatProps } from './seat.types';
-import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
-import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 
 function Seat() {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
-  const { localisation, updateLocalisation } = useContext(
-    LocalisationContext,
-  ) as ILocalisationContext;
-  const { localString } = localisation;
+  const {
+    localisation: { localString },
+  } = useContext(LocalisationContext) as ILocalisationContext;
   function classSelector(seat: ISeatProps) {
     if (selected.includes(seat.seatNo)) {
       seat.status = 'unavailable';

@@ -14,6 +14,13 @@ export const ParentBox = styled('div')(
 
   }
 
+  ${theme.breakpoints.down('md')}{
+    flex-direction:column;
+    gap:${theme.typography.pxToRem(theme['gap']['large'])};
+    margin-left:30%;
+
+  }
+
 
   .parentContainer{
     background-color:${theme.palette.background.whitesmoke};
@@ -75,7 +82,7 @@ export const ParentBox = styled('div')(
   }
 
   .mainBox {
-    padding:${theme.typography.pxToRem(theme['padding']['small'])};
+    padding:${theme.typography.pxToRem(theme['padding']['smaller'])};
     position:relative;
     display:flex;
     justify-content:flex-start;
@@ -89,8 +96,8 @@ export const ParentBox = styled('div')(
     position: absolute;
     line-height: ${theme.typography.pxToRem(theme['lineHeight']['primary'])};
     color: ${theme.palette.background.darkgrey};
-    top:${theme.typography.pxToRem(theme['top']['small'])};
-    font-size:${theme.typography.fontSizeSmall};
+    top:0;
+    font-size:${theme.typography.pxToRem(8)};
     cursor:pointer;
   }
   .root {
@@ -149,18 +156,12 @@ export const ParentBox = styled('div')(
     flex-direction:column;
 
     ${theme.breakpoints.down('sm')} {
-      margin-left:-${theme.typography.pxToRem(theme['margin']['berthBottom'])};
+      margin-left:-${theme.typography.pxToRem(48)};
+      margin-top: ${theme.typography.pxToRem(theme['margin']['main'])};
+  }
     }
   }
 
-  .seatDetails{
-    margin-top:${theme.typography.pxToRem(theme['margin']['larger'])};
-    margin-left:${theme.typography.pxToRem(theme['margin']['larger'])};
-    
-  }
-
-  .bookingSummaryButton{
-    border-radius:0;
   }
 
   .try{

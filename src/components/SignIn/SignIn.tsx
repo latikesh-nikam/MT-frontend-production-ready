@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import Box from '@mui/material/Box/Box';
 import Button from '@mui/material/Button/Button';
-import { ISignInInput } from './signIn.types';
+import { ISignInInput } from './SignIn.types';
 import FormInput from '../FormInput/FormInput';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';

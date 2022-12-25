@@ -29,21 +29,21 @@ import { TextField } from '@mui/material';
 import { MainDivBox } from './signup.style';
 
 import FormInput from '../FormInput/FormInput';
-import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 
 import { ISignupProps } from './Signup.types';
 import { IQuestionProps } from './Signup.types';
-import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
+import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { signUp } from '../../services/auth/auth.service';
 import { getSecurityQuestions } from '../../services/user/user.service';
+import utility from '../../utils/utility';
 
 const Signup = () => {
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);
   const [captchaToken, setCaptchaToken] = useState('');
-  const { localisation, updateLocalisation } = useContext(
-    LocalisationContext,
-  ) as ILocalisationContext;
-  const { localString } = localisation;
+  const {
+    localisation: { localString },
+  } = useContext(LocalisationContext) as ILocalisationContext;
 
   const captchaRef = useRef<any>(null);
 
@@ -113,6 +113,8 @@ const Signup = () => {
         securityQuestion: '',
         securityAnswer: '',
       });
+      utility.setStore('accessToken', response.access_token);
+      utility.setStore('refreshToken', response.refresh_token);
       toast.success(`${response.message}`, {
         position: toast.POSITION.TOP_RIGHT,
       });

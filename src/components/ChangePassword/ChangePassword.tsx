@@ -21,6 +21,7 @@ import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { changePassword } from '../../services/auth/auth.service';
+import utility from '../../utils/utility';
 
 const ChangePassword = () => {
   const { localisation, updateLocalisation } = useContext(
@@ -66,6 +67,8 @@ const ChangePassword = () => {
         oldPassword: '',
         confirmPassword: '',
       });
+      utility.setStore('accessToken', response.access_token);
+      utility.setStore('refreshToken', response.refresh_token);
       toast.success(`${response.message}`, {
         position: toast.POSITION.TOP_RIGHT,
       });

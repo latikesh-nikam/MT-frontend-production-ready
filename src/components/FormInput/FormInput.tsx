@@ -3,7 +3,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { TextField } from '@mui/material';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
-import { IFormInputProps } from './formInput.types';
+import { IFormInputProps } from './FormInput.types';
 import { InputContainer } from './formInput.styles';
 
 const FormInput = ({

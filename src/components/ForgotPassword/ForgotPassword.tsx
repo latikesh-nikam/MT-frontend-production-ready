@@ -20,7 +20,6 @@ import { Select } from '@mui/material';
 import IForgotPasswordProps from './forgotPassword.types';
 import { IQuestionProps } from '../Signup/Signup.types';
 import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
-import { apiRoutes } from '../../constants/apiRoutes';
 
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -30,6 +29,7 @@ import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider
 import { forgotPassword } from '../../services/auth/auth.service';
 import { axiosInstance } from '../../services/axios.interceptors';
 import { getSecurityQuestions } from '../../services/user/user.service';
+import utility from '../../utils/utility';
 
 const ForgotPassword = () => {
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);
@@ -81,6 +81,8 @@ const ForgotPassword = () => {
         securityQuestion: '',
         securityAnswer: '',
       });
+      utility.setStore('accessToken', response.access_token);
+      utility.setStore('refreshToken', response.refresh_token);
       toast.success(`${response.message}`, {
         position: toast.POSITION.TOP_RIGHT,
       });
