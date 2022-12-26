@@ -22,7 +22,9 @@ const FormInputCheckBox = ({
   return (
     <CheckboxContainer>
       <FormControl size={'small'} variant={'outlined'}>
-        <FormLabel component="legend">{localString[label]}</FormLabel>
+        <FormLabel component="legend" className="formLabel">
+          {localString[label]}
+        </FormLabel>
 
         {options.map(option => {
           return (

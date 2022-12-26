@@ -1,5 +1,6 @@
-export interface ISearchableDropdownProps {
+import { TextFieldProps } from '@mui/material/TextField/TextField';
+
+export type ISearchableDropdownProps = {
   name: string;
-  label: string;
   searchList: any[];
-}
+} & TextFieldProps;

@@ -1,22 +1,16 @@
-import { useContext } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import Autocomplete from '@mui/material/Autocomplete/Autocomplete';
 import TextField from '@mui/material/TextField/TextField';
 import Box from '@mui/material/Box/Box';
 import { ISearchableDropdownProps } from './searchableDropdown.types';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
-import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { InputContainer } from '../FormInput/formInput.styles';
 import { SearchableDropdownContainer } from './searchableDropdown.styles';
 
 const SearchableDropdown = ({
   name,
-  label,
   searchList,
+  ...textFieldProps
 }: ISearchableDropdownProps) => {
-  const {
-    localisation: { localString },
-  } = useContext(LocalisationContext) as ILocalisationContext;
   const { control } = useFormContext();
 
   return (
@@ -48,9 +42,9 @@ const SearchableDropdown = ({
                 <TextField
                   {...params}
                   fullWidth
-                  label={localString[label]}
                   variant="outlined"
                   error={!!errors[name]}
+                  {...textFieldProps}
                 />
               </InputContainer>
             )}

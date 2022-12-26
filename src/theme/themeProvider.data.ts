@@ -119,4 +119,11 @@ export const appTheme = {
     secondary: 20,
     larger: 32,
   },
+  margin: {
+    small: 4,
+    primary: 8,
+    main: 16,
+    secondary: 20,
+    larger: 32,
+  },
 };

@@ -2,29 +2,29 @@ import { styled } from '@mui/material/styles';
 
 export const SearchContainer = styled('div')(
   ({ theme }: any) => `
-    min-width:40%;
     z-index:1;
+    padding:0 ${theme.typography.pxToRem(theme.padding.secondary)};
+    display:flex;
+    gap:${theme.typography.pxToRem(theme.gap.small)};      
+
     .searchForm{
       display:flex;
-      gap:${theme.typography.pxToRem(theme.gap.small)};      
+      gap:${theme.typography.pxToRem(theme.gap.primary)};      
       
-      ${theme.breakpoints.down('sm')}{
-        flex-direction:column;
-        gap:${theme.typography.pxToRem(theme.gap.primary)};
-        padding:${theme.typography.pxToRem(theme.padding.secondary)} 0;
-      }
-
-      .formInput{
+      .row{
         flex:2;
-        background:white;
+        display:flex;
+        gap:${theme.typography.pxToRem(theme.gap.primary)};
+        
+        .formInput{
+          flex:1;
+          background:white;
+          border-radius:${theme.typography.pxToRem(theme.borderRadius.small)};
+        }
       }
-
-      .passengerInput{
-        flex:1;
-        background:white;
-      }
-
+      
       .actions{
+        flex:1;
         display:flex;
         .searchButton{
           flex:1;
@@ -34,6 +34,16 @@ export const SearchContainer = styled('div')(
           }
         }
         
+      }
+    }
+
+    ${theme.breakpoints.down('sm')}{
+
+      .searchForm{
+
+        flex-direction:column;
+        gap:${theme.typography.pxToRem(theme.gap.primary)};
+        padding:${theme.typography.pxToRem(theme.padding.secondary)} 0;
       }
     }
 `,

@@ -21,7 +21,7 @@ export const SignInContainer = styled('div')(
     gap: ${theme.typography.pxToRem(theme.gap.main)};
 
     ${theme.breakpoints.down('sm')} {
-      min-width: 300px;
+      max-width: ${theme.typography.pxToRem(320)};
     }
 
     .recaptchaContainer {

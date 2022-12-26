@@ -26,6 +26,8 @@ const SignIn = () => {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
 
+  console.log(localString.password, localString.email);
+
   const navigate = useNavigate();
   const captchaRef = useRef<ReCAPTCHA>(null);
 
@@ -101,13 +103,13 @@ const SignIn = () => {
               data-testid="signInForm">
               <FormInput
                 name="email"
-                label="email"
+                label={localString?.email}
                 showErrorMessage
                 data-testid="emailInput"
               />
               <FormInput
                 name="password"
-                label="password"
+                label={localString?.password}
                 type="password"
                 showErrorMessage
                 data-testid="passwordInput"

@@ -105,31 +105,35 @@ const Search = ({ navigateTo = '' }: ISearchProps) => {
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <SearchContainer>
           <form onSubmit={handleSubmit(onSubmit)} className="searchForm">
-            <div className="formInput">
-              <SearchableDropdown
-                name="from"
-                label="from"
-                searchList={allStations}
-              />
+            <div className="row">
+              <div className="formInput">
+                <SearchableDropdown
+                  name="from"
+                  placeholder={localString?.from}
+                  searchList={allStations}
+                />
+              </div>
+              <div className="formInput">
+                <SearchableDropdown
+                  name="to"
+                  placeholder={localString?.to}
+                  searchList={allStations}
+                />
+              </div>
             </div>
-            <div className="formInput">
-              <SearchableDropdown
-                name="to"
-                label="to"
-                searchList={allStations}
-              />
-            </div>
-            <div className="formInput">
-              <DateInput name="date" label="date" />
-            </div>
-            <div className="actions">
-              <Button
-                disabled={!isValid}
-                type="submit"
-                className={searchButtonClassName}
-                variant="contained">
-                {localString?.search}
-              </Button>
+            <div className="row">
+              <div className="formInput">
+                <DateInput name="date" label="date" />
+              </div>
+              <div className="actions">
+                <Button
+                  disabled={!isValid}
+                  type="submit"
+                  className={searchButtonClassName}
+                  variant="contained">
+                  {localString?.search}
+                </Button>
+              </div>
             </div>
           </form>
         </SearchContainer>

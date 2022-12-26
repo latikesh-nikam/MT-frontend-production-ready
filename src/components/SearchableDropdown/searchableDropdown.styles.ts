@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 
 export const SearchableDropdownContainer = styled('div')(
   ({ theme }: any) => `
-
+  width:100%;
   .optionLabel{
     text-transform:capitalize;
     cursor:pointer;

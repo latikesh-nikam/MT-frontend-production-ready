@@ -6,6 +6,7 @@ import { IBusResultsProps } from './busResults.type';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import BusResultCard from '../BusResultCard/busResultCard';
+import { searchResults } from './busResults.data';
 
 const BusResults = ({
   handleScroll,
@@ -25,8 +26,8 @@ const BusResults = ({
 
   return (
     <BusResultsContainer ref={scrollerRef} onScroll={handleScroll}>
-      {data.length ? (
-        data.map((result: any, index: number) => {
+      {searchResults.length ? (
+        searchResults.map((result: any, index: number) => {
           return <BusResultCard data={result} key={index} />;
         })
       ) : (

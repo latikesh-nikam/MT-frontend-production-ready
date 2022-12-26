@@ -21,18 +21,25 @@ export const BusResultCardContainer = styled('div')(
     .busDetails{
         flex:1;
         display:flex;
-        padding:${theme.typography.pxToRem(theme.padding.secondary)};
+        padding:${theme.typography.pxToRem(theme.padding.main)};
         gap:${theme.typography.pxToRem(theme.gap.larger)};
 
         .vehicleAndTimeDetails{
             flex:2;
             display:flex;
             justify-content:space-between;
-            min-width:${theme.typography.pxToRem(200)};
+            gap:${theme.typography.pxToRem(theme.gap.primary)};
+
+
             .vehicle{
                 flex:2;
                 p{
                     text-transform:capitalize;
+                }
+                .vehicleName{
+                    margin-bottom:${theme.typography.pxToRem(
+                      theme.margin.primary,
+                    )};
                 }
             }
     
@@ -40,6 +47,7 @@ export const BusResultCardContainer = styled('div')(
                 flex:2;
                 display:flex;
                 justify-content:space-between;
+                gap:${theme.typography.pxToRem(theme.gap.small)};
                 .time{
                     display:flex;
                     flex-direction:column;
@@ -57,6 +65,7 @@ export const BusResultCardContainer = styled('div')(
         .fareAndSeatsAvailabilty{
             display:flex;
             gap:${theme.typography.pxToRem(theme.gap.secondary)};
+            justify-content:space-between;
         }
 
         .ratingDetails{
@@ -118,20 +127,43 @@ export const BusResultCardContainer = styled('div')(
     &:hover {
         box-shadow:${theme.shadows[3]};
         transform:scale(101%);
-    
 }
 
 ${theme.breakpoints.down('sm')}{
-    cursor:pointer;
-    
+
+    h3{
+        font-size:${theme.typography.fontSizeRegular};
+    }
+
+    p{
+        font-size:${theme.typography.fontSizeSmall};
+    }
+
+   .busDetails{
+    jusitfy-content: space-between;
+    gap:${theme.typography.pxToRem(theme.gap.primary)};
+
     .vehicleAndTimeDetails{
         flex-direction:column;
-        gap:${theme.typography.pxToRem(theme.gap.secondary)}
+        gap: ${theme.typography.pxToRem(theme.gap.secondary)};
+
+
+        .timeDetails{
+            .departure{
+            h3{ 
+                font-size:${theme.typography.fontSizeSmall};
+               }
+            }
+            .time{
+                justify-content:center;
+            }
+        }
     }
 
     .fareAndSeatsAvailabilty{
         flex-direction:column;
     }
+   }
 }
 
 `,

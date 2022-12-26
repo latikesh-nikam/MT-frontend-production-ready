@@ -1,7 +1,8 @@
-export interface IFormInputProps {
+import { TextFieldProps } from '@mui/material/TextField';
+
+export type IFormInputProps = {
   name: string;
-  label: string;
   type?: 'text' | 'number' | 'password';
   showErrorMessage?: boolean;
-  size?: "medium" | "small" ; 
-}
+  size?: 'medium' | 'small';
+} & TextFieldProps;

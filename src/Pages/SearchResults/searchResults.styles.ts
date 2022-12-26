@@ -35,7 +35,7 @@ export const SearchResultsContainer = styled('div')(
       display: flex;
       max-height: calc(100vh - ${theme.typography.pxToRem(96)});
       overflow-y: scroll;
-      box-shadow: ${theme.shadows[2]};
+      border-right: thin solid ${theme.palette.borderFaded2};
       flex-direction:column;
       position:sticky;
       padding:${theme.typography.pxToRem(theme.padding.primary)};

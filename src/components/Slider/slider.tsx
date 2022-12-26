@@ -14,13 +14,13 @@ const SliderInput = ({ data, name, label }: ISliderProps) => {
   const { control } = useFormContext();
 
   return (
-    <Fragment>
-      <FormLabel>{localString[label]}</FormLabel>
-      <SliderContainer>
-        <Controller
-          control={control}
-          name={name}
-          render={({ field: { onChange, value } }) => (
+    <SliderContainer>
+      <FormLabel className="formLabel">{localString[label]}</FormLabel>
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: { onChange, value } }) => (
+          <div className="slider">
             <Slider
               value={value}
               step={null}
@@ -29,10 +29,10 @@ const SliderInput = ({ data, name, label }: ISliderProps) => {
                 onChange(data);
               }}
             />
-          )}
-        />
-      </SliderContainer>
-    </Fragment>
+          </div>
+        )}
+      />
+    </SliderContainer>
   );
 };
 

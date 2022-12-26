@@ -39,6 +39,8 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
       ? 'ratings orange'
       : 'ratings red';
 
+  const hourString = totalTravelTime > 1 ? localString?.hrs : localString?.hr;
+
   const handleClick = (type: string) => {
     if (selected === type) setSelected('');
     else setSelected(type);
@@ -53,24 +55,32 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
       <div className="busDetails">
         <div className="vehicleAndTimeDetails">
           <div className="vehicle">
-            <h3>
+            <h3 className="vehicleName">
               {operatorName} {vehicleName}
             </h3>
             <p className="lightGrey">
               {vehicleType} {vehicleClassType}
             </p>
           </div>
+
           <div className="timeDetails">
             <div className="departure time">
               <h3>{departure.sourceDepartureTime}</h3>
-              <p className="lightGrey">{departure.sourceName}</p>
+
+              {windowWidth && (
+                <p className="lightGrey">{departure.sourceName}</p>
+              )}
             </div>
+
             <div className="totalDuration time">
-              <p className="lightGrey">{totalTravelTime} hrs</p>
+              <p className="lightGrey">
+                {totalTravelTime} {hourString}
+              </p>
             </div>
+
             <div className="arrival time">
               <p>{arrival.sourceDepartureTime}</p>
-              <p className="lightGrey">{arrival.sourceName}</p>
+              {windowWidth && <p className="lightGrey">{arrival.sourceName}</p>}
             </div>
           </div>
         </div>
@@ -92,10 +102,11 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
               {fixedFare}
             </h3>
           </div>
+
           <div className="seatsAvailability">
             <p className="lightGrey">
               {' '}
-              {TotalAvailableSeat} {localString?.seatsAvailable}
+              {TotalAvailableSeat} {localString?.seats} {localString?.available}
             </p>
           </div>
         </div>

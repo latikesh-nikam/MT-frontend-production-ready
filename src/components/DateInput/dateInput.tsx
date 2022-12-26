@@ -32,7 +32,7 @@ const DateInput = ({
           <DatePicker
             minDate={new Date()}
             value={value}
-            inputFormat="DD-MM-YYYY"
+            inputFormat="DD-MM-YY"
             renderInput={params => (
               <InputContainer>
                 <TextField
