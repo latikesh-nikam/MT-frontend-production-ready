@@ -10,14 +10,15 @@ export const MainDivBox = styled('div')(
     border-radius:${theme.typography.pxToRem(
       theme['shape']['borderRadius']['small'],
     )};
+
   }
+
   
   .formContainer {
     padding:${theme.typography.pxToRem(theme['padding']['main'])};
     display: flex;
     flex-direction: column;
     align-items: center;
-
   }
   .formControl {
     margin-top: ${theme.typography.pxToRem(theme['margin']['primary'])};

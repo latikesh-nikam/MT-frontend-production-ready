@@ -5,12 +5,12 @@ import { render } from '@testing-library/react';
 import { screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { forgotPassword } from '../services/auth/auth.service';
+import { forgotPassword } from '../../services/auth/auth.service';
 
 import userEvent from '@testing-library/user-event';
-import ForgotPassword from '../components/ForgotPassword/ForgotPassword';
-import LocalisationProvider from '../hoc/Localization/LocalisationProvider';
-import MuiThemeProvider from '../theme/ThemeProvider';
+import ForgotPassword from '../../components/ForgotPassword/ForgotPassword';
+import LocalisationProvider from '../../hoc/LocalisationProvider/LocalisationProvider';
+import MuiThemeProvider from '../../theme/ThemeProvider';
 
 test('Rendered Forgot Password', () => {
   render(

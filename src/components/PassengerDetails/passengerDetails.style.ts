@@ -8,6 +8,13 @@ export const Parent = styled('div')(
         display: none; 
     }
     
+    ${theme.breakpoints.down('sm')} {
+       padding:${theme.typography.pxToRem(
+         theme['padding']['main'],
+       )} ${theme.typography.pxToRem(24)} ${theme.typography.pxToRem(
+    theme['padding']['main'],
+  )} ${theme.typography.pxToRem(24)};
+      }
     
     .row{
         display:flex;

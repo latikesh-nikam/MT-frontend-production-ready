@@ -32,27 +32,31 @@ function Seat() {
 
   const handleChange = (seat: ISeatProps) => {
     if (seat.status === 'unavailable') {
+      console.log(1);
       const selectedSeat = selected.filter(
         (singleSeat: ISeatProps) => singleSeat.seatNo === seat.seatNo,
       );
       if (selectedSeat.length > 0) {
-        setSelected(selected.filter(element => element.seatNo !== seat.seatNo));
+        console.log(2);
         seat.status = 'available';
+        setSelected(selected.filter(element => element.seatNo !== seat.seatNo));
       } else {
         return;
       }
     } else {
+      console.log(3);
       const selectedSeat = selected.filter(
         (singleSeat: ISeatProps) => singleSeat.seatNo === seat.seatNo,
       );
-
       if (selectedSeat.length > 0) {
-        setSelected(selected.filter(element => element.seatNo !== seat.seatNo));
+        console.log(4);
+        setSelected(selected.filter(element => element !== seat.seatNo));
         seat.status = seat.status === 'available' ? 'unavailable' : 'available';
       } else {
+        console.log(5);
         seat.status = 'unavailable';
-        selected.push(seat);
-        setSelected([...selected]);
+        // selected.push(seat);
+        setSelected([...selected, seat]);
       }
     }
   };
@@ -67,6 +71,7 @@ function Seat() {
     dataLengthForLowerSeats / 3,
     dataLengthForLowerSeats,
   );
+
   //////////////////////////////////////////////////
 
   const upperDeck = berthData.filter(element => element.deck === 'upper Deck');
@@ -87,12 +92,12 @@ function Seat() {
       <Grid item xs={2} key={index}>
         <Box
           key={index}
-          className={classSelector(seat) + ' ' + 'mainBox'}
+          className={`${classSelector(seat)} mainBox`}
           onClick={() => handleChange(seat)}>
           <p className="id">{seat.seatNo}</p>
           <Box
             key={index + seat.seatNo}
-            className={classSelector(seat) + ' ' + 'smallBox'}
+            className={`${classSelector(seat)} smallBox`}
             onClick={() => handleChange(seat)}></Box>
         </Box>
       </Grid>
@@ -102,7 +107,7 @@ function Seat() {
   return (
     <Fragment>
       <ParentBox>
-        <Box className="parentContainer">
+        <Box className="seats">
           <Box className="busContainer">
             <img src={image} alt="drive icon" className="steeringImage" />
             <Box className="boxContainer">
@@ -139,10 +144,9 @@ function Seat() {
               );
             })}
           </Box>
-        </Box>
-        {/* Upper Berth */}
 
-        <Box className="parentContainer">
+          {/* Upper Berth */}
+
           <Box className="boxContainer upperSeatBox">
             <Grid
               direction="column"
@@ -185,6 +189,7 @@ function Seat() {
         </Box>
 
         {/* selected seats */}
+
         <Box className="seatDetails">
           <SeatDetails selected={selected} />
         </Box>

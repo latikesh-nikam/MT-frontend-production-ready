@@ -72,7 +72,7 @@ function Seater() {
       <Grid item xs={2} key={index} className="root">
         <Icon
           fontSize="large"
-          className={classSelector(seat) + ' ' + 'mainBox'}
+          className={`${classSelector(seat)} mainBox`}
           onClick={() => handleChange(seat)}
         />
         <Typography
@@ -124,6 +124,7 @@ function Seater() {
               </Grid>
             </Box>
           </Box>
+
           <Box className="seatLegend">
             {detailsContainer.map((detail, index) => {
               return (

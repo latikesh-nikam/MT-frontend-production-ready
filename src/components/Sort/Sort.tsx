@@ -12,6 +12,7 @@ import RadioInput from '../RadioInput/RadioInput';
 import { StoreContext } from '../../context/StoreContext/StoreContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { sortDataAction } from '../../context/actions/dashboardActions/dashboardActions';
+import { MainContaiiner } from './sort.style';
 
 const Sort = ({ navigateTo = '' }: ISortProps) => {
   const {
@@ -42,8 +43,16 @@ const Sort = ({ navigateTo = '' }: ISortProps) => {
   ];
 
   const nameValue = [
-    { label: 'a-z', value: '1', displayIcon: <ArrowDownwardIcon /> },
-    { label: 'z-a', value: '-1', displayIcon: <ArrowUpwardIcon /> },
+    {
+      label: 'a-z',
+      value: '1',
+      displayIcon: <ArrowDownwardIcon fontSize="small" />,
+    },
+    {
+      label: 'z-a',
+      value: '-1',
+      displayIcon: <ArrowUpwardIcon fontSize="small" />,
+    },
   ];
 
   const ratingOption = [
@@ -80,21 +89,26 @@ const Sort = ({ navigateTo = '' }: ISortProps) => {
 
   return (
     <Fragment>
-      <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(submit)} autoComplete="off">
-          <RadioInput label="fare" name="fixedFare" options={fareValue} />
-          <RadioInput label="name" name="name" options={nameValue} />
+      <MainContaiiner>
+        <FormProvider {...methods}>
+          <form
+            onSubmit={handleSubmit(submit)}
+            autoComplete="off"
+            className="sortForm">
+            <RadioInput label="fare" name="fixedFare" options={fareValue} />
+            <RadioInput label="name" name="name" options={nameValue} />
 
-          <FormInputCheckBox
-            options={ratingOption}
-            label={'ratings'}
-            name="ratings"
-          />
-          <Button type="submit" fullWidth variant="contained">
-            {localString['sort']}
-          </Button>
-        </form>
-      </FormProvider>
+            <FormInputCheckBox
+              options={ratingOption}
+              label={'ratings'}
+              name="ratings"
+            />
+            <Button type="submit" fullWidth variant="contained">
+              {localString['sort']}
+            </Button>
+          </form>
+        </FormProvider>
+      </MainContaiiner>
     </Fragment>
   );
 };

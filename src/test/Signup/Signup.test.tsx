@@ -4,9 +4,9 @@ import { render } from '@testing-library/react';
 import { screen } from '@testing-library/react';
 
 import userEvent from '@testing-library/user-event';
-import Signup from '../components/Signup/Signup';
-import LocalisationProvider from '../hoc/Localization/LocalisationProvider';
-import MuiThemeProvider from '../theme/ThemeProvider';
+import Signup from '../../components/Signup/Signup';
+import LocalisationProvider from '../../hoc/LocalisationProvider/LocalisationProvider';
+import MuiThemeProvider from '../../theme/ThemeProvider';
 
 test('Rendered Signup Component', () => {
   render(

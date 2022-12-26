@@ -13,10 +13,10 @@ import { TextField } from '@mui/material';
 
 import { MainDivBox } from './changePassword.style';
 
-import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
+import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import IChangePasswordProps from './changePassword.types';
 
-import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -24,10 +24,9 @@ import { changePassword } from '../../services/auth/auth.service';
 import utility from '../../utils/utility';
 
 const ChangePassword = () => {
-  const { localisation, updateLocalisation } = useContext(
-    LocalisationContext,
-  ) as ILocalisationContext;
-  const { localString } = localisation;
+  const {
+    localisation: { localString },
+  } = useContext(LocalisationContext) as ILocalisationContext;
   const required = localString?.required;
   const emailMessage = localString?.emailMessage;
   const minLengthPassword = localString?.minLengthSix;

@@ -2,30 +2,24 @@ import { styled } from '@mui/material/styles';
 
 export const ParentBox = styled('div')(
   ({ theme }: any) => `
+  flex:1;
   display:flex;
   justify-content:center;
   align-items:center;
-  margin-left:${theme.typography.pxToRem(theme['margin']['seatLeft'])};
+  gap:${theme.typography.pxToRem(theme.gap.larger)};
+
   ${theme.breakpoints.down('sm')} {
     flex-direction:column;
-    margin-left:0;
+
   }
-  .parentContainer{
-    background-color:${theme.palette.background.whitesmoke};
-    max-height:75vh;
-    display:flex;
-    gap:${theme.typography.pxToRem(theme['gap']['main'])};
-    justify-content: flex-end;
-    margin-top:${theme.typography.pxToRem(theme['margin']['larger'])};
-    ${theme.breakpoints.down('sm')} {
-      margin-left:${theme.typography.pxToRem(theme['margin']['larger'])};
-    }
+
+  ${theme.breakpoints.down('md')} {
+    flex-direction:column;
   }
+
   .upperSeatBox{
     border:thin solid ${theme.palette.background.grey};
-    ${theme.breakpoints.down('sm')} {
-      margin-left:-${theme.typography.pxToRem(theme['margin']['berthBottom'])};
-    }
+    
   }
   .busContainer{
     border:thin solid ${theme.palette.background.grey};
@@ -36,9 +30,7 @@ export const ParentBox = styled('div')(
     &::-webkit-scrollbar { 
       display: none; 
   }
-    ${theme.breakpoints.down('sm')} {
-      margin-left:-${theme.typography.pxToRem(theme['margin']['berthBottom'])};
-    }
+
     }
   .boxContainer{
     padding:${theme.typography.pxToRem(theme['padding']['main'])};
@@ -126,27 +118,22 @@ export const ParentBox = styled('div')(
   .singleLegend{
     display:flex;
     gap:${theme.typography.pxToRem(theme['gap']['primary'])};
-    margin-bottom:${theme.typography.pxToRem(theme['margin']['oneForth'])};
   }
   .seatLegend{
     display:flex;
-    margin-right:${theme.typography.pxToRem(theme['margin']['main'])};
-    justify-content:center;
-    height:inherit;
     flex-direction:column;
-    ${theme.breakpoints.down('sm')} {
-    flex-direction: column;
-    position: absolute;
-    bottom: ${theme.typography.pxToRem(208)};
-    right: ${theme.typography.pxToRem(128)};
-    }
+    justify-content:center;
   }
   .seatDetails{
-    margin-top:${theme.typography.pxToRem(theme['margin']['larger'])};
-    margin-left:${theme.typography.pxToRem(theme['margin']['larger'])};
+
     ${theme.breakpoints.down('sm')} {
       margin-left:${theme.typography.pxToRem(48)};
       margin-top:${theme.typography.pxToRem(theme['margin']['twoRem'])};
+    }
+    ${theme.breakpoints.down('md')} {
+      flex-direction:column;
+      margin-left:0;
+      margin-bottom:${theme.typography.pxToRem(32)};
     }
   }
   .bookingSummaryButton{
@@ -164,6 +151,20 @@ export const ParentBox = styled('div')(
     left: ${theme.typography.pxToRem(theme['left']['secondary'])};
     margin: 0;
     color:${theme.palette.background.darkgrey};
+  }
+
+  .seats{
+    display:flex;
+    gap:${theme.typography.pxToRem(theme.gap.secondary)};
+
+    ${theme.breakpoints.down('sm')} {
+      flex-direction:column;
+    }
+  }
+
+  .bg{
+    color:black;
+    
   }
 `,
 );

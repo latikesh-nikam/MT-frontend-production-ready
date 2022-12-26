@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { Fragment, useContext } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import FormControlLabel from '@mui/material/FormControlLabel/FormControlLabel';
 import Radio from '@mui/material/Radio/Radio';
@@ -43,7 +43,12 @@ const RadioInput = ({
                     key={index}
                     value={value}
                     control={<Radio />}
-                    label={`${localString[label]} ${Icon}`}
+                    label={
+                      <Fragment>
+                        {localString[label]}
+                        <span className="icon">{Icon}</span>
+                      </Fragment>
+                    }
                   />
                 );
               })}

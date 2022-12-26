@@ -9,6 +9,7 @@ export const Header = styled('div')(
   justify-content: space-between;
   align-items: center;
   color: ${theme.palette.textColors.white};
+  z-index:99;
 
   .logoDiv{
     display:flex;

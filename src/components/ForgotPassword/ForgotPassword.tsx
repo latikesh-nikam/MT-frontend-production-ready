@@ -19,13 +19,13 @@ import { Select } from '@mui/material';
 
 import IForgotPasswordProps from './forgotPassword.types';
 import { IQuestionProps } from '../Signup/Signup.types';
-import { ILocalisationContext } from '../../hoc/Localization/localisationProvider.types';
+import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MainDivBox } from './forgotPassword.style';
 import FormInput from '../FormInput/FormInput';
-import { LocalisationContext } from '../../hoc/Localization/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 import { forgotPassword } from '../../services/auth/auth.service';
 import { axiosInstance } from '../../services/axios.interceptors';
 import { getSecurityQuestions } from '../../services/user/user.service';
@@ -33,10 +33,10 @@ import utility from '../../utils/utility';
 
 const ForgotPassword = () => {
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);
-  const { localisation, updateLocalisation } = useContext(
-    LocalisationContext,
-  ) as ILocalisationContext;
-  const { localString } = localisation;
+  const {
+    localisation: { localString },
+  } = useContext(LocalisationContext) as ILocalisationContext;
+
   const required = localString?.required;
   const emailMessage = localString?.emailMessage;
   const minLengthPassword = localString?.minLengthSix;

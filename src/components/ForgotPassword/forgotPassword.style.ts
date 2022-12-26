@@ -7,6 +7,12 @@ export const MainDivBox = styled('div')(
     padding:${theme.typography.pxToRem(theme['padding']['secondary'])};
     display: flex;
     flex-direction: column;
+
+    ${theme.breakpoints.down('sm')} {
+    padding:${theme.typography.pxToRem(68)};
+    padding-bottom: ${theme.typography.pxToRem(theme['padding']['main'])};
+    padding-top:0;
+    }
   }
   .container{
     border-radius:${theme.typography.pxToRem(

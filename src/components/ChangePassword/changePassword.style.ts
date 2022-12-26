@@ -8,6 +8,11 @@ export const MainDivBox = styled('div')(
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    ${theme.breakpoints.down('sm')} {
+      padding-bottom: ${theme.typography.pxToRem(theme['padding']['main'])};
+      padding-top:0;
+      }
   }
   .container{
     border-radius:${theme.typography.pxToRem(

@@ -16,13 +16,13 @@ export const ProfileContainer = styled('div')(
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    z-index: ${theme.zIndex['appBar']};
+    z-index:0;
   }
 
   .profileDetails{
     box-shadow: ${theme.shadows[3]};
     position: absolute;
-    top:9%;
+    top:6%;
     right: ${theme.typography.pxToRem(theme['padding']['oneForth'])};
     min-width:  ${theme.typography.pxToRem(theme['width']['primary'])};
     background-color:${theme.palette.background.white};
@@ -32,10 +32,18 @@ export const ProfileContainer = styled('div')(
     justify-content: center;
     padding: ${theme.typography.pxToRem(theme['padding']['primary'])};
     gap:${theme.typography.pxToRem(theme['gap']['primary'])};
+
+    ${theme.breakpoints.down('sm')} {
+      padding:0;
+      gap:0;
+      right:0;
+      top:10%;
+      }
   }
 
   .actions{
     text-align: center;
+
   }
   
   .buttonItems{
@@ -44,6 +52,10 @@ export const ProfileContainer = styled('div')(
     color:${theme.palette['textColors']['grey']};
     padding:${theme.typography.pxToRem(theme['padding']['primary'])};
     background-color:${theme.palette['background']['white']};
+
+    ${theme.breakpoints.down('sm')} {
+      font-size:${theme.typography.fontSizeSmall};
+      }
   }
 
   .logoutButton,.settingsButton{
@@ -54,6 +66,10 @@ export const ProfileContainer = styled('div')(
     padding: ${theme.typography.pxToRem(
       theme['padding']['oneForth'],
     )} ${theme.typography.pxToRem(theme['padding']['primary'])};
+
+    ${theme.breakpoints.down('sm')} {
+      padding:0;
+      }
   }
 
   .buttonItems:hover{
@@ -70,6 +86,10 @@ export const ProfileContainer = styled('div')(
   .icon {
     margin-top: ${theme.typography.pxToRem(theme['margin']['oneForth'])};
     font-size: ${theme.typography.h2.fontSize};
+
+    ${theme.breakpoints.down('sm')} {
+      font-size:${theme.typography.fontSizeSmall};
+      }
   }
 
   .profileIcon{
