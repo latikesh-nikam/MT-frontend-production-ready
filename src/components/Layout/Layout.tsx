@@ -13,6 +13,7 @@ import Signup from '../Signup/Signup';
 import Sort from '../Sort/Sort';
 import Topbar from '../Topbar/Topbar';
 import ChangePassword from '../ChangePassword/ChangePassword';
+import PassengerDetailsForm from '../PassengerDetails/PassengerDetailsForm';
 
 const Layout = () => {
   return (

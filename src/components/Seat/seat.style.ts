@@ -1,3 +1,5 @@
+import { Box } from '@mui/material';
+import { grey } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 
 export const ParentBox = styled('div')(
@@ -129,6 +131,7 @@ export const ParentBox = styled('div')(
     ${theme.breakpoints.down('sm')} {
       margin-left:${theme.typography.pxToRem(48)};
       margin-top:${theme.typography.pxToRem(theme['margin']['twoRem'])};
+      display:none;
     }
     ${theme.breakpoints.down('md')} {
       flex-direction:column;
@@ -161,10 +164,41 @@ export const ParentBox = styled('div')(
       flex-direction:column;
     }
   }
+.drawer{
+  display:none;
 
-  .bg{
-    color:black;
-    
+  ${theme.breakpoints.down('sm')} {
+    display:flex;
   }
+}
+
+.styledBox{
+  display:none;
+  
+  ${theme.breakpoints.down('sm')} {
+    display:flex;
+    background-color:#fff;
+  }
+}
+.summaryButton{
+  position: fixed;
+  right: 1%;
+  bottom: 0;
+}
+
+
 `,
 );
+export const StyledBox = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[800],
+}));
+
+export const Puller = styled(Box)(({ theme }) => ({
+  width: 30,
+  height: 6,
+  backgroundColor: theme.palette.mode === 'light' ? grey[300] : grey[900],
+  borderRadius: 3,
+  position: 'absolute',
+  top: 8,
+  left: 'calc(50% - 15px)',
+}));

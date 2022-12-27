@@ -112,7 +112,7 @@ export default function SeatDetails({ selected }: any) {
             disabled={fare === 0}
             className="button"
             onClick={handleOpen}>
-            {localString?.totalFare}
+            {localString?.enterPassengerDetails}
           </Button>
         </CardActions>
       </Card>
