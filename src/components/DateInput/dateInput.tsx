@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useFormContext, Controller } from 'react-hook-form';
 import { TextField } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers';
+import { DesktopDatePicker } from '@mui/x-date-pickers';
 import { IDatePickerProps } from './dateInput.types';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
@@ -29,7 +29,7 @@ const DateInput = ({
       control={control}
       render={({ field: { onChange, value } }) => {
         return (
-          <DatePicker
+          <DesktopDatePicker
             minDate={new Date()}
             value={value}
             inputFormat="DD-MM-YY"

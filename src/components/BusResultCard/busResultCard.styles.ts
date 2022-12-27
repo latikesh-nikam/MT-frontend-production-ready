@@ -6,6 +6,7 @@ export const BusResultCardContainer = styled('div')(
     text-transform: capitalize;        
     border-radius:${theme.typography.pxToRem(theme.borderRadius.primary)};
     transition:all linear 0.2s;
+    padding: ${theme.typography.pxToRem(theme.padding.main)};
     display:flex;
     gap:${theme.typography.pxToRem(theme.gap.primary)};
     flex-direction:column;
@@ -18,73 +19,81 @@ export const BusResultCardContainer = styled('div')(
         font-weight: ${theme.typography.fontWeightLight};
     }
     
-    .busDetails{
-        flex:1;
-        display:flex;
-        padding:${theme.typography.pxToRem(theme.padding.main)};
-        gap:${theme.typography.pxToRem(theme.gap.larger)};
+    .vehicleDetails {
 
-        .vehicleAndTimeDetails{
-            flex:2;
-            display:flex;
-            justify-content:space-between;
-            gap:${theme.typography.pxToRem(theme.gap.primary)};
-
-
-            .vehicle{
-                flex:2;
-                p{
-                    text-transform:capitalize;
-                }
-                .vehicleName{
-                    margin-bottom:${theme.typography.pxToRem(
-                      theme.margin.primary,
-                    )};
-                }
-            }
+        .vehicleName{
+            margin-bottom: ${theme.typography.pxToRem(theme.margin.primary)}
+        }
     
-            .timeDetails{
-                flex:2;
+        .busDetails{
+            flex:1;
+            display:flex;
+            gap:${theme.typography.pxToRem(theme.gap.larger)};
+    
+            .vehicleAndTimeDetails{
+                flex:3;
                 display:flex;
-                justify-content:space-between;
-                gap:${theme.typography.pxToRem(theme.gap.small)};
-                .time{
-                    display:flex;
-                    flex-direction:column;
-                    gap:${theme.typography.pxToRem(theme.gap.secondary)};
-                    justify-content:space-between;
-
-                    &.totalDuration{
-                        text-transform:none;
+                justify-content:space-around;
+    
+                .vehicle{
+                    flex:1;
+                    p{
+                        text-transform:capitalize;
+                    }
+                    .vehicleName{
+                        margin-bottom:${theme.typography.pxToRem(
+                          theme.margin.primary,
+                        )};
                     }
                 }
+        
+                .timeDetails{
+                    flex:2;
+                    display:flex;
+                    justify-content:space-between;
+                    gap:${theme.typography.pxToRem(theme.gap.small)};
+                    .time{
+                        display:flex;
+                        flex-direction:column;
+                        gap:${theme.typography.pxToRem(theme.gap.secondary)};
+    
+                        &.totalDuration{
+                            text-transform:none;
+                        }
+                    }
+                }
+                
             }
-            
-        }
-
-        .fareAndSeatsAvailabilty{
-            display:flex;
-            gap:${theme.typography.pxToRem(theme.gap.secondary)};
-            justify-content:space-between;
-        }
-
-        .ratingDetails{
-            color:${theme.palette.textColors.white};
-
-            .ratings{
-                padding:${theme.typography.pxToRem(
-                  theme.padding.small,
-                )} ${theme.typography.pxToRem(theme.padding.primary)};
-                &.green{
-                    background-color: ${theme.palette.commonBgColor.lightGreen};
-                }
-                &.orange{
-                    background-color: ${
-                      theme.palette.commonBgColor.lightOrange
-                    };
-                }
-                &.red{
-                    background-color: ${theme.palette.commonBgColor.lightRed};
+    
+            .fareAndSeatsAvailabilty{
+                flex:2;
+                display:flex;
+                gap:${theme.typography.pxToRem(theme.gap.secondary)};
+                justify-content:space-between;
+            }
+    
+            .ratingDetails{
+                color:${theme.palette.textColors.white};
+    
+                .ratings{
+                    padding:${theme.typography.pxToRem(
+                      theme.padding.small,
+                    )} ${theme.typography.pxToRem(theme.padding.primary)};
+                    &.green{
+                        background-color: ${
+                          theme.palette.commonBgColor.lightGreen
+                        };
+                    }
+                    &.orange{
+                        background-color: ${
+                          theme.palette.commonBgColor.lightOrange
+                        };
+                    }
+                    &.red{
+                        background-color: ${
+                          theme.palette.commonBgColor.lightRed
+                        };
+                    }
                 }
             }
         }
@@ -93,7 +102,6 @@ export const BusResultCardContainer = styled('div')(
     .actionsContainer{
         display:flex;
         gap:${theme.typography.pxToRem(theme.gap.small)};
-        padding:${theme.typography.pxToRem(theme.padding.secondary)};
         justify-content:flex-end;
         .actions{
             cursor:pointer;
@@ -124,9 +132,9 @@ export const BusResultCardContainer = styled('div')(
         }
     }
 
-    &:hover {
-        box-shadow:${theme.shadows[3]};
-        transform:scale(101%);
+    &:hover, &:active {
+        box-shadow:${theme.shadows[4]};
+        z-index: 10;
 }
 
 ${theme.breakpoints.down('sm')}{
@@ -139,31 +147,29 @@ ${theme.breakpoints.down('sm')}{
         font-size:${theme.typography.fontSizeSmall};
     }
 
-   .busDetails{
-    jusitfy-content: space-between;
-    gap:${theme.typography.pxToRem(theme.gap.primary)};
+    .vehicleDetails{
 
-    .vehicleAndTimeDetails{
-        flex-direction:column;
-        gap: ${theme.typography.pxToRem(theme.gap.secondary)};
-
-
-        .timeDetails{
-            .departure{
-            h3{ 
-                font-size:${theme.typography.fontSizeSmall};
-               }
-            }
-            .time{
-                justify-content:center;
-            }
+        .busDetails{
+         flex-direction:column;
+         gap:${theme.typography.pxToRem(theme.gap.primary)};
+     
+         .vehicleAndTimeDetails{
+             gap: ${theme.typography.pxToRem(theme.gap.secondary)};
+     
+             .timeDetails{
+                 .departure{
+                 h3{ 
+                     font-size:${theme.typography.fontSizeSmall};
+                    }
+                 }
+                 .time{
+                     justify-content:center;
+                 }
+             }
+         }
         }
     }
 
-    .fareAndSeatsAvailabilty{
-        flex-direction:column;
-    }
-   }
 }
 
 `,

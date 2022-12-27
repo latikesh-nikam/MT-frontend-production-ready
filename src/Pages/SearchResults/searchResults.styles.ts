@@ -27,30 +27,34 @@ export const SearchResultsContainer = styled('div')(
 
   }
 
-  .searResultsMain {
+  .searchResultsMain {
     flex: 1;
     display: flex;
     
     .sidebar {
       display: flex;
-      max-height: calc(100vh - ${theme.typography.pxToRem(96)});
       overflow-y: scroll;
       border-right: thin solid ${theme.palette.borderFaded2};
       flex-direction:column;
+      max-height: calc(100vh - ${theme.typography.pxToRem(96)});
       position:sticky;
       padding:${theme.typography.pxToRem(theme.padding.primary)};
       gap:${theme.typography.pxToRem(theme.gap.secondary)};
+
+      .MuiDivider-root{
+        border-color: ${theme.palette.borderFaded2};
+      }
       
       &::-webkit-scrollbar {
         display:none;
         };
     }
 
-    .searchRresults{
+    .searchResults{
         flex: 5;
         display:flex;
         flex-direction:column;
-    }
+      }
   }
 
   .filterIcon{
@@ -58,7 +62,7 @@ export const SearchResultsContainer = styled('div')(
     bottom:2%;
     right:3%;
     cursor:pointer;
-    z-index-1;
+    z-index: 1;
     padding:${theme.typography.pxToRem(theme.padding.primary)};
     box-shadow:${theme.shadows[4]};
     font-size: ${theme.typography.fontSizeMedium};
@@ -71,8 +75,7 @@ export const SearchResultsContainer = styled('div')(
     .filterIcon{
       display:block;
     }
-    .searResultsMain{
-
+    .searchResultsMain{
       .sidebar{
         display:none;
       }

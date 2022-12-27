@@ -52,71 +52,81 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
 
   return (
     <BusResultCardContainer onClick={!windowWidth ? handleViewSeats : () => {}}>
-      <div className="busDetails">
-        <div className="vehicleAndTimeDetails">
-          <div className="vehicle">
-            <h3 className="vehicleName">
-              {operatorName} {vehicleName}
-            </h3>
-            <p className="lightGrey">
-              {vehicleType} {vehicleClassType}
-            </p>
-          </div>
-
-          <div className="timeDetails">
-            <div className="departure time">
-              <h3>{departure.sourceDepartureTime}</h3>
-
-              {windowWidth && (
-                <p className="lightGrey">{departure.sourceName}</p>
-              )}
-            </div>
-
-            <div className="totalDuration time">
+      <div className="vehicleDetails">
+        <div className="vehicleName">
+          <h3>
+            {operatorName} {vehicleName}
+          </h3>
+        </div>
+        <div className="busDetails">
+          <div className="vehicleAndTimeDetails">
+            <div className="vehicle">
               <p className="lightGrey">
-                {totalTravelTime} {hourString}
+                {vehicleType} {vehicleClassType}
               </p>
             </div>
 
-            <div className="arrival time">
-              <p>{arrival.sourceDepartureTime}</p>
-              {windowWidth && <p className="lightGrey">{arrival.sourceName}</p>}
-            </div>
-          </div>
-        </div>
-        {ratings && (
-          <div className="ratingDetails">
-            <div className={ratingClassName}>
-              <p>{ratings}</p>
-            </div>
-          </div>
-        )}
-        <div className="fareAndSeatsAvailabilty">
-          <div className="fare">
-            <p className="lightGrey">{localString?.startsFrom}</p>
-            <h3>
-              <span className="lightGrey fontWeightLight">
-                {' '}
-                {localString?.INR}
-              </span>{' '}
-              {fixedFare}
-            </h3>
-          </div>
+            <div className="timeDetails">
+              <div className="departure time">
+                <h3>{departure.sourceDepartureTime}</h3>
 
-          <div className="seatsAvailability">
-            <p className="lightGrey">
-              {' '}
-              {TotalAvailableSeat} {localString?.seats} {localString?.available}
-            </p>
+                {windowWidth && (
+                  <p className="lightGrey">{departure.sourceName}</p>
+                )}
+              </div>
+
+              <div className="totalDuration time">
+                <p className="lightGrey">
+                  {totalTravelTime} {hourString}
+                </p>
+              </div>
+
+              <div className="arrival time">
+                <p>{arrival.sourceDepartureTime}</p>
+                {windowWidth && (
+                  <p className="lightGrey">{arrival.sourceName}</p>
+                )}
+              </div>
+            </div>
           </div>
+          {ratings && (
+            <div className="ratingDetails">
+              <div className={ratingClassName}>
+                <p>{ratings}</p>
+              </div>
+            </div>
+          )}
+          <div className="fareAndSeatsAvailabilty">
+            <div className="fare">
+              <p className="lightGrey">{localString?.startsFrom}</p>
+              <h3>
+                <span className="lightGrey fontWeightLight">
+                  {' '}
+                  {localString?.rs}
+                </span>{' '}
+                {fixedFare}
+              </h3>
+            </div>
+
+            <div className="seatsAvailability">
+              <p className="lightGrey">
+                {' '}
+                {TotalAvailableSeat} {localString?.seats}{' '}
+                {localString?.available}
+              </p>
+            </div>
+          </div>
+          {windowWidth && (
+            <div className="viewSeats">
+              <Button
+                variant="contained"
+                size="small"
+                onClick={handleViewSeats}>
+                {localString?.viewSeats}
+              </Button>
+            </div>
+          )}
         </div>
-        {windowWidth && (
-          <div className="viewSeats">
-            <Button variant="contained" size="small" onClick={handleViewSeats}>
-              {localString?.viewSeats}
-            </Button>
-          </div>
-        )}
       </div>
 
       {windowWidth && (

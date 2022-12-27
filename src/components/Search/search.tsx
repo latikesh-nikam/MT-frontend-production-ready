@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import Button from '@mui/material/Button/Button';
+import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import DateInput from '../DateInput/dateInput';
 import SearchableDropdown from '../SearchableDropdown/searchableDropdown';
 import { StoreContext } from '../../context/StoreContext/storeContext';
@@ -19,6 +20,8 @@ import { epochDate } from '../../utils/utility';
 import { useDidMountEffect } from '../../hooks/useDidMountEffect';
 import { searchFormDataAction } from '../../context/actions/dashboardActions/dashboardActions';
 import { fetchAllStations } from '../../services/user/user.service';
+import Avatar from '@mui/material/Avatar/Avatar';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const Search = ({ navigateTo = '' }: ISearchProps) => {
   const [allStations, updateAllStations] = useState<IAllStation[]>([]);
@@ -41,6 +44,9 @@ const Search = ({ navigateTo = '' }: ISearchProps) => {
   } = useContext(LocalisationContext) as ILocalisationContext;
 
   const navigate = useNavigate();
+  const { width } = useWindowSize();
+
+  const windowWidth = width > 576;
 
   const required = localString['required'];
   const differentCities = localString['differentCities'];
@@ -113,6 +119,11 @@ const Search = ({ navigateTo = '' }: ISearchProps) => {
                   searchList={allStations}
                 />
               </div>
+              {!windowWidth && (
+                <Avatar className="arrowIcon">
+                  <ArrowForwardRoundedIcon fontSize="small" />
+                </Avatar>
+              )}
               <div className="formInput">
                 <SearchableDropdown
                   name="to"

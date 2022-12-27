@@ -6,10 +6,15 @@ export const BusResultsContainer = styled('div')(
     flex:1;
     display:flex;
     flex-direction:column;
-    gap:${theme.typography.pxToRem(theme.gap.primary)};
+    gap:${theme.typography.pxToRem(theme.gap.main)};
     letter-spacing: ${theme.typography.subtitle2.letterSpacing};
-    padding:${theme.typography.pxToRem(theme.padding.secondary)};
+    overflow-y: scroll;
+    padding: ${theme.typography.pxToRem(theme.padding.main)};    
     max-height: calc(100vh - ${theme.typography.pxToRem(96)});
-    overflow-y: scroll;    
+
+    ${theme.breakpoints.down('sm')}{
+      max-height: calc(100vh - ${theme.typography.pxToRem(181)});
+
+    }
 `,
 );

@@ -1,4 +1,4 @@
-import { Fragment, useContext } from 'react';
+import { useContext } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import FormLabel from '@mui/material/FormLabel/FormLabel';
 import Slider from '@mui/material/Slider/Slider';

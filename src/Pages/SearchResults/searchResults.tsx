@@ -53,18 +53,18 @@ const SearchResults = () => {
       <div className="search">
         <Search />
       </div>
-      <div className="searResultsMain">
+      <div className="searchResultsMain">
         <aside className="sidebar">
           <Sort />
           <Divider />
           <Filter />
         </aside>
-        <div className="searchRresults">
+        <main className="searchResults">
           <InfiniteScroll
             handlePageChange={handlePageNumber}
             Component={BusResults}
           />
-        </div>
+        </main>
       </div>
       <div className="filterIcon" onClick={handleFilterIcon}>
         <TuneOutlinedIcon />

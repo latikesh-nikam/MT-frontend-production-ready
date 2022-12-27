@@ -6,21 +6,17 @@ export const InputContainer = styled('div')(
     .MuiFormLabel-root{
     padding:  ${theme.typography.pxToRem(theme.padding.main)};
 color: ${theme.palette.textColors.black};
-      border-radius:${theme.typography.pxToRem(theme.borderRadius.small)};
     }
     
-    .MuiOutlinedInput-root{
-      border-radius:0.5rem;
-    }
-
     ${theme.breakpoints.down('sm')} {
       .MuiOutlinedInput-root{
-        border-radius:0;
-        padding:0;
+        padding: ${theme.typography.pxToRem(
+          theme.padding.small,
+        )} ${theme.typography.pxToRem(theme.padding.primary)}
       }
   
       .MuiOutlinedInput-input{
-        padding:0.75rem;
+        padding:0.5rem;
       }
     }
     `,

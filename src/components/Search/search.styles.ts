@@ -5,16 +5,30 @@ export const SearchContainer = styled('div')(
     z-index:1;
     padding:0 ${theme.typography.pxToRem(theme.padding.secondary)};
     display:flex;
-    gap:${theme.typography.pxToRem(theme.gap.small)};      
+    gap:${theme.typography.pxToRem(theme.gap.small)}; 
 
+    
     .searchForm{
       display:flex;
       gap:${theme.typography.pxToRem(theme.gap.primary)};      
       
       .row{
+        position:relative;
         flex:2;
         display:flex;
         gap:${theme.typography.pxToRem(theme.gap.primary)};
+
+            
+    .arrowIcon{
+      background-color: ${theme.palette.background.grey};
+      position:absolute;
+      top: 50%;
+      left:50%;
+      z-index: 2;
+      transform: translate(-50%,-50%);
+      height: ${theme.typography.pxToRem(30)};
+      width: ${theme.typography.pxToRem(30)};
+    }
         
         .formInput{
           flex:1;
