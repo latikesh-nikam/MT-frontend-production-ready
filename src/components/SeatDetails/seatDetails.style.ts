@@ -2,9 +2,6 @@ import { styled } from '@mui/material/styles';
 export const SeatDetailsContainer = styled('div')(
   ({ theme }: any) => `
 
-  ${theme.breakpoints.down('sm')} {
-    margin-right:${theme.typography.pxToRem(100)};
-  }
 
   .image{
     height:${theme.typography.pxToRem(theme['height']['medium'])};
@@ -20,9 +17,10 @@ export const SeatDetailsContainer = styled('div')(
     )};
 
     ${theme.breakpoints.down('sm')} {
-      max-width:${theme.typography.pxToRem(theme['width']['new'])};
-      margin-left:${theme.typography.pxToRem(100)};
-      margin-bottom:${theme.typography.pxToRem(16)};
+      max-width:${theme.typography.pxToRem(295)};
+      
+      // margin-left:${theme.typography.pxToRem(100)};
+      // margin-bottom:${theme.typography.pxToRem(16)};
     }
   }
 
@@ -68,9 +66,13 @@ export const SeatDetailsContainer = styled('div')(
   }
 
   .berthData{
-    ${theme.breakpoints.down('sm')} {
-      margin-right:${theme.typography.pxToRem(theme['margin']['berthBottom'])};
+
     }
+  }
+
+  ${theme.breakpoints.down('sm')} {
+    display:flex;
+    justify-content:center;
   }
 
     `,

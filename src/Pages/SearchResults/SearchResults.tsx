@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
 import Divider from '@mui/material/Divider/Divider';
-import Search from '../../components/Search/Search';
-import Filter from '../../components/Filter/Filter';
-import Sort from '../../components/Sort/Sort';
-import BusResults from '../../components/BusResults/BusResults';
+import Search from '../../components/Search/search';
+import Filter from '../../components/Filter/filter';
+import Sort from '../../components/Sort/sort';
+import BusResults from '../../components/BusResults/busResults';
 import { SearchResultsContainer } from './searchResults.styles';
-import InfiniteScroll from '../../components/InfiniteScroll/InifiniteScroll';
+import InfiniteScroll from '../../components/InfiniteScroll/inifiniteScroll';
 import { useContext, useEffect } from 'react';
 import { StoreContext } from '../../context/StoreContext/StoreContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';

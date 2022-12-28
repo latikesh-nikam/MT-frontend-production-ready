@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import ErrorBoundary from './hoc/ErrorBoundary/ErrorBoundary';
-import Layout from './components/Layout/Layout';
+import Layout from './components/Layout/layout';
 import StoreProvider from './context/StoreContext/StoreContext';
 import LocalisationProvider from './hoc/LocalisationProvider/LocalisationProvider';
 import Toaster from './hoc/Toaster/Toaster';

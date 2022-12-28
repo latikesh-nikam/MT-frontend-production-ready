@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { forgotPassword } from '../../services/auth/auth.service';
 
 import userEvent from '@testing-library/user-event';
-import ForgotPassword from '../../components/ForgotPassword/ForgotPassword';
+import ForgotPassword from '../../components/ForgotPassword/forgotPassword';
 import LocalisationProvider from '../../hoc/LocalisationProvider/LocalisationProvider';
 import MuiThemeProvider from '../../theme/ThemeProvider';
 

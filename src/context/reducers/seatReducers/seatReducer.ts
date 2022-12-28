@@ -3,13 +3,13 @@ import { IReducerAction } from '../index.types';
 import { ISeatState } from './seatReducer.types';
 
 const INITIAL_STATE: ISeatState = {
-  selectedVehicleData: [],
+  selectedVehicleData: {},
 };
 
 const seatReducer = (state: ISeatState, { type, payload }: IReducerAction) => {
   switch (type) {
     case SEAT_DATA: {
-      return payload;
+      return { ...state, selectedVehicleData: payload };
     }
     default: {
       return state;

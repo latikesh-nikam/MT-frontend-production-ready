@@ -1,19 +1,19 @@
 import { Route } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
 import Auth from '../../Pages/Auth/Auth';
-import Berth from '../Berth/Berth';
+import Berth from '../../Pages/ViewSeats/viewSeats';
 import Home from '../../Pages/Home/Home';
 import Main from '../../Pages/Main/Main';
 import MobileFilter from '../../Pages/MobileFilter/MobileFilter';
 import SearchResults from '../../Pages/SearchResults/SearchResults';
-import SignIn from '../SignIn/SignIn';
-import ForgotPassword from '../ForgotPassword/ForgotPassword';
-import Seat from '../Seat/Seat';
-import Signup from '../Signup/Signup';
-import Sort from '../Sort/Sort';
-import Topbar from '../Topbar/Topbar';
-import ChangePassword from '../ChangePassword/ChangePassword';
-import PassengerDetailsForm from '../PassengerDetails/PassengerDetailsForm';
+import SignIn from '../SignIn/signIn';
+import ForgotPassword from '../ForgotPassword/forgotPassword';
+import Seat from '../Sleeper/sleeper';
+import Signup from '../Signup/signup';
+import Sort from '../Sort/sort';
+import Topbar from '../Topbar/topbar';
+import ChangePassword from '../ChangePassword/changePassword';
+import PassengerDetailsForm from '../PassengerDetails/passengerDetailsForm';
 
 const Layout = () => {
   return (
@@ -27,10 +27,10 @@ const Layout = () => {
       <Route path="/home" element={<Main />}>
         <Route index element={<Home />} />
         <Route path="searchResults" element={<SearchResults />} />
+        <Route path="viewSeats" element={<Berth />} />
         <Route path="filter" element={<MobileFilter />} />
       </Route>
       <Route path="/seat" element={<Seat />} />
-      <Route path="/berth" element={<Berth />} />
       <Route path="/sort" element={<Sort />} />
       <Route path="/topbar" element={<Topbar />}></Route>
     </Routes>

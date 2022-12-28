@@ -6,13 +6,19 @@ import { IBusResultCardProps } from './busResultCard.types';
 import { iconMap } from '../BusResults/busResults.data';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
+import { StoreContext } from '../../context/StoreContext/StoreContext';
+import { IStoreContext } from '../../context/StoreContext/storeContext.types';
+import { seatDataAction } from '../../context/actions/seatActions/seatActions';
+import { useNavigate } from 'react-router';
 
 const BusResultCard = ({ data }: IBusResultCardProps) => {
   const [selected, setSelected] = useState('');
-
+  const { dispatch } = useContext(StoreContext) as IStoreContext;
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
+
+  const navigate = useNavigate();
   const {
     vehicleName,
     operatorName,
@@ -41,6 +47,10 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
     else setSelected(type);
   };
 
+  const handleViewSeats = (data: any) => {
+    dispatch(seatDataAction(data));
+    navigate('/home/viewSeats');
+  };
   return (
     <BusResultCardContainer>
       <div className="busDetails">
@@ -89,7 +99,10 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
           </p>
         </div>
         <div className="viewSeats">
-          <Button variant="contained" size="small">
+          <Button
+            variant="contained"
+            size="small"
+            onClick={() => handleViewSeats(data)}>
             {localString?.viewSeats}
           </Button>
         </div>

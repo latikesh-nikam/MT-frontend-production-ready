@@ -16,6 +16,15 @@ export const ParentBox = styled('div')(
     flex-direction:column;
   }
 
+  .parentContainer{
+    display:flex;
+    gap:${theme.typography.pxToRem(theme.gap.larger)};
+
+    ${theme.breakpoints.down('md')} {
+      flex-direction:column;
+    }
+
+  }
   .upperSeatBox{
     border:thin solid ${theme.palette.background.grey};
     
@@ -122,6 +131,7 @@ export const ParentBox = styled('div')(
     ${theme.breakpoints.down('sm')} {
       margin-left:${theme.typography.pxToRem(48)};
       margin-top:${theme.typography.pxToRem(theme['margin']['twoRem'])};
+      display:none;
     }
     ${theme.breakpoints.down('md')} {
       flex-direction:column;
@@ -163,6 +173,39 @@ export const ParentBox = styled('div')(
     ${theme.breakpoints.down('sm')} {
       flex-direction:column;
     }
+  }
+
+  .drawer{
+    display:none;
+  
+    ${theme.breakpoints.down('sm')} {
+      display:flex;
+    }
+  }
+  
+  .styledBox{
+    display:none;
+    
+    ${theme.breakpoints.down('sm')} {
+      display:flex;
+      background-color:#fff;
+    }
+  }
+  .summaryButton{
+    position: fixed;
+    right: 1%;
+    bottom: 0;
+  }
+  
+  .childrenContainer{
+    display:flex;
+    flex:1;
+    justify-content:center;
+    align-items:center;
+  }
+  
+  .heading{
+    margin-top:1rem;
   }
 
 `,

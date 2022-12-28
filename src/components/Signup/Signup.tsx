@@ -28,11 +28,11 @@ import { TextField } from '@mui/material';
 
 import { MainDivBox } from './signup.style';
 
-import FormInput from '../FormInput/FormInput';
+import FormInput from '../FormInput/formInput';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 
-import { ISignupProps } from './Signup.types';
-import { IQuestionProps } from './Signup.types';
+import { ISignupProps } from './signup.types';
+import { IQuestionProps } from './signup.types';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { signUp } from '../../services/auth/auth.service';
 import { getSecurityQuestions } from '../../services/user/user.service';

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { StoreContext } from '../../context/StoreContext/StoreContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { BusResultsContainer } from './busResults.styles';
-import BusResultCard from '../BusResultCard/BusResultCard';
+import BusResultCard from '../BusResultCard/busResultCard';
 import { IBusResultsProps } from './busResults.type';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';

@@ -9,17 +9,28 @@ import { Grid } from '@mui/material';
 import { Divider } from '@mui/material';
 
 import image from '../../assets/images/sw.png';
-import { berthData } from '../Berth/berth.mockData';
 import { detailsContainer } from './seater.mockdata';
 
 import { ParentBox } from './seater.style';
-import SeatDetails from '../SeatDetails/SeatDetails';
-import { ISeatProps } from '../Seat/seat.types';
+import SeatDetails from '../SeatDetails/seatDetails';
+import { ISeatProps } from '../Sleeper/sleeper.types';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
+import BottomBar from '../../hoc/BottomBar/bottomBar';
+import { StoreContext } from '../../context/StoreContext/StoreContext';
+import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 
 function Seater() {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
+
+  const {
+    state: {
+      seatState: { selectedVehicleData },
+    },
+  } = useContext(StoreContext) as IStoreContext;
+
+  const berthData = selectedVehicleData.seatDetails as ISeatProps[];
+
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
@@ -84,7 +95,6 @@ function Seater() {
       </Grid>
     );
   }
-  console.log(selected);
 
   return (
     <Fragment>
@@ -136,7 +146,16 @@ function Seater() {
             })}
           </Box>
         </Box>
-        <Box className="berthData">
+        {selected.length > 0 && (
+          <BottomBar text="Swipe up for Booking Summary">
+            <Box
+              sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}
+              className="childrenContainer">
+              <SeatDetails selected={selected} />
+            </Box>
+          </BottomBar>
+        )}
+        <Box className="seatDetails">
           <SeatDetails selected={selected} />
         </Box>
       </ParentBox>

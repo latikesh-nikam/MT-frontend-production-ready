@@ -3,7 +3,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 import Autocomplete from '@mui/material/Autocomplete/Autocomplete';
 import TextField from '@mui/material/TextField/TextField';
 import Box from '@mui/material/Box/Box';
-import { ISearchableDropdownProps } from './SearchableDropdown.types';
+import { ISearchableDropdownProps } from './searchableDropdown.types';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { InputContainer } from '../FormInput/formInput.styles';

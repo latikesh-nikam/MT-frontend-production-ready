@@ -21,15 +21,26 @@ import { IPassengerCountProps } from './passengerDetails.types';
 import { IPassengerDetails } from './passengerDetails.types';
 
 import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
-import FormInput from '../FormInput/FormInput';
-import RadioInput from '../RadioInput/RadioInput';
+import FormInput from '../FormInput/formInput';
+import RadioInput from '../RadioInput/radioInput';
 
 import { Parent } from './passengerDetails.style';
+import { IStoreContext } from '../../context/StoreContext/storeContext.types';
+import { StoreContext } from '../../context/StoreContext/StoreContext';
+import utility from '../../utils/utility';
+import { vehicleBooking } from '../../services/vehicle/vehicle.service';
 
 function PassengerDetailsForm(passengerCount: IPassengerCountProps) {
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
+  const {
+    state: {
+      seatState: {
+        selectedVehicleData: { vehicleID, _id, vehicleNumber },
+      },
+    },
+  } = useContext(StoreContext) as IStoreContext;
   const { passengerCount: count } = passengerCount;
   count.sort((a: any, b: any) => a.seatNo - b.seatNo);
   const required = localString?.required;
@@ -39,7 +50,7 @@ function PassengerDetailsForm(passengerCount: IPassengerCountProps) {
 
   const passengerDetailsSchema = Yup.object({
     email: Yup.string().required(required).email(emailMessage),
-    phone: Yup.string()
+    phoneNumber: Yup.string()
       .required(required)
       .min(10, minLengthPhone)
       .max(10, maxLengthPhone),
@@ -62,15 +73,33 @@ function PassengerDetailsForm(passengerCount: IPassengerCountProps) {
   } = methods;
 
   const { fields } = useFieldArray<any>({
-    name: 'seats',
+    name: 'passengerDetails',
     control,
   });
 
+  console.log(vehicleID, 'vehicleId');
+  console.log(_id, '_id');
+  console.log(vehicleNumber, 'vehicleNUmber');
+  console.log(utility.getStore('userId'), 'userId');
+
   const submit = async (data: IPassengerDetailsProps) => {
-    data.seats.forEach((element: IPassengerDetailsFormProps, index: number) => {
-      element.seatNo = count[index].seatNo;
-    });
-    console.log(data);
+    console.log(vehicleID, 'id');
+    data.passengerDetails.forEach(
+      (element: IPassengerDetailsFormProps, index: number) => {
+        element.passengerSeat = count[index].seatNo;
+        element.userId = utility.getStore('userId') as string;
+        element.email = data.email;
+        element.phoneNumber = data.phoneNumber;
+      },
+    );
+    const response = await vehicleBooking(
+      {
+        passengerDetails: [...data.passengerDetails],
+      },
+      _id,
+      vehicleNumber,
+    );
+    console.log(response, 'response');
   };
 
   return (
@@ -85,7 +114,6 @@ function PassengerDetailsForm(passengerCount: IPassengerCountProps) {
               </h4>
               {count.length &&
                 count.map((element: IPassengerDetails, index: number) => {
-                  console.log(element, 'element');
                   return (
                     <Paper elevation={2} className="paper">
                       <Box className="row">
@@ -97,20 +125,20 @@ function PassengerDetailsForm(passengerCount: IPassengerCountProps) {
                       <Box className="inputs">
                         <Box>
                           <FormInput
-                            name={`seats.${index}.name`}
+                            name={`passengerDetails.${index}.passengerName`}
                             label="enterName"
                             showErrorMessage
                             size="small"
                           />
 
                           <RadioInput
-                            name={`seats.${index}.gender`}
+                            name={`passengerDetails.${index}.passengerGender`}
                             label="Select Gender"
                             options={genderOptions}
                             row
                           />
                           <FormInput
-                            name={`seats.${index}.age`}
+                            name={`passengerDetails.${index}.passengerAge`}
                             label="enterAge"
                             showErrorMessage
                             size="small"
@@ -135,7 +163,7 @@ function PassengerDetailsForm(passengerCount: IPassengerCountProps) {
                   />
 
                   <FormInput
-                    name="phone"
+                    name="phoneNumber"
                     label="enterPhoneNumber"
                     showErrorMessage
                     size="small"

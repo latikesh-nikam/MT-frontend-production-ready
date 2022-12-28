@@ -15,27 +15,30 @@ import { Divider } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import image from '../../assets/images/sw.png';
-import SeatDetails from '../SeatDetails/SeatDetails';
-import { detailsContainer } from './seatMockData';
+import SeatDetails from '../SeatDetails/seatDetails';
 
-import { ParentBox, Puller, StyledBox } from './seat.style';
-import { berthData } from '../Berth/berth.mockData';
-import { ISeatProps } from './seat.types';
+import { ParentBox } from './sleeper.style';
+// import { berthData } from '../Berth/berth.mockData';
+import { ISeatProps } from './sleeper.types';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { Global } from '@emotion/react';
-import PassengerDetailsForm from '../PassengerDetails/PassengerDetailsForm';
+import PassengerDetailsForm from '../PassengerDetails/passengerDetailsForm';
 import BottomBar from '../../hoc/BottomBar/bottomBar';
-
-const drawerBleeding = 56;
-
-interface Props {
-  window?: () => Window;
-}
+import { StoreContext } from '../../context/StoreContext/StoreContext';
+import { IStoreContext } from '../../context/StoreContext/storeContext.types';
+import { detailsContainer } from './sleeperMockData';
 
 function Seat() {
-  const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<ISeatProps[]>([]);
+  const {
+    state: {
+      seatState: { selectedVehicleData },
+    },
+  } = useContext(StoreContext) as IStoreContext;
+
+  const berthData = selectedVehicleData.seatDetails as ISeatProps[];
+
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
@@ -75,7 +78,7 @@ function Seat() {
     }
   };
 
-  const lowerDeck = berthData.filter(element => element.deck === 'lower Deck');
+  const lowerDeck = berthData.filter(element => element.seatNo.includes('L'));
 
   const dataLengthForLowerSeats = lowerDeck.length;
 
@@ -88,7 +91,7 @@ function Seat() {
 
   //////////////////////////////////////////////////
 
-  const upperDeck = berthData.filter(element => element.deck === 'upper Deck');
+  const upperDeck = berthData.filter(element => element.seatNo.includes('U'));
   const dataLengthForUpperSeats = upperDeck.length;
 
   const singleRowForUpperSeats = upperDeck.slice(
@@ -208,116 +211,16 @@ function Seat() {
         </Box>
 
         {/* selected seats */}
-
-        {/* <Box className="drawer">
-          <Global
-            styles={{
-              '.MuiDrawer-root > .MuiPaper-root': {
-                height: `calc(50% - ${drawerBleeding}px)`,
-                overflow: 'visible',
-              },
-            }}
-          />
-          {selected.length > 0 && (
-            <Button
-              size="small"
-              onClick={() => setOpen(true)}
-              className="summaryButton">
-              Swipe up for booking summary
-            </Button>
-          )}
-          <SwipeableDrawer
-            anchor="bottom"
-            open={open}
-            onClose={() => setOpen(false)}
-            onOpen={() => setOpen(true)}
-            swipeAreaWidth={drawerBleeding}
-            disableSwipeToOpen={false}
-            ModalProps={{
-              keepMounted: true,
-            }}>
-            <StyledBox
-              sx={{
-                visibility: 'hidden',
-                position: 'absolute',
-                top: -drawerBleeding,
-                borderTopLeftRadius: 8,
-                borderTopRightRadius: 8,
-                right: 0,
-                left: 0,
-              }}>
-              <Puller />
-              <Typography sx={{ p: 2, color: 'text.secondary' }}>
-                Total Fare : ₹2000
-                <span>
-                  {open && (
-                    <span onClick={() => setOpen(false)}>
-                      <KeyboardArrowDownIcon />
-                    </span>
-                  )}
-                </span>
-              </Typography>
-            </StyledBox>
-            <StyledBox
-              sx={{
-                px: 2,
-                pb: 2,
-                height: '100%',
-                overflow: 'auto',
-              }}> */}
-        <BottomBar text="Swipe up for Booking Summary">
-          <Box>
-            <Box className="heading">
-              <Typography gutterBottom variant="h3" component="div">
-                {localString?.bookingSummary}
-              </Typography>
+        {selected.length > 0 && (
+          <BottomBar text="Swipe up for Booking Summary">
+            <Box
+              sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}
+              className="childrenContainer">
+              <SeatDetails selected={selected} />
             </Box>
-            <Box className="source">
-              <Typography variant="h5" color="text.secondary">
-                {localString?.source}: <span className="rightText">Pune</span>
-              </Typography>
-              <Typography variant="h5" color="text.secondary">
-                <span className="rightText bottom">Swargate - 9:00am</span>
-              </Typography>
-            </Box>
-            <Box className="destination">
-              <Typography variant="h5" color="text.secondary">
-                {localString?.destination}:{' '}
-                <span className="rightText">Nagpur</span>
-              </Typography>
-              <Typography variant="h5" color="text.secondary">
-                <span className="rightText bottom">ABC Bus Stop - 12:00pm</span>
-              </Typography>
-            </Box>
-            <Box className="seats">
-              <Typography variant="h5" color="text.secondary">
-                {localString?.seatsSelected}:{' '}
-                <span className="rightText">
-                  {selected.length > 0
-                    ? selected
-                        .map((element: any) => element.seatNo)
-                        .sort((a: number, b: number) => a - b)
-                        .join(', ')
-                    : 'None'}
-                </span>
-              </Typography>
-            </Box>
-            <Box className="fare">
-              <Typography variant="h5" color="text.secondary">
-                {localString?.totalFare}:{' '}
-                <span className="rightText">Rs. {fare}</span>
-              </Typography>
-            </Box>
-            <Button variant="contained" size="small">
-              Fill Passenger Details
-            </Button>
-          </Box>
-        </BottomBar>
-        {/* </StyledBox>
-          </SwipeableDrawer>
-        </Box> */}
-
-        <Box className="seatDetails" sx={{ marginTop: '10rem' }}>
+          </BottomBar>
+        )}
+        <Box className="seatDetails">
           <SeatDetails selected={selected} />
         </Box>
       </ParentBox>

@@ -1,3 +1,3 @@
 export interface ISeatState {
-  selectedVehicleData: any[];
+  selectedVehicleData: any;
 }

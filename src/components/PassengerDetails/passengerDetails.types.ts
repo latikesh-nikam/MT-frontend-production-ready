@@ -1,10 +1,10 @@
 export type IPassengerDetailsProps = {
   name?: string;
   email: string;
-  phone: number | string;
+  phoneNumber: number | string;
   gender?: string;
   age?: string;
-  seats: [];
+  passengerDetails: [];
 };
 
 export type IPassengerCountProps = {
@@ -24,8 +24,11 @@ export type IFieldArrayProps = {
 };
 
 export type IPassengerDetailsFormProps = {
-  name: string;
-  seatNo: number;
-  age: string | number;
-  gender: string;
+  passengerName: string;
+  passengerSeat: number;
+  passengerAge: string | number;
+  passengerGender: string;
+  email?: string;
+  phoneNumber?: string | number;
+  userId?: string;
 };

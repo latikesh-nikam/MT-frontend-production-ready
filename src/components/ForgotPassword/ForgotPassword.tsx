@@ -18,13 +18,13 @@ import { Paper } from '@mui/material';
 import { Select } from '@mui/material';
 
 import IForgotPasswordProps from './forgotPassword.types';
-import { IQuestionProps } from '../Signup/Signup.types';
+import { IQuestionProps } from '../Signup/signup.types';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MainDivBox } from './forgotPassword.style';
-import FormInput from '../FormInput/FormInput';
+import FormInput from '../FormInput/formInput';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 import { forgotPassword } from '../../services/auth/auth.service';
 import { axiosInstance } from '../../services/axios.interceptors';

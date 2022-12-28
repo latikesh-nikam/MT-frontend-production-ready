@@ -12,10 +12,12 @@ import { Button } from '@mui/material';
 import { CardActionArea } from '@mui/material';
 import { CardActions } from '@mui/material';
 
-import PassengerDetailsForm from '../PassengerDetails/PassengerDetailsForm';
+import PassengerDetailsForm from '../PassengerDetails/passengerDetailsForm';
 import { SeatDetailsContainer } from './seatDetails.style';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
+import { StoreContext } from '../../context/StoreContext/StoreContext';
+import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -37,8 +39,16 @@ export default function SeatDetails({ selected }: any) {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
 
+  const {
+    state: {
+      seatState: {
+        selectedVehicleData: { fixedFare },
+      },
+    },
+  } = useContext(StoreContext) as IStoreContext;
+
   const fare = selected.reduce(
-    (current: number, sum: any) => current + sum.seatFare,
+    (current: number, sum: any) => current + sum.seatFare + fixedFare,
     0,
   );
 
@@ -48,6 +58,8 @@ export default function SeatDetails({ selected }: any) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  console.log(fixedFare, 'fixedFare');
 
   return (
     <SeatDetailsContainer>

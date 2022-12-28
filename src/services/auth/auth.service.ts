@@ -2,7 +2,7 @@ import { ISignInInput } from '../../components/SignIn/signIn.types';
 import { apiRoutes } from '../../constants/apiRoutes';
 import utility from '../../utils/utility';
 import { axiosInstance } from '../axios.interceptors';
-import { ISignupProps } from '../../components/Signup/Signup.types';
+import { ISignupProps } from '../../components/Signup/signup.types';
 import IForgotPasswordProps from '../../components/ForgotPassword/forgotPassword.types';
 import IChangePasswordProps from '../../components/ChangePassword/changePassword.types';
 
@@ -11,6 +11,7 @@ export const signIn = async (signInData: ISignInInput) => {
     const { data } = await axiosInstance.post(apiRoutes.logIn, signInData);
     utility.setStore('accessToken', data.access_token);
     utility.setStore('refreshToken', data.refresh_token);
+    utility.setStore('userId', data.id);
     return data;
   } catch (error) {
     throw error;

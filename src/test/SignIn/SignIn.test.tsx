@@ -7,7 +7,7 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
-import SignIn from '../../components/SignIn/SignIn';
+import SignIn from '../../components/SignIn/signIn';
 import LocalisationProvider from '../../hoc/LocalisationProvider/LocalisationProvider';
 import { signIn } from '../../services/auth/auth.service';
 import MuiThemeProvider from '../../theme/ThemeProvider';

@@ -16,10 +16,10 @@ import { LocalisationContext } from '../../hoc/LocalisationProvider/Localisation
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { StoreContext } from '../../context/StoreContext/StoreContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
-import FormInputCheckBox from '../FormInputCheckbox/FormInputCheckbox';
+import FormInputCheckBox from '../FormInputCheckbox/formInputCheckbox';
 import SliderInput from '../Slider/Slider';
-import RadioInput from '../RadioInput/RadioInput';
-import SearchableDropdown from '../SearchableDropdown/SearchableDropdown';
+import RadioInput from '../RadioInput/radioInput';
+import SearchableDropdown from '../SearchableDropdown/searchableDropdown';
 import { epochDate } from '../../utils/utility';
 import { useDidMountEffect } from '../../hooks/useDidMountEffect';
 import { filterDataAction } from '../../context/actions/dashboardActions/dashboardActions';

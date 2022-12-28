@@ -1,6 +1,6 @@
 import Divider from '@mui/material/Divider/Divider';
-import Filter from '../../components/Filter/Filter';
-import Sort from '../../components/Sort/Sort';
+import Filter from '../../components/Filter/filter';
+import Sort from '../../components/Sort/sort';
 import { routes } from '../../constants/route';
 import { MobileFilterContainer } from './mobile.styles';
 

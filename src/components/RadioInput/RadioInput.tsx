@@ -37,7 +37,6 @@ const RadioInput = ({
             {...radioGroupProps}>
             {options &&
               options.map(({ label, value, displayIcon: Icon }, index) => {
-                console.log(Icon);
                 return (
                   <FormControlLabel
                     key={index}

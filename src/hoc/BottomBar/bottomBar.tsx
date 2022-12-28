@@ -15,14 +15,11 @@ function BottomBar({ children, text }: IBottomBarProps) {
         <Global
           styles={{
             '.MuiDrawer-root > .MuiPaper-root': {
-              height: `calc(50% - ${drawerBleeding}px)`,
               overflow: 'visible',
             },
           }}
         />
-        <Box onClick={() => setOpen(true)} className="button">
-          {text}
-        </Box>
+        <Box className="button">{text}</Box>
         <SwipeableDrawer
           anchor="bottom"
           open={open}
@@ -47,10 +44,7 @@ function BottomBar({ children, text }: IBottomBarProps) {
           </StyledBox>
           <StyledBox
             sx={{
-              px: 2,
-              pb: 2,
               height: '100%',
-              overflow: 'auto',
             }}>
             {children}
           </StyledBox>
