@@ -13,7 +13,7 @@ import Signup from '../Signup/signup';
 import Sort from '../Sort/sort';
 import Topbar from '../Topbar/topbar';
 import ChangePassword from '../ChangePassword/changePassword';
-import PassengerDetailsForm from '../PassengerDetails/passengerDetailsForm';
+import BookingSuccessful from '../../Pages/BookingSuccess/bookingSuccessful';
 
 const Layout = () => {
   return (
@@ -33,6 +33,7 @@ const Layout = () => {
       <Route path="/seat" element={<Seat />} />
       <Route path="/sort" element={<Sort />} />
       <Route path="/topbar" element={<Topbar />}></Route>
+      <Route path="/success" element={<BookingSuccessful />}></Route>
     </Routes>
   );
 };
