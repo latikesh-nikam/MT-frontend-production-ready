@@ -103,5 +103,9 @@
   "proceedToPayment": "Proceed To Payment",
   "passengerDetails": "Passenger Details",
   "a-z": "A - Z",
-  "z-a": "Z - A"
+  "z-a": "Z - A",
+  "bookingSuccessful": "Booking Successful",
+  "clickToViewBookingSummary": "Click to View Booking Summary",
+  "backToHome": "Back to Home",
+  "downloadTicket": "Download Ticket"
 }

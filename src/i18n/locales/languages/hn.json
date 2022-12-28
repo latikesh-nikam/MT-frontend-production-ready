@@ -102,5 +102,9 @@
   "proceedToPayment": "भुगतान करें",
   "passengerDetails": "यात्री विवरण",
   "a-z": "A - Z",
-  "z-a": "Z - A"
+  "z-a": "Z - A",
+  "bookingSuccessful": "बुकिंग सफल",
+  "clickToViewBookingSummary": "बुकिंग सारांश देखने के लिए क्लिक करें",
+  "backToHome": "घर",
+  "downloadTicket": "टिकट डाउनलोड करें"
 }

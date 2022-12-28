@@ -1,27 +1,35 @@
 import { Box, Button, Tooltip } from '@mui/material';
 import { Container } from './bookingSuccessful.style';
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import success from '../../assets/images/success.gif';
 import { useNavigate } from 'react-router-dom';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 
 function BookingSuccessful() {
   const navigate = useNavigate();
+  const {
+    localisation: { localString },
+  } = useContext(LocalisationContext) as ILocalisationContext;
   return (
     <Fragment>
       <Container>
         <img src={success} alt="success gif" />
-        <h2 className="heading">Booking Successful</h2>
-        <Tooltip title="Click to view Booking Summary" placement="right">
+        <h2 className="heading">{localString['bookingSuccessful']}</h2>
+        <Tooltip
+          title={localString['clickToViewBookingSummary']}
+          placement="right">
           <p>
-            Booking Id : <span className="bookingId">621438</span>
+            {localString['bookingId']} :{' '}
+            <span className="bookingId">621438</span>
           </p>
         </Tooltip>
         <Box className="buttonGroup">
           <Button variant="contained" size="small" onClick={() => navigate(-1)}>
-            Back to Home
+            {localString['backToHome']}
           </Button>
           <Button variant="contained" size="small">
-            Download Ticket
+            {localString['downloadTicket']}
           </Button>
         </Box>
       </Container>
