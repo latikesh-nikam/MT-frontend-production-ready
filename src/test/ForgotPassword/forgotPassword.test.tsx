@@ -9,8 +9,8 @@ import { forgotPassword } from '../../services/auth/auth.service';
 
 import userEvent from '@testing-library/user-event';
 import ForgotPassword from '../../components/ForgotPassword/forgotPassword';
-import LocalisationProvider from '../../hoc/LocalisationProvider/LocalisationProvider';
-import MuiThemeProvider from '../../theme/ThemeProvider';
+import LocalisationProvider from '../../hoc/LocalisationProvider/localisationProvider';
+import MuiThemeProvider from '../../theme/themeProvider';
 
 test('Rendered Forgot Password', () => {
   render(

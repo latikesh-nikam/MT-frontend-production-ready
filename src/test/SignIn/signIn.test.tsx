@@ -8,9 +8,9 @@ import {
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import SignIn from '../../components/SignIn/signIn';
-import LocalisationProvider from '../../hoc/LocalisationProvider/LocalisationProvider';
+import LocalisationProvider from '../../hoc/LocalisationProvider/localisationProvider';
 import { signIn } from '../../services/auth/auth.service';
-import MuiThemeProvider from '../../theme/ThemeProvider';
+import MuiThemeProvider from '../../theme/themeProvider';
 
 jest.mock('../../services/axios.instance');
 

@@ -20,7 +20,7 @@ import { IPassengerDetailsFormProps } from './passengerDetails.types';
 import { IPassengerCountProps } from './passengerDetails.types';
 import { IPassengerDetails } from './passengerDetails.types';
 
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import FormInput from '../FormInput/formInput';
 import RadioInput from '../RadioInput/radioInput';
 

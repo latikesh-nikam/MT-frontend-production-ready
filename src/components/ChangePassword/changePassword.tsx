@@ -16,7 +16,7 @@ import { MainDivBox } from './changePassword.style';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import IChangePasswordProps from './changePassword.types';
 
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';

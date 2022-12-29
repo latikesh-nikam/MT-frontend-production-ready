@@ -10,7 +10,7 @@ import DateInput from '../DateInput/dateInput';
 import SearchableDropdown from '../SearchableDropdown/searchableDropdown';
 import { StoreContext } from '../../context/StoreContext/StoreContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { SearchContainer } from './search.styles';
 import { IAllStation, ISearchInput } from './search.types';

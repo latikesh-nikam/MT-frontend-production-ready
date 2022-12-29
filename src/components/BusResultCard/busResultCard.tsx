@@ -4,7 +4,7 @@ import Divider from '@mui/material/Divider/Divider';
 import { BusResultCardContainer } from './busResultCard.styles';
 import { IBusResultCardProps } from './busResultCard.types';
 import { iconMap } from '../BusResults/busResults.data';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { StoreContext } from '../../context/StoreContext/StoreContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';

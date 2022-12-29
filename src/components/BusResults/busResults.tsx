@@ -4,7 +4,7 @@ import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { BusResultsContainer } from './busResults.styles';
 import BusResultCard from '../BusResultCard/busResultCard';
 import { IBusResultsProps } from './busResults.type';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 
 const BusResults = ({

@@ -20,7 +20,7 @@ import SeatDetails from '../SeatDetails/seatDetails';
 import { ParentBox } from './sleeper.style';
 // import { berthData } from '../Berth/berth.mockData';
 import { ISeatProps } from './sleeper.types';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { Global } from '@emotion/react';
 import PassengerDetailsForm from '../PassengerDetails/passengerDetailsForm';

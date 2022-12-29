@@ -25,7 +25,7 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MainDivBox } from './forgotPassword.style';
 import FormInput from '../FormInput/formInput';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { forgotPassword } from '../../services/auth/auth.service';
 import { axiosInstance } from '../../services/axios.interceptors';
 import { getSecurityQuestions } from '../../services/user/user.service';

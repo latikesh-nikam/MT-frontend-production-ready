@@ -7,7 +7,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import FormInputCheckBox from '../FormInputCheckbox/formInputCheckbox';
 import { ISortProps, ISortTypes } from './sort.types';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import RadioInput from '../RadioInput/radioInput';
 import { StoreContext } from '../../context/StoreContext/StoreContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';

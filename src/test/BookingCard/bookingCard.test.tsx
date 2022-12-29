@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import BookingCard from '../../components/BookingCard/BookingCard';
-import LocalisationProvider from '../../hoc/LocalisationProvider/LocalisationProvider';
+import BookingCard from '../../components/BookingCard/bookingCard';
+import LocalisationProvider from '../../hoc/LocalisationProvider/localisationProvider';
 import { mockBookingsData } from '../../mock/bookingsData/bookings.data';
-import MuiThemeProvider from '../../theme/ThemeProvider';
+import MuiThemeProvider from '../../theme/themeProvider';
 
 test('render booking card correclty', () => {
   render(

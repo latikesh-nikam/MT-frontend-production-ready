@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { ProfileContainer } from './profile.style';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { logout } from '../../services/auth/auth.service';
 import { routes } from '../../constants/route';

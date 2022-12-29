@@ -4,7 +4,7 @@ import FormControl from '@mui/material/FormControl/FormControl';
 import FormLabel from '@mui/material/FormLabel/FormLabel';
 import FormControlLabel from '@mui/material/FormControlLabel/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox/Checkbox';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { CheckboxContainer } from './formInputChecbox.styles';
 import { IFormInputCheckboxProps } from './formInputCheckbox.types';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';

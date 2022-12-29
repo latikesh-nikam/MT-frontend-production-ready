@@ -3,7 +3,7 @@ import { useFormContext, Controller } from 'react-hook-form';
 import { TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import { IDatePickerProps } from './dateInput.types';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { InputContainer } from '../FormInput/formInput.styles';
 

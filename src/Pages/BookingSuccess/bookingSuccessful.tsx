@@ -3,7 +3,7 @@ import { Container } from './bookingSuccessful.style';
 import React, { Fragment, useContext } from 'react';
 import success from '../../assets/images/success.gif';
 import { useNavigate } from 'react-router-dom';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 
 function BookingSuccessful() {

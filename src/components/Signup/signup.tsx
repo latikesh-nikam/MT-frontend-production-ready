@@ -29,7 +29,7 @@ import { TextField } from '@mui/material';
 import { MainDivBox } from './signup.style';
 
 import FormInput from '../FormInput/formInput';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 
 import { ISignupProps } from './signup.types';
 import { IQuestionProps } from './signup.types';

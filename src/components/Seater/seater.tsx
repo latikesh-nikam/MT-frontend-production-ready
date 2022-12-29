@@ -14,7 +14,7 @@ import { detailsContainer } from './seater.mockdata';
 import { ParentBox } from './seater.style';
 import SeatDetails from '../SeatDetails/seatDetails';
 import { ISeatProps } from '../Sleeper/sleeper.types';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import BottomBar from '../../hoc/BottomBar/bottomBar';
 import { StoreContext } from '../../context/StoreContext/StoreContext';

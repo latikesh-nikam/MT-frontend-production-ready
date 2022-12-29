@@ -1,11 +1,11 @@
 import { Route } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
-import Auth from '../../Pages/Auth/Auth';
+import Auth from '../../Pages/Auth/auth';
 import Berth from '../../Pages/ViewSeats/viewSeats';
-import Home from '../../Pages/Home/Home';
-import Main from '../../Pages/Main/Main';
-import MobileFilter from '../../Pages/MobileFilter/MobileFilter';
-import SearchResults from '../../Pages/SearchResults/SearchResults';
+import Home from '../../Pages/Home/home';
+import Main from '../../Pages/Main/main';
+import MobileFilter from '../../Pages/MobileFilter/mobileFilter';
+import SearchResults from '../../Pages/SearchResults/searchResults';
 import SignIn from '../SignIn/signIn';
 import ForgotPassword from '../ForgotPassword/forgotPassword';
 import Seat from '../Sleeper/sleeper';

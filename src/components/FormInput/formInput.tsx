@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { TextField } from '@mui/material';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { IFormInputProps } from './formInput.types';
 import { InputContainer } from './formInput.styles';
 

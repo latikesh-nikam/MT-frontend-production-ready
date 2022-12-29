@@ -14,7 +14,7 @@ import { CardActions } from '@mui/material';
 
 import PassengerDetailsForm from '../PassengerDetails/passengerDetailsForm';
 import { SeatDetailsContainer } from './seatDetails.style';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { StoreContext } from '../../context/StoreContext/StoreContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';

@@ -4,7 +4,7 @@ import Autocomplete from '@mui/material/Autocomplete/Autocomplete';
 import TextField from '@mui/material/TextField/TextField';
 import Box from '@mui/material/Box/Box';
 import { ISearchableDropdownProps } from './searchableDropdown.types';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/LocalisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { InputContainer } from '../FormInput/formInput.styles';
 import { SearchableDropdownContainer } from './searchableDropdown.styles';

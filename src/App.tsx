@@ -1,10 +1,10 @@
 import { BrowserRouter } from 'react-router-dom';
-import ErrorBoundary from './hoc/ErrorBoundary/ErrorBoundary';
+import ErrorBoundary from './hoc/ErrorBoundary/errorBoundary';
 import Layout from './components/Layout/layout';
 import StoreProvider from './context/StoreContext/StoreContext';
-import LocalisationProvider from './hoc/LocalisationProvider/LocalisationProvider';
-import Toaster from './hoc/Toaster/Toaster';
-import MuiThemeProvider from './theme/ThemeProvider';
+import LocalisationProvider from './hoc/LocalisationProvider/localisationProvider';
+import Toaster from './hoc/Toaster/toaster';
+import MuiThemeProvider from './theme/themeProvider';
 
 const App = () => {
   return (
