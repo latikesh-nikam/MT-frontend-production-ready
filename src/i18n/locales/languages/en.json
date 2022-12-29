@@ -124,5 +124,7 @@
   "bookingSuccessful": "Booking Successful",
   "clickToViewBookingSummary": "Click to View Booking Summary",
   "backToHome": "Back to Home",
-  "downloadTicket": "Download Ticket"
+  "downloadTicket": "Download Ticket",
+  "swipeUpTo": "Swipe up to",
+  "view": "view"
 }

@@ -1,5 +1,3 @@
-import { SvgIconTypeMap } from '@mui/material';
-import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { RadioGroupProps } from '@mui/material/RadioGroup';
 
 export type IRadioInputProps = {

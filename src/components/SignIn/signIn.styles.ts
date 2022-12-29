@@ -7,7 +7,7 @@ padding: ${theme.typography.pxToRem(theme.padding.main)};
 gap: ${theme.typography.pxToRem(theme.gap.main)};
 box-shadow: ${theme.shadows[6]};
 background:${theme.palette.textColors.white};
-border-radius:${theme.borderRadius.primary};
+border-radius:${theme.typography.pxToRem(theme.borderRadius.primary)};
 
 .formHeading {
   color:${theme.palette.primary.main};

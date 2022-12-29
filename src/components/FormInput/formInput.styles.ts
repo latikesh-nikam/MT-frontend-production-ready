@@ -5,12 +5,5 @@ export const InputContainer = styled('div')(
 .MuiFormLabel-root {
 	color: ${theme.palette.textColors.black};
 }
-
-${theme.breakpoints.down('sm')} {
-	.MuiOutlinedInput-input {
-		font-size: ${theme.typography.fontSizeSmall};
-	}
-}
-
 `,
 );
