@@ -4,6 +4,7 @@ import { IMuiThemeProviderProps } from './themeProvider.types';
 
 const MuiThemeProvider = ({ children }: IMuiThemeProviderProps) => {
   const theme = createTheme(appTheme as ThemeOptions);
+
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
 

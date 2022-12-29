@@ -27,8 +27,20 @@ const SearchableDropdown = ({
                 .length > 0
                 ? searchList.filter(station => station.stationName === value)[0]
                 : null
+              searchList.filter(station => station.stationName === value)
+                .length > 0
+                ? searchList.filter(station => station.stationName === value)[0]
+                : null
             }
             getOptionLabel={option => option.stationName || option.label}
+            renderOption={(props, option) => (
+              <Box
+                component="li"
+                {...props}
+                sx={{ textTransform: 'capitalize' }}>
+                {option.stationName || option.label}
+              </Box>
+            )}
             renderOption={(props, option) => (
               <Box
                 component="li"

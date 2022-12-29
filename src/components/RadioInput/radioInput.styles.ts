@@ -11,5 +11,13 @@ export const RadioGroupContainer = styled('div')(
     }
     .radioGroup{
         
+        display:flex;
+        gap:${theme.typography.pxToRem(theme.gap.primary)};
+        font-size: ${theme.typography.pxToRem(theme.typography.fontSizeSmall)}
+    }
+
+    .icon{
+        position:absolute;
+        margin-left: ${theme.typography.pxToRem(4.8)};
     }`,
 );

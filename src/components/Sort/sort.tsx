@@ -2,14 +2,17 @@ import { Fragment, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm, FormProvider } from 'react-hook-form';
 import Button from '@mui/material/Button/Button';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import FormInputCheckBox from '../FormInputCheckbox/formInputCheckbox';
 import { ISortProps, ISortTypes } from './sort.types';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import RadioInput from '../RadioInput/radioInput';
-import { StoreContext } from '../../context/StoreContext/storeContext';
+import { StoreContext } from '../../context/StoreContext/StoreContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { sortDataAction } from '../../context/actions/dashboardActions/dashboardActions';
+import { MainContaiiner } from './sort.style';
 
 const Sort = ({ navigateTo = '' }: ISortProps) => {
   const {
@@ -34,9 +37,22 @@ const Sort = ({ navigateTo = '' }: ISortProps) => {
   });
   const { handleSubmit } = methods;
 
-  const sortValue = [
+  const fareValue = [
     { label: 'fareLowToHigh', value: '1' },
     { label: 'fareHighToLow', value: '-1' },
+  ];
+
+  const nameValue = [
+    {
+      label: 'a-z',
+      value: '1',
+      displayIcon: <ArrowDownwardIcon fontSize="small" />,
+    },
+    {
+      label: 'z-a',
+      value: '-1',
+      displayIcon: <ArrowUpwardIcon fontSize="small" />,
+    },
   ];
 
   const ratingOption = [
@@ -73,20 +89,26 @@ const Sort = ({ navigateTo = '' }: ISortProps) => {
 
   return (
     <Fragment>
-      <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(submit)} autoComplete="off">
-          <RadioInput label="fare" name="fixedFare" options={sortValue} />
+      <MainContaiiner>
+        <FormProvider {...methods}>
+          <form
+            onSubmit={handleSubmit(submit)}
+            autoComplete="off"
+            className="sortForm">
+            <RadioInput label="fare" name="fixedFare" options={fareValue} />
+            <RadioInput label="name" name="name" options={nameValue} />
 
-          <FormInputCheckBox
-            options={ratingOption}
-            label={'ratings'}
-            name="ratings"
-          />
-          <Button type="submit" fullWidth variant="contained">
-            {localString['sort']}
-          </Button>
-        </form>
-      </FormProvider>
+            <FormInputCheckBox
+              options={ratingOption}
+              label={'ratings'}
+              name="ratings"
+            />
+            <Button type="submit" fullWidth variant="contained">
+              {localString['sort']}
+            </Button>
+          </form>
+        </FormProvider>
+      </MainContaiiner>
     </Fragment>
   );
 };

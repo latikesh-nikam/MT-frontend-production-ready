@@ -1,6 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
+import ErrorBoundary from './hoc/ErrorBoundary/errorBoundary';
 import Layout from './components/Layout/layout';
-import StoreProvider from './context/StoreContext/storeContext';
+import StoreProvider from './context/StoreContext/StoreContext';
 import LocalisationProvider from './hoc/LocalisationProvider/localisationProvider';
 import Toaster from './hoc/Toaster/toaster';
 import MuiThemeProvider from './theme/themeProvider';
@@ -11,9 +12,11 @@ const App = () => {
       <LocalisationProvider>
         <MuiThemeProvider>
           <StoreProvider>
-            <Toaster>
-              <Layout />
-            </Toaster>
+            <ErrorBoundary>
+              <Toaster>
+                <Layout />
+              </Toaster>
+            </ErrorBoundary>
           </StoreProvider>
         </MuiThemeProvider>
       </LocalisationProvider>

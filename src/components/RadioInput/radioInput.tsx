@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { Fragment, useContext } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import FormControlLabel from '@mui/material/FormControlLabel/FormControlLabel';
 import Radio from '@mui/material/Radio/Radio';
@@ -14,6 +14,7 @@ const RadioInput = ({
   label,
   options,
   row = false,
+  ...radioGroupProps
 }: IRadioInputProps) => {
   const {
     localisation: { localString },
@@ -29,15 +30,24 @@ const RadioInput = ({
           <FormLabel className="formLabel" component="legend">
             {localString[label]}
           </FormLabel>
-          <RadioGroup {...field} className="radioGroup" row={row}>
+          <RadioGroup
+            {...field}
+            className="radioGroup"
+            row={row}
+            {...radioGroupProps}>
             {options &&
-              options.map(({ label, value }, index) => {
+              options.map(({ label, value, displayIcon: Icon }, index) => {
                 return (
                   <FormControlLabel
                     key={index}
                     value={value}
                     control={<Radio />}
-                    label={localString[label]}
+                    label={
+                      <Fragment>
+                        {localString[label]}
+                        <span className="icon">{Icon}</span>
+                      </Fragment>
+                    }
                   />
                 );
               })}

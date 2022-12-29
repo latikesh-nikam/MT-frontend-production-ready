@@ -45,9 +45,9 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
     if (selected === type) setSelected('');
     else setSelected(type);
   };
-
-  const handleViewSeats = () => {
-    console.log('view seats');
+  const handleViewSeats = (data: any) => {
+    dispatch(seatDataAction(data));
+    navigate('/home/viewSeats');
   };
 
   return (

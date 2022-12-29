@@ -12,5 +12,6 @@ color: ${theme.palette.textColors.black};
         font-size: ${theme.typography.fontSizeSmall};
       }
     }
+
     `,
 );

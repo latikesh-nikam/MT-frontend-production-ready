@@ -3,9 +3,15 @@ import { Controller, useFormContext } from 'react-hook-form';
 import FormLabel from '@mui/material/FormLabel/FormLabel';
 import Slider from '@mui/material/Slider/Slider';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { SliderContainer } from './slider.styles';
 import { ISliderProps } from './slider.types';
+
+const SliderInput = ({ data, name, label }: ISliderProps) => {
+  const {
+    localisation: { localString },
+  } = useContext(LocalisationContext) as ILocalisationContext;
 
 const SliderInput = ({ data, name, label }: ISliderProps) => {
   const {

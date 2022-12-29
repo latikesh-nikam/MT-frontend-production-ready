@@ -10,7 +10,6 @@ import { LocalisationContext } from '../../hoc/LocalisationProvider/localisation
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { logout } from '../../services/auth/auth.service';
 import { routes } from '../../constants/route';
-
 function Profile() {
   const [profile, setProfile] = useState(false);
   const navigate = useNavigate();
@@ -18,12 +17,10 @@ function Profile() {
     LocalisationContext,
   ) as ILocalisationContext;
   const { localString } = localisation;
-
   const handleLogout = async () => {
     const response = await logout();
     navigate('/');
   };
-
   return (
     <ProfileContainer>
       <div>
@@ -31,7 +28,6 @@ function Profile() {
           <AccountCircleSharpIcon className="profileIcon" />
         </div>
       </div>
-
       {profile && (
         <div
           className="profileDetailsContainer"
