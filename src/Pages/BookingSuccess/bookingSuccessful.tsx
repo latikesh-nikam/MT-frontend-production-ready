@@ -1,8 +1,8 @@
-import { Box, Button, Tooltip } from '@mui/material';
-import { Container } from './bookingSuccessful.style';
-import React, { Fragment, useContext } from 'react';
-import success from '../../assets/images/success.gif';
+import { Fragment, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Box, Button, Tooltip } from '@mui/material';
+import success from '../../assets/images/success.gif';
+import { Container } from './bookingSuccessful.style';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 

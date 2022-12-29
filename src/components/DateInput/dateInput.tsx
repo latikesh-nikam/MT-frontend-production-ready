@@ -4,7 +4,6 @@ import { TextField } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers';
 import { IDatePickerProps } from './dateInput.types';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { InputContainer } from '../FormInput/formInput.styles';
 
@@ -17,16 +16,11 @@ const DateInput = ({
     control,
     formState: { errors },
   } = useFormContext();
-  const {
-    control,
-    formState: { errors },
-  } = useFormContext();
+
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
 
-  const errorMessage =
-    showErrorMessage && errors[name] ? (errors[name]?.message as string) : '';
   const errorMessage =
     showErrorMessage && errors[name] ? (errors[name]?.message as string) : '';
 

@@ -1,3 +1,5 @@
+import { Control } from 'react-hook-form';
+
 export type IPassengerDetailsProps = {
   name?: string;
   email: string;
@@ -20,7 +22,8 @@ export type IPassengerDetails = {
 };
 
 export type IFieldArrayProps = {
-  name?: string;
+  name: string;
+  control: Control<IPassengerDetailsProps, any>;
 };
 
 export type IPassengerDetailsFormProps = {

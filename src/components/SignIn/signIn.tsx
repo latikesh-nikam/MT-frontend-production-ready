@@ -1,7 +1,6 @@
 import { useContext, useRef, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { FormProvider, useForm } from 'react-hook-form';
-import { SubmitHandler } from 'react-hook-form/dist/types/form';
+import { FormProvider, useForm, SubmitHandler } from 'react-hook-form';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';

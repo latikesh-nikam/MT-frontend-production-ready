@@ -6,22 +6,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import Button from '@mui/material/Button/Button';
+import Avatar from '@mui/material/Avatar/Avatar';
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import DateInput from '../DateInput/dateInput';
 import SearchableDropdown from '../SearchableDropdown/searchableDropdown';
 import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { SearchContainer } from './search.styles';
 import { IAllStation, ISearchInput } from './search.types';
 import { ISearchProps } from './search.types';
 import { epochDate } from '../../utils/utility';
-import { useDidMountEffect } from '../../hooks/useDidMountEffect';
 import { searchFormDataAction } from '../../context/actions/dashboardActions/dashboardActions';
 import { fetchAllStations } from '../../services/user/user.service';
-import Avatar from '@mui/material/Avatar/Avatar';
+import { useDidMountEffect } from '../../hooks/useDidMountEffect';
 import useWindowSize from '../../hooks/useWindowSize';
 
 const Search = ({ navigateTo = '' }: ISearchProps) => {

@@ -1,25 +1,16 @@
-import { Fragment } from 'react';
-import { useContext } from 'react';
-import { useForm } from 'react-hook-form';
-import { Controller } from 'react-hook-form';
+import { Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import { toast } from 'react-toastify';
-
-import { Box } from '@mui/system';
-import { Button } from '@mui/material';
-import { Paper } from '@mui/material';
-import { TextField } from '@mui/material';
-
-import { MainDivBox } from './changePassword.style';
-
-import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
-import IChangePasswordProps from './changePassword.types';
-
-import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
-
+import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import Paper from '@mui/material/Paper/Paper';
+import Box from '@mui/material/Box/Box';
+import TextField from '@mui/material/TextField/TextField';
+import Button from '@mui/material/Button/Button';
+import { MainDivBox } from './changePassword.style';
+import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
+import IChangePasswordProps from './changePassword.types';
+import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { changePassword } from '../../services/auth/auth.service';
 import utility from '../../utils/utility';
 
@@ -68,19 +59,13 @@ const ChangePassword = () => {
       });
       utility.setStore('accessToken', response.access_token);
       utility.setStore('refreshToken', response.refresh_token);
-      toast.success(`${response.message}`, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
     } catch (error: any) {
-      toast.error(error.response.data.error.message, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+      throw error;
     }
   };
 
   return (
     <Fragment>
-      <ToastContainer />
       <MainDivBox>
         <Paper elevation={3} className="container">
           <div className="formContainer">

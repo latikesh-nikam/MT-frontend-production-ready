@@ -1,19 +1,16 @@
 import { useContext, Fragment } from 'react';
-import { useContext, Fragment } from 'react';
+import Grid from '@mui/material/Grid/Grid';
 import { IRecentBookingsProps } from './recentBookings.types';
 import { RecentBookingsContainer } from './recentBookings.styles';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
-import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import BookingCard from '../BookingCard/bookingCard';
-import Grid from '@mui/material/Grid/Grid';
 
 const RecentBookings = ({ data }: IRecentBookingsProps) => {
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
 
-  const showBookingCard = data.length > 0;
   const showBookingCard = data.length > 0;
 
   return (

@@ -1,23 +1,19 @@
-import { Fragment, useContext } from 'react';
-import { useState } from 'react';
-
+import { Fragment, useContext, useState } from 'react';
 import ChairIcon from '@mui/icons-material/Chair';
 import ChairOutlinedIcon from '@mui/icons-material/ChairOutlined';
-import { Box } from '@mui/material';
-import { Typography } from '@mui/material';
-import { Grid } from '@mui/material';
-import { Divider } from '@mui/material';
-
+import Grid from '@mui/material/Grid/Grid';
+import Typography from '@mui/material/Typography/Typography';
+import Box from '@mui/material/Box/Box';
+import Divider from '@mui/material/Divider/Divider';
 import image from '../../assets/images/sw.png';
 import { detailsContainer } from './seater.mockdata';
-
 import { ParentBox } from './seater.style';
 import SeatDetails from '../SeatDetails/seatDetails';
 import { ISeatProps } from '../Sleeper/sleeper.types';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import BottomBar from '../../hoc/BottomBar/bottomBar';
-import { StoreContext } from '../../context/StoreContext/StoreContext';
+import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 
 function Seater() {

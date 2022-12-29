@@ -1,43 +1,32 @@
-import { Fragment } from 'react';
-import { useContext } from 'react';
-
-import { useFieldArray } from 'react-hook-form';
-import { useForm } from 'react-hook-form';
-import { FormProvider } from 'react-hook-form';
-
-import { toast } from 'react-toastify';
-
+import { Fragment, useContext } from 'react';
+import { useFieldArray, useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-
-import { Box } from '@mui/material';
-import { Paper } from '@mui/material';
-import { Button } from '@mui/material';
-
+import Box from '@mui/material/Box/Box';
+import Paper from '@mui/material/Paper/Paper';
+import Button from '@mui/material/Button/Button';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { IPassengerDetailsProps } from './passengerDetails.types';
 import { IPassengerDetailsFormProps } from './passengerDetails.types';
 import { IPassengerCountProps } from './passengerDetails.types';
 import { IPassengerDetails } from './passengerDetails.types';
-
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import FormInput from '../FormInput/formInput';
 import RadioInput from '../RadioInput/radioInput';
-
 import { Parent } from './passengerDetails.style';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
-import { StoreContext } from '../../context/StoreContext/StoreContext';
-import utility from '../../utils/utility';
+import { StoreContext } from '../../context/StoreContext/storeContext';
 import { vehicleBooking } from '../../services/vehicle/vehicle.service';
+import utility from '../../utils/utility';
 
-function PassengerDetailsForm(passengerCount: IPassengerCountProps) {
+function PassengerDetails(passengerCount: IPassengerCountProps) {
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
   const {
     state: {
       seatState: {
-        selectedVehicleData: { vehicleID, _id, vehicleNumber },
+        selectedVehicleData: { _id, vehicleNumber },
       },
     },
   } = useContext(StoreContext) as IStoreContext;
@@ -77,13 +66,7 @@ function PassengerDetailsForm(passengerCount: IPassengerCountProps) {
     control,
   });
 
-  console.log(vehicleID, 'vehicleId');
-  console.log(_id, '_id');
-  console.log(vehicleNumber, 'vehicleNUmber');
-  console.log(utility.getStore('userId'), 'userId');
-
   const submit = async (data: IPassengerDetailsProps) => {
-    console.log(vehicleID, 'id');
     data.passengerDetails.forEach(
       (element: IPassengerDetailsFormProps, index: number) => {
         element.passengerSeat = count[index].seatNo;
@@ -99,7 +82,6 @@ function PassengerDetailsForm(passengerCount: IPassengerCountProps) {
       _id,
       vehicleNumber,
     );
-    console.log(response, 'response');
   };
 
   return (
@@ -187,4 +169,4 @@ function PassengerDetailsForm(passengerCount: IPassengerCountProps) {
   );
 }
 
-export default PassengerDetailsForm;
+export default PassengerDetails;

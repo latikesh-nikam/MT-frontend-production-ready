@@ -1,10 +1,10 @@
 import { useContext } from 'react';
+import Grid from '@mui/material/Grid/Grid';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { IBookingsCardProps } from './bookingCard.types';
 import { BookingCardContainer } from './bookingCard.styles';
-import Grid from '@mui/material/Grid/Grid';
 
 const BookingCard = ({ data }: IBookingsCardProps) => {
   const {

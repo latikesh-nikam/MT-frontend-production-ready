@@ -1,10 +1,10 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { IBackNavbarProps } from './backNavbar.types';
 import { BackNavbarContainer } from './backNavbar.styles';
-import { useNavigate } from 'react-router-dom';
 
 const BackNavbar = ({ text }: IBackNavbarProps) => {
   const {

@@ -1,18 +1,26 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useWindowSize from '../../hooks/useWindowSize';
 import Button from '@mui/material/Button/Button';
 import { BusResultCardContainer } from './busResultCard.styles';
 import { IBusResultCardProps } from './busResultCard.types';
 import { iconMap } from '../BusResults/busResults.data';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
-import useWindowSize from '../../hooks/useWindowSize';
+import { StoreContext } from '../../context/StoreContext/storeContext';
+import { IStoreContext } from '../../context/StoreContext/storeContext.types';
+import { seatDataAction } from '../../context/actions/seatActions/seatActions';
 
 const BusResultCard = ({ data }: IBusResultCardProps) => {
   const [selected, setSelected] = useState('');
 
+  const { dispatch } = useContext(StoreContext) as IStoreContext;
+
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
+
+  const navigate = useNavigate();
 
   const { width } = useWindowSize();
   const windowWidth = width > 576;

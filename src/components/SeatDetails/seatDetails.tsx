@@ -1,37 +1,22 @@
-import { useContext, useEffect } from 'react';
-import { useState } from 'react';
-
+import { useContext, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import CardActionArea from '@mui/material/CardActionArea/CardActionArea';
+import Box from '@mui/material/Box/Box';
+import CardActions from '@mui/material/CardActions/CardActions';
+import Button from '@mui/material/Button/Button';
+import Modal from '@mui/material/Modal/Modal';
 import image from '../../assets/images/bookingbg.jpg';
-import { Box } from '@mui/material';
-import { Modal } from '@mui/material';
-import { Button } from '@mui/material';
-import { CardActionArea } from '@mui/material';
-import { CardActions } from '@mui/material';
-
-import PassengerDetailsForm from '../PassengerDetails/passengerDetailsForm';
 import { SeatDetailsContainer } from './seatDetails.style';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
-import { StoreContext } from '../../context/StoreContext/StoreContext';
+import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
+import { style } from './seatDetails.data';
+import PassengerDetails from '../PassengerDetails/passengerDetails';
 
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  pt: 2,
-  px: 4,
-  pb: 3,
-};
 export default function SeatDetails({ selected }: any) {
   console.log(selected, 'selected');
   const [open, setOpen] = useState(false);
@@ -58,8 +43,6 @@ export default function SeatDetails({ selected }: any) {
   const handleClose = () => {
     setOpen(false);
   };
-
-  console.log(fixedFare, 'fixedFare');
 
   return (
     <SeatDetailsContainer>
@@ -91,7 +74,9 @@ export default function SeatDetails({ selected }: any) {
                 <span className="rightText">Nagpur</span>
               </Typography>
               <Typography variant="h5" color="text.secondary">
-                <span className="rightText bottom">ABC Bus Stop - 12:00pm</span>
+                <span className="rightText bottom">
+                  ABC Bus Stop - 12:00pm{' '}
+                </span>
               </Typography>
             </Box>
             <Box className="seats">
@@ -134,7 +119,7 @@ export default function SeatDetails({ selected }: any) {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description">
         <Box sx={{ ...style, width: 400 }}>
-          <PassengerDetailsForm passengerCount={selected} />
+          <PassengerDetails passengerCount={selected} />
         </Box>
       </Modal>
     </SeatDetailsContainer>

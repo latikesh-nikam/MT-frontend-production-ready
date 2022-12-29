@@ -1,33 +1,22 @@
-import { Fragment } from 'react';
-import { useContext } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { FormProvider } from 'react-hook-form';
-import { useForm } from 'react-hook-form';
-import { Controller } from 'react-hook-form';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import { toast } from 'react-toastify';
-
-import { Box } from '@mui/system';
-import { Button } from '@mui/material';
-import { FormControl } from '@mui/material';
-import { InputLabel } from '@mui/material';
-import { MenuItem } from '@mui/material';
-import { Paper } from '@mui/material';
-import { Select } from '@mui/material';
-
+import { FormProvider, useForm, Controller } from 'react-hook-form';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import Paper from '@mui/material/Paper/Paper';
+import Box from '@mui/material/Box/Box';
+import FormControl from '@mui/material/FormControl/FormControl';
+import InputLabel from '@mui/material/InputLabel/InputLabel';
+import Select from '@mui/material/Select/Select';
+import MenuItem from '@mui/material/MenuItem/MenuItem';
+import Button from '@mui/material/Button/Button';
 import IForgotPasswordProps from './forgotPassword.types';
 import { IQuestionProps } from '../Signup/signup.types';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
-
-import * as Yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { MainDivBox } from './forgotPassword.style';
 import FormInput from '../FormInput/formInput';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { forgotPassword } from '../../services/auth/auth.service';
-import { axiosInstance } from '../../services/axios.interceptors';
 import { getSecurityQuestions } from '../../services/user/user.service';
 import utility from '../../utils/utility';
 
@@ -83,13 +72,8 @@ const ForgotPassword = () => {
       });
       utility.setStore('accessToken', response.access_token);
       utility.setStore('refreshToken', response.refresh_token);
-      toast.success(`${response.message}`, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
     } catch (error: any) {
-      toast.error(error.response.data.error.message, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+      throw error;
     }
   };
 
@@ -104,7 +88,6 @@ const ForgotPassword = () => {
 
   return (
     <Fragment>
-      <ToastContainer />
       <MainDivBox data-testid="forgotPasswordForm">
         <Paper elevation={3} className="container">
           <div className="formContainer">

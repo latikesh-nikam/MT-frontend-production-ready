@@ -10,7 +10,6 @@ import ForgotPassword from '../ForgotPassword/forgotPassword';
 import Seat from '../Sleeper/sleeper';
 import Signup from '../Signup/signup';
 import Sort from '../Sort/sort';
-import Topbar from '../Topbar/topbar';
 import ChangePassword from '../ChangePassword/changePassword';
 import BookingSuccessful from '../../Pages/BookingSuccess/bookingSuccessful';
 import Payment from '../../Pages/Payment/payment';
@@ -33,7 +32,6 @@ const Layout = () => {
       </Route>
       <Route path="/seat" element={<Seat />} />
       <Route path="/sort" element={<Sort />} />
-      <Route path="/topbar" element={<Topbar />}></Route>
       <Route path="/success" element={<BookingSuccessful />}></Route>
     </Routes>
   );

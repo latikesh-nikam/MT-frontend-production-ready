@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
+import Box from '@mui/material/Box/Box';
 import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 import Button from '@mui/material/Button';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
@@ -10,17 +10,21 @@ import { LocalisationContext } from '../../hoc/LocalisationProvider/localisation
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { logout } from '../../services/auth/auth.service';
 import { routes } from '../../constants/route';
+
 function Profile() {
   const [profile, setProfile] = useState(false);
   const navigate = useNavigate();
+
   const { localisation } = useContext(
     LocalisationContext,
   ) as ILocalisationContext;
   const { localString } = localisation;
+
   const handleLogout = async () => {
     const response = await logout();
     navigate('/');
   };
+
   return (
     <ProfileContainer>
       <div>

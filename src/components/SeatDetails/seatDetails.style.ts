@@ -2,7 +2,6 @@ import { styled } from '@mui/material/styles';
 export const SeatDetailsContainer = styled('div')(
   ({ theme }: any) => `
 
-
   .image{
     height:${theme.typography.pxToRem(theme['height']['medium'])};
     min-width:${theme.typography.pxToRem(theme['width']['main'])}

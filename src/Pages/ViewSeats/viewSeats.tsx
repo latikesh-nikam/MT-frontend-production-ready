@@ -1,5 +1,5 @@
 import { Fragment, useContext } from 'react';
-import { StoreContext } from '../../context/StoreContext/StoreContext';
+import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import Topbar from '../../components/Topbar/topbar';
 import { vehicleTypeMap } from './viewSeats.data';

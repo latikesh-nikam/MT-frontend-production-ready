@@ -1,31 +1,15 @@
-import { Fragment, useContext } from 'react';
-import { useState } from 'react';
-
-import {
-  Box,
-  Button,
-  CssBaseline,
-  Paper,
-  Skeleton,
-  SwipeableDrawer,
-  Typography,
-} from '@mui/material';
-import { Grid } from '@mui/material';
-import { Divider } from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-
+import { Fragment, useContext, useState } from 'react';
+import Box from '@mui/material/Box/Box';
+import Grid from '@mui/material/Grid/Grid';
+import Divider from '@mui/material/Divider/Divider';
 import image from '../../assets/images/sw.png';
 import SeatDetails from '../SeatDetails/seatDetails';
-
 import { ParentBox } from './sleeper.style';
-// import { berthData } from '../Berth/berth.mockData';
 import { ISeatProps } from './sleeper.types';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
-import { Global } from '@emotion/react';
-import PassengerDetailsForm from '../PassengerDetails/passengerDetailsForm';
 import BottomBar from '../../hoc/BottomBar/bottomBar';
-import { StoreContext } from '../../context/StoreContext/StoreContext';
+import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { detailsContainer } from './sleeperMockData';
 

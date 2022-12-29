@@ -1,36 +1,22 @@
-import { Fragment } from 'react';
-import { useContext } from 'react';
-import { useEffect } from 'react';
-import { useRef } from 'react';
-import { useState } from 'react';
+import { Fragment, useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FormProvider } from 'react-hook-form';
-import { Controller } from 'react-hook-form';
-import { useForm } from 'react-hook-form';
+import { FormProvider, Controller, useForm } from 'react-hook-form';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { ToastContainer } from 'react-toastify';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-
-import { Button } from '@mui/material';
-import { Box } from '@mui/material';
-import { FormControl } from '@mui/material';
-import { FormControlLabel } from '@mui/material';
-import { FormLabel } from '@mui/material';
-import { MenuItem } from '@mui/material';
-import { Paper } from '@mui/material';
-import { Radio } from '@mui/material';
-import { RadioGroup } from '@mui/material';
-import { TextField } from '@mui/material';
-
+import Button from '@mui/material/Button/Button';
+import Box from '@mui/material/Box/Box';
+import FormControl from '@mui/material/FormControl/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel/FormLabel';
+import MenuItem from '@mui/material/MenuItem/MenuItem';
+import Paper from '@mui/material/Paper/Paper';
+import Radio from '@mui/material/Radio/Radio';
+import RadioGroup from '@mui/material/RadioGroup/RadioGroup';
+import TextField from '@mui/material/TextField';
 import { MainDivBox } from './signup.style';
-
 import FormInput from '../FormInput/formInput';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
-
 import { ISignupProps } from './signup.types';
 import { IQuestionProps } from './signup.types';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
@@ -115,15 +101,11 @@ const Signup = () => {
       });
       utility.setStore('accessToken', response.access_token);
       utility.setStore('refreshToken', response.refresh_token);
-      toast.success(`${response.message}`, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+
       setCaptchaToken('');
     } catch (error: any) {
-      toast.error(error.response.data.error.message, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
       setCaptchaToken('');
+      throw error;
     }
   };
 
@@ -143,7 +125,6 @@ const Signup = () => {
 
   return (
     <Fragment>
-      <ToastContainer />
       <MainDivBox data-testid="signupForm">
         <Paper elevation={3} className="container">
           <Box className="formContainer">

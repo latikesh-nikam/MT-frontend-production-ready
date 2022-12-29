@@ -9,7 +9,7 @@ import { ISortProps, ISortTypes } from './sort.types';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import RadioInput from '../RadioInput/radioInput';
-import { StoreContext } from '../../context/StoreContext/StoreContext';
+import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { sortDataAction } from '../../context/actions/dashboardActions/dashboardActions';
 import { MainContaiiner } from './sort.style';
