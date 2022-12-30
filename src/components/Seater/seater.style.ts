@@ -1,11 +1,13 @@
 import { styled } from '@mui/material/styles';
 
 export const ParentBox = styled('div')(
-  ({ theme }: any) => ` flex:1;
+  ({ theme }: any) => ` 
+flex:1;
 display:flex;
 justify-content:center;
 align-items:center;
 gap:${theme.typography.pxToRem(theme.gap.larger)};
+height:100vh;
 
 ${theme.breakpoints.down('sm')} {
 	flex-direction:column;
@@ -16,6 +18,8 @@ ${theme.breakpoints.down('md')} {
 }
 
 .parentContainer {
+	// flex:1.3;
+	justify-content:center;
 	display:flex;
 	gap:${theme.typography.pxToRem(theme.gap.larger)};
 
@@ -148,16 +152,14 @@ ${theme.breakpoints.down('md')} {
 }
 
 .seatDetails {
+	// flex:1;
 
 	${theme.breakpoints.down('sm')} {
-		margin-left:${theme.typography.pxToRem(48)};
-		margin-top:${theme.typography.pxToRem(theme['margin']['twoRem'])};
 		display: none;
 	}
 
 	${theme.breakpoints.down('md')} {
 		flex-direction: column;
-		margin-left: 0;
 		margin-bottom:${theme.typography.pxToRem(32)};
 	}
 }

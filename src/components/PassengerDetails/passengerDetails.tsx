@@ -82,6 +82,7 @@ function PassengerDetails(passengerCount: IPassengerCountProps) {
       _id,
       vehicleNumber,
     );
+    console.log(response);
   };
 
   return (
@@ -108,20 +109,20 @@ function PassengerDetails(passengerCount: IPassengerCountProps) {
                         <Box>
                           <FormInput
                             name={`passengerDetails.${index}.passengerName`}
-                            label="enterName"
+                            label={localString['enterName']}
                             showErrorMessage
                             size="small"
                           />
 
                           <RadioInput
                             name={`passengerDetails.${index}.passengerGender`}
-                            label="Select Gender"
+                            label={localString['Select Gender']}
                             options={genderOptions}
                             row
                           />
                           <FormInput
                             name={`passengerDetails.${index}.passengerAge`}
-                            label="enterAge"
+                            label={localString['enterAge']}
                             showErrorMessage
                             size="small"
                             type="number"
@@ -139,14 +140,14 @@ function PassengerDetails(passengerCount: IPassengerCountProps) {
                 <Box className="column inputs">
                   <FormInput
                     name="email"
-                    label="enterEmail"
+                    label={localString['enterEmail']}
                     showErrorMessage
                     size="small"
                   />
 
                   <FormInput
                     name="phoneNumber"
-                    label="enterPhoneNumber"
+                    label={localString['enterPhoneNumber']}
                     showErrorMessage
                     size="small"
                   />

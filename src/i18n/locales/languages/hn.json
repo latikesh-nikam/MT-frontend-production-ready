@@ -122,5 +122,6 @@
   "bookingSuccessful": "बुकिंग सफल",
   "clickToViewBookingSummary": "बुकिंग सारांश देखने के लिए क्लिक करें",
   "backToHome": "घर",
-  "downloadTicket": "टिकट डाउनलोड करें"
+  "downloadTicket": "टिकट डाउनलोड करें",
+  "swipeUpForBookingSummary": "बुकिंग सारांश के लिए ऊपर की ओर स्वाइप करें"
 }

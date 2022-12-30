@@ -100,7 +100,7 @@ const ForgotPassword = () => {
                   className="mainBox">
                   <FormInput
                     name="email"
-                    label="enterEmail"
+                    label={localString['enterEmail']}
                     size="small"
                     showErrorMessage
                   />
@@ -142,20 +142,20 @@ const ForgotPassword = () => {
                   />
                   <FormInput
                     name="securityAnswer"
-                    label="enterSecurityQuestionAnswer"
+                    label={localString['enterSecurityQuestionAnswer']}
                     size="small"
                     showErrorMessage
                   />
                   <FormInput
                     name="password"
-                    label="password"
+                    label={localString['password']}
                     size="small"
                     showErrorMessage
                     type="password"
                   />
                   <FormInput
                     name="confirmPassword"
-                    label="confirmPassword"
+                    label={localString['confirmPassword']}
                     size="small"
                     showErrorMessage
                     type="password"

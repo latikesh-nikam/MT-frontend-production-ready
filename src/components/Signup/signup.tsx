@@ -135,13 +135,13 @@ const Signup = () => {
                   <Box className="row">
                     <FormInput
                       name="name"
-                      label="enterName"
+                      label={localString['enterName']}
                       showErrorMessage
                       size="small"
                     />
                     <FormInput
                       name="email"
-                      label="enterEmail"
+                      label={localString['enterEmail']}
                       showErrorMessage
                       size="small"
                     />
@@ -149,13 +149,13 @@ const Signup = () => {
                   <Box className="row">
                     <FormInput
                       name="phone"
-                      label="enterPhoneNumber"
+                      label={localString['enterPhoneNumber']}
                       showErrorMessage
                       size="small"
                     />
                     <FormInput
                       name="occupation"
-                      label="enterOccupation"
+                      label={localString['enterOccupation']}
                       showErrorMessage
                       size="small"
                     />
@@ -219,7 +219,7 @@ const Signup = () => {
                     />
                     <FormInput
                       name="securityAnswer"
-                      label="enterSecurityQuestionAnswer"
+                      label={localString['enterSecurityQuestionAnswer']}
                       showErrorMessage
                       size="small"
                     />
@@ -227,14 +227,14 @@ const Signup = () => {
                   <Box className="row">
                     <FormInput
                       name="password"
-                      label="password"
+                      label={localString['password']}
                       showErrorMessage
                       size="small"
                       type="password"
                     />
                     <FormInput
                       name="confirmPassword"
-                      label="confirmPassword"
+                      label={localString['confirmPassword']}
                       showErrorMessage
                       size="small"
                       type="password"

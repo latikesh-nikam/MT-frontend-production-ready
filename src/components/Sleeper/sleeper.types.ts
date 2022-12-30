@@ -1,7 +1,7 @@
 export type ISeatProps = {
-  seatFare: number;
+  // seatFare: number;
   seatNo: any;
   status: string;
   bookedGender: string;
-  _id: string;
+  // _id: string;
 };

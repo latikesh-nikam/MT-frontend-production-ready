@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState } from 'react';
+import { forwardRef, Fragment, useContext, useState } from 'react';
 import ChairIcon from '@mui/icons-material/Chair';
 import ChairOutlinedIcon from '@mui/icons-material/ChairOutlined';
 import Grid from '@mui/material/Grid/Grid';
@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography/Typography';
 import Box from '@mui/material/Box/Box';
 import Divider from '@mui/material/Divider/Divider';
 import image from '../../assets/images/sw.png';
-import { detailsContainer } from './seater.mockdata';
+import { detailsContainer, seaterMockData } from './seater.mockdata';
 import { ParentBox } from './seater.style';
 import SeatDetails from '../SeatDetails/seatDetails';
 import { ISeatProps } from '../Sleeper/sleeper.types';
@@ -15,9 +15,12 @@ import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisatio
 import BottomBar from '../../hoc/BottomBar/bottomBar';
 import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
+import useWindowSize from '../../hooks/useWindowSize';
 
-function Seater() {
+function Seater(props: any, ref: any) {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
+  const { width } = useWindowSize();
+  const windowWidth = width >= 576;
 
   const {
     state: {
@@ -25,7 +28,8 @@ function Seater() {
     },
   } = useContext(StoreContext) as IStoreContext;
 
-  const berthData = selectedVehicleData.seatDetails as ISeatProps[];
+  // const berthData = selectedVehicleData.seatDetails as ISeatProps[];
+  const berthData = seaterMockData;
 
   const {
     localisation: { localString },
@@ -95,7 +99,7 @@ function Seater() {
   return (
     <Fragment>
       <ParentBox>
-        <Box className="parentContainer">
+        <Box className="parentContainer" ref={ref}>
           <Box className="busContainer">
             <img src={image} alt="drive icon" className="steeringImage" />
             <Box className="boxContainer">
@@ -142,8 +146,12 @@ function Seater() {
             })}
           </Box>
         </Box>
-        {selected.length > 0 && (
-          <BottomBar text="Swipe up for Booking Summary">
+        {windowWidth ? (
+          <Box className="seatDetails">
+            <SeatDetails selected={selected} />
+          </Box>
+        ) : (
+          <BottomBar text={localString['swipeUpForBookingSummary']}>
             <Box
               sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}
               className="childrenContainer">
@@ -151,11 +159,8 @@ function Seater() {
             </Box>
           </BottomBar>
         )}
-        <Box className="seatDetails">
-          <SeatDetails selected={selected} />
-        </Box>
       </ParentBox>
     </Fragment>
   );
 }
-export default Seater;
+export default forwardRef(Seater);

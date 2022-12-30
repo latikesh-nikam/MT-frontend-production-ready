@@ -2,6 +2,10 @@ import { styled } from '@mui/material/styles';
 export const SeatDetailsContainer = styled('div')(
   ({ theme }: any) => `
 
+  ${theme.breakpoints.down('sm')} {
+   padding:${theme.typography.pxToRem(16)} 0;
+  }
+
   .image{
     height:${theme.typography.pxToRem(theme['height']['medium'])};
     min-width:${theme.typography.pxToRem(theme['width']['main'])}
@@ -17,9 +21,12 @@ export const SeatDetailsContainer = styled('div')(
 
     ${theme.breakpoints.down('sm')} {
       max-width:${theme.typography.pxToRem(295)};
+    }
+
+    ${theme.breakpoints.up('sm')} {
+      // max-width:${theme.typography.pxToRem(450)};
+      max-width:100%;
       
-      // margin-left:${theme.typography.pxToRem(100)};
-      // margin-bottom:${theme.typography.pxToRem(16)};
     }
   }
 
@@ -31,7 +38,7 @@ export const SeatDetailsContainer = styled('div')(
 
   .buttonContainer{
     padding:${theme.typography.pxToRem(theme['padding']['main'])};
-
+    width:100%;
   }
 
   .button{

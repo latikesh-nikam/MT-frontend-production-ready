@@ -5,7 +5,7 @@ import Topbar from '../../components/Topbar/topbar';
 import { vehicleTypeMap } from './viewSeats.data';
 import { Container } from './viewSeats.style';
 
-function Berth() {
+function ViewSeats() {
   const {
     state: { seatState },
   } = useContext(StoreContext) as IStoreContext;
@@ -25,4 +25,4 @@ function Berth() {
   );
 }
 
-export default Berth;
+export default ViewSeats;

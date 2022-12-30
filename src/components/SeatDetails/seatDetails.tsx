@@ -16,6 +16,8 @@ import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { style } from './seatDetails.data';
 import PassengerDetails from '../PassengerDetails/passengerDetails';
+import PDFGenerator from '../../hoc/PDFGenerator/pdfGenerator';
+import BookingSuccessful from '../../Pages/BookingSuccess/bookingSuccessful';
 
 export default function SeatDetails({ selected }: any) {
   console.log(selected, 'selected');
@@ -100,7 +102,7 @@ export default function SeatDetails({ selected }: any) {
             </Box>
           </CardContent>
         </CardActionArea>
-        <CardActions className="buttonContainer">
+        <Box className="buttonContainer">
           <Button
             size="small"
             color="primary"
@@ -111,7 +113,8 @@ export default function SeatDetails({ selected }: any) {
             onClick={handleOpen}>
             {localString?.enterPassengerDetails}
           </Button>
-        </CardActions>
+          {/* <PDFGenerator buttonText="Print" component={BookingSuccessful} /> */}
+        </Box>
       </Card>
       <Modal
         open={open}

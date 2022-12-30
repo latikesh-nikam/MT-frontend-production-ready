@@ -1,11 +1,13 @@
 import { styled } from '@mui/material/styles';
 
 export const ParentBox = styled('div')(
-  ({ theme }: any) => ` flex:1;
+  ({ theme }: any) => ` 
+flex:1;
 display:flex;
 justify-content:center;
 align-items:center;
 gap:${theme.typography.pxToRem(theme.gap.larger)};
+height:100vh;
 
 ${theme.breakpoints.down('sm')} {
 	flex-direction:column;

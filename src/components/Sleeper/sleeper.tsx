@@ -11,9 +11,10 @@ import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisatio
 import BottomBar from '../../hoc/BottomBar/bottomBar';
 import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
-import { detailsContainer } from './sleeperMockData';
+import { detailsContainer, sleeperMockData } from './sleeperMockData';
+import useWindowSize from '../../hooks/useWindowSize';
 
-function Seat() {
+function Sleeper() {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
   const {
     state: {
@@ -21,7 +22,11 @@ function Seat() {
     },
   } = useContext(StoreContext) as IStoreContext;
 
-  const berthData = selectedVehicleData.seatDetails as ISeatProps[];
+  const { width } = useWindowSize();
+  const windowWidth = width > 576;
+
+  // const berthData = selectedVehicleData.seatDetails as ISeatProps[];
+  const berthData = sleeperMockData;
 
   const {
     localisation: { localString },
@@ -86,11 +91,6 @@ function Seat() {
   const doubleRowForUpperSeats = upperDeck.slice(
     dataLengthForUpperSeats / 3,
     dataLengthForUpperSeats,
-  );
-
-  const fare = selected.reduce(
-    (current: number, sum: any) => current + sum.seatFare,
-    0,
   );
 
   function gridItem(seat: ISeatProps, index: number) {
@@ -194,8 +194,11 @@ function Seat() {
           </Box>
         </Box>
 
-        {/* selected seats */}
-        {selected.length > 0 && (
+        {windowWidth ? (
+          <Box className="seatDetails">
+            <SeatDetails selected={selected} />
+          </Box>
+        ) : (
           <BottomBar text="Swipe up for Booking Summary">
             <Box
               sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}
@@ -204,11 +207,8 @@ function Seat() {
             </Box>
           </BottomBar>
         )}
-        <Box className="seatDetails">
-          <SeatDetails selected={selected} />
-        </Box>
       </ParentBox>
     </Fragment>
   );
 }
-export default Seat;
+export default Sleeper;

@@ -6,11 +6,6 @@ export const InputContainer = styled('div')(
 	color: ${theme.palette.textColors.black};
 }
 
-${theme.breakpoints.down('sm')} {
-	.MuiOutlinedInput-input {
-		font-size: ${theme.typography.fontSizeSmall};
-	}
-}
 
 `,
 );
