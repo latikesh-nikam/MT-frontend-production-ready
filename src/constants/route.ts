@@ -1,5 +1,5 @@
 export const routes = {
-  filterRoute: '/home/filter',
+  filterRoute: '/filter',
   searcResultsFilterRoute: '/home/searchResults',
   searcResultsRoute: 'searchResults',
   homeRoute: '/home',

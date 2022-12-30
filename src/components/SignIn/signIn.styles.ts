@@ -28,9 +28,6 @@ border-radius:${theme.typography.pxToRem(theme.borderRadius.primary)};
      justify-content: center;
   }
 
-  .submitButton {
-     min-width: 100%;
-  }
 }
 
 .actions {

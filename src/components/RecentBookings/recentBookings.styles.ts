@@ -8,7 +8,7 @@ padding: ${theme.typography.pxToRem(theme.padding.main)};
 flex-direction: column;
 
 ${theme.breakpoints.down('sm')} {
-  max-height: calc(100vh - ${theme.typography.pxToRem(181)});
+  max-height: calc(100vh - ${theme.typography.pxToRem(198.25)});
 
   h2 {
      font-size:${theme.typography.fontSizeMedium};

@@ -16,8 +16,8 @@
   "emailMessage": "Enter a valid email address",
   "monthMessage": "Enter a valid Month",
   "yearMessage": "Enter a valid Year",
-  "from": "*From",
-  "to": "*To",
+  "from": "From",
+  "to": "To",
   "adults": "Adults",
   "date": "Date",
   "children": "Children",
@@ -126,5 +126,14 @@
   "backToHome": "Back to Home",
   "downloadTicket": "Download Ticket",
   "swipeUpTo": "Swipe up to",
-  "view": "view"
+  "view": "view",
+  "gender": "Gender",
+  "age": "Age",
+  "seatNo": "Seat Number",
+  "busTicketPurchase": "Bus Ticket Purchase",
+  "booking": "Booking",
+  "busDetails": "Bus Details",
+  "bookedBy": "Booked By",
+  "departure": "Departure",
+  "arrival": "Arrival"
 }

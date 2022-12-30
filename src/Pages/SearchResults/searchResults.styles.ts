@@ -35,7 +35,7 @@ flex-direction:column;
      overflow-y: scroll;
      border-right: thin solid ${theme.palette.borderFaded2};
      flex-direction:column;
-     max-height: calc(100vh - ${theme.typography.pxToRem(96)});
+     max-height: calc(100vh - ${theme.typography.pxToRem(148)});
      position:sticky;
      padding:${theme.typography.pxToRem(theme.padding.primary)};
      gap:${theme.typography.pxToRem(theme.gap.secondary)};

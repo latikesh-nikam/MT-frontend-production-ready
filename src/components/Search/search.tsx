@@ -115,7 +115,7 @@ const Search = ({ navigateTo = '' }: ISearchProps) => {
               <div className="formInput">
                 <SearchableDropdown
                   name="from"
-                  placeholder={localString?.from}
+                  placeholder={'*' + localString?.from}
                   searchList={allStations}
                 />
               </div>
@@ -127,7 +127,7 @@ const Search = ({ navigateTo = '' }: ISearchProps) => {
               <div className="formInput">
                 <SearchableDropdown
                   name="to"
-                  placeholder={localString?.to}
+                  placeholder={'*' + localString?.to}
                   searchList={allStations}
                 />
               </div>
