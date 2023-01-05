@@ -18,7 +18,7 @@ ${theme.breakpoints.down('md')} {
 }
 
 .parentContainer {
-	// flex:1.3;
+
 	justify-content:center;
 	display:flex;
 	gap:${theme.typography.pxToRem(theme.gap.larger)};
@@ -94,6 +94,7 @@ ${theme.breakpoints.down('md')} {
 	align-items: center;
 	flex-direction: column-reverse;
 	cursor: pointer;
+	transition: 0.3s ease;
 }
 
 .count {
@@ -239,6 +240,22 @@ ${theme.breakpoints.down('md')} {
 .heading {
 	margin-top: 1rem;
 }
+
+.closeButton{
+	max-width:100vw;
+    position:absolute;
+	right:${theme.typography.pxToRem(8)};
+	top:${theme.typography.pxToRem(64)};
+	cursor:pointer;
+}
+.closeButtonText{
+	font-style:italic;
+	color:blue;
+	text-decoration:underline;
+	cursor:pointer;
+}
+
+
 
 `,
 );

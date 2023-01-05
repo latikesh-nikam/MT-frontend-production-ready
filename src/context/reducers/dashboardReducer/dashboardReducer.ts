@@ -31,6 +31,7 @@ const INITIAL_STATE: IDashboardState = {
     isSorted: false,
     fixedFare: '',
     ratings: [],
+    name: '',
   },
   pageNumber: 0,
 };

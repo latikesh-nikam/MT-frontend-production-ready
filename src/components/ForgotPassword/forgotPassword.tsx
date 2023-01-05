@@ -19,12 +19,16 @@ import { LocalisationContext } from '../../hoc/LocalisationProvider/localisation
 import { forgotPassword } from '../../services/auth/auth.service';
 import { getSecurityQuestions } from '../../services/user/user.service';
 import utility from '../../utils/utility';
+import { toasterDataAction } from '../../context/actions/toasterActions/toasterActions';
+import { IStoreContext } from '../../context/StoreContext/storeContext.types';
+import { StoreContext } from '../../context/StoreContext/storeContext';
 
 const ForgotPassword = () => {
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
+  const { dispatch } = useContext(StoreContext) as IStoreContext;
 
   const required = localString?.required;
   const emailMessage = localString?.emailMessage;
@@ -62,7 +66,6 @@ const ForgotPassword = () => {
   const submit = async (data: IForgotPasswordProps) => {
     try {
       const response = await forgotPassword(data);
-      console.log(response);
       reset({
         email: '',
         password: '',
@@ -72,8 +75,22 @@ const ForgotPassword = () => {
       });
       utility.setStore('accessToken', response.access_token);
       utility.setStore('refreshToken', response.refresh_token);
+      dispatch(
+        toasterDataAction({
+          showMessage: true,
+          message: response.message,
+          type: 'success',
+        }),
+      );
     } catch (error: any) {
-      throw error;
+      const message = error.response.data.error.message;
+      dispatch(
+        toasterDataAction({
+          showMessage: true,
+          message: message,
+          type: 'error',
+        }),
+      );
     }
   };
 
@@ -148,7 +165,7 @@ const ForgotPassword = () => {
                   />
                   <FormInput
                     name="password"
-                    label={localString['password']}
+                    label={localString['newPassword']}
                     size="small"
                     showErrorMessage
                     type="password"

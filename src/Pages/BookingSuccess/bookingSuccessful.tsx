@@ -7,7 +7,6 @@ import { LocalisationContext } from '../../hoc/LocalisationProvider/localisation
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import PDFGenerator from '../../hoc/PDFGenerator/pdfGenerator';
 import seater from '../../components/Seater/seater';
-import Sleeper from '../../components/Sleeper/sleeper';
 
 function BookingSuccessful(props: any, ref: any) {
   const navigate = useNavigate();
@@ -33,14 +32,14 @@ function BookingSuccessful(props: any, ref: any) {
           <Button variant="contained" size="small" onClick={() => navigate(-1)}>
             {localString['backToHome']}
           </Button>
-          {/* <Button variant="contained" size="small">
+          <Button variant="contained" size="small">
             {localString['downloadTicket']}
-          </Button> */}
-          <PDFGenerator
+          </Button>
+          {/* <PDFGenerator
             buttonText={localString['downloadTicket']}
             component={seater}
             icon
-          />
+          /> */}
         </Box>
       </Container>
     </Fragment>

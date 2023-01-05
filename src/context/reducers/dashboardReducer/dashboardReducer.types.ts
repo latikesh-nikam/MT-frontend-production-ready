@@ -21,6 +21,7 @@ export interface ISortDataState {
   isSorted: boolean;
   fixedFare: string;
   ratings: string[];
+  name: string;
 }
 
 export interface IDashboardState {

@@ -89,12 +89,15 @@ ${theme.breakpoints.down('lg')} {
 	align-items: center;
 	flex-direction: column-reverse;
 	cursor: pointer;
+	z-index:1;
+	transition: 0.3s ease;
 
 	.id {
 		position: absolute;
 		bottom:${theme.typography.pxToRem(20)};
 		font-size:${theme.typography.pxToRem(10)};
 	}
+
 }
 
 .smallBox {
@@ -102,6 +105,8 @@ ${theme.breakpoints.down('lg')} {
 	width:${theme.typography.pxToRem(16)};
 	border:thin solid ${theme.palette.commonBgColor.darkgrey};
 	padding:${theme.typography.pxToRem(3)};
+	z-index:-1;
+	transition: 0.3s ease;
 }
 
 .femaleUnavailable {
@@ -188,7 +193,12 @@ ${theme.breakpoints.down('lg')} {
 	gap:${theme.typography.pxToRem(theme.gap.secondary)};
 
 	${theme.breakpoints.down('sm')} {
+		margin-top:5%;
 		flex-direction: column;
+	}
+	${theme.breakpoints.down('md')} {
+		margin-top:10%;
+		
 	}
 }
 
@@ -224,6 +234,19 @@ ${theme.breakpoints.down('lg')} {
 
 .heading {
 	margin-top: 1rem;
+}
+.closeButton{
+	max-width:100vw;
+    position:absolute;
+	right:${theme.typography.pxToRem(8)};
+	top:${theme.typography.pxToRem(64)};
+	cursor:pointer;
+}
+.closeButtonText{
+	font-style:italic;
+	color:blue;
+	text-decoration:underline;
+	cursor:pointer;
 }
 
 `,

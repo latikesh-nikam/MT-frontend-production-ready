@@ -1,12 +1,10 @@
 import { Global } from '@emotion/react';
-import { Box, Button, SwipeableDrawer, Typography } from '@mui/material';
-import React, { useState } from 'react';
-import { StyledBox, Drawer } from './bottomBar.style';
+import { Box, SwipeableDrawer } from '@mui/material';
+import { useState } from 'react';
+import { Drawer } from './bottomBar.style';
 import { IBottomBarProps } from './bottomBar.types';
 
-const drawerBleeding = 56;
-
-function BottomBar({ children, text }: IBottomBarProps) {
+function BottomBar({ children, text, fare }: IBottomBarProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -19,7 +17,12 @@ function BottomBar({ children, text }: IBottomBarProps) {
             },
           }}
         />
-        <Box className="button">{text}</Box>
+        <Box
+          className="button"
+          sx={{ justifyContent: fare ? 'space-between' : 'center' }}>
+          {fare ? <span>₹{fare} </span> : ''}
+          <span>{text}</span>
+        </Box>
         <SwipeableDrawer
           anchor="bottom"
           open={open}

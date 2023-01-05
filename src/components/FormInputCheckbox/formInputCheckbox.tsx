@@ -21,7 +21,10 @@ const FormInputCheckBox = ({
 
   return (
     <CheckboxContainer>
-      <FormControl size={'small'} variant={'outlined'}>
+      <FormControl
+        size={'small'}
+        variant={'outlined'}
+        data-testid={`${name}Input`}>
         <FormLabel component="legend" className="formLabel">
           {localString[label]}
         </FormLabel>

@@ -13,11 +13,16 @@ import IChangePasswordProps from './changePassword.types';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { changePassword } from '../../services/auth/auth.service';
 import utility from '../../utils/utility';
+import { toasterDataAction } from '../../context/actions/toasterActions/toasterActions';
+import { IStoreContext } from '../../context/StoreContext/storeContext.types';
+import { StoreContext } from '../../context/StoreContext/storeContext';
 
 const ChangePassword = () => {
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
+  const { dispatch } = useContext(StoreContext) as IStoreContext;
+
   const required = localString?.required;
   const emailMessage = localString?.emailMessage;
   const minLengthPassword = localString?.minLengthSix;
@@ -59,14 +64,28 @@ const ChangePassword = () => {
       });
       utility.setStore('accessToken', response.access_token);
       utility.setStore('refreshToken', response.refresh_token);
+      dispatch(
+        toasterDataAction({
+          showMessage: true,
+          message: response.message,
+          type: 'success',
+        }),
+      );
     } catch (error: any) {
-      throw error;
+      const message = error.response.data.error.message;
+      dispatch(
+        toasterDataAction({
+          showMessage: true,
+          message: message,
+          type: 'error',
+        }),
+      );
     }
   };
 
   return (
     <Fragment>
-      <MainDivBox>
+      <MainDivBox data-testid="changePasswordForm">
         <Paper elevation={3} className="container">
           <div className="formContainer">
             <h2 className="heading">{localString?.changePassword}</h2>
@@ -86,6 +105,7 @@ const ChangePassword = () => {
                       helperText={errors.email ? errors.email?.message : ''}
                       margin="dense"
                       size="small"
+                      data-testid="emailInput"
                     />
                   )}
                 />
@@ -106,6 +126,7 @@ const ChangePassword = () => {
                       margin="dense"
                       size="small"
                       type="password"
+                      data-testid="oldPasswordInput"
                     />
                   )}
                 />
@@ -116,7 +137,7 @@ const ChangePassword = () => {
                   render={({ field }) => (
                     <TextField
                       {...field}
-                      label={localString?.password}
+                      label={localString?.newPassword}
                       variant="outlined"
                       fullWidth
                       error={!!errors.newPassword}
@@ -126,6 +147,7 @@ const ChangePassword = () => {
                       margin="dense"
                       size="small"
                       type="password"
+                      data-testid="newPasswordInput"
                     />
                   )}
                 />
@@ -148,6 +170,7 @@ const ChangePassword = () => {
                       margin="dense"
                       size="small"
                       type="password"
+                      data-testid="confirmPasswordInput"
                     />
                   )}
                 />

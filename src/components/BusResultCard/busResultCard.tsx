@@ -59,7 +59,8 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
   };
 
   return (
-    <BusResultCardContainer onClick={!windowWidth ? handleViewSeats : () => {}}>
+    <BusResultCardContainer
+      onClick={!windowWidth ? () => handleViewSeats(data) : () => {}}>
       <div className="vehicleDetails">
         <div className="vehicleName">
           <h3>
@@ -129,7 +130,7 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
               <Button
                 variant="contained"
                 size="small"
-                onClick={handleViewSeats}>
+                onClick={() => handleViewSeats(data)}>
                 {localString?.viewSeats}
               </Button>
             </div>

@@ -17,7 +17,6 @@ function ViewSeats() {
   const ComponentToRender = vehicleTypeMap[vehicleType];
   return (
     <Fragment>
-      <Topbar />
       <Container>
         <ComponentToRender />
       </Container>

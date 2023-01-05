@@ -28,9 +28,9 @@ const Layout = () => {
         <Route index element={<Home />} />
         <Route path="searchResults" element={<SearchResults />} />
         <Route path="viewSeats" element={<ViewSeats />} />
-        <Route path="filter" element={<MobileFilter />} />
         <Route path="payment" element={<Payment />} />
       </Route>
+      <Route path="/filter" element={<MobileFilter />} />
       <Route path="/sleeper" element={<Sleeper />} />
       <Route path="/seater" element={<Seater />} />
       <Route path="/sort" element={<Sort />} />

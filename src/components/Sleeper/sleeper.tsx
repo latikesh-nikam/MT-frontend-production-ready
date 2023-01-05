@@ -1,4 +1,6 @@
 import { Fragment, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ClearIcon from '@mui/icons-material/Clear';
 import Box from '@mui/material/Box/Box';
 import Grid from '@mui/material/Grid/Grid';
 import Divider from '@mui/material/Divider/Divider';
@@ -16,17 +18,20 @@ import useWindowSize from '../../hooks/useWindowSize';
 
 function Sleeper() {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
+  const navigate = useNavigate();
   const {
     state: {
       seatState: { selectedVehicleData },
     },
   } = useContext(StoreContext) as IStoreContext;
+  const { fixedFare } = selectedVehicleData;
 
   const { width } = useWindowSize();
-  const windowWidth = width > 576;
+  const windowWidthCondition = width < 576 && selected.length > 0;
+  const windowWidth = width < 576;
 
-  // const berthData = selectedVehicleData.seatDetails as ISeatProps[];
-  const berthData = sleeperMockData;
+  const berthData = selectedVehicleData.seatDetails as ISeatProps[];
+  // const berthData = sleeperMockData;
 
   const {
     localisation: { localString },
@@ -41,6 +46,11 @@ function Sleeper() {
       seat.status.slice(1, seat.status.length);
     return `${seat.bookedGender}${capitalizedText}`;
   }
+
+  const fare = selected.reduce(
+    (current: number, sum: any) => current + sum.seatFare + fixedFare,
+    0,
+  );
 
   const handleChange = (seat: ISeatProps) => {
     if (seat.status === 'unavailable') {
@@ -97,14 +107,17 @@ function Sleeper() {
     return (
       <Grid item xs={2} key={index}>
         <Box
+          data-testid={`mainBox`}
           key={index}
           className={`${classSelector(seat)} mainBox`}
-          onClick={() => handleChange(seat)}>
+          onClick={() => {
+            handleChange(seat);
+          }}>
           <p className="id">{seat.seatNo}</p>
           <Box
+            data-testid={`smallBox`}
             key={index + seat.seatNo}
-            className={`${classSelector(seat)} smallBox`}
-            onClick={() => handleChange(seat)}></Box>
+            className={`${classSelector(seat)} smallBox`}></Box>
         </Box>
       </Grid>
     );
@@ -112,11 +125,18 @@ function Sleeper() {
 
   return (
     <Fragment>
-      <ParentBox>
+      <ParentBox data-testid="parentContainerLower">
+        <Box className="closeButton" onClick={() => navigate(-1)}>
+          {windowWidth ? (
+            <ClearIcon />
+          ) : (
+            <p className="closeButtonText">Back to Search Results</p>
+          )}
+        </Box>
         <Box className="seats">
-          <Box className="busContainer">
+          <Box className="busContainer" data-testid="busContainerLower">
             <img src={image} alt="drive icon" className="steeringImage" />
-            <Box className="boxContainer">
+            <Box className="boxContainer" data-testid="boxContainerLower">
               <Grid direction="column" className="nowrap" container rowGap={2}>
                 {singleRow.map((seat: ISeatProps, index: number) => {
                   return gridItem(seat, index);
@@ -153,7 +173,9 @@ function Sleeper() {
 
           {/* Upper Berth */}
 
-          <Box className="boxContainer upperSeatBox">
+          <Box
+            className="boxContainer upperSeatBox"
+            data-testid="boxContainerUpper">
             <Grid
               direction="column"
               className="nowrap gridMargin"
@@ -194,15 +216,14 @@ function Sleeper() {
           </Box>
         </Box>
 
-        {windowWidth ? (
+        {!windowWidthCondition ? (
           <Box className="seatDetails">
             <SeatDetails selected={selected} />
           </Box>
         ) : (
-          <BottomBar text="Swipe up for Booking Summary">
-            <Box
-              sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}
-              className="childrenContainer">
+          <BottomBar text={localString['swipeUpForBookingSummary']} fare={fare}>
+            {' '}
+            <Box className="childrenContainer">
               <SeatDetails selected={selected} />
             </Box>
           </BottomBar>

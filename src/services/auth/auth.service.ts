@@ -20,7 +20,9 @@ export const signIn = async (signInData: ISignInInput) => {
 
 export const logout = async () => {
   try {
-    const { data } = await axiosInstance.get(apiRoutes.logout);
+    const { data } = await axiosInstance.post(apiRoutes.logout, {
+      refresh_token: utility.getStore('refreshToken'),
+    });
     utility.setStore('accessToken', '');
     utility.setStore('refreshToken', '');
     return data;

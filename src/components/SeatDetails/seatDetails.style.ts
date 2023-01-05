@@ -1,38 +1,31 @@
 import { styled } from '@mui/material/styles';
 export const SeatDetailsContainer = styled('div')(
   ({ theme }: any) => `
+  min-width:${theme.typography.pxToRem(theme['width']['main'])};
 
   ${theme.breakpoints.down('sm')} {
-   padding:${theme.typography.pxToRem(16)} 0;
+   min-width:unset;
+
   }
 
   .image{
     height:${theme.typography.pxToRem(theme['height']['medium'])};
-    min-width:${theme.typography.pxToRem(theme['width']['main'])}
+    width:100%;
+
   }
 
   .cardContainer{
     border:thin solid ${theme.palette.background.lightgrey};
-    max-width:${theme.typography.pxToRem(theme['width']['main'])};
     min-height:${theme.typography.pxToRem(theme['height']['larger'])};
     border-radius:${theme.typography.pxToRem(
       theme['shape']['borderRadius']['medium'],
     )};
-
-    ${theme.breakpoints.down('sm')} {
-      max-width:${theme.typography.pxToRem(295)};
-    }
-
-    ${theme.breakpoints.up('sm')} {
-      // max-width:${theme.typography.pxToRem(450)};
-      max-width:100%;
-      
-    }
   }
 
   .rightText{
     font-weight:${theme.typography.fontWeightRegular};
     font-size:0.9rem;
+    text-transform:capitalize;
   }
 
 

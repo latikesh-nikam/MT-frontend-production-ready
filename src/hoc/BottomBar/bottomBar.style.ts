@@ -10,6 +10,7 @@ export const Drawer = styled('div')(
 
   .button{
     position: fixed;
+    display:flex;
     right: 0;
     left:0;
     bottom: 0;

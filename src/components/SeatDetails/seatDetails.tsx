@@ -20,7 +20,6 @@ import PDFGenerator from '../../hoc/PDFGenerator/pdfGenerator';
 import BookingSuccessful from '../../Pages/BookingSuccess/bookingSuccessful';
 
 export default function SeatDetails({ selected }: any) {
-  console.log(selected, 'selected');
   const [open, setOpen] = useState(false);
   const {
     localisation: { localString },
@@ -29,10 +28,16 @@ export default function SeatDetails({ selected }: any) {
   const {
     state: {
       seatState: {
-        selectedVehicleData: { fixedFare },
+        selectedVehicleData: { fixedFare, station },
+      },
+      dashboardState: {
+        searchFormData: { from, to },
       },
     },
   } = useContext(StoreContext) as IStoreContext;
+
+  const [departure, ...stations] = station;
+  const arrival = station.slice(-1)[0];
 
   const fare = selected.reduce(
     (current: number, sum: any) => current + sum.seatFare + fixedFare,
@@ -64,20 +69,17 @@ export default function SeatDetails({ selected }: any) {
             </Box>
             <Box className="source">
               <Typography variant="h5" color="text.secondary">
-                {localString?.source}: <span className="rightText">Pune</span>
-              </Typography>
-              <Typography variant="h5" color="text.secondary">
-                <span className="rightText bottom">Swargate - 9:00am</span>
+                {localString?.source}:{' '}
+                <span className="rightText">
+                  {departure.sourceName} - {departure.sourceDepartureTime}
+                </span>
               </Typography>
             </Box>
             <Box className="destination">
               <Typography variant="h5" color="text.secondary">
                 {localString?.destination}:{' '}
-                <span className="rightText">Nagpur</span>
-              </Typography>
-              <Typography variant="h5" color="text.secondary">
-                <span className="rightText bottom">
-                  ABC Bus Stop - 12:00pm{' '}
+                <span className="rightText">
+                  {arrival.sourceName} - {arrival.sourceDepartureTime}
                 </span>
               </Typography>
             </Box>
@@ -113,7 +115,6 @@ export default function SeatDetails({ selected }: any) {
             onClick={handleOpen}>
             {localString?.enterPassengerDetails}
           </Button>
-          {/* <PDFGenerator buttonText="Print" component={BookingSuccessful} /> */}
         </Box>
       </Card>
       <Modal
@@ -122,7 +123,7 @@ export default function SeatDetails({ selected }: any) {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description">
         <Box sx={{ ...style, width: 400 }}>
-          <PassengerDetails passengerCount={selected} />
+          <PassengerDetails passengerCount={selected} showModal={setOpen} />
         </Box>
       </Modal>
     </SeatDetailsContainer>

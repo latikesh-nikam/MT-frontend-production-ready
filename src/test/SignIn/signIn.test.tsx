@@ -8,6 +8,7 @@ import {
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import SignIn from '../../components/SignIn/signIn';
+import StoreProvider from '../../context/StoreContext/storeContext';
 import LocalisationProvider from '../../hoc/LocalisationProvider/localisationProvider';
 import { signIn } from '../../services/auth/auth.service';
 import MuiThemeProvider from '../../theme/themeProvider';
@@ -21,7 +22,9 @@ test('renders sign in', () => {
     <BrowserRouter>
       <LocalisationProvider>
         <MuiThemeProvider>
-          <SignIn />
+          <StoreProvider>
+            <SignIn />
+          </StoreProvider>
         </MuiThemeProvider>
       </LocalisationProvider>
     </BrowserRouter>,
@@ -52,7 +55,9 @@ test('should display correct error message for password length', async () => {
     <BrowserRouter>
       <LocalisationProvider>
         <MuiThemeProvider>
-          <SignIn />
+          <StoreProvider>
+            <SignIn />
+          </StoreProvider>
         </MuiThemeProvider>
       </LocalisationProvider>
     </BrowserRouter>,
@@ -78,7 +83,9 @@ test('should display correct error message for valid email', async () => {
     <BrowserRouter>
       <LocalisationProvider>
         <MuiThemeProvider>
-          <SignIn />
+          <StoreProvider>
+            <SignIn />
+          </StoreProvider>
         </MuiThemeProvider>
       </LocalisationProvider>
     </BrowserRouter>,
@@ -104,7 +111,9 @@ test('form submit successfully', async () => {
     <BrowserRouter>
       <LocalisationProvider>
         <MuiThemeProvider>
-          <SignIn />
+          <StoreProvider>
+            <SignIn />
+          </StoreProvider>
         </MuiThemeProvider>
       </LocalisationProvider>
     </BrowserRouter>,

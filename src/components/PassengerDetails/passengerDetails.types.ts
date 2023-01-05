@@ -11,6 +11,7 @@ export type IPassengerDetailsProps = {
 
 export type IPassengerCountProps = {
   passengerCount: IPassengerDetails[];
+  showModal: any;
 };
 
 export type IPassengerDetails = {
@@ -34,4 +35,9 @@ export type IPassengerDetailsFormProps = {
   email?: string;
   phoneNumber?: string | number;
   userId?: string;
+  seatFare?: number;
+  fixedFare?: number;
+  from?: string;
+  to?: string;
+  date?: Date;
 };

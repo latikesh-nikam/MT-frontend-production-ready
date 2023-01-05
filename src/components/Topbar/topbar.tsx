@@ -13,7 +13,7 @@ function Topbar() {
   const { localString } = localisation;
   return (
     <Header>
-      <Box className="logoDiv">
+      <Box className="logoDiv" data-testid="topbar">
         <DirectionsBusFilledIcon className="icon" />
         <h2>{localString?.Mticket}</h2>
       </Box>

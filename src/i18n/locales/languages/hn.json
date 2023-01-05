@@ -91,6 +91,7 @@
   "selectSecurityQuestion": "*सुरक्षा प्रश्न का चयन करें",
   "enterSecurityQuestionAnswer": "*सुरक्षा प्रश्न उत्तर दर्ज करें",
   "confirmPassword": "*नए पासवर्ड की पुष्टि करें",
+  "newPassword": "*नया पासवर्ड दर्ज करें",
   "male": "नर",
   "female": "महिला",
   "other": "अन्य",
@@ -123,5 +124,9 @@
   "clickToViewBookingSummary": "बुकिंग सारांश देखने के लिए क्लिक करें",
   "backToHome": "घर",
   "downloadTicket": "टिकट डाउनलोड करें",
-  "swipeUpForBookingSummary": "बुकिंग सारांश के लिए ऊपर की ओर स्वाइप करें"
+  "swipeUpForBookingSummary": "बुकिंग सारांश के लिए ऊपर की ओर स्वाइप करें",
+  "backToSearchResults": "जाँच परिणाम में वापस",
+  "lengthSixteen": "लंबाई 16 होनी चाहिए",
+  "fare": "किराया",
+  "pay": "भुगतान करें"
 }

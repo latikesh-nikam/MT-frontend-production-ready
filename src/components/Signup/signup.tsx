@@ -23,6 +23,9 @@ import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisatio
 import { signUp } from '../../services/auth/auth.service';
 import { getSecurityQuestions } from '../../services/user/user.service';
 import utility from '../../utils/utility';
+import { toasterDataAction } from '../../context/actions/toasterActions/toasterActions';
+import { IStoreContext } from '../../context/StoreContext/storeContext.types';
+import { StoreContext } from '../../context/StoreContext/storeContext';
 
 const Signup = () => {
   const [questions, setQuestions] = useState<IQuestionProps[]>([]);
@@ -30,6 +33,7 @@ const Signup = () => {
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
+  const { dispatch } = useContext(StoreContext) as IStoreContext;
 
   const captchaRef = useRef<any>(null);
 
@@ -82,7 +86,6 @@ const Signup = () => {
   } = methods;
 
   const submit = async (data: ISignupProps) => {
-    console.log(data);
     const token = captchaRef.current.getValue();
     setCaptchaToken(token);
     data['captcha'] = captchaToken;
@@ -101,11 +104,24 @@ const Signup = () => {
       });
       utility.setStore('accessToken', response.access_token);
       utility.setStore('refreshToken', response.refresh_token);
-
+      dispatch(
+        toasterDataAction({
+          showMessage: true,
+          message: response.message,
+          type: 'success',
+        }),
+      );
       setCaptchaToken('');
     } catch (error: any) {
+      const message = error.response.data.error.message;
+      dispatch(
+        toasterDataAction({
+          showMessage: true,
+          message: message,
+          type: 'error',
+        }),
+      );
       setCaptchaToken('');
-      throw error;
     }
   };
 
@@ -227,7 +243,7 @@ const Signup = () => {
                   <Box className="row">
                     <FormInput
                       name="password"
-                      label={localString['password']}
+                      label={localString['newPassword']}
                       showErrorMessage
                       size="small"
                       type="password"

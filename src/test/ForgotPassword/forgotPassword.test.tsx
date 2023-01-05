@@ -11,17 +11,48 @@ import userEvent from '@testing-library/user-event';
 import ForgotPassword from '../../components/ForgotPassword/forgotPassword';
 import LocalisationProvider from '../../hoc/LocalisationProvider/localisationProvider';
 import MuiThemeProvider from '../../theme/themeProvider';
+import StoreProvider from '../../context/StoreContext/storeContext';
 
-test('Rendered Forgot Password', () => {
-  render(
+const renderComponents = () => {
+  return (
     <BrowserRouter>
       <LocalisationProvider>
         <MuiThemeProvider>
-          <ForgotPassword />
+          <StoreProvider>
+            <ForgotPassword />
+          </StoreProvider>
         </MuiThemeProvider>
       </LocalisationProvider>
-    </BrowserRouter>,
+    </BrowserRouter>
   );
+};
+
+const elements = () => ({
+  forgotPassword: screen.getByTestId('forgotPasswordForm'),
+  email: screen.getByTestId('emailInput'),
+  newPassword: screen.getByTestId('passwordInput'),
+  confirmPassword: screen.getByTestId('confirmPasswordInput'),
+  securityQuestion: screen.getByTestId('securityQuestion-field'),
+  securityAnswer: screen.getByTestId('securityAnswerInput'),
+  newPasswordByText: screen.getByLabelText(
+    '*Enter New Password',
+  ) as HTMLInputElement,
+  confirmPasswordByText: screen.getByLabelText(
+    '*Confirm New Password',
+  ) as HTMLInputElement,
+  submitButton: screen.getByText('Update Password') as HTMLButtonElement,
+  emailByText: screen.getByLabelText('*Enter Email') as HTMLInputElement,
+  password: screen.getByLabelText('*Enter New Password') as HTMLInputElement,
+  securityQuestionByText: screen.getByLabelText(
+    '*Select Security Question',
+  ) as HTMLInputElement,
+  securityAnswerByText: screen.getByLabelText(
+    '*Security Question Answer',
+  ) as HTMLInputElement,
+});
+
+test('Rendered Forgot Password', () => {
+  render(renderComponents());
 
   const forgotPassword = screen.getByTestId('forgotPasswordForm');
   expect(forgotPassword).toBeInTheDocument();
@@ -30,21 +61,16 @@ test('Rendered Forgot Password', () => {
 ////////////////////////////////////////////////////////////////////////////////
 
 test('Forgot Password Fields Test', async () => {
-  render(
-    <BrowserRouter>
-      <LocalisationProvider>
-        <MuiThemeProvider>
-          <ForgotPassword />
-        </MuiThemeProvider>
-      </LocalisationProvider>
-    </BrowserRouter>,
-  );
+  render(renderComponents());
 
-  const email = screen.getByTestId('emailInput');
-  const newPassword = screen.getByTestId('passwordInput');
-  const confirmPassword = screen.getByTestId('confirmPasswordInput');
-  const securityQuestion = screen.getByTestId('securityQuestion-field');
-  const securityAnswer = screen.getByTestId('securityAnswerInput');
+  const {
+    email,
+    newPassword,
+    confirmPassword,
+    securityQuestion,
+    securityAnswer,
+  } = elements();
+
   userEvent.type(email, 'stharmia@gmail.com');
   userEvent.type(newPassword, '123456');
   userEvent.type(confirmPassword, '123456');
@@ -61,48 +87,27 @@ test('Forgot Password Fields Test', async () => {
 ////////////////////////////////////////////////////////////////////////////////
 
 test('Password Match Check', () => {
-  render(
-    <BrowserRouter>
-      <LocalisationProvider>
-        <MuiThemeProvider>
-          <ForgotPassword />
-        </MuiThemeProvider>
-      </LocalisationProvider>
-    </BrowserRouter>,
-  );
-  const newPassword = screen.getByLabelText(
-    '*Enter New Password',
-  ) as HTMLInputElement;
-  const confirmPassword = screen.getByLabelText(
-    '*Confirm New Password',
-  ) as HTMLInputElement;
-  userEvent.type(newPassword, '123456');
-  userEvent.type(confirmPassword, '123456');
-  expect(newPassword.value).toEqual(confirmPassword.value);
+  render(renderComponents());
+
+  const { newPasswordByText, confirmPasswordByText } = elements();
+
+  userEvent.type(newPasswordByText, '123456');
+  userEvent.type(confirmPasswordByText, '123456');
+  expect(newPasswordByText.value).toEqual(confirmPasswordByText.value);
 });
 
 ////////////////////////////////////////////////////////////////////////////////
 
 test('Password Length Check', () => {
-  render(
-    <BrowserRouter>
-      <LocalisationProvider>
-        <MuiThemeProvider>
-          <ForgotPassword />
-        </MuiThemeProvider>
-      </LocalisationProvider>
-    </BrowserRouter>,
-  );
-  const newPassword = screen.getByLabelText(
-    '*Enter New Password',
-  ) as HTMLInputElement;
-  const confirmPassword = screen.getByLabelText(
-    '*Confirm New Password',
-  ) as HTMLInputElement;
-  userEvent.type(newPassword, '123456');
-  userEvent.type(confirmPassword, '123456');
-  expect(newPassword.value).toHaveLength(6);
-  expect(confirmPassword.value).toHaveLength(6);
+  render(renderComponents());
+
+  const { newPasswordByText, confirmPasswordByText } = elements();
+
+  userEvent.type(newPasswordByText, '123456');
+  userEvent.type(confirmPasswordByText, '123456');
+
+  expect(newPasswordByText.value).toHaveLength(6);
+  expect(confirmPasswordByText.value).toHaveLength(6);
 });
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -111,60 +116,37 @@ const mockValue = 'Test@123';
 afterEach(cleanup);
 
 test('should watch input correctly', () => {
-  render(
-    <BrowserRouter>
-      <LocalisationProvider>
-        <MuiThemeProvider>
-          <ForgotPassword />
-        </MuiThemeProvider>
-      </LocalisationProvider>
-    </BrowserRouter>,
-  );
-  const newPassword = screen.getByLabelText(
-    '*Enter New Password',
-  ) as HTMLInputElement;
-  const confirmPassword = screen.getByLabelText(
-    '*Confirm New Password',
-  ) as HTMLInputElement;
-  fireEvent.input(newPassword, {
+  render(renderComponents());
+
+  const { newPasswordByText, confirmPasswordByText } = elements();
+
+  fireEvent.input(newPasswordByText, {
     target: {
       value: mockValue,
     },
   });
-  fireEvent.input(confirmPassword, {
+  fireEvent.input(confirmPasswordByText, {
     target: {
       value: mockValue,
     },
   });
-  expect(newPassword.value).toEqual(mockValue);
-  expect(confirmPassword.value).toEqual(mockValue);
+  expect(newPasswordByText.value).toEqual(mockValue);
+  expect(confirmPasswordByText.value).toEqual(mockValue);
 });
 
 ///////////////////////////////////////////////////////////////
 
 test('Should display correct error message for password miss match', async () => {
-  const { container } = render(
-    <BrowserRouter>
-      <LocalisationProvider>
-        <MuiThemeProvider>
-          <ForgotPassword />
-        </MuiThemeProvider>
-      </LocalisationProvider>
-    </BrowserRouter>,
-  );
-  const newPassword = screen.getByLabelText(
-    '*Enter New Password',
-  ) as HTMLInputElement;
-  const confirmNewPassword = screen.getByLabelText(
-    '*Confirm New Password',
-  ) as HTMLInputElement;
-  const submitButton = screen.getByText('Update Password') as HTMLButtonElement;
-  fireEvent.input(newPassword, {
+  const { container } = render(renderComponents());
+
+  const { newPasswordByText, confirmPasswordByText, submitButton } = elements();
+
+  fireEvent.input(newPasswordByText, {
     target: {
       value: mockValue,
     },
   });
-  fireEvent.input(confirmNewPassword, {
+  fireEvent.input(confirmPasswordByText, {
     target: {
       value: `${mockValue}4`,
     },
@@ -186,35 +168,22 @@ const mockPostData = {
 };
 test('Should submit form successfully', async () => {
   const response = await forgotPassword(mockPostData);
-  render(
-    <BrowserRouter>
-      <LocalisationProvider>
-        <MuiThemeProvider>
-          <ForgotPassword />
-        </MuiThemeProvider>
-      </LocalisationProvider>
-    </BrowserRouter>,
-  );
-  const email = screen.getByLabelText('*Enter Email') as HTMLInputElement;
-  const password = screen.getByLabelText(
-    '*Enter New Password',
-  ) as HTMLInputElement;
-  const confirmPassword = screen.getByLabelText(
-    '*Confirm New Password',
-  ) as HTMLInputElement;
-  const securityQuestion = screen.getByLabelText(
-    '*Select Security Question',
-  ) as HTMLInputElement;
-  const securityAnswer = screen.getByLabelText(
-    '*Security Question Answer',
-  ) as HTMLInputElement;
-  const submitButton = screen.getByText('Update Password') as HTMLButtonElement;
+  render(renderComponents());
+
+  const {
+    password,
+    confirmPasswordByText,
+    emailByText,
+    securityQuestionByText,
+    securityAnswerByText,
+    submitButton,
+  } = elements();
 
   userEvent.type(password, mockValue);
-  userEvent.type(confirmPassword, mockValue);
-  userEvent.type(email, mockPostData.email);
-  userEvent.type(securityQuestion, mockPostData.securityQuestion);
-  fireEvent.input(securityAnswer, mockPostData.securityAnswer);
+  userEvent.type(confirmPasswordByText, mockValue);
+  userEvent.type(emailByText, mockPostData.email);
+  userEvent.type(securityQuestionByText, mockPostData.securityQuestion);
+  fireEvent.input(securityAnswerByText, mockPostData.securityAnswer);
 
   // eslint-disable-next-line testing-library/no-unnecessary-act
   await act(async () => {

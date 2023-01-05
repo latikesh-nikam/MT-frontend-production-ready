@@ -1,6 +1,8 @@
-import { forwardRef, Fragment, useContext, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ChairIcon from '@mui/icons-material/Chair';
 import ChairOutlinedIcon from '@mui/icons-material/ChairOutlined';
+import ClearIcon from '@mui/icons-material/Clear';
 import Grid from '@mui/material/Grid/Grid';
 import Typography from '@mui/material/Typography/Typography';
 import Box from '@mui/material/Box/Box';
@@ -17,19 +19,21 @@ import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import useWindowSize from '../../hooks/useWindowSize';
 
-function Seater(props: any, ref: any) {
+function Seater() {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
+  const navigate = useNavigate();
   const { width } = useWindowSize();
-  const windowWidth = width >= 576;
+  const windowWidthCondition = width < 576 && selected.length > 0;
+  const windowWidth = width < 765;
 
   const {
     state: {
       seatState: { selectedVehicleData },
     },
   } = useContext(StoreContext) as IStoreContext;
-
-  // const berthData = selectedVehicleData.seatDetails as ISeatProps[];
-  const berthData = seaterMockData;
+  const { fixedFare } = selectedVehicleData;
+  const berthData = selectedVehicleData.seatDetails as ISeatProps[];
+  // const berthData = seaterMockData;
 
   const {
     localisation: { localString },
@@ -44,6 +48,11 @@ function Seater(props: any, ref: any) {
       seat.status.slice(1, seat.status.length);
     return `${seat.bookedGender}${capitalizedText}`;
   }
+
+  const fare = selected.reduce(
+    (current: number, sum: any) => current + sum.seatFare + fixedFare,
+    0,
+  );
 
   const handleChange = (seat: ISeatProps) => {
     if (seat.status === 'unavailable') {
@@ -78,31 +87,64 @@ function Seater(props: any, ref: any) {
   const doubleRow = berthData.slice(dataLength / 2, dataLength);
 
   function gridItem(seat: ISeatProps, index: number) {
+    // eslint-disable-next-line no-lone-blocks
+    {
+      /* For Testing Purpose
+    const Icon =
+      seat.status === 'available' ? (
+        <ChairOutlinedIcon
+          titleAccess="outlineIcon"
+          fontSize="medium"
+        />
+      ) : (
+        <ChairIcon titleAccess="filledIcon" fontSize="medium" />
+      ); */
+    }
+
     const Icon = seat.status === 'available' ? ChairOutlinedIcon : ChairIcon;
     return (
-      <Grid item xs={2} key={index} className="root">
-        <Icon
-          fontSize="large"
-          className={`${classSelector(seat)} mainBox`}
-          onClick={() => handleChange(seat)}
-        />
-        <Typography
-          component="span"
-          className="count"
-          onClick={() => handleChange(seat)}>
-          {seat.seatNo}
-        </Typography>
-      </Grid>
+      <span>
+        <Grid item xs={2} key={index} className="root">
+          {/* For Testing Purpose
+          <span
+            data-testid={`mainBoxSeater`}
+            className={`${classSelector(seat)} mainBox`}
+            onClick={() => handleChange(seat)}>
+            {Icon}
+          </span> 
+          */}
+          <Icon
+            data-testid={`mainBoxSeater`}
+            fontSize="large"
+            className={`${classSelector(seat)} mainBox`}
+            onClick={() => handleChange(seat)}
+          />
+          <Typography
+            component="span"
+            className="count"
+            onClick={() => handleChange(seat)}>
+            {seat.seatNo}
+          </Typography>
+        </Grid>
+      </span>
     );
   }
 
   return (
     <Fragment>
       <ParentBox>
-        <Box className="parentContainer" ref={ref}>
-          <Box className="busContainer">
+        <Box className="closeButton" onClick={() => navigate(-1)}>
+          {windowWidth ? (
+            <ClearIcon />
+          ) : (
+            <p className="closeButtonText">Back to Search Results</p>
+          )}
+        </Box>
+
+        <Box className="parentContainer" data-testid="parentContainer">
+          <Box className="busContainer" data-testid="busContainer">
             <img src={image} alt="drive icon" className="steeringImage" />
-            <Box className="boxContainer">
+            <Box className="boxContainer" data-testid="boxContainer">
               <Grid direction="column" className="nowrap" container rowGap={2}>
                 {singleRow
                   .slice(0, singleRow.length / 2)
@@ -146,15 +188,13 @@ function Seater(props: any, ref: any) {
             })}
           </Box>
         </Box>
-        {windowWidth ? (
+        {!windowWidthCondition ? (
           <Box className="seatDetails">
             <SeatDetails selected={selected} />
           </Box>
         ) : (
-          <BottomBar text={localString['swipeUpForBookingSummary']}>
-            <Box
-              sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}
-              className="childrenContainer">
+          <BottomBar text={localString['swipeUpForBookingSummary']} fare={fare}>
+            <Box className="childrenContainer">
               <SeatDetails selected={selected} />
             </Box>
           </BottomBar>
@@ -163,4 +203,4 @@ function Seater(props: any, ref: any) {
     </Fragment>
   );
 }
-export default forwardRef(Seater);
+export default Seater;
