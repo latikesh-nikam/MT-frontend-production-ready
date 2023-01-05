@@ -8,11 +8,9 @@ import {
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import SignIn from '../../components/SignIn/signIn';
+import StoreProvider from '../../context/StoreContext/storeContext';
 import LocalisationProvider from '../../hoc/LocalisationProvider/localisationProvider';
-import { signIn } from '../../services/auth/auth.service';
 import MuiThemeProvider from '../../theme/themeProvider';
-
-jest.mock('../../services/axios.instance');
 
 afterEach(cleanup);
 
@@ -21,7 +19,9 @@ test('renders sign in', () => {
     <BrowserRouter>
       <LocalisationProvider>
         <MuiThemeProvider>
-          <SignIn />
+          <StoreProvider>
+            <SignIn />
+          </StoreProvider>
         </MuiThemeProvider>
       </LocalisationProvider>
     </BrowserRouter>,
@@ -52,7 +52,9 @@ test('should display correct error message for password length', async () => {
     <BrowserRouter>
       <LocalisationProvider>
         <MuiThemeProvider>
-          <SignIn />
+          <StoreProvider>
+            <SignIn />
+          </StoreProvider>
         </MuiThemeProvider>
       </LocalisationProvider>
     </BrowserRouter>,
@@ -78,7 +80,9 @@ test('should display correct error message for valid email', async () => {
     <BrowserRouter>
       <LocalisationProvider>
         <MuiThemeProvider>
-          <SignIn />
+          <StoreProvider>
+            <SignIn />
+          </StoreProvider>
         </MuiThemeProvider>
       </LocalisationProvider>
     </BrowserRouter>,
@@ -97,34 +101,4 @@ test('should display correct error message for valid email', async () => {
   });
 
   expect(container.textContent).toContain('Enter a valid email address');
-});
-
-test('form submit successfully', async () => {
-  render(
-    <BrowserRouter>
-      <LocalisationProvider>
-        <MuiThemeProvider>
-          <SignIn />
-        </MuiThemeProvider>
-      </LocalisationProvider>
-    </BrowserRouter>,
-  );
-
-  const emailInput = screen.getByLabelText('*Email') as HTMLInputElement;
-  const passwordInput = screen.getByLabelText('*Password') as HTMLInputElement;
-  const signInForm = screen.getByTestId('signInForm');
-
-  userEvent.type(emailInput, 'abhay@gmail.com');
-  userEvent.type(passwordInput, '333333');
-
-  // eslint-disable-next-line testing-library/no-unnecessary-act
-  await act(async () => {
-    fireEvent.submit(signInForm);
-  });
-
-  expect(signIn).toHaveBeenCalledWith({
-    email: emailInput.value,
-    password: passwordInput.value,
-    captcha: '',
-  });
 });

@@ -12,21 +12,21 @@ import BottomBar from '../../hoc/BottomBar/bottomBar';
 import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { detailsContainer } from './sleeperMockData';
-
-function Seat() {
+import useWindowSize from '../../hooks/useWindowSize';
+function Sleeper() {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
   const {
     state: {
       seatState: { selectedVehicleData },
     },
   } = useContext(StoreContext) as IStoreContext;
-
+  const { width } = useWindowSize();
+  const windowWidth = width > 576;
   const berthData = selectedVehicleData.seatDetails as ISeatProps[];
-
+  // const berthData = sleeperMockData;
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
-
   function classSelector(seat: ISeatProps) {
     if (selected.includes(seat.seatNo)) {
       seat.status = 'unavailable';
@@ -36,7 +36,6 @@ function Seat() {
       seat.status.slice(1, seat.status.length);
     return `${seat.bookedGender}${capitalizedText}`;
   }
-
   const handleChange = (seat: ISeatProps) => {
     if (seat.status === 'unavailable') {
       const selectedSeat = selected.filter(
@@ -61,55 +60,41 @@ function Seat() {
       }
     }
   };
-
   const lowerDeck = berthData.filter(element => element.seatNo.includes('L'));
-
   const dataLengthForLowerSeats = lowerDeck.length;
-
   const singleRow = lowerDeck.slice(0, dataLengthForLowerSeats / 3);
-
   const doubleRow = lowerDeck.slice(
     dataLengthForLowerSeats / 3,
     dataLengthForLowerSeats,
   );
-
   //////////////////////////////////////////////////
-
   const upperDeck = berthData.filter(element => element.seatNo.includes('U'));
   const dataLengthForUpperSeats = upperDeck.length;
-
   const singleRowForUpperSeats = upperDeck.slice(
     0,
     dataLengthForUpperSeats / 3,
   );
-
   const doubleRowForUpperSeats = upperDeck.slice(
     dataLengthForUpperSeats / 3,
     dataLengthForUpperSeats,
   );
-
-  const fare = selected.reduce(
-    (current: number, sum: any) => current + sum.seatFare,
-    0,
-  );
-
   function gridItem(seat: ISeatProps, index: number) {
     return (
       <Grid item xs={2} key={index}>
         <Box
           key={index}
           className={`${classSelector(seat)} mainBox`}
-          onClick={() => handleChange(seat)}>
+          onClick={() => {
+            handleChange(seat);
+          }}>
           <p className="id">{seat.seatNo}</p>
           <Box
             key={index + seat.seatNo}
-            className={`${classSelector(seat)} smallBox`}
-            onClick={() => handleChange(seat)}></Box>
+            className={`${classSelector(seat)} smallBox`}></Box>
         </Box>
       </Grid>
     );
   }
-
   return (
     <Fragment>
       <ParentBox>
@@ -150,9 +135,7 @@ function Seat() {
               );
             })}
           </Box>
-
           {/* Upper Berth */}
-
           <Box className="boxContainer upperSeatBox">
             <Grid
               direction="column"
@@ -193,22 +176,20 @@ function Seat() {
             <p className="deckInfo">Upper Deck</p>
           </Box>
         </Box>
-
-        {/* selected seats */}
-        {selected.length > 0 && (
-          <BottomBar text="Swipe up for Booking Summary">
-            <Box
-              sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}
-              className="childrenContainer">
+        {windowWidth ? (
+          <Box className="seatDetails">
+            <SeatDetails selected={selected} />
+          </Box>
+        ) : (
+          <BottomBar text={localString['swipeUpForBookingSummary']}>
+            {' '}
+            <Box className="childrenContainer">
               <SeatDetails selected={selected} />
             </Box>
           </BottomBar>
         )}
-        <Box className="seatDetails">
-          <SeatDetails selected={selected} />
-        </Box>
       </ParentBox>
     </Fragment>
   );
 }
-export default Seat;
+export default Sleeper;

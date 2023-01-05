@@ -4,7 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import Button from '@mui/material/Button/Button';
 import { FilterContainer } from './filter.styles';
 import {
-  busTypeOptions,
+  vehicleClassTypeOptions,
   departureOptions,
   filterInitialState,
   sliderData,
@@ -92,12 +92,16 @@ const Filter = ({ navigateTo = '' }: IFilterProps) => {
 
   return (
     <FormProvider {...methods}>
-      <FilterContainer className="filter">
-        <form onSubmit={handleSubmit(onSubmit)} className="filterForm">
+      <FilterContainer className="filter" data-testid="filter">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="filterForm"
+          data-testid="filterForm">
           <FormInputCheckBox
-            options={busTypeOptions}
+            options={vehicleClassTypeOptions}
             name="vehicleClassType"
             label="busType"
+            data-testid="abcd"
           />
           <RadioInput
             name="vehicleType"
@@ -110,11 +114,18 @@ const Filter = ({ navigateTo = '' }: IFilterProps) => {
             options={departureOptions}
           />
           <SliderInput name="price" label="selectPrice" data={sliderData} />
-          <Button type="submit" variant="contained" fullWidth>
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            data-testid="filterButton">
             {localString?.filter}
           </Button>
           {isFiltered && (
-            <Button variant="contained" onClick={handleReset}>
+            <Button
+              variant="contained"
+              onClick={handleReset}
+              data-testid="resetFilterButton">
               {localString?.clearFilter}
             </Button>
           )}

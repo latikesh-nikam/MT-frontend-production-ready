@@ -8,7 +8,7 @@ min-height: 100vh;
 
 .downloadButton{
   position:absolute;
-  top: 4.1%;
+  top: 5.3%;
   right: 2%
 }
 

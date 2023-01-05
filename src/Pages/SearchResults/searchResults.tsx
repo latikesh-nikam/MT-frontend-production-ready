@@ -12,6 +12,7 @@ import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { routes } from '../../constants/route';
 import { pageNumberAction } from '../../context/actions/dashboardActions/dashboardActions';
+import { epochDate } from '../../utils/utility';
 
 const SearchResults = () => {
   const {
@@ -37,7 +38,7 @@ const SearchResults = () => {
   const getSearchData = async () => {
     await getSearchResults({
       ...search,
-      date: date.getTime(),
+      date: epochDate(date),
       filterBy: {},
     });
   };

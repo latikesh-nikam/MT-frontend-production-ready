@@ -40,6 +40,7 @@ const SearchableDropdown = ({
             renderInput={params => (
               <InputContainer>
                 <TextField
+                  data-testid={`${name}Input`}
                   {...params}
                   fullWidth
                   variant="outlined"

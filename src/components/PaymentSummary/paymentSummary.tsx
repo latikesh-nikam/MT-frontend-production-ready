@@ -45,7 +45,7 @@ const PaymentSummary = () => {
               <StarBorderIcon />
             </div>
             <div className="details">
-              <p>{localString?.issuer} </p>
+              <p>{localString?.issuer}</p>
               <h3>{localString?.Mticket}</h3>
             </div>
           </div>
@@ -55,7 +55,7 @@ const PaymentSummary = () => {
               <LabelImportantIcon />
             </div>
             <div className="details">
-              <p>{localString?.bookingId} </p>
+              <p>{localString?.bookingId}</p>
               <h3>OYX123580219G</h3>
             </div>
           </div>

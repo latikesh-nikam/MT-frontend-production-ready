@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Auth from '../../Pages/Auth/auth';
-import Berth from '../../Pages/ViewSeats/viewSeats';
+import ViewSeats from '../../Pages/ViewSeats/viewSeats';
 import Home from '../../Pages/Home/home';
 import Main from '../../Pages/Main/main';
 import MobileFilter from '../../Pages/MobileFilter/mobileFilter';
@@ -25,7 +25,7 @@ const Layout = () => {
       <Route path="/home" element={<Main />}>
         <Route index element={<Home />} />
         <Route path="searchResults" element={<SearchResults />} />
-        <Route path="viewSeats" element={<Berth />} />
+        <Route path="viewSeats" element={<ViewSeats />} />
       </Route>
       <Route path="filter" element={<MobileFilter />} />
       <Route path="ticket" element={<Ticket />} />

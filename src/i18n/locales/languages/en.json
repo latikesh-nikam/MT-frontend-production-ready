@@ -135,5 +135,6 @@
   "busDetails": "Bus Details",
   "bookedBy": "Booked By",
   "departure": "Departure",
-  "arrival": "Arrival"
+  "arrival": "Arrival",
+  "swipeUpForBookingSummary": "Swipe Up For Booking Summary"
 }

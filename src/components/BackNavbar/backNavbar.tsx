@@ -5,6 +5,7 @@ import { LocalisationContext } from '../../hoc/LocalisationProvider/localisation
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { IBackNavbarProps } from './backNavbar.types';
 import { BackNavbarContainer } from './backNavbar.styles';
+import { routes } from '../../constants/route';
 
 const BackNavbar = ({ text }: IBackNavbarProps) => {
   const {
@@ -13,15 +14,18 @@ const BackNavbar = ({ text }: IBackNavbarProps) => {
   const navigate = useNavigate();
 
   const handleAction = () => {
-    navigate(-1);
+    navigate(routes.searcResultsFilterRoute);
   };
 
   return (
-    <BackNavbarContainer>
-      <h3>
+    <BackNavbarContainer data-testid="backNavbar">
+      <h3 data-testid="backNavbarHeader">
         {localString?.sort} {localString?.and} {localString?.filter}
       </h3>
-      <div className="action" onClick={handleAction}>
+      <div
+        className="action"
+        onClick={handleAction}
+        data-testid="backNavbarAction">
         <CloseIcon />
       </div>
     </BackNavbarContainer>

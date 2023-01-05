@@ -135,7 +135,6 @@ export const BusResultCardContainer = styled('div')(
  &:hover,
  &:active {
 	box-shadow:${theme.shadows[4]};
-	z-index: 10;
  }
  
  ${theme.breakpoints.down('sm')} {

@@ -34,6 +34,7 @@ const RadioInput = ({
             {...field}
             className="radioGroup"
             row={row}
+            data-testid={`${name}Input`}
             {...radioGroupProps}>
             {options &&
               options.map(({ label, value, displayIcon: Icon }, index) => {

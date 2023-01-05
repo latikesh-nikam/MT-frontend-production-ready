@@ -1,7 +1,6 @@
 import { SEAT_DATA } from '../../../constants/seat';
-import { ISearchData } from '../../reducers/dashboardReducer/dashboardReducer.types';
 
-export const seatDataAction = (data: ISearchData) => ({
+export const seatDataAction = (data: any) => ({
   type: SEAT_DATA,
   payload: data,
 });

@@ -11,9 +11,20 @@ i18n.use(initReactI18next).init({
     hn: {
       translations: require('./locales/languages/hn.json'),
     },
+    tn: {
+      translations: require('./locales/languages/tn.json'),
+    },
+    ger: {
+      translations: require('./locales/languages/ger.json'),
+    },
   },
   ns: ['translations'],
   defaultNS: 'translations',
 });
-i18n.languages = [languageConstants.english, languageConstants.english];
+i18n.languages = [
+  languageConstants.english,
+  languageConstants.hindi,
+  languageConstants.german,
+  languageConstants.tamil,
+];
 export default i18n;

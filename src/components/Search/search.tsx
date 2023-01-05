@@ -44,8 +44,8 @@ const Search = ({ navigateTo = '' }: ISearchProps) => {
   } = useContext(LocalisationContext) as ILocalisationContext;
 
   const navigate = useNavigate();
-  const { width } = useWindowSize();
 
+  const { width } = useWindowSize();
   const windowWidth = width > 576;
 
   const required = localString['required'];
@@ -109,14 +109,18 @@ const Search = ({ navigateTo = '' }: ISearchProps) => {
   return (
     <FormProvider {...methods}>
       <LocalizationProvider dateAdapter={AdapterMoment}>
-        <SearchContainer>
-          <form onSubmit={handleSubmit(onSubmit)} className="searchForm">
+        <SearchContainer data-testid="search">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="searchForm"
+            data-testid="searchForm">
             <div className="row">
               <div className="formInput">
                 <SearchableDropdown
                   name="from"
                   placeholder={'*' + localString?.from}
                   searchList={allStations}
+                  id="from"
                 />
               </div>
               {!windowWidth && (
@@ -134,13 +138,14 @@ const Search = ({ navigateTo = '' }: ISearchProps) => {
             </div>
             <div className="row">
               <div className="formInput">
-                <DateInput name="date" label="date" />
+                <DateInput name="date" placeholder={'*' + localString?.date} />
               </div>
               <div className="actions">
                 <Button
                   disabled={!isValid}
                   type="submit"
                   className={searchButtonClassName}
+                  data-testid="searchButton"
                   variant="contained">
                   {localString?.search}
                 </Button>

@@ -1,11 +1,10 @@
 import { Fragment, useContext } from 'react';
 import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
-import Topbar from '../../components/Topbar/topbar';
 import { vehicleTypeMap } from './viewSeats.data';
 import { Container } from './viewSeats.style';
 
-function Berth() {
+function ViewSeats() {
   const {
     state: { seatState },
   } = useContext(StoreContext) as IStoreContext;
@@ -15,9 +14,9 @@ function Berth() {
     | 'SEATER';
 
   const ComponentToRender = vehicleTypeMap[vehicleType];
+
   return (
     <Fragment>
-      <Topbar />
       <Container>
         <ComponentToRender />
       </Container>
@@ -25,4 +24,4 @@ function Berth() {
   );
 }
 
-export default Berth;
+export default ViewSeats;

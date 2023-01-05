@@ -59,7 +59,6 @@ const SignIn = () => {
     try {
       data['captcha'] = captchaToken;
       const response = await signIn(data);
-      console.log(response);
       dispatch(
         toasterDataAction({
           showMessage: true,
@@ -101,14 +100,12 @@ const SignIn = () => {
               name="email"
               label={localString?.email}
               showErrorMessage
-              data-testid="emailInput"
             />
             <FormInput
               name="password"
               label={localString?.password}
               type="password"
               showErrorMessage
-              data-testid="passwordInput"
             />
             <div className="recaptchaContainer">
               <ReCAPTCHA

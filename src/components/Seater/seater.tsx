@@ -15,22 +15,20 @@ import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisatio
 import BottomBar from '../../hoc/BottomBar/bottomBar';
 import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
-
+import useWindowSize from '../../hooks/useWindowSize';
 function Seater() {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
-
+  const { width } = useWindowSize();
+  const windowWidth = width >= 576;
   const {
     state: {
       seatState: { selectedVehicleData },
     },
   } = useContext(StoreContext) as IStoreContext;
-
   const berthData = selectedVehicleData.seatDetails as ISeatProps[];
-
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
-
   function classSelector(seat: ISeatProps) {
     if (selected.includes(seat.seatNo)) {
       seat.status = 'unavailable';
@@ -40,7 +38,6 @@ function Seater() {
       seat.status.slice(1, seat.status.length);
     return `${seat.bookedGender}${capitalizedText}`;
   }
-
   const handleChange = (seat: ISeatProps) => {
     if (seat.status === 'unavailable') {
       const selectedSeat = selected.filter(
@@ -66,13 +63,9 @@ function Seater() {
       }
     }
   };
-
   const dataLength = berthData.length;
-
   const singleRow = berthData.slice(0, dataLength / 2);
-
   const doubleRow = berthData.slice(dataLength / 2, dataLength);
-
   function gridItem(seat: ISeatProps, index: number) {
     const Icon = seat.status === 'available' ? ChairOutlinedIcon : ChairIcon;
     return (
@@ -91,7 +84,6 @@ function Seater() {
       </Grid>
     );
   }
-
   return (
     <Fragment>
       <ParentBox>
@@ -130,7 +122,6 @@ function Seater() {
               </Grid>
             </Box>
           </Box>
-
           <Box className="seatLegend">
             {detailsContainer.map((detail, index) => {
               return (
@@ -142,18 +133,17 @@ function Seater() {
             })}
           </Box>
         </Box>
-        {selected.length > 0 && (
-          <BottomBar text="Swipe up for Booking Summary">
-            <Box
-              sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}
-              className="childrenContainer">
+        {windowWidth ? (
+          <Box className="seatDetails">
+            <SeatDetails selected={selected} />
+          </Box>
+        ) : (
+          <BottomBar text={localString['swipeUpForBookingSummary']}>
+            <Box className="childrenContainer">
               <SeatDetails selected={selected} />
             </Box>
           </BottomBar>
         )}
-        <Box className="seatDetails">
-          <SeatDetails selected={selected} />
-        </Box>
       </ParentBox>
     </Fragment>
   );

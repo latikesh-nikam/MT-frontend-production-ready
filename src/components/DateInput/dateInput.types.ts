@@ -1,5 +1,6 @@
-export interface IDatePickerProps {
+import { TextFieldProps } from '@mui/material/TextField/TextField';
+
+export type IDatePickerProps = {
   name: string;
-  label: string;
   showErrorMessage?: boolean;
-}
+} & TextFieldProps;

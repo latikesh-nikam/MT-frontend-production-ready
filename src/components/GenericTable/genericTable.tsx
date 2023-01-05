@@ -16,10 +16,10 @@ const GenericTable = ({ data, headers }: ITableProps) => {
   } = useContext(LocalisationContext) as ILocalisationContext;
   return (
     <GenericTableContainer>
-      {data.length ? (
-        <TableContainer className="tableContainer">
-          <Table className="table">
-            <TableHead className="thead">
+      {data.length > 0 ? (
+        <TableContainer className="tableContainer" data-testid="tableContainer">
+          <Table className="table" data-testid="table">
+            <TableHead className="thead" data-testid="tableHead">
               <TableRow>
                 {headers.map((header, index) => {
                   return (
@@ -29,7 +29,7 @@ const GenericTable = ({ data, headers }: ITableProps) => {
               </TableRow>
             </TableHead>
 
-            <TableBody className="tbody">
+            <TableBody className="tbody" data-testid="tableBody">
               {data?.map((rowData: any, index: number) => {
                 return (
                   <TableRow key={index}>

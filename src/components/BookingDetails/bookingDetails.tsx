@@ -33,7 +33,7 @@ const BookingDetails = (props: any, ref: any) => {
   const bookingDate = new Date();
 
   const fareContainer = (
-    <div className="fare paddingTopBottom">
+    <div className="fare paddingTopBottom" data-testid="bookingDetailsFare">
       <h3 className="lightGrey">{localString?.totalFare}</h3>
       <h3 className="">
         {localString?.rs}
@@ -43,16 +43,20 @@ const BookingDetails = (props: any, ref: any) => {
   );
 
   return (
-    <BookingDetailsContainer ref={ref}>
-      <header className="heading borderBottom">
+    <BookingDetailsContainer ref={ref} data-testid="bookingDetails">
+      <header
+        className="heading borderBottom"
+        data-testid="bookingDetailsHeader">
         <div className="logoContainer">
           <img src={logo} alt={localString?.MTicket} />
         </div>
         <h2>{localString?.busTicketPurchase}</h2>
         {!windowWidth && fareContainer}
       </header>
-      <main className="bookingDeatilsMain">
-        <div className="dateAndBookingPersonDetails borderBottom paddingTopBottom flex">
+      <main className="bookingDeatilsMain" data-testid="bookingDetailsMain">
+        <div
+          className="dateAndBookingPersonDetails borderBottom paddingTopBottom flex"
+          data-testid="dateAndBookingPersonDetails">
           <div className="details date flex">
             <h4>
               {localString?.booking} {localString?.date}
@@ -64,7 +68,9 @@ const BookingDetails = (props: any, ref: any) => {
             <p>{bookedBy}</p>
           </div>
         </div>
-        <div className="busdetailsContainer paddingTopBottom borderBottom flex">
+        <div
+          className="busdetailsContainer paddingTopBottom borderBottom flex"
+          data-testid="busdetailsContainer">
           <h3>{localString?.busDetails}</h3>
           <div className="busDetails">
             <div className="station from flex">
@@ -96,7 +102,9 @@ const BookingDetails = (props: any, ref: any) => {
             </div>
           </div>
         </div>
-        <div className="passengerDetailsContainer paddingTopBottom borderBottom flex">
+        <div
+          className="passengerDetailsContainer paddingTopBottom borderBottom flex"
+          data-testid="passengerDetailsContainer">
           <h3>{localString?.passengerDetails}</h3>
           <GenericTable
             data={passengerDetails}

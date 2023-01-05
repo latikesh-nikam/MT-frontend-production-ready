@@ -14,12 +14,16 @@ const RecentBookings = ({ data }: IRecentBookingsProps) => {
   const showBookingCard = data.length > 0;
 
   return (
-    <RecentBookingsContainer>
-      <div>
+    <RecentBookingsContainer data-testid="recentBookings">
+      <div data-testid="recentBookingsHeader">
         <h2>{localString['recentBookings']}</h2>
       </div>
       {showBookingCard ? (
-        <Grid container className="cardsContainer" spacing={2}>
+        <Grid
+          container
+          data-testid="bookings"
+          className="cardsContainer"
+          spacing={2}>
           {data.map(booking => {
             return <BookingCard data={booking} key={booking._id} />;
           })}

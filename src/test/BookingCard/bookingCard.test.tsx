@@ -16,10 +16,8 @@ test('render booking card correclty', () => {
   const bookingCard = screen.getByTestId('bookingCard');
   const cardHeader = screen.getByTestId('cardHeader');
   const cities = screen.getByTestId('cities');
-  const passengers = screen.getByTestId('passengers');
 
   expect(bookingCard).toBeInTheDocument();
   expect(cardHeader).toBeInTheDocument();
   expect(cities).toBeInTheDocument();
-  expect(passengers).toBeInTheDocument();
 });

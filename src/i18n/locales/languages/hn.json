@@ -131,5 +131,8 @@
   "busTicketPurchase": "बस टिकट खरीदना",
   "booking": "बुकिंग",
   "busDetails": "बस विवरण",
-  "bookedBy": "द्वारा बुक किया हुआ"
+  "bookedBy": "द्वारा बुक किया हुआ",
+  "departure": "प्रस्थान",
+  "arrival": "आगमन",
+  "swipeUpForBookingSummary": "बुकिंग सारांश के लिए ऊपर की ओर स्वाइप करें"
 }

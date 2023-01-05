@@ -1,8 +1,11 @@
-import { act } from '@testing-library/react';
-import { fireEvent } from '@testing-library/react';
-import { cleanup } from '@testing-library/react';
-import { render } from '@testing-library/react';
-import { screen } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  cleanup,
+  render,
+  screen,
+} from '@testing-library/react';
+
 import { BrowserRouter } from 'react-router-dom';
 
 import { forgotPassword } from '../../services/auth/auth.service';
