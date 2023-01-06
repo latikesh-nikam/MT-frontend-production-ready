@@ -128,7 +128,7 @@ function PassengerDetails({
               {count.length &&
                 count.map((element: IPassengerDetails, index: number) => {
                   return (
-                    <Box className="paper">
+                    <Box className="paper" key={index}>
                       <Box className="row" data-testid="details">
                         {localString?.passenger} {index + 1} &emsp;|
                         <Box>

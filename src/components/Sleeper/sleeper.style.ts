@@ -10,7 +10,12 @@ gap:${theme.typography.pxToRem(theme.gap.larger)};
 height:100vh;
 
 ${theme.breakpoints.down('sm')} {
+	margin-top:2rem;
+	gap:0;
 	flex-direction:column;
+	justify-content:center;
+    align-items:center;
+	max-width:100vw;
 }
 
 ${theme.breakpoints.down('md')} {
@@ -45,6 +50,7 @@ ${theme.breakpoints.down('lg')} {
 	display:flex;
 	max-height: ${theme.typography.pxToRem(400)};
 	overflow-y:scroll;
+	width: max-content;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -145,12 +151,25 @@ ${theme.breakpoints.down('lg')} {
 .singleLegend {
 	display: flex;
 	gap:${theme.typography.pxToRem(theme['gap']['primary'])};
+
+	${theme.breakpoints.down('sm')} {
+		gap:${theme.typography.pxToRem(4)};
+	}
 }
 
 .seatLegend {
+	position:absolute;
+	top:-15%;
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
+	gap:0.5rem;
+	padding:0 0.5rem 0 0.5rem;
+
+	${theme.breakpoints.down('sm')} {
+		gap:${theme.typography.pxToRem(4)};
+		padding:0 ${theme.typography.pxToRem(8)};
+		top:-8%;
+	}
 }
 
 .seatDetails {
@@ -191,6 +210,9 @@ ${theme.breakpoints.down('lg')} {
 .seats {
 	display: flex;
 	gap:${theme.typography.pxToRem(theme.gap.secondary)};
+	justify-content:center;
+    align-items:center;
+	position:relative;
 
 	${theme.breakpoints.down('sm')} {
 		margin-top:5%;

@@ -1,11 +1,9 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import CardActionArea from '@mui/material/CardActionArea/CardActionArea';
 import Box from '@mui/material/Box/Box';
-import CardActions from '@mui/material/CardActions/CardActions';
+import Typography from '@mui/material/Typography/Typography';
 import Button from '@mui/material/Button/Button';
 import Modal from '@mui/material/Modal/Modal';
 import image from '../../assets/images/bookingbg.jpg';
@@ -16,11 +14,11 @@ import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { style } from './seatDetails.data';
 import PassengerDetails from '../PassengerDetails/passengerDetails';
-import PDFGenerator from '../../hoc/PDFGenerator/pdfGenerator';
-import BookingSuccessful from '../../Pages/BookingSuccess/bookingSuccessful';
+import { routes } from '../../constants/route';
 
 export default function SeatDetails({ selected }: any) {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
@@ -54,14 +52,14 @@ export default function SeatDetails({ selected }: any) {
   return (
     <SeatDetailsContainer>
       <Card className="cardContainer">
-        <CardActionArea>
+        <Box>
           <CardMedia
             component="img"
             image={image}
             alt="image"
             className="image"
           />
-          <CardContent className="cardContent">
+          <Box className="cardContent">
             <Box className="heading">
               <Typography gutterBottom variant="h3" component="div">
                 {localString?.bookingSummary}
@@ -83,7 +81,7 @@ export default function SeatDetails({ selected }: any) {
                 </span>
               </Typography>
             </Box>
-            <Box className="seats">
+            <Box className="seatsNumbers">
               <Typography variant="h5" color="text.secondary">
                 {localString?.seatsSelected}:{' '}
                 <span className="rightText">
@@ -102,8 +100,8 @@ export default function SeatDetails({ selected }: any) {
                 <span className="rightText">Rs. {fare}</span>
               </Typography>
             </Box>
-          </CardContent>
-        </CardActionArea>
+          </Box>
+        </Box>
         <Box className="buttonContainer">
           <Button
             size="small"
@@ -111,9 +109,18 @@ export default function SeatDetails({ selected }: any) {
             variant="contained"
             fullWidth
             disabled={fare === 0}
-            className="button"
+            className="detailsButton button"
             onClick={handleOpen}>
             {localString?.enterPassengerDetails}
+          </Button>
+          <Button
+            size="small"
+            color="primary"
+            variant="contained"
+            fullWidth
+            className="cancelButton button"
+            onClick={() => navigate('/home/searchResults')}>
+            {localString?.cancel}
           </Button>
         </Box>
       </Card>
@@ -122,7 +129,7 @@ export default function SeatDetails({ selected }: any) {
         onClose={handleClose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description">
-        <Box sx={{ ...style, width: 400 }}>
+        <Box sx={{ ...style }}>
           <PassengerDetails passengerCount={selected} showModal={setOpen} />
         </Box>
       </Modal>

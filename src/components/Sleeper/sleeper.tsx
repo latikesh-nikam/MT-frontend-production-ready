@@ -126,14 +126,17 @@ function Sleeper() {
   return (
     <Fragment>
       <ParentBox data-testid="parentContainerLower">
-        <Box className="closeButton" onClick={() => navigate(-1)}>
-          {windowWidth ? (
-            <ClearIcon />
-          ) : (
-            <p className="closeButtonText">Back to Search Results</p>
-          )}
-        </Box>
         <Box className="seats">
+          <Box className="seatLegend">
+            {detailsContainer.map(detail => {
+              return (
+                <Box className="singleLegend">
+                  <Box className={detail.classname}></Box>
+                  <span>{localString[detail.text]}</span>
+                </Box>
+              );
+            })}
+          </Box>
           <Box className="busContainer" data-testid="busContainerLower">
             <img src={image} alt="drive icon" className="steeringImage" />
             <Box className="boxContainer" data-testid="boxContainerLower">
@@ -160,7 +163,7 @@ function Sleeper() {
               </Grid>
             </Box>
           </Box>
-          <Box className="seatLegend">
+          {/* <Box className="seatLegend">
             {detailsContainer.map(detail => {
               return (
                 <Box className="singleLegend">
@@ -169,7 +172,7 @@ function Sleeper() {
                 </Box>
               );
             })}
-          </Box>
+          </Box> */}
 
           {/* Upper Berth */}
 

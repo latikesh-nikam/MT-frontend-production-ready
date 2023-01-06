@@ -32,6 +32,8 @@ export const SeatDetailsContainer = styled('div')(
   .buttonContainer{
     padding:${theme.typography.pxToRem(theme['padding']['main'])};
     width:100%;
+    display:flex;
+    gap:1rem;
   }
 
   .button{
@@ -40,13 +42,22 @@ export const SeatDetailsContainer = styled('div')(
     )};
   }
 
+  .cancelButton{
+    flex:1;
+  }
+
+  .detailsButton{
+    flex:2;
+  }
+
   .cardContent{
     display:flex;
     flex-direction:column;
     gap:${theme.typography.pxToRem(theme['gap']['primary'])};
+    padding:1rem;
   }
 
-  .seats{
+  .seatsNumbers{
     color:red;
   }
 

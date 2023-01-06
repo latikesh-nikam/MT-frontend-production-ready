@@ -20,8 +20,8 @@ function BottomBar({ children, text, fare }: IBottomBarProps) {
         <Box
           className="button"
           sx={{ justifyContent: fare ? 'space-between' : 'center' }}>
-          {fare ? <span>₹{fare} </span> : ''}
           <span>{text}</span>
+          {fare ? <span>₹{fare} </span> : ''}
         </Box>
         <SwipeableDrawer
           anchor="bottom"

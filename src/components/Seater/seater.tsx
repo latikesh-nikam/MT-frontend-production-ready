@@ -86,6 +86,21 @@ function Seater() {
 
   const doubleRow = berthData.slice(dataLength / 2, dataLength);
 
+  let adjacentSeatNumber = 0;
+
+  const adjacentSeat = (seat: ISeatProps, index: number) => {
+    for (let i = 0; i < dataLength / 2; i++) {
+      adjacentSeatNumber = seat.seatNo - singleRow.length / 2;
+      console.log(adjacentSeatNumber, seat.seatNo);
+      if (seat.status === 'unavailable' && seat.bookedGender === 'female') {
+        // const adjacentSeat = berthData.filter(
+        //   element => element.seatNo === adjacentSeatNumber,
+        // );
+        console.log(adjacentSeat, 'adj seat', seat, 'seat');
+      }
+    }
+  };
+
   function gridItem(seat: ISeatProps, index: number) {
     // eslint-disable-next-line no-lone-blocks
     {
@@ -102,6 +117,7 @@ function Seater() {
     }
 
     const Icon = seat.status === 'available' ? ChairOutlinedIcon : ChairIcon;
+    const adjacentSeatNumber = adjacentSeat(seat, index);
     return (
       <span>
         <Grid item xs={2} key={index} className="root">
@@ -133,15 +149,17 @@ function Seater() {
   return (
     <Fragment>
       <ParentBox>
-        <Box className="closeButton" onClick={() => navigate(-1)}>
-          {windowWidth ? (
-            <ClearIcon />
-          ) : (
-            <p className="closeButtonText">Back to Search Results</p>
-          )}
-        </Box>
-
         <Box className="parentContainer" data-testid="parentContainer">
+          <Box className="seatLegend">
+            {detailsContainer.map(detail => {
+              return (
+                <Box className="singleLegend">
+                  <Box className={detail.classname}></Box>
+                  <span>{localString[detail.text]}</span>
+                </Box>
+              );
+            })}
+          </Box>
           <Box className="busContainer" data-testid="busContainer">
             <img src={image} alt="drive icon" className="steeringImage" />
             <Box className="boxContainer" data-testid="boxContainer">
@@ -175,17 +193,6 @@ function Seater() {
                   })}
               </Grid>
             </Box>
-          </Box>
-
-          <Box className="seatLegend">
-            {detailsContainer.map((detail, index) => {
-              return (
-                <Box className="singleLegend">
-                  <Box className={detail.classname}></Box>
-                  <span>{localString[detail.text]}</span>
-                </Box>
-              );
-            })}
           </Box>
         </Box>
         {!windowWidthCondition ? (
