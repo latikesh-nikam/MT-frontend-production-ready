@@ -1,12 +1,15 @@
-import styled from '@emotion/styled';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box/Box';
+import grey from '@mui/material/colors/grey';
 
 export const Drawer = styled('div')(
   ({ theme }: any) => `
-
-  background-color:#fff;
+   
+    background-color:#fff;
 
   .button{
     position: fixed;
+    display:flex;
     right: 0;
     left:0;
     bottom: 0;
@@ -26,3 +29,8 @@ export const Drawer = styled('div')(
   }
     `,
 );
+
+export const StyledBox = styled(Box)(({ theme }: any) => ({
+  backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[800],
+  overflow: 'auto',
+}));

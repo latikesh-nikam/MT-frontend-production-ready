@@ -1,11 +1,13 @@
 import { styled } from '@mui/material/styles';
 
 export const ParentBox = styled('div')(
-  ({ theme }: any) => ` flex:1;
+  ({ theme }: any) => ` 
+flex:1;
 display:flex;
 justify-content:center;
 align-items:center;
 gap:${theme.typography.pxToRem(theme.gap.larger)};
+height:100vh;
 
 ${theme.breakpoints.down('sm')} {
 	flex-direction:column;
@@ -16,12 +18,13 @@ ${theme.breakpoints.down('md')} {
 }
 
 .parentContainer {
-	display:flex;
-	gap:${theme.typography.pxToRem(theme.gap.larger)};
 
-	${theme.breakpoints.down('md')} {
-		flex-direction:column;
-	}
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	max-width:100vw;
+	align-items:center;
+	gap:${theme.typography.pxToRem(theme.gap.larger)};
 
 }
 
@@ -90,6 +93,7 @@ ${theme.breakpoints.down('md')} {
 	align-items: center;
 	flex-direction: column-reverse;
 	cursor: pointer;
+	transition: 0.3s ease;
 }
 
 .count {
@@ -139,25 +143,33 @@ ${theme.breakpoints.down('md')} {
 .singleLegend {
 	display: flex;
 	gap:${theme.typography.pxToRem(theme['gap']['primary'])};
+
+	${theme.breakpoints.down('sm')} {
+		gap:${theme.typography.pxToRem(4)};
+	}
 }
 
 .seatLegend {
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
+	gap:0.5rem;
+	padding:0 0.5rem 0 0.5rem;
+
+	${theme.breakpoints.down('sm')} {
+		gap:${theme.typography.pxToRem(4)};
+		padding:0 ${theme.typography.pxToRem(8)};
+	}
 }
 
 .seatDetails {
+	// flex:1;
 
 	${theme.breakpoints.down('sm')} {
-		margin-left:${theme.typography.pxToRem(48)};
-		margin-top:${theme.typography.pxToRem(theme['margin']['twoRem'])};
 		display: none;
 	}
 
 	${theme.breakpoints.down('md')} {
 		flex-direction: column;
-		margin-left: 0;
 		margin-bottom:${theme.typography.pxToRem(32)};
 	}
 }
@@ -198,9 +210,17 @@ ${theme.breakpoints.down('md')} {
 .seats {
 	display: flex;
 	gap:${theme.typography.pxToRem(theme.gap.secondary)};
+	justify-content:center;
+    align-items:center;
+	position:relative;
 
 	${theme.breakpoints.down('sm')} {
+		margin-top:5%;
 		flex-direction: column;
+	}
+	${theme.breakpoints.down('md')} {
+		margin-top:10%;
+		
 	}
 }
 
@@ -237,6 +257,22 @@ ${theme.breakpoints.down('md')} {
 .heading {
 	margin-top: 1rem;
 }
+
+.closeButton{
+	max-width:100vw;
+    position:absolute;
+	left:${theme.typography.pxToRem(8)};
+	top:${theme.typography.pxToRem(64)};
+	cursor:pointer;
+}
+.closeButtonText{
+	font-style:italic;
+	color:blue;
+	text-decoration:underline;
+	cursor:pointer;
+}
+
+
 
 `,
 );

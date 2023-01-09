@@ -89,9 +89,10 @@ const Sort = ({ navigateTo = '' }: ISortProps) => {
 
   return (
     <Fragment>
-      <MainContaiiner>
+      <MainContaiiner data-testid="sort">
         <FormProvider {...methods}>
           <form
+            data-testid="sortForm"
             onSubmit={handleSubmit(submit)}
             autoComplete="off"
             className="sortForm">
@@ -103,7 +104,11 @@ const Sort = ({ navigateTo = '' }: ISortProps) => {
               label={'ratings'}
               name="ratings"
             />
-            <Button type="submit" fullWidth variant="contained">
+            <Button
+              data-testid="sortButton"
+              type="submit"
+              fullWidth
+              variant="contained">
               {localString['sort']}
             </Button>
           </form>

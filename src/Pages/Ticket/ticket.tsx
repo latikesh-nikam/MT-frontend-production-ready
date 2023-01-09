@@ -5,6 +5,7 @@ import { TicketContainer } from './ticket.styles';
 const Ticket = () => {
   return (
     <TicketContainer>
+      <BookingDetails />
       <div className="downloadButton">
         <PDFGenerator
           buttonText="Download Ticket"
@@ -12,7 +13,6 @@ const Ticket = () => {
           icon
         />
       </div>
-      <BookingDetails />
     </TicketContainer>
   );
 };

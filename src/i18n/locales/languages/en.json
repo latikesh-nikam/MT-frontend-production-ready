@@ -7,8 +7,8 @@
   "signIn": "Sign In",
   "signUp": "Sign Up",
   "forgotPassword": "Forgot Password",
-  "email": "*Email",
-  "password": "*Password",
+  "email": "Email",
+  "password": "Password",
   "required": "*Required",
   "minlengthSix": "Minimum length should be 6",
   "lengthSixteen": "Length should be 16",
@@ -100,6 +100,7 @@
   "passwordValidation": "Passwords Do Not Match",
   "oldPassword": "*Enter Old Password",
   "changePassword": "Change Password",
+  "newPassword": "*Enter New Password",
   "close": "Close",
   "somethingWentWrong": "Something Went Wrong!",
   "expand": "Expand",
@@ -125,6 +126,7 @@
   "clickToViewBookingSummary": "Click to View Booking Summary",
   "backToHome": "Back to Home",
   "downloadTicket": "Download Ticket",
+  "backToSearchResults": "Back To Search Results",
   "swipeUpTo": "Swipe up to",
   "view": "view",
   "gender": "Gender",
@@ -136,5 +138,7 @@
   "bookedBy": "Booked By",
   "departure": "Departure",
   "arrival": "Arrival",
-  "swipeUpForBookingSummary": "Swipe Up For Booking Summary"
+  "swipeUpForBookingSummary": "Swipe Up For Booking Summary",
+  "contact": "Contact Number",
+  "viewBookingDetails": "View Booking Details"
 }

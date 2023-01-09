@@ -70,6 +70,7 @@ letter-spacing: ${theme.typography.subtitle2.letterSpacing};
      .busDetails {
         display:flex;
         gap:${theme.typography.pxToRem(theme.gap.larger)};
+        text-transform: capitalize;
 
         .station {
            flex:1;

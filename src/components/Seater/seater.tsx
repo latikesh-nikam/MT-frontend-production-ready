@@ -1,12 +1,14 @@
-import { Fragment, useContext, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ChairIcon from '@mui/icons-material/Chair';
 import ChairOutlinedIcon from '@mui/icons-material/ChairOutlined';
+import ClearIcon from '@mui/icons-material/Clear';
 import Grid from '@mui/material/Grid/Grid';
 import Typography from '@mui/material/Typography/Typography';
 import Box from '@mui/material/Box/Box';
 import Divider from '@mui/material/Divider/Divider';
 import image from '../../assets/images/sw.png';
-import { detailsContainer } from './seater.mockdata';
+import { detailsContainer, seaterMockData } from './seater.mockdata';
 import { ParentBox } from './seater.style';
 import SeatDetails from '../SeatDetails/seatDetails';
 import { ISeatProps } from '../Sleeper/sleeper.types';
@@ -16,19 +18,28 @@ import BottomBar from '../../hoc/BottomBar/bottomBar';
 import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import useWindowSize from '../../hooks/useWindowSize';
+
 function Seater() {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
+  const [updatedBerthData, setUpdatedBerthData] = useState<ISeatProps[]>([]);
+  const navigate = useNavigate();
   const { width } = useWindowSize();
-  const windowWidth = width >= 576;
+  const windowWidthCondition = width < 576 && selected.length > 0;
+  const windowWidth = width < 765;
+
   const {
     state: {
       seatState: { selectedVehicleData },
     },
   } = useContext(StoreContext) as IStoreContext;
+  const { fixedFare } = selectedVehicleData;
   const berthData = selectedVehicleData.seatDetails as ISeatProps[];
+  // const berthData = seaterMockData;
+
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
+
   function classSelector(seat: ISeatProps) {
     if (selected.includes(seat.seatNo)) {
       seat.status = 'unavailable';
@@ -38,6 +49,12 @@ function Seater() {
       seat.status.slice(1, seat.status.length);
     return `${seat.bookedGender}${capitalizedText}`;
   }
+
+  const fare = selected.reduce(
+    (current: number, sum: any) => current + sum.seatFare + fixedFare,
+    0,
+  );
+
   const handleChange = (seat: ISeatProps) => {
     if (seat.status === 'unavailable') {
       const selectedSeat = selected.filter(
@@ -63,34 +80,130 @@ function Seater() {
       }
     }
   };
-  const dataLength = berthData.length;
-  const singleRow = berthData.slice(0, dataLength / 2);
-  const doubleRow = berthData.slice(dataLength / 2, dataLength);
+
+  const dataLength = updatedBerthData.length;
+
+  const singleRow = updatedBerthData.slice(0, dataLength / 2);
+
+  const doubleRow = updatedBerthData.slice(dataLength / 2, dataLength);
+
+  const toNumber = (string: string) => {
+    return Number(string);
+  };
+
+  const adjacentSeat = (seat: ISeatProps) => {
+    const seatNumber = toNumber(seat.seatNo);
+
+    const columnLength = berthData.length / 4;
+    const adjacentSeatNumber =
+      (seatNumber > 0 && seatNumber <= columnLength) ||
+      (seatNumber > columnLength * 2 && seatNumber <= columnLength * 3)
+        ? (seatNumber + berthData.length / 4).toString()
+        : (seatNumber - berthData.length / 4).toString();
+
+    if (seat.status === 'unavailable' && seat.bookedGender === 'female') {
+      const adjacentSeatData = berthData.filter(ele => {
+        const number = toNumber(ele.seatNo);
+        return number === Number(adjacentSeatNumber);
+      });
+
+      if (
+        seat.bookedGender === 'female' &&
+        seat.status === 'unavailable' &&
+        adjacentSeatData.length
+      ) {
+        if (
+          toNumber(adjacentSeatData[0].seatNo) > 0 &&
+          adjacentSeatData[0].status === 'available'
+        ) {
+          adjacentSeatData[0].bookedGender = 'female';
+        } else if (
+          adjacentSeatData[0].bookedGender === 'female' &&
+          adjacentSeatData[0].status === 'unavailable'
+        ) {
+          seat.bookedGender = 'female';
+        }
+      }
+
+      return seat;
+    } else {
+      return seat;
+    }
+  };
+
   function gridItem(seat: ISeatProps, index: number) {
-    const Icon = seat.status === 'available' ? ChairOutlinedIcon : ChairIcon;
-    return (
-      <Grid item xs={2} key={index} className="root">
-        <Icon
-          fontSize="large"
-          className={`${classSelector(seat)} mainBox`}
-          onClick={() => handleChange(seat)}
+    // eslint-disable-next-line no-lone-blocks
+    {
+      /* For Testing Purpose
+    const Icon =
+      seat.status === 'available' ? (
+        <ChairOutlinedIcon
+          titleAccess="outlineIcon"
+          fontSize="medium"
         />
-        <Typography
-          component="span"
-          className="count"
-          onClick={() => handleChange(seat)}>
-          {seat.seatNo}
-        </Typography>
-      </Grid>
+      ) : (
+        <ChairIcon titleAccess="filledIcon" fontSize="medium" />
+      ); */
+    }
+
+    // const updatedSeat = adjacentSeat(seat);
+    // console.log(seat);
+    const Icon = seat.status === 'available' ? ChairOutlinedIcon : ChairIcon;
+
+    return (
+      <span>
+        <Grid item xs={2} key={index} className="root">
+          {/* For Testing Purpose
+          <span
+            data-testid={`mainBoxSeater`}
+            className={`${classSelector(seat)} mainBox`}
+            onClick={() => handleChange(seat)}>
+            {Icon}
+          </span> 
+          */}
+          <Icon
+            data-testid={`mainBoxSeater`}
+            fontSize="large"
+            className={`${classSelector(seat)} mainBox`}
+            onClick={() => handleChange(seat)}
+          />
+          <Typography
+            component="span"
+            className="count"
+            onClick={() => handleChange(seat)}>
+            {seat.seatNo}
+          </Typography>
+        </Grid>
+      </span>
     );
   }
+
+  useEffect(() => {
+    const newData = berthData.map(berth => {
+      const data = adjacentSeat(berth);
+      return data;
+    });
+
+    setUpdatedBerthData([...newData]);
+  }, []);
+
   return (
     <Fragment>
       <ParentBox>
-        <Box className="parentContainer">
-          <Box className="busContainer">
+        <Box className="parentContainer" data-testid="parentContainer">
+          <Box className="seatLegend">
+            {detailsContainer.map(detail => {
+              return (
+                <Box className="singleLegend">
+                  <Box className={detail.classname}></Box>
+                  <span>{localString[detail.text]}</span>
+                </Box>
+              );
+            })}
+          </Box>
+          <Box className="busContainer" data-testid="busContainer">
             <img src={image} alt="drive icon" className="steeringImage" />
-            <Box className="boxContainer">
+            <Box className="boxContainer" data-testid="boxContainer">
               <Grid direction="column" className="nowrap" container rowGap={2}>
                 {singleRow
                   .slice(0, singleRow.length / 2)
@@ -122,23 +235,13 @@ function Seater() {
               </Grid>
             </Box>
           </Box>
-          <Box className="seatLegend">
-            {detailsContainer.map((detail, index) => {
-              return (
-                <Box className="singleLegend">
-                  <Box className={detail.classname}></Box>
-                  <span>{localString[detail.text]}</span>
-                </Box>
-              );
-            })}
-          </Box>
         </Box>
-        {windowWidth ? (
+        {!windowWidthCondition ? (
           <Box className="seatDetails">
             <SeatDetails selected={selected} />
           </Box>
         ) : (
-          <BottomBar text={localString['swipeUpForBookingSummary']}>
+          <BottomBar text={localString['swipeUpForBookingSummary']} fare={fare}>
             <Box className="childrenContainer">
               <SeatDetails selected={selected} />
             </Box>

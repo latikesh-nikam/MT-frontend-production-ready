@@ -36,11 +36,13 @@ const SearchResults = () => {
   };
 
   const getSearchData = async () => {
-    await getSearchResults({
+    const response = await getSearchResults({
       ...search,
       date: epochDate(date),
       filterBy: {},
     });
+
+    console.log(response);
   };
 
   useEffect(() => {

@@ -98,12 +98,12 @@ const SignIn = () => {
             data-testid="signInForm">
             <FormInput
               name="email"
-              label={localString?.email}
+              label={`*${localString?.email}`}
               showErrorMessage
             />
             <FormInput
               name="password"
-              label={localString?.password}
+              label={`*${localString?.password}`}
               type="password"
               showErrorMessage
             />

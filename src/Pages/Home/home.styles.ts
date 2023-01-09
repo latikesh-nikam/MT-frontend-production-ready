@@ -27,9 +27,6 @@ flex-direction: column;
 
 }
 
-.bookings {
-  flex: 1;
-}
 
 ${theme.breakpoints.down('sm')} {
   .search {

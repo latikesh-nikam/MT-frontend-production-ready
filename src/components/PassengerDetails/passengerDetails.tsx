@@ -3,7 +3,6 @@ import { useFieldArray, useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import Box from '@mui/material/Box/Box';
-import Paper from '@mui/material/Paper/Paper';
 import Button from '@mui/material/Button/Button';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { IPassengerDetailsProps } from './passengerDetails.types';
@@ -18,19 +17,31 @@ import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { StoreContext } from '../../context/StoreContext/storeContext';
 import { vehicleBooking } from '../../services/vehicle/vehicle.service';
 import utility from '../../utils/utility';
+import { paymentInfoAction } from '../../context/actions/bookingDetailsActions/bookingDetailsActions';
+import { useNavigate } from 'react-router-dom';
+import { routes } from '../../constants/route';
 
-function PassengerDetails(passengerCount: IPassengerCountProps) {
+function PassengerDetails({
+  passengerCount: count,
+  showModal,
+}: IPassengerCountProps) {
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
   const {
+    dispatch,
     state: {
       seatState: {
-        selectedVehicleData: { _id, vehicleNumber },
+        selectedVehicleData: { _id, fixedFare, station },
+      },
+      dashboardState: {
+        searchFormData: { from, to, date },
       },
     },
   } = useContext(StoreContext) as IStoreContext;
-  const { passengerCount: count } = passengerCount;
+
+  const navigate = useNavigate();
+
   count.sort((a: any, b: any) => a.seatNo - b.seatNo);
   const required = localString?.required;
   const emailMessage = localString?.emailMessage;
@@ -48,7 +59,6 @@ function PassengerDetails(passengerCount: IPassengerCountProps) {
   const genderOptions = [
     { label: 'male', value: 'male' },
     { label: 'female', value: 'female' },
-    { label: 'other', value: 'other' },
   ];
 
   const methods = useForm<IPassengerDetailsProps>({
@@ -67,21 +77,40 @@ function PassengerDetails(passengerCount: IPassengerCountProps) {
   });
 
   const submit = async (data: IPassengerDetailsProps) => {
+    const [departure, ...stations] = station;
+    const arrival = station.slice(-1)[0];
+
     data.passengerDetails.forEach(
       (element: IPassengerDetailsFormProps, index: number) => {
         element.passengerSeat = count[index].seatNo;
+        element.seatFare = count[index].seatFare;
+        element.fixedFare = fixedFare;
         element.userId = utility.getStore('userId') as string;
         element.email = data.email;
         element.phoneNumber = data.phoneNumber;
+        element.from = from;
+        element.to = to;
+        element.departureDate = date;
+        element.departureTime = departure.sourceDepartureTime;
+        element.arrivalDate = date;
+        element.arrivalTime = arrival.sourceDepartureTime;
       },
     );
-    const response = await vehicleBooking(
-      {
-        passengerDetails: [...data.passengerDetails],
-      },
-      _id,
-      vehicleNumber,
-    );
+    try {
+      const response = await vehicleBooking(
+        {
+          passengerDetails: [...data.passengerDetails],
+        },
+        _id,
+      );
+      console.log(response.data);
+      dispatch(paymentInfoAction(response.data));
+      showModal(false);
+      navigate(routes.payment);
+    } catch (error: any) {
+      const message = error.response.data.error.message;
+      throw error;
+    }
   };
 
   return (
@@ -89,7 +118,10 @@ function PassengerDetails(passengerCount: IPassengerCountProps) {
       <Parent>
         <h2 className="heading">{localString?.passengerDetails}</h2>
         <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(submit)} autoComplete="off">
+          <form
+            onSubmit={handleSubmit(submit)}
+            autoComplete="off"
+            data-testid="passengerDetailsForm">
             <Box className="container">
               <h4 className="subHeading">
                 {localString?.passengerInformation}
@@ -97,62 +129,63 @@ function PassengerDetails(passengerCount: IPassengerCountProps) {
               {count.length &&
                 count.map((element: IPassengerDetails, index: number) => {
                   return (
-                    <Paper elevation={2} className="paper">
-                      <Box className="row">
+                    <Box className="paper">
+                      <Box className="row" data-testid="details">
                         {localString?.passenger} {index + 1} &emsp;|
                         <Box>
                           {localString?.seat} {element.seatNo}
                         </Box>
                       </Box>
-                      <Box className="inputs">
+                      <Box className="inputs" data-testid="inputFields">
                         <Box>
                           <FormInput
                             name={`passengerDetails.${index}.passengerName`}
-                            label="enterName"
+                            label={localString['enterName']}
                             showErrorMessage
                             size="small"
                           />
 
                           <RadioInput
                             name={`passengerDetails.${index}.passengerGender`}
-                            label="Select Gender"
+                            label={localString['selectGender']}
                             options={genderOptions}
                             row
                           />
                           <FormInput
                             name={`passengerDetails.${index}.passengerAge`}
-                            label="enterAge"
+                            label={localString['enterAge']}
                             showErrorMessage
                             size="small"
                             type="number"
                           />
                         </Box>
                       </Box>
-                    </Paper>
+                    </Box>
                   );
                 })}
             </Box>
             <Box className="container">
               <h4 className="subHeading">{localString?.contactInformation}</h4>
               <p className="description">{localString?.sendTicketDetails}</p>
-              <Paper elevation={2} className="paper contactContainer">
-                <Box className="column inputs">
+              <Box className="paper contactContainer">
+                <Box className="column inputs" data-testid="contactContainer">
                   <FormInput
                     name="email"
-                    label="enterEmail"
+                    label={localString['enterEmail']}
                     showErrorMessage
                     size="small"
                   />
 
                   <FormInput
                     name="phoneNumber"
-                    label="enterPhoneNumber"
+                    label={localString['enterPhoneNumber']}
                     showErrorMessage
                     size="small"
                   />
                 </Box>
-              </Paper>
+              </Box>
               <Button
+                data-testid="submitButton"
                 disabled={!(Object.keys(dirtyFields).length >= 3)}
                 type="submit"
                 fullWidth

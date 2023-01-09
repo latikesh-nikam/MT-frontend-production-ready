@@ -3,12 +3,11 @@ import { styled } from '@mui/material/styles';
 export const TicketContainer = styled('div')(
   ({ theme }: any) => `
 display:flex;
-justify-content:center;
 min-height: 100vh;
 
 .downloadButton{
   position:absolute;
-  top: 5.3%;
+  top: 5%;
   right: 2%
 }
 

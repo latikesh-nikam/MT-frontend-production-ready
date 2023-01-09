@@ -1,21 +1,20 @@
 export const bookingsDetailsData = {
-  totalFare: 3000,
   from: 'Mumbai',
   to: 'Nagpur',
+  email: 'asdasd',
+  phoneNumber: 1231231233,
+  totalFare: 1300,
   departureDate: new Date(2023, 1, 25),
   departureTime: '18.30',
   arrivalTime: '9:00',
   arrivalDate: new Date(2023, 1, 26),
-  bookedBy: 'Shruti Tharmia',
+  bookingId: 'kasdkjasdkja',
   passengerDetails: [
     {
       passengerName: 'shruti',
       passengerGender: 'female',
       passengerAge: '21',
       passengerSeat: 'U9',
-      userId: '63a3fe92d0baec9bfc6ff115',
-      email: 'amay@gmail.com',
-      phoneNumber: '8766288401',
     },
     {
       passengerName: 'abhay',
@@ -23,18 +22,13 @@ export const bookingsDetailsData = {
       passengerAge: '21',
       passengerSeat: 'L4',
       userId: '63a3fe92d0baec9bfc6ff115',
-      email: 'amay@gmail.com',
-      phoneNumber: '8766288401',
     },
-    // {
-    //   passengerName: 'amay',
-    //   passengerGender: 'male',
-    //   passengerAge: '22',
-    //   passengerSeat: 'L1',
-    //   userId: '63a3fe92d0baec9bfc6ff115',
-    //   email: 'amay@gmail.com',
-    //   phoneNumber: '8766288401',
-    // },
+    {
+      passengerName: 'amay',
+      passengerGender: 'male',
+      passengerAge: '22',
+      passengerSeat: 'L1',
+    },
   ],
 };
 

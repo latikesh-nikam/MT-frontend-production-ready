@@ -9,4 +9,6 @@ export const apiRoutes = {
   refresh: 'auth/refresh',
   vehicle: 'vehicle',
   vehicleBooking: 'vehicleBooking/newPassenger/',
+  payment: 'vehicleBooking/paymentStatus/',
+  recentBookings: 'vehicleBooking/recentlyBookedTicket/',
 };

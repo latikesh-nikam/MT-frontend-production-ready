@@ -28,12 +28,16 @@ function Profile() {
   return (
     <ProfileContainer>
       <div>
-        <div className="accountIcon" onClick={() => setProfile(true)}>
+        <div
+          className="accountIcon"
+          onClick={() => setProfile(true)}
+          data-testid="icon">
           <AccountCircleSharpIcon className="profileIcon" />
         </div>
       </div>
       {profile && (
         <div
+          data-testid="profile"
           className="profileDetailsContainer"
           onClick={event => {
             if (event.target === event.currentTarget) {

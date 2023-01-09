@@ -23,6 +23,12 @@ export const PaymentDetailsContainer = styled('div')(
        display:flex;
        flex-direction:column;
        gap:${theme.typography.pxToRem(theme.gap.small)};
+
+       .formInput{
+         .MuiFormLabel-root{
+            text-transform: uppercase;         
+         }
+       }
  
        .row {
           display:flex;

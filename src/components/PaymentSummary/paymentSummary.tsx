@@ -6,11 +6,23 @@ import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { PaymentSummaryContainer } from './paymentSummary.styles';
+import { StoreContext } from '../../context/StoreContext/storeContext';
+import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 
 const PaymentSummary = () => {
   const {
+    state: {
+      bookingDetailsState: {
+        paymentInfo: { amountToPay, bookingId },
+      },
+    },
+  } = useContext(StoreContext) as IStoreContext;
+
+  const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
+
+  const date = new Date();
 
   return (
     <PaymentSummaryContainer>
@@ -26,7 +38,9 @@ const PaymentSummary = () => {
             </div>
             <div className="details">
               <p>{localString?.amount} </p>
-              <h3>{localString?.rs} 3000</h3>
+              <h3>
+                {localString?.rs} {amountToPay}
+              </h3>
             </div>
           </div>
 
@@ -36,7 +50,7 @@ const PaymentSummary = () => {
             </div>
             <div className="details">
               <p>{localString?.date} </p>
-              <h3>28/12/2022</h3>
+              <h3>{date.toLocaleDateString()}</h3>
             </div>
           </div>
 
@@ -56,7 +70,7 @@ const PaymentSummary = () => {
             </div>
             <div className="details">
               <p>{localString?.bookingId}</p>
-              <h3>OYX123580219G</h3>
+              <h3>{bookingId}</h3>
             </div>
           </div>
         </main>

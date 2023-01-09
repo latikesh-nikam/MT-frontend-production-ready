@@ -5,5 +5,7 @@ export const InputContainer = styled('div')(
 .MuiFormLabel-root {
 	color: ${theme.palette.textColors.black};
 }
+
+
 `,
 );

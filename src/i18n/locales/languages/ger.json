@@ -98,5 +98,7 @@
   "other": "Andere",
   "updatePassword": "Passwort aktualisieren",
   "passwordValidation": "Passwörter stimmen nicht überein",
-  "seat": "Sitzplatz"
+  "seat": "Sitzplatz",
+  "swipeUpForBookingSummary": "Für die Buchungsübersicht nach oben wischen",
+  "backToSearchResults": "Zurück zu den Suchergebnissen"
 }

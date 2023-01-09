@@ -6,11 +6,19 @@ import GenericTable from '../GenericTable/genericTable';
 import { bookingsDetailsData, tableHeaders } from './bookingDetails.data';
 import { BookingDetailsContainer } from './bookingDetails.styles';
 import logo from '../../assets/images/logo.png';
+import { StoreContext } from '../../context/StoreContext/storeContext';
+import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 
 const BookingDetails = (props: any, ref: any) => {
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
+
+  const {
+    state: {
+      bookingDetailsState: { bookingData },
+    },
+  } = useContext(StoreContext) as IStoreContext;
 
   const { width } = useWindowSize();
 
@@ -19,18 +27,21 @@ const BookingDetails = (props: any, ref: any) => {
   const {
     arrivalDate,
     arrivalTime,
-    bookedBy,
     departureDate,
     departureTime,
     from,
     passengerDetails,
     to,
+    email,
+    bookingId,
+    phoneNumber,
     totalFare,
-  } = bookingsDetailsData;
+  } = bookingData;
 
   const passengerDetailsTableHeaders = tableHeaders(localString);
 
-  const bookingDate = new Date();
+  const arrival = new Date(arrivalDate);
+  const departure = new Date(departureDate);
 
   const fareContainer = (
     <div className="fare paddingTopBottom" data-testid="bookingDetailsFare">
@@ -57,15 +68,27 @@ const BookingDetails = (props: any, ref: any) => {
         <div
           className="dateAndBookingPersonDetails borderBottom paddingTopBottom flex"
           data-testid="dateAndBookingPersonDetails">
-          <div className="details date flex">
+          {/* <div className="details date flex">
             <h4>
               {localString?.booking} {localString?.date}
             </h4>
-            <p>{bookingDate.toDateString()}</p>
+            <p>12/12/22</p>
+          </div> */}
+          <div className="details bookingId flex">
+            <h4>{localString?.bookingId}</h4>
+            <p>{bookingId}</p>
           </div>
-          <div className=" details bookedBy flex">
+          {/* <div className="details bookedBy flex">
             <h4>{localString?.bookedBy}</h4>
-            <p>{bookedBy}</p>
+            <p>Shruti Tharmia</p>
+          </div> */}
+          <div className="details contact flex">
+            <h4>{localString?.contact}</h4>
+            <p>{phoneNumber}</p>
+          </div>
+          <div className="details email flex">
+            <h4>{localString?.email}</h4>
+            <p>{email}</p>
           </div>
         </div>
         <div
@@ -82,7 +105,7 @@ const BookingDetails = (props: any, ref: any) => {
                 {localString?.departure} {localString?.date}
               </h4>
               <div>
-                <p>{departureDate.toDateString()}</p>
+                <p>{departure.toDateString()}</p>
                 <p>{departureTime}</p>
               </div>
             </div>
@@ -96,7 +119,7 @@ const BookingDetails = (props: any, ref: any) => {
                 {localString?.arrival} {localString?.date}
               </h4>
               <div>
-                <p>{arrivalDate.toDateString()}</p>
+                <p>{arrival.toDateString()}</p>
                 <p>{arrivalTime}</p>
               </div>
             </div>

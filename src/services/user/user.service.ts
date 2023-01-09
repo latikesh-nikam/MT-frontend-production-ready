@@ -21,3 +21,15 @@ export const getSecurityQuestions = async () => {
     throw error;
   }
 };
+
+export const getRecentlyBookedTicket = async () => {
+  try {
+    const userId = utility.getStore('userId');
+    const { data } = await axiosInstance.get(
+      `${apiRoutes.recentBookings}${userId}`,
+    );
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

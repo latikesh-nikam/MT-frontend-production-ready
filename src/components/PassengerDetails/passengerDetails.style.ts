@@ -74,7 +74,7 @@ ${theme.typography.pxToRem(theme['margin']['main'])}
 }
 
 .paper {
-	border:thin solid ${theme.palette.background.lightgrey};
+	border-bottom:0.5px solid ${theme.palette.background.lightgrey};
 }
 
 .seatNumber {

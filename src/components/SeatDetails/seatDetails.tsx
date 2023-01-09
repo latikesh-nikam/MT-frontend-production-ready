@@ -1,11 +1,9 @@
 import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import CardActionArea from '@mui/material/CardActionArea/CardActionArea';
 import Box from '@mui/material/Box/Box';
-import CardActions from '@mui/material/CardActions/CardActions';
+import Typography from '@mui/material/Typography/Typography';
 import Button from '@mui/material/Button/Button';
 import Modal from '@mui/material/Modal/Modal';
 import image from '../../assets/images/bookingbg.jpg';
@@ -16,45 +14,46 @@ import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { style } from './seatDetails.data';
 import PassengerDetails from '../PassengerDetails/passengerDetails';
-
+import { routes } from '../../constants/route';
 export default function SeatDetails({ selected }: any) {
-  console.log(selected, 'selected');
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
-
   const {
     state: {
       seatState: {
-        selectedVehicleData: { fixedFare },
+        selectedVehicleData: { fixedFare, station },
+      },
+      dashboardState: {
+        searchFormData: { from, to },
       },
     },
   } = useContext(StoreContext) as IStoreContext;
-
+  const [departure, ...stations] = station;
+  const arrival = station.slice(-1)[0];
   const fare = selected.reduce(
     (current: number, sum: any) => current + sum.seatFare + fixedFare,
     0,
   );
-
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-
   return (
     <SeatDetailsContainer>
       <Card className="cardContainer">
-        <CardActionArea>
+        <Box>
           <CardMedia
             component="img"
             image={image}
             alt="image"
             className="image"
           />
-          <CardContent className="cardContent">
+          <Box className="cardContent">
             <Box className="heading">
               <Typography gutterBottom variant="h3" component="div">
                 {localString?.bookingSummary}
@@ -62,24 +61,21 @@ export default function SeatDetails({ selected }: any) {
             </Box>
             <Box className="source">
               <Typography variant="h5" color="text.secondary">
-                {localString?.source}: <span className="rightText">Pune</span>
-              </Typography>
-              <Typography variant="h5" color="text.secondary">
-                <span className="rightText bottom">Swargate - 9:00am</span>
+                {localString?.source}:{' '}
+                <span className="rightText">
+                  {departure.sourceName} - {departure.sourceDepartureTime}
+                </span>
               </Typography>
             </Box>
             <Box className="destination">
               <Typography variant="h5" color="text.secondary">
                 {localString?.destination}:{' '}
-                <span className="rightText">Nagpur</span>
-              </Typography>
-              <Typography variant="h5" color="text.secondary">
-                <span className="rightText bottom">
-                  ABC Bus Stop - 12:00pm{' '}
+                <span className="rightText">
+                  {arrival.sourceName} - {arrival.sourceDepartureTime}
                 </span>
               </Typography>
             </Box>
-            <Box className="seats">
+            <Box className="seatNumbers">
               <Typography variant="h5" color="text.secondary">
                 {localString?.seatsSelected}:{' '}
                 <span className="rightText">
@@ -98,28 +94,37 @@ export default function SeatDetails({ selected }: any) {
                 <span className="rightText">Rs. {fare}</span>
               </Typography>
             </Box>
-          </CardContent>
-        </CardActionArea>
-        <CardActions className="buttonContainer">
+          </Box>
+        </Box>
+        <Box className="buttonContainer">
           <Button
             size="small"
             color="primary"
             variant="contained"
             fullWidth
             disabled={fare === 0}
-            className="button"
+            className="detailsButton button"
             onClick={handleOpen}>
             {localString?.enterPassengerDetails}
           </Button>
-        </CardActions>
+          <Button
+            size="small"
+            color="primary"
+            variant="contained"
+            fullWidth
+            className="cancelButton button"
+            onClick={() => navigate('/home/searchResults')}>
+            {localString?.cancel}
+          </Button>
+        </Box>
       </Card>
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description">
-        <Box sx={{ ...style, width: 400 }}>
-          <PassengerDetails passengerCount={selected} />
+        <Box sx={{ ...style }}>
+          <PassengerDetails passengerCount={selected} showModal={setOpen} />
         </Box>
       </Modal>
     </SeatDetailsContainer>

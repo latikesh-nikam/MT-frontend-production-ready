@@ -1,4 +1,4 @@
-export const seatDetails = [
+export const sleeperMockData = [
   {
     id: 'L1',
     status: 'available',

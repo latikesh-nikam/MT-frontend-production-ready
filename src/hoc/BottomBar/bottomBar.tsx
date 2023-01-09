@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Drawer } from './bottomBar.style';
 import { IBottomBarProps } from './bottomBar.types';
 
-function BottomBar({ children, text }: IBottomBarProps) {
+function BottomBar({ children, text, fare }: IBottomBarProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -17,7 +17,12 @@ function BottomBar({ children, text }: IBottomBarProps) {
             },
           }}
         />
-        <Box className="button">{text}</Box>
+        <Box
+          className="button"
+          sx={{ justifyContent: fare ? 'space-between' : 'center' }}>
+          <span>{text}</span>
+          {fare ? <span>₹{fare} </span> : ''}
+        </Box>
         <SwipeableDrawer
           anchor="bottom"
           open={open}

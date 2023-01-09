@@ -1,9 +1,20 @@
 export interface IBookingsData {
-    
-    "_id": string,
-    "date": Date,
-    "adults":number,
-    "children": number,
-    "from":string,
-    "to":string
+  from: string;
+  to: string;
+  email: string;
+  phoneNumber: number;
+  totalFare: number;
+  departureDate: string;
+  departureTime: string;
+  arrivalTime: string;
+  arrivalDate: string;
+  bookingId: string;
+  passengerDetails: IPassengerDetails[];
+}
+
+export interface IPassengerDetails {
+  passengerName: string;
+  passengerAge: number;
+  passengerGender: string;
+  passengerSeat: string;
 }

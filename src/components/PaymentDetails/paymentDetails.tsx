@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Box from '@mui/material/Box/Box';
@@ -15,11 +16,27 @@ import {
   paymentDetailsDefaultValues,
   paymentDetailsSchema,
 } from './paymentDetails.data';
+import { payment } from '../../services/vehicle/vehicle.service';
+import { StoreContext } from '../../context/StoreContext/storeContext';
+import { IStoreContext } from '../../context/StoreContext/storeContext.types';
+import { routes } from '../../constants/route';
+import { toasterDataAction } from '../../context/actions/toasterActions/toasterActions';
+import { bookingDataAction } from '../../context/actions/bookingDetailsActions/bookingDetailsActions';
 
 const PaymentDetails = () => {
   const {
+    state: {
+      bookingDetailsState: {
+        paymentInfo: { bookingId },
+      },
+    },
+    dispatch,
+  } = useContext(StoreContext) as IStoreContext;
+  const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
+
+  const navigate = useNavigate();
 
   const schema = paymentDetailsSchema(localString);
 
@@ -33,14 +50,29 @@ const PaymentDetails = () => {
     formState: { dirtyFields },
   } = methods;
 
-  const onSubmit: SubmitHandler<IPaymentDetailsInput> = data => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IPaymentDetailsInput> = async data => {
+    try {
+      const response = await payment(bookingId, data);
+      dispatch(
+        toasterDataAction({
+          message: response.message,
+          type: 'success',
+          showMessage: true,
+        }),
+      );
+      dispatch(bookingDataAction(response.data[0]));
+      navigate(routes.success);
+    } catch (error) {
+      throw error;
+    }
   };
 
   const disablePaymentButton = !(
     Object.keys(dirtyFields).length ===
     Object.keys(paymentDetailsDefaultValues).length
   );
+
+  const email = localString?.email;
 
   return (
     <PaymentDetailsContainer>
@@ -52,6 +84,13 @@ const PaymentDetails = () => {
               autoComplete="off"
               onSubmit={handleSubmit(onSubmit)}
               className="paymentDetailsForm">
+              <div className="formInput">
+                <FormInput
+                  name="email"
+                  label={email && email.replace('*', '')}
+                  showErrorMessage
+                />
+              </div>
               <div className="formInput">
                 <FormInput
                   name="cardNumber"
@@ -68,7 +107,7 @@ const PaymentDetails = () => {
               </div>
               <div className="formInput">
                 <FormInput
-                  name="cardHolderName"
+                  name="cardName"
                   showErrorMessage
                   label={localString?.cardHolderName}
                 />
@@ -76,22 +115,23 @@ const PaymentDetails = () => {
               <div className="row">
                 <div className="formInput month">
                   <FormInput
-                    name="month"
+                    name="cardExpMonth"
                     showErrorMessage
                     label={localString?.month}
                   />
                 </div>
                 <div className="formInput">
                   <FormInput
-                    name="year"
+                    name="cardExpYear"
                     showErrorMessage
                     label={localString?.year}
                   />
                 </div>
-                <div className="formInput cvv">
+                <div className="formInput cvc">
                   <FormInput
-                    name="cvv"
+                    name="cardCVC"
                     showErrorMessage
+                    type="password"
                     label={localString?.cvv}
                     InputProps={{
                       endAdornment: (

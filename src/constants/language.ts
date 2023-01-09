@@ -1,6 +1,6 @@
 export enum languageConstants {
   'english' = 'en',
   'hindi' = 'hn',
-  'tamil' = 'tn',
+  'tamil' = 'tm',
   'german' = 'ger',
 }

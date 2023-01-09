@@ -13,7 +13,6 @@ import { seatDataAction } from '../../context/actions/seatActions/seatActions';
 
 const BusResultCard = ({ data }: IBusResultCardProps) => {
   const [selected, setSelected] = useState('');
-
   const { dispatch } = useContext(StoreContext) as IStoreContext;
 
   const {
@@ -113,16 +112,14 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
               <p className="lightGrey">{localString?.startsFrom}</p>
               <h3>
                 <span className="lightGrey fontWeightLight">
-                  {' '}
                   {localString?.rs}
-                </span>{' '}
+                </span>
                 {fixedFare}
               </h3>
             </div>
 
             <div className="seatsAvailability" data-testid="seatsAvailability">
               <p className="lightGrey">
-                {' '}
                 {TotalAvailableSeat} {localString?.seats}{' '}
                 {localString?.available}
               </p>
