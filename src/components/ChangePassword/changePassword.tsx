@@ -98,7 +98,7 @@ const ChangePassword = () => {
                   render={({ field }) => (
                     <TextField
                       {...field}
-                      label={localString?.enterEmail}
+                      label={`*${localString?.enterEmail}`}
                       variant="outlined"
                       fullWidth
                       error={!!errors.email}
@@ -116,7 +116,7 @@ const ChangePassword = () => {
                   render={({ field }) => (
                     <TextField
                       {...field}
-                      label={localString?.oldPassword}
+                      label={`*${localString?.oldPassword}`}
                       variant="outlined"
                       fullWidth
                       error={!!errors.oldPassword}
@@ -137,7 +137,7 @@ const ChangePassword = () => {
                   render={({ field }) => (
                     <TextField
                       {...field}
-                      label={localString?.newPassword}
+                      label={`*${localString?.newPassword}`}
                       variant="outlined"
                       fullWidth
                       error={!!errors.newPassword}
@@ -158,7 +158,7 @@ const ChangePassword = () => {
                   render={({ field }) => (
                     <TextField
                       {...field}
-                      label={localString?.confirmPassword}
+                      label={`*${localString?.confirmPassword}`}
                       variant="outlined"
                       fullWidth
                       error={!!errors.confirmPassword}

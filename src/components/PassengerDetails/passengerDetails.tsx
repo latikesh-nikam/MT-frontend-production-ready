@@ -139,20 +139,20 @@ function PassengerDetails({
                         <Box>
                           <FormInput
                             name={`passengerDetails.${index}.passengerName`}
-                            label={localString['enterName']}
+                            label={`*${localString['enterName']}`}
                             showErrorMessage
                             size="small"
                           />
 
                           <RadioInput
                             name={`passengerDetails.${index}.passengerGender`}
-                            label={localString['selectGender']}
+                            label={`*${localString['selectGender']}`}
                             options={genderOptions}
                             row
                           />
                           <FormInput
                             name={`passengerDetails.${index}.passengerAge`}
-                            label={localString['enterAge']}
+                            label={`*${localString['enterAge']}`}
                             showErrorMessage
                             size="small"
                             type="number"
@@ -170,14 +170,14 @@ function PassengerDetails({
                 <Box className="column inputs" data-testid="contactContainer">
                   <FormInput
                     name="email"
-                    label={localString['enterEmail']}
+                    label={`*${localString['enterEmail']}`}
                     showErrorMessage
                     size="small"
                   />
 
                   <FormInput
                     name="phoneNumber"
-                    label={localString['enterPhoneNumber']}
+                    label={`*${localString['enterPhoneNumber']}`}
                     showErrorMessage
                     size="small"
                   />

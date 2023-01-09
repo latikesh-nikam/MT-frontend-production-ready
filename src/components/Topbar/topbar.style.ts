@@ -21,6 +21,8 @@ z-index:99;
 
 .icon {
 	font-size:${theme.typography.h1.fontSize};
+	// height:3rem;
+	// aspect-ratio:1/1;
 }
 
 .navElements {

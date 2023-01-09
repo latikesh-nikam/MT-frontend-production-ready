@@ -117,7 +117,7 @@ const ForgotPassword = () => {
                   className="mainBox">
                   <FormInput
                     name="email"
-                    label={localString['enterEmail']}
+                    label={`*${localString['enterEmail']}`}
                     size="small"
                     showErrorMessage
                   />
@@ -131,7 +131,7 @@ const ForgotPassword = () => {
                           <InputLabel
                             id="securityQuestion-label"
                             className="selectInput">
-                            {localString?.selectSecurityQuestion}
+                            {`*${localString?.selectSecurityQuestion}`}
                           </InputLabel>
                           <Select
                             {...field}
@@ -159,20 +159,20 @@ const ForgotPassword = () => {
                   />
                   <FormInput
                     name="securityAnswer"
-                    label={localString['enterSecurityQuestionAnswer']}
+                    label={`*${localString['enterSecurityQuestionAnswer']}`}
                     size="small"
                     showErrorMessage
                   />
                   <FormInput
                     name="password"
-                    label={localString['newPassword']}
+                    label={`*${localString['newPassword']}`}
                     size="small"
                     showErrorMessage
                     type="password"
                   />
                   <FormInput
                     name="confirmPassword"
-                    label={localString['confirmPassword']}
+                    label={`*${localString['confirmPassword']}`}
                     size="small"
                     showErrorMessage
                     type="password"

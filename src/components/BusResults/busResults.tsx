@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { BusResultsContainer } from './busResults.styles';
@@ -6,7 +6,9 @@ import { IBusResultsProps } from './busResults.type';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import BusResultCard from '../BusResultCard/busResultCard';
-
+import { epochDate } from '../../utils/utility';
+import { useDidMountEffect } from '../../hooks/useDidMountEffect';
+import { ThreeDots } from 'react-loader-spinner';
 const BusResults = ({
   handleScroll,
   scrollerRef,
@@ -16,13 +18,30 @@ const BusResults = ({
     state: {
       dashboardState: {
         searchData: { data },
+        searchFormData: { from, to, date },
       },
     },
+    resetState,
+    getSearchResults,
   } = useContext(StoreContext) as IStoreContext;
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
-
+  const getSearchData = () => {
+    if (data.length === 0) {
+      getSearchResults({
+        from: from,
+        to: to,
+        date: epochDate(date),
+      });
+    }
+  };
+  useEffect(() => {
+    if (from && to && date) {
+      resetState();
+    }
+  }, []);
+  useDidMountEffect(getSearchData, [data]);
   return (
     <BusResultsContainer ref={scrollerRef} onScroll={handleScroll}>
       {data.length ? (
@@ -30,11 +49,18 @@ const BusResults = ({
           return <BusResultCard data={result} key={index} />;
         })
       ) : (
-        <p>{localString?.noBusesFound}</p>
+        <ThreeDots
+          height="80"
+          width="80"
+          radius="9"
+          color="#4f794d"
+          ariaLabel="three-dots-loading"
+          visible={true}
+        />
       )}
+
       {loading && <p>...{localString?.loading}</p>}
     </BusResultsContainer>
   );
 };
-
 export default BusResults;

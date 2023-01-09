@@ -152,18 +152,17 @@ ${theme.breakpoints.down('md')} {
 .seatLegend {
 	display: flex;
 	justify-content: center;
-	gap:0.5rem;
-	padding:0 0.5rem 0 0.5rem;
+	gap:${theme.typography.pxToRem(8)};
+	padding:0 ${theme.typography.pxToRem(8)} 0 ${theme.typography.pxToRem(8)};
 
 	${theme.breakpoints.down('sm')} {
 		gap:${theme.typography.pxToRem(4)};
 		padding:0 ${theme.typography.pxToRem(8)};
+		width: max-content;
 	}
 }
 
 .seatDetails {
-	// flex:1;
-
 	${theme.breakpoints.down('sm')} {
 		display: none;
 	}
@@ -255,7 +254,7 @@ ${theme.breakpoints.down('md')} {
 }
 
 .heading {
-	margin-top: 1rem;
+	margin-top: ${theme.typography.pxToRem(16)};
 }
 
 .closeButton{

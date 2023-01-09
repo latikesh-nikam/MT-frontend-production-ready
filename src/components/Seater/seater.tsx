@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ChairIcon from '@mui/icons-material/Chair';
 import ChairOutlinedIcon from '@mui/icons-material/ChairOutlined';
@@ -21,7 +21,7 @@ import useWindowSize from '../../hooks/useWindowSize';
 
 function Seater() {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
-  const navigate = useNavigate();
+  const [updatedBerthData, setUpdatedBerthData] = useState<ISeatProps[]>([]);
   const { width } = useWindowSize();
   const windowWidthCondition = width < 576 && selected.length > 0;
   const windowWidth = width < 765;
@@ -80,55 +80,53 @@ function Seater() {
     }
   };
 
-  const dataLength = berthData.length;
+  const dataLength = updatedBerthData.length;
 
-  const singleRow = berthData.slice(0, dataLength / 2);
+  const singleRow = updatedBerthData.slice(0, dataLength / 2);
 
-  const doubleRow = berthData.slice(dataLength / 2, dataLength);
+  const doubleRow = updatedBerthData.slice(dataLength / 2, dataLength);
 
-  let adjacentSeatNumber = 0;
+  const toNumber = (string: string) => {
+    return Number(string.slice(1, string.length));
+  };
 
-  const adjacentSeat = (seat: ISeatProps, index: number) => {
-    for (let i = 0; i < dataLength / 2; i++) {
-      adjacentSeatNumber = seat.seatNo - singleRow.length / 2;
-      console.log(adjacentSeatNumber, seat.seatNo);
-      if (seat.status === 'unavailable' && seat.bookedGender === 'female') {
-        // const adjacentSeat = berthData.filter(
-        //   element => element.seatNo === adjacentSeatNumber,
-        // );
-        console.log(adjacentSeat, 'adj seat', seat, 'seat');
+  const adjacentSeat = (seat: ISeatProps) => {
+    const seatNumber = toNumber(seat.seatNo);
+    const adjacentSeatNumber = (
+      Number(seatNumber) -
+      berthData.slice(0, berthData.length / 2).length / 2
+    ).toString();
+
+    if (seat.status === 'unavailable' && seat.bookedGender === 'female') {
+      const adjacentSeatData = berthData.filter(ele => {
+        const number = toNumber(ele.seatNo);
+        return number === Number(adjacentSeatNumber);
+      });
+      if (
+        seat.bookedGender === 'female' &&
+        seat.status === 'unavailable' &&
+        adjacentSeatData.length
+      ) {
+        if (toNumber(adjacentSeatData[0].seatNo) > 0) {
+          adjacentSeatData[0].bookedGender = 'female';
+        } else if (
+          adjacentSeatData[0].bookedGender === 'female' &&
+          adjacentSeatData[0].status === 'unavailable'
+        ) {
+          seat.bookedGender = 'female';
+        }
       }
+      return seat;
+    } else {
+      return seat;
     }
   };
 
   function gridItem(seat: ISeatProps, index: number) {
-    // eslint-disable-next-line no-lone-blocks
-    {
-      /* For Testing Purpose
-    const Icon =
-      seat.status === 'available' ? (
-        <ChairOutlinedIcon
-          titleAccess="outlineIcon"
-          fontSize="medium"
-        />
-      ) : (
-        <ChairIcon titleAccess="filledIcon" fontSize="medium" />
-      ); */
-    }
-
     const Icon = seat.status === 'available' ? ChairOutlinedIcon : ChairIcon;
-    const adjacentSeatNumber = adjacentSeat(seat, index);
     return (
       <span>
         <Grid item xs={2} key={index} className="root">
-          {/* For Testing Purpose
-          <span
-            data-testid={`mainBoxSeater`}
-            className={`${classSelector(seat)} mainBox`}
-            onClick={() => handleChange(seat)}>
-            {Icon}
-          </span> 
-          */}
           <Icon
             data-testid={`mainBoxSeater`}
             fontSize="large"
@@ -145,6 +143,14 @@ function Seater() {
       </span>
     );
   }
+
+  useEffect(() => {
+    const newData = berthData.map(berth => {
+      const data = adjacentSeat(berth);
+      return data;
+    });
+    setUpdatedBerthData([...newData]);
+  }, []);
 
   return (
     <Fragment>

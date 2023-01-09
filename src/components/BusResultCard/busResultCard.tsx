@@ -10,6 +10,7 @@ import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisatio
 import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { seatDataAction } from '../../context/actions/seatActions/seatActions';
+import { ThreeDots } from 'react-loader-spinner';
 
 const BusResultCard = ({ data }: IBusResultCardProps) => {
   const [selected, setSelected] = useState('');
@@ -50,8 +51,11 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
   const hourString = totalTravelTime > 1 ? localString?.hrs : localString?.hr;
 
   const handleClick = (type: string) => {
-    if (selected === type) setSelected('');
-    else setSelected(type);
+    if (selected === type) {
+      setSelected('');
+    } else {
+      setSelected(type);
+    }
   };
   const handleViewSeats = (data: any) => {
     dispatch(seatDataAction(data));

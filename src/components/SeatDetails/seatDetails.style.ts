@@ -57,7 +57,7 @@ export const SeatDetailsContainer = styled('div')(
     padding:1rem;
   }
 
-  .seatsNumbers{
+  .seatNumbers{
     color:red;
   }
 

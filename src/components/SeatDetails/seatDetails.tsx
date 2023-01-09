@@ -81,7 +81,7 @@ export default function SeatDetails({ selected }: any) {
                 </span>
               </Typography>
             </Box>
-            <Box className="seatsNumbers">
+            <Box className="seatNumbers">
               <Typography variant="h5" color="text.secondary">
                 {localString?.seatsSelected}:{' '}
                 <span className="rightText">

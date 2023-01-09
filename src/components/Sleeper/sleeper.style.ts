@@ -10,7 +10,7 @@ gap:${theme.typography.pxToRem(theme.gap.larger)};
 height:100vh;
 
 ${theme.breakpoints.down('sm')} {
-	margin-top:2rem;
+	margin-top:${theme.typography.pxToRem(32)};
 	gap:0;
 	flex-direction:column;
 	justify-content:center;
@@ -162,12 +162,13 @@ ${theme.breakpoints.down('lg')} {
 	top:-15%;
 	display: flex;
 	justify-content: center;
-	gap:0.5rem;
-	padding:0 0.5rem 0 0.5rem;
+	gap:${theme.typography.pxToRem(8)};
+	padding:0 ${theme.typography.pxToRem(8)} 0 ${theme.typography.pxToRem(8)};
 
 	${theme.breakpoints.down('sm')} {
 		gap:${theme.typography.pxToRem(4)};
 		padding:0 ${theme.typography.pxToRem(8)};
+		width: max-content;
 		top:-8%;
 	}
 }
@@ -255,20 +256,7 @@ ${theme.breakpoints.down('lg')} {
 }
 
 .heading {
-	margin-top: 1rem;
-}
-.closeButton{
-	max-width:100vw;
-    position:absolute;
-	right:${theme.typography.pxToRem(8)};
-	top:${theme.typography.pxToRem(64)};
-	cursor:pointer;
-}
-.closeButtonText{
-	font-style:italic;
-	color:blue;
-	text-decoration:underline;
-	cursor:pointer;
+	margin-top: ${theme.typography.pxToRem(16)};
 }
 
 `,

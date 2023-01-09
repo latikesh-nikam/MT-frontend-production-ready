@@ -1,11 +1,9 @@
-import { Fragment, useContext, useState } from 'react';
+import { Fragment, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ClearIcon from '@mui/icons-material/Clear';
 import Box from '@mui/material/Box/Box';
 import Grid from '@mui/material/Grid/Grid';
 import Divider from '@mui/material/Divider/Divider';
 import image from '../../assets/images/sw.png';
-import SeatDetails from '../SeatDetails/seatDetails';
 import { ParentBox } from './sleeper.style';
 import { ISeatProps } from './sleeper.types';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
@@ -15,9 +13,12 @@ import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { detailsContainer, sleeperMockData } from './sleeperMockData';
 import useWindowSize from '../../hooks/useWindowSize';
+import SeatDetails from '../SeatDetails/seatDetails';
 
 function Sleeper() {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
+  const [updatedBerthData, setUpdatedBerthData] = useState<ISeatProps[]>([]);
+
   const navigate = useNavigate();
   const {
     state: {
@@ -78,12 +79,15 @@ function Sleeper() {
   };
 
   const lowerDeck = berthData.filter(element => element.seatNo.includes('L'));
+  const lower = updatedBerthData.filter(element =>
+    element.seatNo.includes('L'),
+  );
 
   const dataLengthForLowerSeats = lowerDeck.length;
 
   const singleRow = lowerDeck.slice(0, dataLengthForLowerSeats / 3);
 
-  const doubleRow = lowerDeck.slice(
+  const doubleRow = lower.slice(
     dataLengthForLowerSeats / 3,
     dataLengthForLowerSeats,
   );
@@ -91,6 +95,10 @@ function Sleeper() {
   //////////////////////////////////////////////////
 
   const upperDeck = berthData.filter(element => element.seatNo.includes('U'));
+  const upper = updatedBerthData.filter(element =>
+    element.seatNo.includes('U'),
+  );
+
   const dataLengthForUpperSeats = upperDeck.length;
 
   const singleRowForUpperSeats = upperDeck.slice(
@@ -98,10 +106,45 @@ function Sleeper() {
     dataLengthForUpperSeats / 3,
   );
 
-  const doubleRowForUpperSeats = upperDeck.slice(
+  const doubleRowForUpperSeats = upper.slice(
     dataLengthForUpperSeats / 3,
     dataLengthForUpperSeats,
   );
+
+  const toNumber = (string: string) => {
+    return Number(string.slice(1, string.length));
+  };
+
+  const adjacentSeat = (seat: ISeatProps) => {
+    const seatNumber = toNumber(seat.seatNo);
+    const adjacentSeatNumber = (
+      Number(seatNumber) -
+      berthData.slice(0, berthData.length / 2).length / 2
+    ).toString();
+    if (seat.status === 'unavailable' && seat.bookedGender === 'female') {
+      const adjacentSeatData = berthData.filter(ele => {
+        const number = toNumber(ele.seatNo);
+        return number === Number(adjacentSeatNumber);
+      });
+      if (
+        seat.bookedGender === 'female' &&
+        seat.status === 'unavailable' &&
+        adjacentSeatData.length
+      ) {
+        if (Number(toNumber(adjacentSeatData[0].seatNo)) > 0) {
+          adjacentSeatData[0].bookedGender = 'female';
+        } else if (
+          adjacentSeatData[0].bookedGender === 'female' &&
+          adjacentSeatData[0].status === 'unavailable'
+        ) {
+          seat.bookedGender = 'female';
+        }
+      }
+      return seat;
+    } else {
+      return seat;
+    }
+  };
 
   function gridItem(seat: ISeatProps, index: number) {
     return (
@@ -122,6 +165,14 @@ function Sleeper() {
       </Grid>
     );
   }
+
+  useEffect(() => {
+    const newData = berthData.map(berth => {
+      const data = adjacentSeat(berth);
+      return data;
+    });
+    setUpdatedBerthData([...newData]);
+  }, []);
 
   return (
     <Fragment>
@@ -162,17 +213,8 @@ function Sleeper() {
                   })}
               </Grid>
             </Box>
+            <p className="deckInfo">{localString?.lowerDeck}</p>
           </Box>
-          {/* <Box className="seatLegend">
-            {detailsContainer.map(detail => {
-              return (
-                <Box className="singleLegend">
-                  <Box className={detail.classname}></Box>
-                  <span>{localString[detail.text]}</span>
-                </Box>
-              );
-            })}
-          </Box> */}
 
           {/* Upper Berth */}
 
@@ -215,7 +257,7 @@ function Sleeper() {
                   );
                 })}
             </Grid>
-            <p className="deckInfo">Upper Deck</p>
+            <p className="deckInfo">{localString?.upperDeck}</p>
           </Box>
         </Box>
 
