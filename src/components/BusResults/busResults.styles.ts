@@ -9,12 +9,16 @@ gap:${theme.typography.pxToRem(theme.gap.main)};
 letter-spacing: ${theme.typography.subtitle2.letterSpacing};
 overflow-y: scroll;
 padding: ${theme.typography.pxToRem(theme.padding.main)};
-max-height: calc(100vh - ${theme.typography.pxToRem(96)});
+max-height: calc(100vh - ${theme.typography.pxToRem(148)});
 
 ${theme.breakpoints.down('sm')} {
-	max-height: calc(100vh - ${theme.typography.pxToRem(181)});
-
+	max-height: calc(100vh - ${theme.typography.pxToRem(198.25)});
 }
 
+.threeDots{
+  justify-content:center;
+  align-items:center;
+  flex:1;
+}
 `,
 );

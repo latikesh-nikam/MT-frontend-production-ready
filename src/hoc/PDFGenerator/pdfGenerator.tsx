@@ -6,6 +6,7 @@ import DownloadForOfflineOutlinedIcon from '@mui/icons-material/DownloadForOffli
 import { Container } from './pdfGenerator.style';
 import { IPDFGeneratorProps } from './pdfGenerator.types';
 import useWindowSize from '../../hooks/useWindowSize';
+
 const PDFGenerator = ({
   buttonText,
   component: ComponentToPrint,
@@ -17,6 +18,7 @@ const PDFGenerator = ({
   });
   const { width } = useWindowSize();
   const windowWidth = width <= 576;
+
   return (
     <Container>
       <Box className="hide">

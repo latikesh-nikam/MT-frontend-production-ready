@@ -22,6 +22,7 @@ import useWindowSize from '../../hooks/useWindowSize';
 function Seater() {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
   const [updatedBerthData, setUpdatedBerthData] = useState<ISeatProps[]>([]);
+  const navigate = useNavigate();
   const { width } = useWindowSize();
   const windowWidthCondition = width < 576 && selected.length > 0;
   const windowWidth = width < 765;
@@ -32,6 +33,7 @@ function Seater() {
     },
   } = useContext(StoreContext) as IStoreContext;
   const { fixedFare } = selectedVehicleData;
+
   const berthData = selectedVehicleData.seatDetails as ISeatProps[];
   // const berthData = seaterMockData;
 
@@ -87,27 +89,34 @@ function Seater() {
   const doubleRow = updatedBerthData.slice(dataLength / 2, dataLength);
 
   const toNumber = (string: string) => {
-    return Number(string.slice(1, string.length));
+    return Number(string);
   };
 
   const adjacentSeat = (seat: ISeatProps) => {
     const seatNumber = toNumber(seat.seatNo);
-    const adjacentSeatNumber = (
-      Number(seatNumber) -
-      berthData.slice(0, berthData.length / 2).length / 2
-    ).toString();
+
+    const columnLength = berthData.length / 4;
+    const adjacentSeatNumber =
+      (seatNumber > 0 && seatNumber <= columnLength) ||
+      (seatNumber > columnLength * 2 && seatNumber <= columnLength * 3)
+        ? (seatNumber + berthData.length / 4).toString()
+        : (seatNumber - berthData.length / 4).toString();
 
     if (seat.status === 'unavailable' && seat.bookedGender === 'female') {
       const adjacentSeatData = berthData.filter(ele => {
         const number = toNumber(ele.seatNo);
         return number === Number(adjacentSeatNumber);
       });
+
       if (
         seat.bookedGender === 'female' &&
         seat.status === 'unavailable' &&
         adjacentSeatData.length
       ) {
-        if (toNumber(adjacentSeatData[0].seatNo) > 0) {
+        if (
+          toNumber(adjacentSeatData[0].seatNo) > 0 &&
+          adjacentSeatData[0].status === 'available'
+        ) {
           adjacentSeatData[0].bookedGender = 'female';
         } else if (
           adjacentSeatData[0].bookedGender === 'female' &&
@@ -116,6 +125,7 @@ function Seater() {
           seat.bookedGender = 'female';
         }
       }
+
       return seat;
     } else {
       return seat;
@@ -123,7 +133,24 @@ function Seater() {
   };
 
   function gridItem(seat: ISeatProps, index: number) {
+    // eslint-disable-next-line no-lone-blocks
+    {
+      /* For Testing Purpose
+    const Icon =
+      seat.status === 'available' ? (
+        <ChairOutlinedIcon
+          titleAccess="outlineIcon"
+          fontSize="medium"
+        />
+      ) : (
+        <ChairIcon titleAccess="filledIcon" fontSize="medium" />
+      ); */
+    }
+
+    // const updatedSeat = adjacentSeat(seat);
+    // console.log(seat);
     const Icon = seat.status === 'available' ? ChairOutlinedIcon : ChairIcon;
+
     return (
       <span>
         <Grid item xs={2} key={index} className="root">
@@ -149,6 +176,7 @@ function Seater() {
       const data = adjacentSeat(berth);
       return data;
     });
+
     setUpdatedBerthData([...newData]);
   }, []);
 

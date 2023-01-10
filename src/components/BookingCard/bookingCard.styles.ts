@@ -8,12 +8,12 @@ display: flex;
 flex-direction: column;
 gap: ${theme.typography.pxToRem(theme.gap.primary)};
 border: thin solid ${theme.palette.borderFaded2};
-
+cursor:pointer;
 .cities {
 	display: flex;
 	align-items: center;
 	gap: ${theme.typography.pxToRem(theme.gap.primary)};
-
+	text-transform: capitalize;
 	.city {
 		font-weight: ${theme.typography.fontWeightRegular}
 	}
@@ -37,5 +37,9 @@ ${theme.breakpoints.down('sm')} {
 	}
 }
 
+// &:hover{
+// 	transform: translate(101%);
+// 	box-shadow: ${theme.shadows[2]};
+// }
 `,
 );

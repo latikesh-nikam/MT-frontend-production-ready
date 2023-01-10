@@ -13,7 +13,7 @@ flex-direction:column;
   letter-spacing: ${theme.typography.subtitle2.letterSpacing};
   display:flex;
   flex-direction:column;
-  gap: ${theme.typography.pxToRem(theme.gap.larger)};
+  gap: ${theme.typography.pxToRem(theme.gap.small)};
 
   .heading {
      padding: ${theme.typography.pxToRem(theme.padding.main)} 0;
@@ -24,24 +24,21 @@ flex-direction:column;
      padding: ${theme.typography.pxToRem(theme.padding.main)} 0;
      display:flex;
      flex-direction:column;
-     gap: ${theme.typography.pxToRem(theme.gap.larger)};
-
+     justify-content: space-around;
      .items {
         flex:1;
         display:flex;
-        gap: ${theme.typography.pxToRem(theme.gap.larger)};
+        gap: ${theme.typography.pxToRem(theme.gap.secondary)};
 
         .header {
            display:flex;
-           gap:${theme.typography.pxToRem(theme.gap.larger)};
         }
 
         .details {
-           padding:0 ${theme.typography.pxToRem(theme.padding.larger)};
 
-           h3 {
-              margin-top: ${theme.typography.pxToRem(theme.margin.main)};
-           }
+         display:flex;
+         flex-direction:column;
+         gap: ${theme.typography.pxToRem(theme.gap.main)};
 
         }
      }

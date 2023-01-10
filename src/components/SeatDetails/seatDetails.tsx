@@ -15,14 +15,12 @@ import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { style } from './seatDetails.data';
 import PassengerDetails from '../PassengerDetails/passengerDetails';
 import { routes } from '../../constants/route';
-
 export default function SeatDetails({ selected }: any) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
-
   const {
     state: {
       seatState: {
@@ -33,22 +31,18 @@ export default function SeatDetails({ selected }: any) {
       },
     },
   } = useContext(StoreContext) as IStoreContext;
-
   const [departure, ...stations] = station;
   const arrival = station.slice(-1)[0];
-
   const fare = selected.reduce(
     (current: number, sum: any) => current + sum.seatFare + fixedFare,
     0,
   );
-
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-
   return (
     <SeatDetailsContainer>
       <Card className="cardContainer">

@@ -1,9 +1,12 @@
 import { styled } from '@mui/material/styles';
+
 export const Container = styled('div')(
   ({ theme }: any) => `
+
   .hide{
     display:none;
   }
+
   .download{
     .icon{
       cursor:pointer;
@@ -11,5 +14,6 @@ export const Container = styled('div')(
       background-color: ${theme.palette.background.white};
     }
   }
+
     `,
 );

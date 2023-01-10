@@ -22,6 +22,7 @@ const SliderInput = ({ data, name, label }: ISliderProps) => {
         render={({ field: { onChange, value } }) => (
           <div className="slider">
             <Slider
+              data-testid={`${name}Input`}
               value={value}
               step={null}
               marks={data}

@@ -12,6 +12,7 @@ export const searchApi = async (info: any, pageNumber: number) => {
       `${apiRoutes.search}${pageNumber}`,
       info,
     );
+    console.log(data);
     return data;
   } catch (error) {
     throw error;

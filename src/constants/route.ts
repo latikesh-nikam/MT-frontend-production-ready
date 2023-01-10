@@ -4,4 +4,7 @@ export const routes = {
   searcResultsRoute: 'searchResults',
   homeRoute: '/home',
   changePassword: '/changePassword',
+  payment: '/payment',
+  success: '/success',
+  ticket: '/ticket',
 };

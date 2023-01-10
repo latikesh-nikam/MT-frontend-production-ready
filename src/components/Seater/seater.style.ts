@@ -152,13 +152,12 @@ ${theme.breakpoints.down('md')} {
 .seatLegend {
 	display: flex;
 	justify-content: center;
-	gap:${theme.typography.pxToRem(8)};
-	padding:0 ${theme.typography.pxToRem(8)} 0 ${theme.typography.pxToRem(8)};
+	gap:0.5rem;
+	padding:0 0.5rem 0 0.5rem;
 
 	${theme.breakpoints.down('sm')} {
 		gap:${theme.typography.pxToRem(4)};
 		padding:0 ${theme.typography.pxToRem(8)};
-		width: max-content;
 	}
 }
 

@@ -45,7 +45,7 @@ const FormInputCheckBox = ({
                       <Checkbox
                         value={option.value}
                         {...register(name)}
-                        defaultChecked={checked}
+                        checked={checked}
                       />
                     );
                   }}

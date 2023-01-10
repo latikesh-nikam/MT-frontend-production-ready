@@ -6,7 +6,7 @@ export type IPassengerDetailsProps = {
   phoneNumber: number | string;
   gender?: string;
   age?: string;
-  passengerDetails: [];
+  passengerDetails: any[];
 };
 
 export type IPassengerCountProps = {
@@ -39,5 +39,8 @@ export type IPassengerDetailsFormProps = {
   fixedFare?: number;
   from?: string;
   to?: string;
-  date?: Date;
+  departureDate?: Date;
+  departureTime?: string;
+  arrivalDate?: Date;
+  arrivalTime?: string;
 };

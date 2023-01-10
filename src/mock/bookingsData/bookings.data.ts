@@ -2,27 +2,23 @@ import { IBookingsData } from './bookings.types';
 
 export const mockBookingsData: IBookingsData[] = [
   {
-    _id: 'awadd1233',
-    date: new Date('20 November 2022'),
-    adults: 1,
-    children: 0,
-    from: 'Nagpur',
-    to: 'Pune',
-  },
-  {
-    _id: 'dsdada3123',
-    date: new Date('25 November 2022'),
-    adults: 1,
-    children: 0,
-    from: 'Pune',
-    to: 'Nagpur',
-  },
-  {
-    _id: '123hdjshdj',
-    date: new Date('15 November 2022'),
-    adults: 1,
-    children: 0,
-    from: 'Mumbai',
-    to: 'Nagpur',
+    bookingId: 'abc1673007021351',
+    from: 'mumbai',
+    email: '',
+    phoneNumber: 1231231,
+    totalFare: 1233,
+    to: 'pune',
+    departureDate: '2023-01-06T12:09:21.219Z',
+    departureTime: '13:30',
+    arrivalDate: '2023-01-06T12:09:21.219Z',
+    arrivalTime: '09:00',
+    passengerDetails: [
+      {
+        passengerName: 'ABC',
+        passengerAge: 22,
+        passengerGender: 'male',
+        passengerSeat: 'L6',
+      },
+    ],
   },
 ];

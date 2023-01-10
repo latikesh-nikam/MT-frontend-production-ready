@@ -1,7 +1,8 @@
 export interface IPaymentDetailsInput {
   cardNumber: string;
-  cardHolderName: string;
-  year: number | string;
-  month: number | string;
-  cvv: string;
+  cardName: string;
+  cardExpYear: number | string;
+  cardExpMonth: number | string;
+  cardCVC: string;
+  email: string;
 }

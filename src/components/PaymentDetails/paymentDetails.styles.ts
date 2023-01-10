@@ -10,7 +10,8 @@ export const PaymentDetailsContainer = styled('div')(
     padding:${theme.typography.pxToRem(theme.padding.main)};
     border: thin solid ${theme.palette.borderFaded2};
     border-radius: ${theme.typography.pxToRem(theme.borderRadius.small)};
-    max-width: ${theme.typography.pxToRem(400)};
+    max-width: ${theme.typography.pxToRem(350)};
+    box-shadow: ${theme.shadows[2]};
  
     .heading {
        color: ${theme.palette.primary.main};
@@ -22,6 +23,12 @@ export const PaymentDetailsContainer = styled('div')(
        display:flex;
        flex-direction:column;
        gap:${theme.typography.pxToRem(theme.gap.small)};
+
+       .formInput{
+         .MuiFormLabel-root{
+            text-transform: uppercase;         
+         }
+       }
  
        .row {
           display:flex;

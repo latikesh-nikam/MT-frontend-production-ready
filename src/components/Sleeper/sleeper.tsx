@@ -18,7 +18,6 @@ import SeatDetails from '../SeatDetails/seatDetails';
 function Sleeper() {
   const [selected, setSelected] = useState<ISeatProps[]>([]);
   const [updatedBerthData, setUpdatedBerthData] = useState<ISeatProps[]>([]);
-
   const navigate = useNavigate();
   const {
     state: {
@@ -26,7 +25,6 @@ function Sleeper() {
     },
   } = useContext(StoreContext) as IStoreContext;
   const { fixedFare } = selectedVehicleData;
-
   const { width } = useWindowSize();
   const windowWidthCondition = width < 576 && selected.length > 0;
   const windowWidth = width < 576;
@@ -37,7 +35,6 @@ function Sleeper() {
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
-
   function classSelector(seat: ISeatProps) {
     if (selected.includes(seat.seatNo)) {
       seat.status = 'unavailable';
@@ -47,12 +44,10 @@ function Sleeper() {
       seat.status.slice(1, seat.status.length);
     return `${seat.bookedGender}${capitalizedText}`;
   }
-
   const fare = selected.reduce(
     (current: number, sum: any) => current + sum.seatFare + fixedFare,
     0,
   );
-
   const handleChange = (seat: ISeatProps) => {
     if (seat.status === 'unavailable') {
       const selectedSeat = selected.filter(
@@ -77,75 +72,75 @@ function Sleeper() {
       }
     }
   };
-
   const lowerDeck = berthData.filter(element => element.seatNo.includes('L'));
   const lower = updatedBerthData.filter(element =>
     element.seatNo.includes('L'),
   );
-
   const dataLengthForLowerSeats = lowerDeck.length;
-
   const singleRow = lowerDeck.slice(0, dataLengthForLowerSeats / 3);
-
   const doubleRow = lower.slice(
     dataLengthForLowerSeats / 3,
     dataLengthForLowerSeats,
   );
-
   //////////////////////////////////////////////////
-
   const upperDeck = berthData.filter(element => element.seatNo.includes('U'));
   const upper = updatedBerthData.filter(element =>
     element.seatNo.includes('U'),
   );
-
   const dataLengthForUpperSeats = upperDeck.length;
-
   const singleRowForUpperSeats = upperDeck.slice(
     0,
     dataLengthForUpperSeats / 3,
   );
-
   const doubleRowForUpperSeats = upper.slice(
     dataLengthForUpperSeats / 3,
     dataLengthForUpperSeats,
   );
-
   const toNumber = (string: string) => {
     return Number(string.slice(1, string.length));
   };
-
+  const columnLength = Math.floor(berthData.length / 6);
   const adjacentSeat = (seat: ISeatProps) => {
     const seatNumber = toNumber(seat.seatNo);
-    const adjacentSeatNumber = (
-      Number(seatNumber) -
-      berthData.slice(0, berthData.length / 2).length / 2
-    ).toString();
-    if (seat.status === 'unavailable' && seat.bookedGender === 'female') {
-      const adjacentSeatData = berthData.filter(ele => {
-        const number = toNumber(ele.seatNo);
-        return number === Number(adjacentSeatNumber);
-      });
-      if (
-        seat.bookedGender === 'female' &&
-        seat.status === 'unavailable' &&
-        adjacentSeatData.length
-      ) {
-        if (Number(toNumber(adjacentSeatData[0].seatNo)) > 0) {
-          adjacentSeatData[0].bookedGender = 'female';
-        } else if (
-          adjacentSeatData[0].bookedGender === 'female' &&
-          adjacentSeatData[0].status === 'unavailable'
-        ) {
-          seat.bookedGender = 'female';
-        }
-      }
-      return seat;
-    } else {
-      return seat;
-    }
-  };
 
+    if (
+      (seatNumber > columnLength && seatNumber <= columnLength * 3) ||
+      (seatNumber > columnLength * 4 && seatNumber <= columnLength * 6)
+    ) {
+      const adjacentSeatNumber =
+        (seatNumber > columnLength && seatNumber <= columnLength * 2) ||
+        (seatNumber > columnLength * 4 && seatNumber <= columnLength * 5)
+          ? (seatNumber + columnLength).toString()
+          : (seatNumber - columnLength).toString();
+
+      if (seat.status === 'unavailable' && seat.bookedGender === 'female') {
+        const adjacentSeatData = berthData.filter(ele => {
+          const number = toNumber(ele.seatNo);
+          return number === Number(adjacentSeatNumber);
+        });
+        if (
+          seat.bookedGender === 'female' &&
+          seat.status === 'unavailable' &&
+          adjacentSeatData.length
+        ) {
+          if (
+            toNumber(adjacentSeatData[0].seatNo) > 0 &&
+            adjacentSeatData[0].status === 'available'
+          ) {
+            adjacentSeatData[0].bookedGender = 'female';
+          } else if (
+            adjacentSeatData[0].bookedGender === 'female' &&
+            adjacentSeatData[0].status === 'unavailable'
+          ) {
+            seat.bookedGender = 'female';
+          }
+        }
+        return seat;
+      } else {
+        return seat;
+      }
+    } else return seat;
+  };
   function gridItem(seat: ISeatProps, index: number) {
     return (
       <Grid item xs={2} key={index}>
@@ -165,15 +160,19 @@ function Sleeper() {
       </Grid>
     );
   }
-
   useEffect(() => {
-    const newData = berthData.map(berth => {
+    const lower = berthData.slice(0, columnLength * 3).map(berth => {
       const data = adjacentSeat(berth);
       return data;
     });
-    setUpdatedBerthData([...newData]);
+    const upper = berthData
+      .slice(columnLength * 3, columnLength * 6)
+      .map(berth => {
+        const data = adjacentSeat(berth);
+        return data;
+      });
+    setUpdatedBerthData([...lower, ...upper]);
   }, []);
-
   return (
     <Fragment>
       <ParentBox data-testid="parentContainerLower">
@@ -215,9 +214,7 @@ function Sleeper() {
             </Box>
             <p className="deckInfo">{localString?.lowerDeck}</p>
           </Box>
-
           {/* Upper Berth */}
-
           <Box
             className="boxContainer upperSeatBox"
             data-testid="boxContainerUpper">
@@ -260,7 +257,6 @@ function Sleeper() {
             <p className="deckInfo">{localString?.upperDeck}</p>
           </Box>
         </Box>
-
         {!windowWidthCondition ? (
           <Box className="seatDetails">
             <SeatDetails selected={selected} />

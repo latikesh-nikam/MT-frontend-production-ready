@@ -30,8 +30,8 @@ const INITIAL_STATE: IDashboardState = {
   sortData: {
     isSorted: false,
     fixedFare: '',
-    ratings: [],
     name: '',
+    ratings: [],
   },
   pageNumber: 0,
 };

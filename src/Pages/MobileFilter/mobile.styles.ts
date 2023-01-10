@@ -8,7 +8,7 @@ padding:${theme.typography.pxToRem(theme.padding.main)};
 .filterAndSort {
   display:flex;
   flex-direction: column;
-  gap:${theme.typography.pxToRem(theme.gap.secondary)}
+  gap:${theme.typography.pxToRem(theme.gap.secondary)};
 }
 `,
 );

@@ -14,7 +14,6 @@ import { ThreeDots } from 'react-loader-spinner';
 
 const BusResultCard = ({ data }: IBusResultCardProps) => {
   const [selected, setSelected] = useState('');
-
   const { dispatch } = useContext(StoreContext) as IStoreContext;
 
   const {
@@ -50,12 +49,9 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
 
   const hourString = totalTravelTime > 1 ? localString?.hrs : localString?.hr;
 
-  const handleClick = (type: string) => {
-    if (selected === type) {
-      setSelected('');
-    } else {
-      setSelected(type);
-    }
+  const handleActionClick = (type: string) => {
+    if (selected === type) setSelected('');
+    else setSelected(type);
   };
   const handleViewSeats = (data: any) => {
     dispatch(seatDataAction(data));
@@ -64,22 +60,25 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
 
   return (
     <BusResultCardContainer
-      onClick={!windowWidth ? () => handleViewSeats(data) : () => {}}>
-      <div className="vehicleDetails">
+      onClick={!windowWidth ? () => handleViewSeats(data) : data => {}}
+      data-testid="busResultCard">
+      <div className="vehicleDetails" data-testid="vehicleDetails">
         <div className="vehicleName">
           <h3>
             {operatorName} {vehicleName}
           </h3>
         </div>
-        <div className="busDetails">
-          <div className="vehicleAndTimeDetails">
-            <div className="vehicle">
+        <div className="busDetails" data-testid="busDetails">
+          <div
+            className="vehicleAndTimeDetails"
+            data-testid="vehicleAndTimeDetails">
+            <div className="vehicle" data-testid="vehicle">
               <p className="lightGrey">
                 {vehicleType} {vehicleClassType}
               </p>
             </div>
 
-            <div className="timeDetails">
+            <div className="timeDetails" data-testid="timeDetails">
               <div className="departure time">
                 <h3>{departure.sourceDepartureTime}</h3>
 
@@ -110,20 +109,18 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
             </div>
           )}
           <div className="fareAndSeatsAvailabilty">
-            <div className="fare">
+            <div className="fare" data-testid="fare">
               <p className="lightGrey">{localString?.startsFrom}</p>
               <h3>
                 <span className="lightGrey fontWeightLight">
-                  {' '}
                   {localString?.rs}
-                </span>{' '}
+                </span>
                 {fixedFare}
               </h3>
             </div>
 
-            <div className="seatsAvailability">
+            <div className="seatsAvailability" data-testid="seatsAvailability">
               <p className="lightGrey">
-                {' '}
                 {TotalAvailableSeat} {localString?.seats}{' '}
                 {localString?.available}
               </p>
@@ -132,6 +129,7 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
           {windowWidth && (
             <div className="viewSeats">
               <Button
+                data-testid="viewSeatsButton"
                 variant="contained"
                 size="small"
                 onClick={() => handleViewSeats(data)}>
@@ -150,13 +148,14 @@ const BusResultCard = ({ data }: IBusResultCardProps) => {
                 ? 'active amenities actions'
                 : 'amenities actions'
             }
-            onClick={() => handleClick('amenity')}>
+            onClick={() => handleActionClick('amenity')}
+            data-testid="amenities">
             <p>{localString?.amenities}</p>
           </div>
         </div>
       )}
       {selected === 'amenity' && (
-        <div className="amenitiesContainer">
+        <div className="amenitiesContainer" data-testid="amenitiesContainer">
           {amenities.map((amenity: string, index: number) => {
             const Icon = iconMap[amenity];
             return (

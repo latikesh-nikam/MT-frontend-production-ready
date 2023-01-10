@@ -55,9 +55,9 @@ ${theme.breakpoints.down('sm')} {
 .buttonGroup {
 	display:flex;
 	gap:0.5rem;
-	max-width:100vw;
+	max-width:max-content;
 	justify-content:center;
-	margin-left:1rem;
+	
 }
 
 .heading {

@@ -1,3 +1,4 @@
+import { IBookingDetailsState } from '../reducers/bookingDetailsReducer/bookingDetailsReducer.types';
 import { IDashboardState } from '../reducers/dashboardReducer/dashboardReducer.types';
 import { IPassengerDetailsState } from '../reducers/passengerDetailsReducer/passengerDetailsForm.types';
 import { ISeatState } from '../reducers/seatReducers/seatReducer.types';
@@ -8,4 +9,5 @@ export interface IInitialState {
   toasterState: IToasterState;
   seatState: ISeatState;
   passengerDetailsFormData: IPassengerDetailsState;
+  bookingDetailsState: IBookingDetailsState;
 }

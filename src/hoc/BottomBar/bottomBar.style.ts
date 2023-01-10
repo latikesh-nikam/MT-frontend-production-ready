@@ -1,7 +1,6 @@
-import styled from '@emotion/styled';
-import { Box } from '@mui/material';
-import { grey } from '@mui/material/colors';
-import { auto } from '@popperjs/core';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box/Box';
+import grey from '@mui/material/colors/grey';
 
 export const Drawer = styled('div')(
   ({ theme }: any) => `
@@ -33,5 +32,5 @@ export const Drawer = styled('div')(
 
 export const StyledBox = styled(Box)(({ theme }: any) => ({
   backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[800],
-  overflow: auto,
+  overflow: 'auto',
 }));

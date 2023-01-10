@@ -4,41 +4,57 @@ import { IPaymentDetailsInput } from './paymentDetails.types';
 export const paymentDetailsSchema = (localString: any) => {
   const monthMessage = localString?.monthMessage;
   const yearMessage = localString?.yearMessage;
-  const lengthSixteen = localString?.lengthSixteen;
+  const lengthSixteenMessage = localString?.lengthSixteen;
   const lengththreeMessage = localString?.lengththree;
+  const emailMessage = localString?.emailMessage;
+  const numberMessage = localString?.numberMessage;
 
   const date = new Date();
-  const currentYear = date.getFullYear();
-  const cvvRegex = /^[0-9]{3}$/;
-  const cardNumberRegex = /^[0-9]{16}$/;
+  const currentYear = date.getFullYear() - 2000;
+  const currentMonth = date.getMonth();
+  const numberRegex = /^[0-9]+$/;
 
   return Yup.object({
     cardNumber: Yup.string()
       .required('')
-      .matches(cardNumberRegex, lengthSixteen)
-      .min(16)
-      .max(16),
-    cardHolderName: Yup.string().required(''),
-    month: Yup.number()
+      .matches(numberRegex, numberMessage)
+      .min(16, lengthSixteenMessage)
+      .max(16, lengthSixteenMessage),
+    cardName: Yup.string().required(''),
+    cardExpMonth: Yup.number()
       .required('')
+      .typeError(numberMessage)
+      .min(2, monthMessage)
+      .max(2, monthMessage)
       .lessThan(13, monthMessage)
       .moreThan(0, monthMessage),
-    year: Yup.number()
+    cardExpYear: Yup.number()
       .required('')
-      .moreThan(currentYear, yearMessage)
-      .lessThan(currentYear + 10, yearMessage),
-    cvv: Yup.string()
+      .lessThan(currentYear + 10, yearMessage)
+      .when('cardExpMonth', (cardExpMonth: number) => {
+        if (cardExpMonth <= currentMonth + 1) {
+          return Yup.number()
+            .typeError(numberMessage)
+            .moreThan(currentYear, yearMessage);
+        } else
+          return Yup.number()
+            .typeError(numberMessage)
+            .moreThan(currentYear - 1, yearMessage);
+      }),
+    cardCVC: Yup.string()
       .required('')
-      .matches(cvvRegex, lengththreeMessage)
-      .min(3)
-      .max(3),
+      .matches(numberRegex, numberMessage)
+      .min(3, lengththreeMessage)
+      .max(3, lengththreeMessage),
+    email: Yup.string().email(emailMessage),
   });
 };
 
 export const paymentDetailsDefaultValues: IPaymentDetailsInput = {
-  cvv: '',
-  cardHolderName: '',
+  cardCVC: '',
+  cardName: '',
   cardNumber: '',
-  month: '',
-  year: '',
+  cardExpMonth: '',
+  cardExpYear: '',
+  email: '',
 };

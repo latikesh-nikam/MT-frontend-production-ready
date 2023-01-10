@@ -9,6 +9,7 @@ import BusResultCard from '../BusResultCard/busResultCard';
 import { epochDate } from '../../utils/utility';
 import { useDidMountEffect } from '../../hooks/useDidMountEffect';
 import { ThreeDots } from 'react-loader-spinner';
+import Loader from '../../hoc/Loader/loader';
 const BusResults = ({
   handleScroll,
   scrollerRef,
@@ -49,14 +50,7 @@ const BusResults = ({
           return <BusResultCard data={result} key={index} />;
         })
       ) : (
-        <ThreeDots
-          height="80"
-          width="80"
-          radius="9"
-          color="#4f794d"
-          ariaLabel="three-dots-loading"
-          visible={true}
-        />
+        <Loader />
       )}
 
       {loading && <p>...{localString?.loading}</p>}

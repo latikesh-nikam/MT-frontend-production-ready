@@ -13,11 +13,13 @@ import { LocalisationContext } from '../../hoc/LocalisationProvider/localisation
 import FormInput from '../FormInput/formInput';
 import RadioInput from '../RadioInput/radioInput';
 import { Parent } from './passengerDetails.style';
-import { toasterDataAction } from '../../context/actions/toasterActions/toasterActions';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { StoreContext } from '../../context/StoreContext/storeContext';
 import { vehicleBooking } from '../../services/vehicle/vehicle.service';
 import utility from '../../utils/utility';
+import { paymentInfoAction } from '../../context/actions/bookingDetailsActions/bookingDetailsActions';
+import { useNavigate } from 'react-router-dom';
+import { routes } from '../../constants/route';
 
 function PassengerDetails({
   passengerCount: count,
@@ -30,13 +32,16 @@ function PassengerDetails({
     dispatch,
     state: {
       seatState: {
-        selectedVehicleData: { _id, fixedFare },
+        selectedVehicleData: { _id, fixedFare, station },
       },
       dashboardState: {
         searchFormData: { from, to, date },
       },
     },
   } = useContext(StoreContext) as IStoreContext;
+
+  const navigate = useNavigate();
+
   count.sort((a: any, b: any) => a.seatNo - b.seatNo);
   const required = localString?.required;
   const emailMessage = localString?.emailMessage;
@@ -72,6 +77,9 @@ function PassengerDetails({
   });
 
   const submit = async (data: IPassengerDetailsProps) => {
+    const [departure, ...stations] = station;
+    const arrival = station.slice(-1)[0];
+
     data.passengerDetails.forEach(
       (element: IPassengerDetailsFormProps, index: number) => {
         element.passengerSeat = count[index].seatNo;
@@ -82,7 +90,10 @@ function PassengerDetails({
         element.phoneNumber = data.phoneNumber;
         element.from = from;
         element.to = to;
-        element.date = date;
+        element.departureDate = date;
+        element.departureTime = departure.sourceDepartureTime;
+        element.arrivalDate = date;
+        element.arrivalTime = arrival.sourceDepartureTime;
       },
     );
     try {
@@ -92,23 +103,13 @@ function PassengerDetails({
         },
         _id,
       );
-      dispatch(
-        toasterDataAction({
-          showMessage: true,
-          message: response.message,
-          type: 'success',
-        }),
-      );
+      console.log(response.data);
+      dispatch(paymentInfoAction(response.data));
       showModal(false);
+      navigate(routes.payment);
     } catch (error: any) {
       const message = error.response.data.error.message;
-      dispatch(
-        toasterDataAction({
-          showMessage: true,
-          message: message,
-          type: 'error',
-        }),
-      );
+      throw error;
     }
   };
 
