@@ -10,10 +10,15 @@ import { LocalisationContext } from '../../hoc/LocalisationProvider/localisation
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import { logout } from '../../services/auth/auth.service';
 import { routes } from '../../constants/route';
+import { toasterDataAction } from '../../context/actions/toasterActions/toasterActions';
+import { IStoreContext } from '../../context/StoreContext/storeContext.types';
+import { StoreContext } from '../../context/StoreContext/storeContext';
 
 function Profile() {
   const [profile, setProfile] = useState(false);
   const navigate = useNavigate();
+
+  const { dispatch } = useContext(StoreContext) as IStoreContext;
 
   const { localisation } = useContext(
     LocalisationContext,
@@ -22,6 +27,13 @@ function Profile() {
 
   const handleLogout = async () => {
     const response = await logout();
+    dispatch(
+      toasterDataAction({
+        showMessage: true,
+        message: response.message,
+        type: 'success',
+      }),
+    );
     navigate('/');
   };
 

@@ -22,6 +22,7 @@ import { searchFormDataAction } from '../../context/actions/dashboardActions/das
 import { fetchAllStations } from '../../services/user/user.service';
 import { useDidMountEffect } from '../../hooks/useDidMountEffect';
 import useWindowSize from '../../hooks/useWindowSize';
+import { ThreeDots } from 'react-loader-spinner';
 
 const Search = ({ navigateTo = '' }: ISearchProps) => {
   const [allStations, updateAllStations] = useState<IAllStation[]>([]);
@@ -88,6 +89,7 @@ const Search = ({ navigateTo = '' }: ISearchProps) => {
         date: epochDate(date),
         filterBy: {},
       });
+
       if (navigateTo) navigate(navigateTo);
     } catch (error) {
       throw error;

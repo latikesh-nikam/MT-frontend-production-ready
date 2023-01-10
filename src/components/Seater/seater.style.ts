@@ -162,8 +162,6 @@ ${theme.breakpoints.down('md')} {
 }
 
 .seatDetails {
-	// flex:1;
-
 	${theme.breakpoints.down('sm')} {
 		display: none;
 	}
@@ -255,7 +253,7 @@ ${theme.breakpoints.down('md')} {
 }
 
 .heading {
-	margin-top: 1rem;
+	margin-top: ${theme.typography.pxToRem(16)};
 }
 
 .closeButton{

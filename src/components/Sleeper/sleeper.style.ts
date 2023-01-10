@@ -30,8 +30,11 @@ ${theme.breakpoints.down('lg')} {
     display:flex;
     flex-direction:column;
     align-items:flex-end;
+    overflow-y:scroll;
+    
+
     &::-webkit-scrollbar {
-        display: none;
+        display:none;
     }
 }
 .boxContainer {

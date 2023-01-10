@@ -12,6 +12,8 @@ import ChangePassword from '../ChangePassword/changePassword';
 import BookingSuccessful from '../../Pages/BookingSuccess/bookingSuccessful';
 import Payment from '../../Pages/Payment/payment';
 import Ticket from '../../Pages/Ticket/ticket';
+import Seater from '../Seater/seater';
+import Sleeper from '../Sleeper/sleeper';
 
 const Layout = () => {
   return (
@@ -31,6 +33,8 @@ const Layout = () => {
       <Route path="ticket" element={<Ticket />} />
       <Route path="payment" element={<Payment />} />
       <Route path="/success" element={<BookingSuccessful />}></Route>
+      <Route path="/seater" element={<Seater />}></Route>
+      <Route path="/sleeper" element={<Sleeper />}></Route>
     </Routes>
   );
 };

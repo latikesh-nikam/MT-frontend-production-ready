@@ -33,6 +33,7 @@ function Seater() {
     },
   } = useContext(StoreContext) as IStoreContext;
   const { fixedFare } = selectedVehicleData;
+
   const berthData = selectedVehicleData.seatDetails as ISeatProps[];
   // const berthData = seaterMockData;
 
@@ -132,35 +133,11 @@ function Seater() {
   };
 
   function gridItem(seat: ISeatProps, index: number) {
-    // eslint-disable-next-line no-lone-blocks
-    {
-      /* For Testing Purpose
-    const Icon =
-      seat.status === 'available' ? (
-        <ChairOutlinedIcon
-          titleAccess="outlineIcon"
-          fontSize="medium"
-        />
-      ) : (
-        <ChairIcon titleAccess="filledIcon" fontSize="medium" />
-      ); */
-    }
-
-    // const updatedSeat = adjacentSeat(seat);
-    // console.log(seat);
     const Icon = seat.status === 'available' ? ChairOutlinedIcon : ChairIcon;
 
     return (
       <span>
         <Grid item xs={2} key={index} className="root">
-          {/* For Testing Purpose
-          <span
-            data-testid={`mainBoxSeater`}
-            className={`${classSelector(seat)} mainBox`}
-            onClick={() => handleChange(seat)}>
-            {Icon}
-          </span> 
-          */}
           <Icon
             data-testid={`mainBoxSeater`}
             fontSize="large"

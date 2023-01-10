@@ -28,7 +28,9 @@ function Sleeper() {
   const { width } = useWindowSize();
   const windowWidthCondition = width < 576 && selected.length > 0;
   const windowWidth = width < 576;
+
   const berthData = selectedVehicleData.seatDetails as ISeatProps[];
+  // const berthData = sleeperMockData;
 
   const {
     localisation: { localString },

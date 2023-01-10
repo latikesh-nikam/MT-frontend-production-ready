@@ -10,6 +10,7 @@ import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisatio
 import { StoreContext } from '../../context/StoreContext/storeContext';
 import { IStoreContext } from '../../context/StoreContext/storeContext.types';
 import { seatDataAction } from '../../context/actions/seatActions/seatActions';
+import { ThreeDots } from 'react-loader-spinner';
 
 const BusResultCard = ({ data }: IBusResultCardProps) => {
   const [selected, setSelected] = useState('');

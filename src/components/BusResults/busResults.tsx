@@ -28,7 +28,6 @@ const BusResults = ({
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
-
   const getSearchData = () => {
     if (data.length === 0) {
       getSearchResults({
@@ -38,15 +37,12 @@ const BusResults = ({
       });
     }
   };
-
   useEffect(() => {
     if (from && to && date) {
       resetState();
     }
   }, []);
-
   useDidMountEffect(getSearchData, [data]);
-
   return (
     <BusResultsContainer ref={scrollerRef} onScroll={handleScroll}>
       {searchResults.length ? (
@@ -54,11 +50,11 @@ const BusResults = ({
           return <BusResultCard data={result} key={index} />;
         })
       ) : (
-        <p>{localString?.noBusesFound}</p>
+        <Loader />
       )}
+
       {loading && <p>...{localString?.loading}</p>}
     </BusResultsContainer>
   );
 };
-
 export default BusResults;

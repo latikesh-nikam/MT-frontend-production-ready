@@ -14,5 +14,11 @@ max-height: calc(100vh - ${theme.typography.pxToRem(148)});
 ${theme.breakpoints.down('sm')} {
 	max-height: calc(100vh - ${theme.typography.pxToRem(198.25)});
 }
+
+.threeDots{
+  justify-content:center;
+  align-items:center;
+  flex:1;
+}
 `,
 );

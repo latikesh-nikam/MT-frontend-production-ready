@@ -151,13 +151,13 @@ const Signup = () => {
                   <Box className="row">
                     <FormInput
                       name="name"
-                      label={localString['enterName']}
+                      label={`*${localString['enterName']}`}
                       showErrorMessage
                       size="small"
                     />
                     <FormInput
                       name="email"
-                      label={localString['enterEmail']}
+                      label={`*${localString['enterEmail']}`}
                       showErrorMessage
                       size="small"
                     />
@@ -165,13 +165,13 @@ const Signup = () => {
                   <Box className="row">
                     <FormInput
                       name="phone"
-                      label={localString['enterPhoneNumber']}
+                      label={`*${localString['enterPhoneNumber']}`}
                       showErrorMessage
                       size="small"
                     />
                     <FormInput
                       name="occupation"
-                      label={localString['enterOccupation']}
+                      label={`*${localString['enterOccupation']}`}
                       showErrorMessage
                       size="small"
                     />
@@ -183,7 +183,7 @@ const Signup = () => {
                     render={({ field }) => (
                       <Fragment>
                         <FormLabel id="gender">
-                          {localString?.selectGender}
+                          {`*${localString?.selectGender}`}
                         </FormLabel>
                         <RadioGroup {...field} row aria-labelledby="gender">
                           {gender &&
@@ -214,7 +214,7 @@ const Signup = () => {
                               data-testid="securityQuestion-field"
                               id="securityQuestions"
                               className="selectInput"
-                              label={localString?.selectSecurityQuestion}
+                              label={`*${localString?.selectSecurityQuestion}`}
                               error={!!errors.securityQuestion}
                               margin="dense"
                               size="small">
@@ -235,7 +235,7 @@ const Signup = () => {
                     />
                     <FormInput
                       name="securityAnswer"
-                      label={localString['enterSecurityQuestionAnswer']}
+                      label={`*${localString['enterSecurityQuestionAnswer']}`}
                       showErrorMessage
                       size="small"
                     />
@@ -243,14 +243,14 @@ const Signup = () => {
                   <Box className="row">
                     <FormInput
                       name="password"
-                      label={localString['newPassword']}
+                      label={`*${localString['newPassword']}`}
                       showErrorMessage
                       size="small"
                       type="password"
                     />
                     <FormInput
                       name="confirmPassword"
-                      label={localString['confirmPassword']}
+                      label={`*${localString['confirmPassword']}`}
                       showErrorMessage
                       size="small"
                       type="password"
