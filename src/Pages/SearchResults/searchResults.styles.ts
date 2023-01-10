@@ -74,10 +74,6 @@ flex-direction:column;
 
 ${theme.breakpoints.down('md')} {
 
-  .search {
-     padding:${theme.typography.pxToRem(theme.padding.main)} 0;
-  }
-
   .filterIcon {
      display:block;
   }

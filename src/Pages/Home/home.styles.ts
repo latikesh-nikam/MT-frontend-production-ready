@@ -12,7 +12,7 @@ flex-direction: column;
   align-items: center;
   justify-content: center;
   background: url(${searchBackground}) center/cover no-repeat;
-  padding:${theme.padding.main} 0;
+  padding:${theme.typography.pxToRem(theme.padding.secondary)} 0;
   position:relative;
 
   &::before {
@@ -27,13 +27,10 @@ flex-direction: column;
 
 }
 
-
-${theme.breakpoints.down('sm')} {
+${theme.breakpoints.down('md')}{
   .search {
-     flex: 0 1 auto;
-     padding:${theme.typography.pxToRem(theme.padding.main)} 0;
-  }
-
+    flex: 0 1 auto;
+ }
 }
 
 `,

@@ -16,7 +16,7 @@ const BookingCard = ({ data }: IBookingsCardProps) => {
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
-
+  console.log(data);
   const { dispatch } = useContext(StoreContext) as IStoreContext;
 
   const navigate = useNavigate();
@@ -27,7 +27,6 @@ const BookingCard = ({ data }: IBookingsCardProps) => {
 
   const handleBookingCardClick = (data: IBookingsData) => {
     dispatch(bookingDataAction(data));
-
     navigate(routes.ticket);
   };
 

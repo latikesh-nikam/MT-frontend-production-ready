@@ -25,6 +25,7 @@ flex-direction:column;
      display:flex;
      flex-direction:column;
      justify-content: space-around;
+     gap: ${theme.typography.pxToRem(theme.gap.larger)};
      .items {
         flex:1;
         display:flex;

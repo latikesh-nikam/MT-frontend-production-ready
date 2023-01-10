@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { Fragment, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -24,6 +24,8 @@ import { toasterDataAction } from '../../context/actions/toasterActions/toasterA
 import { bookingDataAction } from '../../context/actions/bookingDetailsActions/bookingDetailsActions';
 
 const PaymentDetails = () => {
+  const [isLoading, updateIsLoading] = useState(false);
+
   const {
     state: {
       bookingDetailsState: {
@@ -51,6 +53,7 @@ const PaymentDetails = () => {
   } = methods;
 
   const onSubmit: SubmitHandler<IPaymentDetailsInput> = async data => {
+    updateIsLoading(isLoading => true);
     try {
       const response = await payment(bookingId, data);
       dispatch(
@@ -60,6 +63,7 @@ const PaymentDetails = () => {
           showMessage: true,
         }),
       );
+      updateIsLoading(isLoading => false);
       dispatch(bookingDataAction(response.data[0]));
       navigate(routes.success);
     } catch (error) {
@@ -67,12 +71,26 @@ const PaymentDetails = () => {
     }
   };
 
-  const disablePaymentButton = !(
-    Object.keys(dirtyFields).length ===
-    Object.keys(paymentDetailsDefaultValues).length
-  );
+  const disablePaymentButton =
+    !(
+      Object.keys(dirtyFields).length ===
+      Object.keys(paymentDetailsDefaultValues).length
+    ) || isLoading;
 
   const email = localString?.email;
+
+  const payButtonText = isLoading ? (
+    <Fragment>
+      <span>{localString?.processing}</span>
+      <div className="loader">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </Fragment>
+  ) : (
+    localString?.pay
+  );
 
   return (
     <PaymentDetailsContainer>
@@ -149,9 +167,11 @@ const PaymentDetails = () => {
                   variant="contained"
                   type="submit"
                   disabled={disablePaymentButton}>
-                  {localString?.pay}
+                  {payButtonText}
                 </Button>
-                <Button variant="outlined">{localString?.cancel}</Button>
+                <Button variant="outlined" disabled={isLoading}>
+                  {localString?.cancel}
+                </Button>
               </div>
             </form>
           </FormProvider>

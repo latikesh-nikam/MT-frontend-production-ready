@@ -5,13 +5,14 @@ import { RecentBookingsContainer } from './recentBookings.styles';
 import { LocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider';
 import { ILocalisationContext } from '../../hoc/LocalisationProvider/localisationProvider.types';
 import BookingCard from '../BookingCard/bookingCard';
+import { mockBookingsData } from '../../mock/bookingsData/bookings.data';
 
 const RecentBookings = ({ data }: IRecentBookingsProps) => {
   const {
     localisation: { localString },
   } = useContext(LocalisationContext) as ILocalisationContext;
 
-  const showBookingCard = data.length > 0;
+  const showBookingCard = mockBookingsData.length > 0;
 
   return (
     <RecentBookingsContainer>
@@ -25,7 +26,7 @@ const RecentBookings = ({ data }: IRecentBookingsProps) => {
             data-testid="bookings"
             className="cardsContainer"
             spacing={2}>
-            {data.map(booking => {
+            {mockBookingsData.map(booking => {
               return <BookingCard data={booking} key={booking.bookingId} />;
             })}
           </Grid>
