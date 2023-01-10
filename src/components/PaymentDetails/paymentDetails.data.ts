@@ -30,16 +30,17 @@ export const paymentDetailsSchema = (localString: any) => {
       .moreThan(0, monthMessage),
     cardExpYear: Yup.number()
       .required('')
-      .lessThan(currentYear + 10, yearMessage)
       .when('cardExpMonth', (cardExpMonth: number) => {
         if (cardExpMonth <= currentMonth + 1) {
           return Yup.number()
             .typeError(numberMessage)
-            .moreThan(currentYear, yearMessage);
+            .moreThan(currentYear, yearMessage)
+            .lessThan(currentYear + 10, yearMessage);
         } else
           return Yup.number()
             .typeError(numberMessage)
-            .moreThan(currentYear - 1, yearMessage);
+            .moreThan(currentYear - 1, yearMessage)
+            .lessThan(currentYear + 10, yearMessage);
       }),
     cardCVC: Yup.string()
       .required('')

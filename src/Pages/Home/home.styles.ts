@@ -27,12 +27,10 @@ flex-direction: column;
 
 }
 
-
-${theme.breakpoints.down('sm')} {
+${theme.breakpoints.down('md')}{
   .search {
-     flex: 0 1 auto;
-  }
-
+    flex: 0 1 auto;
+ }
 }
 
 `,

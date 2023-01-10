@@ -18,6 +18,8 @@ export const PaymentDetailsContainer = styled('div')(
        text-align:center;
        margin: ${theme.typography.pxToRem(theme.margin.main)} 0;
     }
+
+
  
     .paymentDetailsForm {
        display:flex;
@@ -26,7 +28,8 @@ export const PaymentDetailsContainer = styled('div')(
 
        .formInput{
          .MuiFormLabel-root{
-            text-transform: uppercase;         
+            text-transform: uppercase;
+            color: ${theme.palette.textColors.lightGrey};         
          }
        }
  
@@ -41,6 +44,34 @@ export const PaymentDetailsContainer = styled('div')(
  
           .paymentButton {
              flex:1;
+            display:flex;
+            gap:${theme.typography.pxToRem(theme.gap.primary)};
+
+            .loader{
+               display:flex;
+               
+            }
+            .loader > div {
+               width: ${theme.typography.pxToRem(9)};
+               height: ${theme.typography.pxToRem(9)};
+               margin: 0 ${theme.typography.pxToRem(6)};
+               border-radius: 50%;
+               background-color: #000;
+               opacity: 1;
+               animation: loader 0.6s infinite alternate;
+             }
+             @keyframes loader {
+               to {
+                 opacity: 0.1;
+                 transform: translateY(-${theme.typography.pxToRem(10)});
+               }
+             }
+             .loader > div:nth-child(2) {
+               animation-delay: 0.4s;
+             }
+             .loader > div:nth-child(3) {
+               animation-delay: 0.6s;
+             }
           }
        }
     }
