@@ -1,5 +1,5 @@
-import { IBookingsData } from "../../mock/bookingsData/bookings.types";
+import { IBookingsData } from '../../mock/bookingsData/bookings.types';
 
 export interface IBookingsCardProps {
-    data:IBookingsData
+  data: IBookingsData;
 }

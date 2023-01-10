@@ -1,26 +1,30 @@
 import { styled } from '@mui/material/styles';
 
 export const RecentBookingsContainer = styled('div')(
-  ({ theme }: any) => `
-  flex: 1;
+  ({ theme }: any) => ` flex: 1;
+  display:flex;
+
+.recentBookings{
+  flex:1;
   display: flex;
-  gap: ${theme.typography.pxToRem(theme.gap.primary)};
+  gap: ${theme.typography.pxToRem(theme.gap.main)};
   padding: ${theme.typography.pxToRem(theme.padding.main)};
   flex-direction: column;
+  overflow-y:scroll;
+  
+  &::-webkit-scrollbar {
+    display:none;
+ }
+  }
+${theme.breakpoints.down('sm')} {
 
-  ${theme.breakpoints.down('sm')}{
-    align-items:center;
+  .recentBookings{
+    max-height: calc(100vh - ${theme.typography.pxToRem(198.25)});
+  }
+  
+  h2 {
+     font-size:${theme.typography.fontSizeMedium};
   }
 
-  .cardsContainer{
-    padding: ${theme.typography.pxToRem(theme.padding.main)} 0;
-    display: flex;
-    gap: ${theme.typography.pxToRem(theme.gap.secondary)};
-    flex-wrap:wrap;
-
-    ${theme.breakpoints.down('sm')}{
-      justify-content:center;
-    }
-  }
   `,
 );

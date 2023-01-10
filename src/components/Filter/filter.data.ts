@@ -1,6 +1,6 @@
 import { IFilterInput } from './filter.types';
 
-export const busTypeOptions = [
+export const vehicleClassTypeOptions = [
   { label: 'sleeper', value: 'SLEEPER' },
   { label: 'seater', value: 'SEATER' },
 ];
@@ -43,7 +43,6 @@ export const sliderData = [
 
 export const filterInitialState: IFilterInput = {
   departure: '',
-  drop: '',
   price: [0, 100],
   vehicleClassType: [],
   vehicleType: '',

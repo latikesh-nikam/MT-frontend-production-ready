@@ -1,15 +1,18 @@
 import { styled } from '@mui/material/styles';
 
 export const BusResultsContainer = styled('div')(
-  ({ theme }: any) => `
+  ({ theme }: any) => ` 
+flex:1;
+display:flex;
+flex-direction:column;
+gap:${theme.typography.pxToRem(theme.gap.main)};
+letter-spacing: ${theme.typography.subtitle2.letterSpacing};
+overflow-y: scroll;
+padding: ${theme.typography.pxToRem(theme.padding.main)};
+max-height: calc(100vh - ${theme.typography.pxToRem(148)});
 
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    gap:${theme.typography.pxToRem(theme.gap.primary)};
-    letter-spacing: ${theme.typography.subtitle2.letterSpacing};
-    padding:${theme.typography.pxToRem(theme.padding.secondary)};
-    max-height: calc(100vh - ${theme.typography.pxToRem(96)});
-    overflow-y: scroll;    
+${theme.breakpoints.down('sm')} {
+	max-height: calc(100vh - ${theme.typography.pxToRem(198.25)});
+}
 `,
 );
