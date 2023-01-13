@@ -9,6 +9,7 @@ import BusResultCard from '../BusResultCard/busResultCard';
 import { epochDate } from '../../utils/utility';
 import { useDidMountEffect } from '../../hooks/useDidMountEffect';
 import { searchResults } from './busResults.data';
+import Loader from '../../hoc/Loader/loader';
 
 const BusResults = ({
   handleScroll,

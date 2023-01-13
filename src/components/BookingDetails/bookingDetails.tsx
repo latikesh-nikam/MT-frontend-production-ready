@@ -45,7 +45,7 @@ const BookingDetails = (props: any, ref: any) => {
 
   const fareContainer = (
     <div className="fare paddingTopBottom" data-testid="bookingDetailsFare">
-      <h3 className="lightGrey">{localString?.totalFare}</h3>
+      <h3 className="totalFareColor">{localString?.totalFare}</h3>
       <h3 className="">
         {localString?.rs}
         {totalFare}
@@ -66,7 +66,7 @@ const BookingDetails = (props: any, ref: any) => {
       </header>
       <main className="bookingDeatilsMain" data-testid="bookingDetailsMain">
         <div
-          className="dateAndBookingPersonDetails borderBottom paddingTopBottom flex"
+          className="dateAndBookingPersonDetails borderBottom paddingTopBottom"
           data-testid="dateAndBookingPersonDetails">
           {/* <div className="details date flex">
             <h4>
@@ -74,7 +74,7 @@ const BookingDetails = (props: any, ref: any) => {
             </h4>
             <p>12/12/22</p>
           </div> */}
-          <div className="details bookingId flex">
+          <div className="details bookingId">
             <h4>{localString?.bookingId}</h4>
             <p>{bookingId}</p>
           </div>
@@ -82,11 +82,11 @@ const BookingDetails = (props: any, ref: any) => {
             <h4>{localString?.bookedBy}</h4>
             <p>Shruti Tharmia</p>
           </div> */}
-          <div className="details contact flex">
+          <div className="details contact">
             <h4>{localString?.contact}</h4>
             <p>{phoneNumber}</p>
           </div>
-          <div className="details email flex">
+          <div className="details email">
             <h4>{localString?.email}</h4>
             <p>{email}</p>
           </div>

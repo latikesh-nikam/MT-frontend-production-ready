@@ -27,8 +27,12 @@ const Payment = () => {
   );
   return (
     <PaymentContainer>
-      {PaymentSummaryToRender}
-      <PaymentDetails />
+      <div className="paymentWrapper">
+        <>
+          {PaymentSummaryToRender}
+          <PaymentDetails />
+        </>
+      </div>
     </PaymentContainer>
   );
 };

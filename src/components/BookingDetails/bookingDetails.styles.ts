@@ -6,6 +6,7 @@ display:flex;
 flex-direction:column;
 padding:${theme.typography.pxToRem(theme.padding.main)};
 letter-spacing: ${theme.typography.subtitle2.letterSpacing};
+color: #615E5E;
 
 .flex {
   display:flex;
@@ -23,6 +24,11 @@ letter-spacing: ${theme.typography.subtitle2.letterSpacing};
 
 .lightGrey {
   color: ${theme.palette.textColors.lightGrey};
+  font-weight: ${theme.typography.fontWeightRegular};
+}
+
+.totalFareColor {
+  color: #111010;
   font-weight: ${theme.typography.fontWeightRegular};
 }
 
@@ -50,17 +56,18 @@ letter-spacing: ${theme.typography.subtitle2.letterSpacing};
 .fare {
   color: ${theme.palette.primary.main};
   display:flex;
-  justify-content:flex-end;
+  justify-content: flex-end;
   gap:${theme.typography.pxToRem(theme.gap.small)};
 }
 
 .bookingDeatilsMain {
-  display:flex;
-  flex-direction:column;
-
   .dateAndBookingPersonDetails {
-     .details {
+    display: flex;
+    justify-content: space-around;
+
+    .details {
         gap: ${theme.typography.pxToRem(theme.gap.primary)};
+        margin-right: auto;
      }
   }
 
