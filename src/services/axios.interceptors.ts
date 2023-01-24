@@ -10,10 +10,12 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(config => {
   const token = utility.getStore('acessToken');
-  config.headers = {
+  const temp:any = {
+    ...config.headers,
     'Content-Type': 'application/json',
     authorization: token || '',
   };
+  config.headers = temp;
   return config;
 });
 
